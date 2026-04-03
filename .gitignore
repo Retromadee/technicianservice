@@ -1,0 +1,21 @@
+# Java Build Artifacts
+**/target/
+!**/src/main/resources/
+!**/src/test/resources/
+*.class
+
+# Node / JS
+node_modules/
+.DS_Store
+
+# Vercel
+.vercel/
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Large Documents
+*.docx
+*.pdf
