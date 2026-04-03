@@ -9,6 +9,8 @@ const App = (() => {
         currentPage: 'dashboard',
         user: null,
         isLoggedIn: false,
+        diagnoses: [],
+        activeBids: [],
         listeners: {}
     };
 

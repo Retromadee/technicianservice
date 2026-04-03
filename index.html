@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HomeFix Pro — Modern Home Service Dashboard">
-    <title>HomeFix Pro | Dashboard</title>
+    <meta name="description" content="HomeFix Pro — AI-Powered Home Service Platform">
+    <title>HomeFix Pro | Intelligent Home Care</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,45 +24,41 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
-                Saas<span>Ca.</span>
+                Home<span>Fix.</span>
             </div>
 
             <nav class="sidebar-menu">
-                <div class="menu-section-label">Menu</div>
+                <div class="menu-section-label">Main Services</div>
                 <a href="#" class="nav-link active" data-page="dashboard">
                     <i class="fas fa-th-large"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="nav-link" data-page="analytics">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
+                <a href="#" class="nav-link" data-page="ai-assistant">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Diagnosis</span>
                 </a>
-                <a href="#" class="nav-link" data-page="orders">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span>Orders</span>
+                <a href="#" class="nav-link" data-page="marketplace">
+                    <i class="fas fa-hand-holding-hand"></i>
+                    <span>Marketplace</span>
                 </a>
-                <a href="#" class="nav-link" data-page="customers">
-                    <i class="fas fa-users"></i>
-                    <span>Customers</span>
-                </a>
-                <a href="#" class="nav-link" data-page="sales">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span>Sales</span>
+                <a href="#" class="nav-link" data-page="my-jobs">
+                    <i class="fas fa-tools"></i>
+                    <span>My Repairs</span>
                 </a>
                 <a href="#" class="nav-link" data-page="messages">
                     <i class="fas fa-comment-dots"></i>
                     <span>Messages</span>
-                    <span class="badge">23</span>
-                </a>
-                <a href="#" class="nav-link" data-page="notifications">
-                    <i class="fas fa-bell"></i>
-                    <span>Notifications</span>
+                    <span class="badge" id="msg-badge">5</span>
                 </a>
 
-                <div class="menu-section-label">Account</div>
-                <a href="#" class="nav-link" data-page="credit-report">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Credit Report</span>
+                <div class="menu-section-label">Finance & Growth</div>
+                <a href="#" class="nav-link" data-page="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="#" class="nav-link" data-page="ratings">
+                    <i class="fas fa-star"></i>
+                    <span>Reviews</span>
                 </a>
                 <a href="#" class="nav-link" data-page="settings">
                     <i class="fas fa-cog"></i>
@@ -71,10 +67,10 @@
             </nav>
 
             <div class="upgrade-card">
-                <i class="fas fa-rocket"></i>
-                <div style="font-weight: 800; font-size: 14px; margin-bottom: 4px;">Upgrade to Pro</div>
-                <div style="font-size: 11px; color: var(--text-muted);">Get more features</div>
-                <button class="upgrade-btn">Upgrade to Pro</button>
+                <i class="fas fa-shield-halved"></i>
+                <div style="font-weight: 800; font-size: 14px; margin-bottom: 4px;">Service Pro</div>
+                <div style="font-size: 11px; color: var(--text-muted);">Verified Technician Plan</div>
+                <button class="upgrade-btn">Join as Tech</button>
             </div>
         </aside>
 
@@ -84,27 +80,27 @@
             <header class="top-header">
                 <div class="search-box">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search Anything">
+                    <input type="text" placeholder="Describe your home issue...">
                 </div>
 
                 <div class="user-profile">
                     <div class="user-meta">
-                        <div class="user-name" id="profileName">S. Datta</div>
-                        <div class="user-email" id="profileEmail">uixsantusdatta@gmail.com</div>
+                        <div class="user-name" id="profileName">Aaron Smith</div>
+                        <div class="user-email" id="profileEmail">aaron.homeowner@mail.com</div>
                     </div>
-                    <img src="https://ui-avatars.com/api/?name=S+Datta&background=7c4dff&color=fff" alt="User" class="user-avatar" id="profileAvatar">
+                    <img src="https://ui-avatars.com/api/?name=Aaron+Smith&background=7c4dff&color=fff" alt="User" class="user-avatar" id="profileAvatar">
                 </div>
             </header>
 
             <!-- Dashboard Content -->
             <div id="page-dashboard" class="page-content active">
                 <div class="dashboard-header">
-                    <h1>My Dashboard</h1>
-                    <p>Your recent transactions activity and all</p>
+                    <h1>My Service Overview</h1>
+                    <p>Track your AI diagnoses, active bids, and repair status.</p>
 
                     <div class="header-tabs">
-                        <div class="tab-link active">Product</div>
-                        <div class="tab-link">Customer</div>
+                        <div class="tab-link active">Active Jobs</div>
+                        <div class="tab-link">AI History</div>
                     </div>
                 </div>
 
@@ -112,191 +108,140 @@
                 <div class="stats-row">
                     <div class="stat-card">
                         <div class="stat-head">
-                            <i class="fas fa-box stat-icon icon-red"></i>
-                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Total Products</div>
+                            <i class="fas fa-stethoscope stat-icon icon-red"></i>
+                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Total Diagnoses</div>
                             <i class="fas fa-chevron-down text-light"></i>
                         </div>
-                        <div class="stat-val" id="stat-products">8,98,879</div>
+                        <div class="stat-val" id="stat-diagnoses">42</div>
                         <div class="stat-tag tag-pos">
-                            <i class="fas fa-plus"></i>
-                            1500 New Added
+                            <i class="fas fa-check"></i>
+                            12 Self-Fixed
                         </div>
                     </div>
 
                     <div class="stat-card">
                         <div class="stat-head">
-                            <i class="fas fa-dollar-sign stat-icon icon-blue"></i>
-                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Total Sales</div>
+                            <i class="fas fa-user-tie stat-icon icon-blue"></i>
+                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Active Bids</div>
                             <i class="fas fa-chevron-down text-light"></i>
                         </div>
-                        <div class="stat-val" id="stat-sales">$32,000.89</div>
+                        <div class="stat-val" id="stat-bids">8</div>
                         <div class="stat-tag tag-pos" style="background: #e0f2fe; color: #0369a1;">
-                            <i class="fas fa-arrow-up"></i>
-                            7.8% Growth
+                            <i class="fas fa-clock"></i>
+                            3 New Proposals
                         </div>
                     </div>
 
                     <div class="stat-card">
                         <div class="stat-head">
-                            <i class="fas fa-chart-line stat-icon icon-green"></i>
-                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Total Profit</div>
+                            <i class="fas fa-calendar-check stat-icon icon-green"></i>
+                            <div class="stat-label" style="font-weight: 600; font-size: 14px; color: var(--text-muted);">Booked Repairs</div>
                             <i class="fas fa-chevron-down text-light"></i>
                         </div>
-                        <div class="stat-val" id="stat-profit">$5000.15</div>
+                        <div class="stat-val" id="stat-booked">3</div>
                         <div class="stat-tag tag-pos">
-                            <i class="fas fa-arrow-up"></i>
-                            5.4% Increase
+                            <i class="fas fa-truck"></i>
+                            1 En Route
                         </div>
                     </div>
                 </div>
 
                 <!-- Main Layout Grid -->
                 <div class="dashboard-grid">
-                    <!-- Right Columns (Bar Chart Area) -->
                     <div class="grid-col-left" style="display: flex; flex-direction: column; gap: 24px;">
+                        <!-- AI Insights Card -->
                         <div class="card">
                             <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                                Revenue Statements
+                                AI Troubleshooting Trends
                                 <i class="fas fa-ellipsis-h text-light"></i>
                             </div>
-                            <!-- Bar Chart Visual -->
                             <div style="height: 220px; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; padding-top: 20px;">
-                                <div style="flex:1; background: #e2e8f0; height: 40%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #cbd5e1; height: 60%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #94a3b8; height: 50%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: var(--primary); height: 80%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #cbd5e1; height: 45%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #7c4dffcc; height: 90%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #e2e8f0; height: 35%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #94a3b8; height: 55%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: var(--primary); height: 70%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #cbd5e1; height: 40%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #7c4dffcc; height: 65%; border-radius: 4px;"></div>
+                                <div style="flex:1; background: #e2e8f0; height: 30%; border-radius: 4px;" title="Plumbing"></div>
+                                <div style="flex:1; background: #cbd5e1; height: 50%; border-radius: 4px;" title="HVAC"></div>
+                                <div style="flex:1; background: #94a3b8; height: 70%; border-radius: 4px;" title="Electrical"></div>
+                                <div style="flex:1; background: var(--primary); height: 40%; border-radius: 4px;"></div>
+                                <div style="flex:1; background: #cbd5e1; height: 85%; border-radius: 4px;"></div>
                             </div>
                             <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-light); margin-top: 8px;">
-                                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                                <span>Plumbing</span><span>HVAC</span><span>Electric</span><span>Appliances</span><span>Other</span>
                             </div>
                         </div>
 
-                        <!-- Team & Add Product Row -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                            <div class="card">
-                                <div class="card-title">Team</div>
-                                <div class="team-list">
-                                    <div class="team-member">
-                                        <img src="https://ui-avatars.com/api/?name=Lottie&background=fff&color=7c4dff&bold=true" class="member-avatar">
-                                        <div class="member-info">
-                                            <div class="member-name">Lottie</div>
-                                            <div class="member-email">laboanovskiy@gmail.com</div>
-                                        </div>
-                                        <i class="fas fa-paper-plane member-invite"></i>
+                        <!-- Active Bidding Marketplace -->
+                        <div class="card">
+                            <div class="card-title">Incoming Bids & Proposals</div>
+                            <div class="orders-list" id="bids-list">
+                                <div class="order-item">
+                                    <div class="order-prod-img"><i class="fas fa-bolt" style="color: #eab308;"></i></div>
+                                    <div class="order-info">
+                                        <div class="order-name">John Doe (Master Electrician)</div>
+                                        <div class="order-price">$80 Bid • 4.9⭐ • Arrival 2PM</div>
                                     </div>
-                                    <div class="team-member">
-                                        <img src="https://ui-avatars.com/api/?name=Adam&background=fff&color=7c4dff&bold=true" class="member-avatar">
-                                        <div class="member-info">
-                                            <div class="member-name">Adam</div>
-                                            <div class="member-email">uixsantusdatta@gmail.com</div>
-                                        </div>
-                                        <i class="fas fa-paper-plane member-invite"></i>
+                                    <div class="order-status status-pending" style="cursor:pointer;" onclick="App.showToast('Bid Accepted!')">Hire Now</div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="order-prod-img"><i class="fas fa-faucet" style="color: #3b82f6;"></i></div>
+                                    <div class="order-info">
+                                        <div class="order-name">Mike's Plumbing Co.</div>
+                                        <div class="order-price">$120 Bid • 4.7⭐ • Tomorrow</div>
                                     </div>
+                                    <div class="order-status status-pending">View Details</div>
                                 </div>
-                            </div>
-
-                            <div class="card" style="display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center;">
-                                <div style="width: 48px; height: 48px; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                                    <i class="fas fa-shopping-bag text-light"></i>
-                                </div>
-                                <div style="font-weight: 800; font-size: 14px; margin-bottom: 4px;">Add a Product?</div>
-                                <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">Add products to your store and start selling to see orders here.</div>
-                                <button class="btn-grant" style="width: auto; padding: 10px 20px;">+ New Product</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column (Donut/Invites Area) -->
                     <div class="grid-col-right" style="display: flex; flex-direction: column; gap: 24px;">
-                        <!-- Analytics Card -->
+                        <!-- AI Diagnosis CTA -->
+                        <div class="card" style="background: linear-gradient(135deg, var(--primary), #9c7cff); color: white;">
+                             <div style="font-weight: 800; font-size: 18px; margin-bottom: 8px;">Run AI Diagnosis?</div>
+                             <p style="font-size: 12px; margin-bottom: 20px; opacity: 0.9;">Describe your issue via text or voice, and let our AI determine if it's a DIY fix or needs a Pro.</p>
+                             <button class="btn-grant" style="background: white; color: var(--primary);" onclick="App.navigate('ai-assistant')">Start Diagnosis</button>
+                        </div>
+
+                        <!-- Routing Success Card -->
                         <div class="card">
-                            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                                Analytics
-                                <i class="fas fa-ellipsis-h text-light"></i>
-                            </div>
+                            <div class="card-title">Routing Efficiency</div>
                             <div style="height: 180px; position: relative; display: flex; align-items: center; justify-content: center;">
                                 <svg width="120" height="120">
                                     <circle cx="60" cy="60" r="50" fill="none" stroke="#f1f5f9" stroke-width="12"></circle>
-                                    <circle cx="60" cy="60" r="50" fill="none" stroke="var(--primary)" stroke-width="12" stroke-dasharray="251 314" transform="rotate(-90 60 60)"></circle>
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="var(--primary)" stroke-width="12" stroke-dasharray="282 314" transform="rotate(-90 60 60)"></circle>
                                 </svg>
-                                <div style="position: absolute; font-size: 24px; font-weight: 800;">80%</div>
+                                <div style="position: absolute; font-size: 24px; font-weight: 800;">90%</div>
                             </div>
-                            <div style="display: flex; justify-content: center; gap: 16px; margin-top: 20px; font-size: 12px; font-weight: 600;">
-                                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; background: #1e293b; border-radius: 50%;"></div> Buy</div>
-                                <div style="display: flex; align-items: center; gap: 6px;"><div style="width: 8px; height: 8px; background: var(--primary); border-radius: 50%;"></div> Sell</div>
-                            </div>
+                            <div style="text-align:center; font-size: 11px; color: var(--text-muted); margin-top: 12px;">Accuracy in identifying DIY vs Pro needs.</div>
                         </div>
 
-                        <!-- David Access Card -->
+                        <!-- Recent Job Status -->
                         <div class="grant-card">
                             <div class="grant-header">
-                                <img src="https://ui-avatars.com/api/?name=David&background=fff&color=7c4dff" class="grant-avatar">
+                                <img src="https://ui-avatars.com/api/?name=Sam+Tech&background=fff&color=7c4dff" class="grant-avatar">
                                 <div class="grant-text">
-                                    David asked for the edit access of products
-                                    <span class="grant-date">12 Jan 2022</span>
+                                    Sam Tech is arriving in 15 mins
+                                    <span class="grant-date">Kitchen Sink Repair</span>
                                 </div>
                             </div>
                             <div class="grant-btns">
-                                <button class="btn-grant">Grant Access</button>
-                                <button class="btn-cancel">Cancel</button>
-                            </div>
-                        </div>
-
-                        <!-- Recent Orders -->
-                        <div class="card">
-                            <div class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
-                                Recent Orders
-                                <div style="display: flex; gap: 8px; color: var(--text-light);">
-                                    <i class="fas fa-chevron-left" style="cursor: pointer;"></i>
-                                    <i class="fas fa-chevron-right" style="cursor: pointer;"></i>
-                                </div>
-                            </div>
-                            <div class="orders-list">
-                                <div class="order-item">
-                                    <div class="order-prod-img"><i class="fas fa-mobile-alt"></i></div>
-                                    <div class="order-info">
-                                        <div class="order-name">iPhone 14 Pro Max</div>
-                                        <div class="order-price">$2400 X 3</div>
-                                    </div>
-                                    <div class="order-status status-pending">Pending</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="order-prod-img"><i class="fas fa-headphones" style="color: #94a3b8;"></i></div>
-                                    <div class="order-info">
-                                        <div class="order-name">Airdot</div>
-                                        <div class="order-price">$49 X 1</div>
-                                    </div>
-                                    <div class="order-status status-done">Completed</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="order-prod-img"><i class="fas fa-laptop" style="color: #94a3b8;"></i></div>
-                                    <div class="order-info">
-                                        <div class="order-name">MacBook M1</div>
-                                        <div class="order-price">$1200 X 1</div>
-                                    </div>
-                                    <div class="order-status status-done">Completed</div>
-                                </div>
+                                <button class="btn-grant">Contact Sam</button>
+                                <button class="btn-cancel">Live Map</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Modal for requests -->
-            <div id="serviceModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 3000; display: hidden; align-items: center; justify-content: center;">
-                <div class="card" style="width: 460px; padding: 40px;">
-                    <h2 class="card-title">New Service Request</h2>
-                    <form id="serviceForm">
-                        <input type="text" id="serviceType" placeholder="Service Type (e.g. Plumbing)" style="width:100%; padding: 12px; margin-bottom: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <textarea id="serviceDesc" placeholder="Describe the issue" style="width:100%; padding: 12px; margin-bottom: 16px; border-radius: 8px; border: 1px solid var(--border-color);"></textarea>
-                        <button type="submit" class="btn-grant" style="width:100%;">Create Job</button>
+            <!-- Placeholder pages for AI Asst and Marketplace -->
+            <div id="page-ai-assistant" class="page-content" style="display: none; padding: 40px;">
+                <h1 style="margin-bottom: 12px;">AI Assistant</h1>
+                <p style="color: var(--text-muted); margin-bottom: 32px;">Describe your problem and upload photos for an instant diagnosis.</p>
+                <div class="card" style="max-width: 600px;">
+                    <form id="aiForm">
+                        <textarea style="width: 100%; min-height: 120px; padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 16px;" placeholder="I hear a strange clicking sound from my AC unit..."></textarea>
+                        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                            <button type="button" class="btn-cancel" style="flex:1;"><i class="fas fa-camera"></i> Photo</button>
+                            <button type="button" class="btn-cancel" style="flex:1;"><i class="fas fa-microphone"></i> Voice</button>
+                        </div>
+                        <button type="submit" class="btn-grant" style="width: 100%; padding: 16px;">Analyze Issue</button>
                     </form>
                 </div>
             </div>
@@ -310,32 +255,8 @@
     <script src="js/services/firebase-config.js"></script>
     <script src="js/app.js"></script>
     <script>
-        // Use compat versions if needed or handle via FirebaseConfig
         const database = firebase.database();
-
-        // Sync Stats from Firebase
-        database.ref('stats').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                document.getElementById('stat-products').innerText = data.total_products || '8,98,879';
-                document.getElementById('stat-sales').innerText = '$' + (data.total_sales || '32,000.89');
-                document.getElementById('stat-profit').innerText = '$' + (data.total_profit || '5000.15');
-            }
-        });
-
-        // Simple Form Handler (already handled in app.js, but adding here as well for robustness)
-        document.getElementById('serviceForm')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const serviceData = {
-                type: document.getElementById('serviceType').value,
-                description: document.getElementById('serviceDesc').value,
-                timestamp: Date.now()
-            };
-            database.ref('service_requests').push(serviceData).then(() => {
-                alert('Request Sent!');
-                document.getElementById('serviceModal').style.display = 'none';
-            });
-        });
+        // Tailored Firebase listeners can be added here
     </script>
 </body>
 
