@@ -18,146 +18,150 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/dashboard_new.css">
     <style>
-        /* Guest Mode Overrides */
-        body.guest-mode .sidebar { display: none; }
-        body.guest-mode .main-content { margin-left: 0; padding-top: 0; }
-        body.guest-mode .top-header { border-bottom: 1px solid var(--border-color); background: white; padding: 16px 48px; position: sticky; top: 0; z-index: 1000; }
-        body.guest-mode .user-profile { display: none; }
-        body.guest-mode .guest-only { display: flex; }
-        body.guest-mode .auth-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; }
-        body.guest-mode .hero-guest { background: linear-gradient(135deg, #fdf4ff 0%, #f5f3ff 100%); padding: 80px 48px; text-align: center; border-bottom: 1px solid var(--border-color); }
-        
-        .guest-only { display: none; align-items: center; gap: 16px; }
-        .hero-guest { display: none; }
-        body.guest-mode .hero-guest { display: block; }
-        body.guest-mode .dashboard-header, body.guest-mode .stats-row { display: none; }
+        /* Role-based Visibility */
+        [data-role] { display: none; }
+        body[data-current-role="guest"] [data-role="guest"] { display: block; }
+        body[data-current-role="user"] [data-role="user"] { display: flex; }
+        body[data-current-role="tech"] [data-role="tech"] { display: flex; }
+        body[data-current-role="admin"] [data-role="admin"] { display: flex; }
 
-        /* General styles */
-        .services-ribbon { display: flex; gap: 16px; overflow-x: auto; padding: 8px 0 24px 0; scrollbar-width: none; }
-        .services-ribbon::-webkit-scrollbar { display: none; }
+        /* General Styles */
+        .services-ribbon { display: flex; gap: 16px; overflow-x: auto; padding: 24px 0; scrollbar-width: none; }
         .service-pill { background: white; padding: 12px 24px; border-radius: 50px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 600; color: var(--text-muted); cursor: pointer; border: 1px solid transparent; }
-        .service-pill:hover { border-color: var(--primary); color: var(--primary); }
-        .ai-result-area { background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 16px; padding: 24px; margin-top: 24px; display: none; animation: fadeIn 0.5s ease; }
+        .service-pill.active { background: var(--primary); color: white; }
+        .ai-result-area { background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 16px; padding: 24px; margin-top: 24px; display: none; }
     </style>
 </head>
 
-<body class="guest-mode"> <!-- Initially in guest mode -->
-    <div class="dashboard-container">
-        <!-- Sidebar -->
+<body data-current-role="guest">
+
+    <!-- ===================== 1. GUEST LANDING PAGE ===================== -->
+    <div data-role="guest" class="guest-layout">
+        <header class="top-header" style="position: sticky; top: 0; background: white; z-index: 1000; padding: 16px 48px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo" style="margin: 0; font-size: 20px;">Home<span>Fix.</span></div>
+            <div style="display: flex; gap: 24px; align-items: center;">
+                <a href="#" onclick="setRole('user')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Find a Tech</a>
+                <a href="#" onclick="setRole('tech')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Become a Pro</a>
+                <button class="upgrade-btn" style="margin: 0; padding: 10px 24px;" onclick="setRole('admin')">Admin Portal</button>
+            </div>
+        </header>
+
+        <section style="background: linear-gradient(135deg, #fdf4ff 0%, #f5f3ff 100%); padding: 100px 48px; text-align: center;">
+            <h1 style="font-size: 56px; font-weight: 800; margin-bottom: 24px; letter-spacing: -2px;">AI-Powered <span style="color: var(--primary);">Home Care.</span></h1>
+            <p style="color: var(--text-muted); font-size: 20px; max-width: 650px; margin: 0 auto 48px auto;">Instant AI diagnostics, DIY troubleshooting, and a marketplace for verified professional technicians.</p>
+            
+            <div class="card" style="max-width: 750px; margin: 0 auto; padding: 12px 12px 12px 24px; box-shadow: 0 20px 40px rgba(124, 77, 255, 0.15); display: flex; align-items: center; border-radius: 20px;">
+                <i class="fas fa-magic" style="color: var(--primary); font-size: 20px;"></i>
+                <input type="text" id="aiInputHero" placeholder="E.g. My AC is making a loud buzzing sound..." style="border: none; flex: 1; padding: 16px; outline: none; font-size: 16px; font-weight: 500;">
+                <button class="upgrade-btn" style="width: auto; padding: 14px 40px; margin: 0;" onclick="handleGuestAI()">Analyze</button>
+            </div>
+            
+            <div id="aiResultGuest" class="ai-result-area" style="max-width: 750px; margin: 32px auto 0 auto; text-align: left;">
+                <!-- Result injected here -->
+            </div>
+        </section>
+
+        <section style="padding: 100px 48px;">
+            <div style="text-align: center; margin-bottom: 60px;">
+                <h2 style="font-size: 32px; font-weight: 800;">Browse All Services</h2>
+            </div>
+            <div class="services-ribbon" style="justify-content: center; flex-wrap: wrap;">
+                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-faucet"></i> Plumbing</div>
+                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-bolt"></i> Electrical</div>
+                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-snowflake"></i> HVAC</div>
+                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-hammer"></i> Carpentry</div>
+                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-paint-roller"></i> Painting</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===================== 2. USER/HOMEOWNER DASHBOARD ===================== -->
+    <div data-role="user" class="dashboard-container">
         <aside class="sidebar">
             <div class="logo">Home<span>Fix.</span></div>
             <nav class="sidebar-menu">
-                <div class="menu-section-label">Main Services</div>
-                <a href="#" class="nav-link active" data-page="dashboard"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-                <a href="#" class="nav-link" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></a>
-                <a href="#" class="nav-link" data-page="marketplace"><i class="fas fa-hand-holding-hand"></i><span>Marketplace</span></a>
-                <a href="#" class="nav-link" data-page="messages"><i class="fas fa-comment-dots"></i><span>Messages</span></a>
+                <div class="menu-section-label">User Dashboard</div>
+                <a href="#" class="nav-link active" onclick="showSubPage('user-main')"><i class="fas fa-th-large"></i><span>Home</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('user-jobs')"><i class="fas fa-tools"></i><span>My Repairs</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('user-bids')"><i class="fas fa-hand-holding-dollar"></i><span>Bids (3)</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('user-messages')"><i class="fas fa-comment-dots"></i><span>Messages</span></a>
+                <div class="menu-section-label">Account</div>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </nav>
-            <div class="upgrade-card">
-                <i class="fas fa-rocket"></i>
-                <div style="font-weight: 800; font-size: 14px;">Service Pro</div>
-                <button class="upgrade-btn">Join as Tech</button>
-            </div>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Header -->
-            <header class="top-header">
-                <div class="logo" style="margin-bottom: 0; font-size: 20px;">Home<span>Fix.</span></div>
-                
-                <div class="search-box" style="margin: 0 auto; width: 450px;">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Explain your problem (e.g. My sink is leaking)">
-                </div>
-
-                <div class="user-profile">
-                    <img src="https://ui-avatars.com/api/?name=User&background=7c4dff&color=fff" class="user-avatar" id="navAvatar">
-                </div>
-
-                <div class="guest-only">
-                    <a href="#" style="text-decoration: none; color: var(--text-muted); font-weight: 600;">Log In</a>
-                    <button class="auth-btn" id="btnSignUp">Sign Up</button>
-                </div>
-            </header>
-
-            <!-- Hero for Guest Users -->
-            <section class="hero-guest">
-                <h1 style="font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1.5px;">Fix Your Home <span style="color: var(--primary);">Intelligently.</span></h1>
-                <p style="color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto 40px auto;">Get instant AI diagnosis for any home repair issue. If you can't fix it yourself, connect with top-rated pros instantly.</p>
-                
-                <div class="card" style="max-width: 700px; margin: 0 auto; padding: 32px; box-shadow: 0 20px 40px rgba(124, 77, 255, 0.1);">
-                    <div style="font-weight: 800; font-size: 18px; margin-bottom: 16px; text-align: left;">What needs fixing today?</div>
-                    <div class="search-box" style="width: 100%; border: 2px solid var(--primary-light); padding: 20px;">
-                        <i class="fas fa-magic" style="color: var(--primary);"></i>
-                        <input type="text" id="aiInputHero" placeholder="E.g. I have water pooling under my dishwasher..." style="font-size: 16px; font-weight: 500;">
-                        <button class="auth-btn" style="padding: 12px 32px;" id="btnAskAIHero">Solve It</button>
+            <div id="user-main" class="sub-page active">
+                <h1>Welcome Back, Aaron!</h1>
+                <p class="text-muted">Need anything fixed today?</p>
+                <div class="dashboard-grid" style="margin-top: 32px;">
+                    <div class="card" style="grid-column: span 2;">
+                        <h3>Run Quick Diagnosis</h3>
+                        <div class="search-box" style="width: 100%; margin-top: 16px;">
+                            <i class="fas fa-magic"></i>
+                            <input type="text" placeholder="Describe the problem...">
+                            <button class="upgrade-btn" style="width: auto; margin: 0; padding: 8px 16px;">Ask AI</button>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+            <div id="user-jobs" class="sub-page" style="display: none;">
+                <h1>My Repairs</h1>
+                <div class="card" style="margin-top: 24px;">No active repairs found.</div>
+            </div>
+        </main>
+    </div>
 
-            <div style="padding: 48px;">
-                <!-- Common Services Ribbon -->
-                <div class="services-ribbon">
-                    <div class="service-pill active"><i class="fas fa-star"></i> All Services</div>
-                    <div class="service-pill"><i class="fas fa-faucet"></i> Plumbing</div>
-                    <div class="service-pill"><i class="fas fa-bolt"></i> Electrical</div>
-                    <div class="service-pill"><i class="fas fa-snowflake"></i> HVAC</div>
-                    <div class="service-pill"><i class="fas fa-broom"></i> Cleaning</div>
-                    <div class="service-pill"><i class="fas fa-hammer"></i> Carpentry</div>
-                </div>
+    <!-- ===================== 3. TECHNICIAN DASHBOARD ===================== -->
+    <div data-role="tech" class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Home<span>Pro.</span></div>
+            <nav class="sidebar-menu">
+                <div class="menu-section-label">Provider Dash</div>
+                <a href="#" class="nav-link active" onclick="showSubPage('tech-main')"><i class="fas fa-briefcase"></i><span>Marketplace</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('tech-active')"><i class="fas fa-tasks"></i><span>My Active Jobs</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('tech-earnings')"><i class="fas fa-wallet"></i><span>Earnings</span></a>
+                <div class="menu-section-label">Account</div>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+            </nav>
+        </aside>
 
-                <!-- Dashboard Content (Hidden in Guest unless we show public jobs) -->
-                <div id="page-dashboard" class="page-content active">
-                    <div class="dashboard-header">
-                        <h1>Service Dashboard</h1>
+        <main class="main-content">
+            <div id="tech-main" class="sub-page active">
+                <header class="top-header">
+                     <div class="dashboard-header" style="margin: 0;">
+                        <h1>Open Marketplace</h1>
+                        <p>Available jobs in NYC Matching Plumbing & HVAC</p>
                     </div>
+                    <div class="user-profile">
+                         <div class="user-meta">
+                            <div class="user-name">Sam's Plumbing</div>
+                            <div class="user-email">Verified Tech #2049</div>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=Sam+P&background=7c4dff&color=fff" class="user-avatar">
+                    </div>
+                </header>
 
-                    <div class="dashboard-grid">
-                        <div class="grid-col-left">
-                            <!-- AI Result shown to guests too! -->
-                            <div id="aiResult" class="ai-result-area" style="margin-top: 0; margin-bottom: 32px;">
-                                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-                                    <div style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-lightbulb" style="color: #ec4899;"></i></div>
-                                    <div style="flex: 1;">
-                                        <div style="font-weight: 800; color: #9d174d; font-size: 14px;">Instant AI Solution</div>
-                                        <div id="aiSuggestion" style="font-size: 13px; margin-top: 4px; line-height: 1.5; color: #be185d;">Thinking...</div>
-                                    </div>
-                                </div>
-                                <div style="font-weight: 800; font-size: 12px; text-transform: uppercase; color: #9d174d; margin-bottom: 12px;">Top Rated Pros for This Task</div>
-                                <div id="aiTechs" style="display: flex; gap: 12px; overflow-x: auto;"></div>
-                                <div style="margin-top: 24px; text-align: center;">
-                                    <button class="auth-btn" style="background: #9d174d;">Register to Chat with Pros</button>
-                                </div>
+                <div class="dashboard-grid">
+                    <div class="grid-col-left">
+                        <div class="card" style="margin-bottom: 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <div class="order-status status-pending">New Request</div>
+                                <span class="text-muted small">Brooklyn • 2 miles</span>
                             </div>
-
-                            <div class="card">
-                                <div class="card-title">Why HomeFix Pro?</div>
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
-                                    <div style="display: flex; gap: 16px;">
-                                        <div style="color: var(--primary); font-size: 24px;"><i class="fas fa-shield-check"></i></div>
-                                        <div>
-                                            <div style="font-weight: 700; font-size: 14px;">Verified Pros</div>
-                                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Every tech is background checked and insured.</p>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex; gap: 16px;">
-                                        <div style="color: var(--primary); font-size: 24px;"><i class="fas fa-brain"></i></div>
-                                        <div>
-                                            <div style="font-weight: 700; font-size: 14px;">AI First Aid</div>
-                                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Save hundreds with AI-guided troubleshooting.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <h3>Burst Pipe in Kitchen</h3>
+                            <p style="font-size: 14px; margin: 12px 0;">"My main pipe burst under the sink. Need urgent help to prevent flooding."</p>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="btn-grant">Send $150 Bid</button>
+                                <button class="btn-cancel">Contact Homeowner</button>
                             </div>
                         </div>
-
-                        <div class="grid-col-right">
-                             <div class="card" style="background: var(--primary); color: white;">
-                                <h3 style="font-size: 18px; margin-bottom: 12px;">Ready to hire?</h3>
-                                <p style="font-size: 12px; opacity: 0.9; margin-bottom: 20px;">Sign up to see thousands of verified local technicians and their exact pricing.</p>
-                                <button class="auth-btn" style="background: white; color: var(--primary); width: 100%;">Create Free Account</button>
-                            </div>
+                    </div>
+                    <div class="grid-col-right">
+                        <div class="card">
+                            <h3>Current Earnings</h3>
+                            <div style="font-size: 32px; font-weight: 800; color: var(--primary); margin: 12px 0;">$1,240.50</div>
+                            <p class="text-muted small">Available for withdrawal</p>
                         </div>
                     </div>
                 </div>
@@ -165,43 +169,81 @@
         </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
-    <script src="js/services/firebase-config.js"></script>
-    <script src="js/app.js"></script>
-    <script>
-        const btnAskAI = document.getElementById('btnAskAIHero');
-        const aiInput = document.getElementById('aiInputHero');
-        const aiResult = document.getElementById('aiResult');
-        const aiSuggestion = document.getElementById('aiSuggestion');
-        const aiTechs = document.getElementById('aiTechs');
+    <!-- ===================== 4. ADMIN DASHBOARD ===================== -->
+    <div data-role="admin" class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Home<span>Admin.</span></div>
+            <nav class="sidebar-menu">
+                <div class="menu-section-label">System Admin</div>
+                <a href="#" class="nav-link active" onclick="showSubPage('admin-main')"><i class="fas fa-chart-pie"></i><span>System Health</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('admin-users')"><i class="fas fa-users-cog"></i><span>User Manager</span></a>
+                <a href="#" class="nav-link" onclick="showSubPage('admin-verify')"><i class="fas fa-user-check"></i><span>Verification Queue (12)</span></a>
+                <div class="menu-section-label">Account</div>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+            </nav>
+        </aside>
 
-        btnAskAI?.addEventListener('click', () => {
-            const problem = aiInput.value;
-            if(!problem) return alert('Describe your problem first!');
-            
-            aiResult.style.display = 'block';
-            aiSuggestion.innerText = "Simulating AI analysis for '" + problem + "'...";
-            window.scrollTo({ top: aiResult.offsetTop - 100, behavior: 'smooth' });
-
-            setTimeout(() => {
-                aiSuggestion.innerHTML = "<strong>The Probable Issue:</strong> Degraded seals or a blockage.<br><strong>DIY Fix:</strong> Tighten the intake hose or clear the filter at the base.<br><strong>Benefit:</strong> You could save ~$120 by checking this yourself.";
-                aiTechs.innerHTML = `
-                    <div style="background:white; padding:12px; border-radius:12px; min-width:140px; border:1px solid #fbcfe8;">
-                        <img src="https://ui-avatars.com/api/?name=Local+Pro&background=7c4dff&color=fff" style="width:32px; border-radius:50%; margin-bottom:8px;">
-                        <div style="font-weight:800; font-size:12px;">Appliance Pros</div>
-                        <div style="font-size:10px; color:var(--text-muted);">$85/hr • 4.9⭐</div>
+        <main class="main-content">
+            <div id="admin-main" class="sub-page active">
+                <h1>Platform Metrics</h1>
+                <div class="stats-row" style="margin-top: 32px;">
+                    <div class="stat-card">
+                        <div class="stat-label">Active Users</div>
+                        <div class="stat-val">12,402</div>
                     </div>
-                `;
-            }, 1000);
-        });
+                    <div class="stat-card">
+                        <div class="stat-label">Platform Revenue</div>
+                        <div class="stat-val">$84,923</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">System Status</div>
+                        <div class="stat-val" style="color: var(--success); font-size: 18px;">Healthy</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-        // Toggle Dev Hook (for demo purposes)
-        document.getElementById('btnSignUp').addEventListener('click', () => {
-            document.body.classList.remove('guest-mode');
-            localStorage.setItem('hv_logged_in', 'true');
-        });
+    <!-- Main Logic Script -->
+    <script>
+        function setRole(role) {
+            document.body.setAttribute('data-current-role', role);
+            localStorage.setItem('current_role', role);
+            // Default subpage reset
+            document.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
+            document.getElementById(role + '-main')?.setAttribute('style', 'display: block');
+        }
+
+        function logout() {
+            setRole('guest');
+            localStorage.removeItem('current_role');
+        }
+
+        function showSubPage(pageId) {
+            document.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            
+            // Handle nav link active state
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        function handleGuestAI() {
+            const result = document.getElementById('aiResultGuest');
+            result.style.display = 'block';
+            result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AI is analyzing your problem...';
+            setTimeout(() => {
+                result.innerHTML = '<div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #fbcfe8;">' +
+                    '<h4 style="color: var(--primary);">Probable Cause: Internal Mechanism Failure</h4>' +
+                    '<p style="font-size: 14px; margin-top: 8px;">It looks like a major component needs replacement. We suggest hiring a pro to avoid further damage.</p>' +
+                    '<button class="upgrade-btn" style="width: auto; margin-top: 12px;" onclick="setRole(\'user\')">Create Account to See Bids</button>' +
+                    '</div>';
+            }, 1000);
+        }
+
+        // Initialize from storage
+        const savedRole = localStorage.getItem('current_role') || 'guest';
+        setRole(savedRole);
     </script>
 </body>
 
