@@ -18,45 +18,30 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/dashboard_new.css">
     <style>
-        .services-ribbon {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            padding: 8px 0 24px 0;
-            scrollbar-width: none;
-        }
+        /* Guest Mode Overrides */
+        body.guest-mode .sidebar { display: none; }
+        body.guest-mode .main-content { margin-left: 0; padding-top: 0; }
+        body.guest-mode .top-header { border-bottom: 1px solid var(--border-color); background: white; padding: 16px 48px; position: sticky; top: 0; z-index: 1000; }
+        body.guest-mode .user-profile { display: none; }
+        body.guest-mode .guest-only { display: flex; }
+        body.guest-mode .auth-btn { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        body.guest-mode .hero-guest { background: linear-gradient(135deg, #fdf4ff 0%, #f5f3ff 100%); padding: 80px 48px; text-align: center; border-bottom: 1px solid var(--border-color); }
+        
+        .guest-only { display: none; align-items: center; gap: 16px; }
+        .hero-guest { display: none; }
+        body.guest-mode .hero-guest { display: block; }
+        body.guest-mode .dashboard-header, body.guest-mode .stats-row { display: none; }
+
+        /* General styles */
+        .services-ribbon { display: flex; gap: 16px; overflow-x: auto; padding: 8px 0 24px 0; scrollbar-width: none; }
         .services-ribbon::-webkit-scrollbar { display: none; }
-        .service-pill {
-            background: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            white-space: nowrap;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-        .service-pill:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
-        .service-pill.active { background: var(--primary); color: white; }
-        .ai-result-area {
-            background: #fdf2f8; 
-            border: 1px solid #fbcfe8;
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 24px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .service-pill { background: white; padding: 12px 24px; border-radius: 50px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 600; color: var(--text-muted); cursor: pointer; border: 1px solid transparent; }
+        .service-pill:hover { border-color: var(--primary); color: var(--primary); }
+        .ai-result-area { background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 16px; padding: 24px; margin-top: 24px; display: none; animation: fadeIn 0.5s ease; }
     </style>
 </head>
 
-<body>
+<body class="guest-mode"> <!-- Initially in guest mode -->
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -64,137 +49,114 @@
             <nav class="sidebar-menu">
                 <div class="menu-section-label">Main Services</div>
                 <a href="#" class="nav-link active" data-page="dashboard"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-                <a href="#" class="nav-link" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Diagnosis</span></a>
+                <a href="#" class="nav-link" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></a>
                 <a href="#" class="nav-link" data-page="marketplace"><i class="fas fa-hand-holding-hand"></i><span>Marketplace</span></a>
-                <a href="#" class="nav-link" data-page="my-jobs"><i class="fas fa-tools"></i><span>My Repairs</span></a>
-                <a href="#" class="nav-link" data-page="messages"><i class="fas fa-comment-dots"></i><span>Messages</span><span class="badge">5</span></a>
-                <div class="menu-section-label">Finance & Growth</div>
-                <a href="#" class="nav-link" data-page="payments"><i class="fas fa-credit-card"></i><span>Payments</span></a>
-                <a href="#" class="nav-link" data-page="ratings"><i class="fas fa-star"></i><span>Reviews</span></a>
-                <a href="#" class="nav-link" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a>
+                <a href="#" class="nav-link" data-page="messages"><i class="fas fa-comment-dots"></i><span>Messages</span></a>
             </nav>
             <div class="upgrade-card">
-                <i class="fas fa-shield-halved"></i>
-                <div style="font-weight: 800; font-size: 14px; margin-bottom: 4px;">Service Pro</div>
-                <div style="font-size: 11px; color: var(--text-muted);">Verified Technician Plan</div>
+                <i class="fas fa-rocket"></i>
+                <div style="font-weight: 800; font-size: 14px;">Service Pro</div>
                 <button class="upgrade-btn">Join as Tech</button>
             </div>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Main Content Area -->
         <main class="main-content">
             <!-- Header -->
             <header class="top-header">
-                <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search Anything"></div>
+                <div class="logo" style="margin-bottom: 0; font-size: 20px;">Home<span>Fix.</span></div>
+                
+                <div class="search-box" style="margin: 0 auto; width: 450px;">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Explain your problem (e.g. My sink is leaking)">
+                </div>
+
                 <div class="user-profile">
-                    <div class="user-meta">
-                        <div class="user-name">Aaron Smith</div>
-                        <div class="user-email">aaron.homeowner@mail.com</div>
-                    </div>
-                    <img src="https://ui-avatars.com/api/?name=Aaron+Smith&background=7c4dff&color=fff" alt="User" class="user-avatar">
+                    <img src="https://ui-avatars.com/api/?name=User&background=7c4dff&color=fff" class="user-avatar" id="navAvatar">
+                </div>
+
+                <div class="guest-only">
+                    <a href="#" style="text-decoration: none; color: var(--text-muted); font-weight: 600;">Log In</a>
+                    <button class="auth-btn" id="btnSignUp">Sign Up</button>
                 </div>
             </header>
 
-            <!-- Services Ribbon -->
-            <div class="services-ribbon">
-                <div class="service-pill active"><i class="fas fa-star"></i> All Services</div>
-                <div class="service-pill"><i class="fas fa-faucet"></i> Plumbing</div>
-                <div class="service-pill"><i class="fas fa-bolt"></i> Electrical</div>
-                <div class="service-pill"><i class="fas fa-snowflake"></i> HVAC</div>
-                <div class="service-pill"><i class="fas fa-broom"></i> Cleaning</div>
-                <div class="service-pill"><i class="fas fa-hammer"></i> Carpentry</div>
-                <div class="service-pill"><i class="fas fa-paint-roller"></i> Painting</div>
-            </div>
-
-            <!-- Dashboard Content -->
-            <div id="page-dashboard" class="page-content active">
-                <div class="dashboard-header">
-                    <h1>Service Dashboard</h1>
-                    <p>Smart home maintenance orchestrated by AI.</p>
-                </div>
-
-                <!-- Stats Row -->
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <div class="stat-head"><i class="fas fa-stethoscope stat-icon icon-red"></i><div class="stat-label">Diagnoses</div><i class="fas fa-chevron-down text-light"></i></div>
-                        <div class="stat-val">42</div><div class="stat-tag tag-pos">+ 3 New</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-head"><i class="fas fa-user-tie stat-icon icon-blue"></i><div class="stat-label">Active Bids</div><i class="fas fa-chevron-down text-light"></i></div>
-                        <div class="stat-val">8</div><div class="stat-tag tag-pos" style="background:#e0f2fe;color:#0369a1;">+ 2 Proposals</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-head"><i class="fas fa-calendar-check stat-icon icon-green"></i><div class="stat-label">Booked</div><i class="fas fa-chevron-down text-light"></i></div>
-                        <div class="stat-val">3</div><div class="stat-tag tag-pos">En Route</div>
+            <!-- Hero for Guest Users -->
+            <section class="hero-guest">
+                <h1 style="font-size: 48px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1.5px;">Fix Your Home <span style="color: var(--primary);">Intelligently.</span></h1>
+                <p style="color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto 40px auto;">Get instant AI diagnosis for any home repair issue. If you can't fix it yourself, connect with top-rated pros instantly.</p>
+                
+                <div class="card" style="max-width: 700px; margin: 0 auto; padding: 32px; box-shadow: 0 20px 40px rgba(124, 77, 255, 0.1);">
+                    <div style="font-weight: 800; font-size: 18px; margin-bottom: 16px; text-align: left;">What needs fixing today?</div>
+                    <div class="search-box" style="width: 100%; border: 2px solid var(--primary-light); padding: 20px;">
+                        <i class="fas fa-magic" style="color: var(--primary);"></i>
+                        <input type="text" id="aiInputHero" placeholder="E.g. I have water pooling under my dishwasher..." style="font-size: 16px; font-weight: 500;">
+                        <button class="auth-btn" style="padding: 12px 32px;" id="btnAskAIHero">Solve It</button>
                     </div>
                 </div>
+            </section>
 
-                <div class="dashboard-grid">
-                    <div class="grid-col-left">
-                        <!-- AI Diagnosis Card -->
-                        <div class="card" style="margin-bottom: 24px;">
-                            <div class="card-title">AI Powered Diagnosis</div>
-                            <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">Describe your issue in plain language. AI will suggest a fix and find local pros.</p>
-                            <div class="search-box" style="width: 100%; border-color: var(--primary); box-shadow: 0 0 10px rgba(124, 77, 255, 0.1);">
-                                <i class="fas fa-magic" style="color: var(--primary);"></i>
-                                <input type="text" id="aiInput" placeholder="E.g. My sink is leaking from the handle area..." style="font-weight: 500;">
-                                <button class="btn-grant" id="btnRunAI" style="width: auto; padding: 8px 16px;">Ask AI</button>
-                            </div>
+            <div style="padding: 48px;">
+                <!-- Common Services Ribbon -->
+                <div class="services-ribbon">
+                    <div class="service-pill active"><i class="fas fa-star"></i> All Services</div>
+                    <div class="service-pill"><i class="fas fa-faucet"></i> Plumbing</div>
+                    <div class="service-pill"><i class="fas fa-bolt"></i> Electrical</div>
+                    <div class="service-pill"><i class="fas fa-snowflake"></i> HVAC</div>
+                    <div class="service-pill"><i class="fas fa-broom"></i> Cleaning</div>
+                    <div class="service-pill"><i class="fas fa-hammer"></i> Carpentry</div>
+                </div>
 
-                            <div id="aiResult" class="ai-result-area">
+                <!-- Dashboard Content (Hidden in Guest unless we show public jobs) -->
+                <div id="page-dashboard" class="page-content active">
+                    <div class="dashboard-header">
+                        <h1>Service Dashboard</h1>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="grid-col-left">
+                            <!-- AI Result shown to guests too! -->
+                            <div id="aiResult" class="ai-result-area" style="margin-top: 0; margin-bottom: 32px;">
                                 <div style="display: flex; gap: 12px; margin-bottom: 16px;">
                                     <div style="background: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;"><i class="fas fa-lightbulb" style="color: #ec4899;"></i></div>
                                     <div style="flex: 1;">
-                                        <div style="font-weight: 800; color: #9d174d; font-size: 14px;">AI Suggested Fix</div>
-                                        <div id="aiSuggestion" style="font-size: 13px; margin-top: 4px; line-height: 1.5; color: #be185d;">Wait, I am analyzing...</div>
+                                        <div style="font-weight: 800; color: #9d174d; font-size: 14px;">Instant AI Solution</div>
+                                        <div id="aiSuggestion" style="font-size: 13px; margin-top: 4px; line-height: 1.5; color: #be185d;">Thinking...</div>
                                     </div>
                                 </div>
-                                <div style="font-weight: 800; font-size: 12px; text-transform: uppercase; color: #9d174d; margin-bottom: 12px; letter-spacing: 0.5px;">Recommended Technicians</div>
-                                <div id="aiTechs" style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px;">
-                                    <!-- Dynamic Techs here -->
+                                <div style="font-weight: 800; font-size: 12px; text-transform: uppercase; color: #9d174d; margin-bottom: 12px;">Top Rated Pros for This Task</div>
+                                <div id="aiTechs" style="display: flex; gap: 12px; overflow-x: auto;"></div>
+                                <div style="margin-top: 24px; text-align: center;">
+                                    <button class="auth-btn" style="background: #9d174d;">Register to Chat with Pros</button>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-title">Why HomeFix Pro?</div>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px;">
+                                    <div style="display: flex; gap: 16px;">
+                                        <div style="color: var(--primary); font-size: 24px;"><i class="fas fa-shield-check"></i></div>
+                                        <div>
+                                            <div style="font-weight: 700; font-size: 14px;">Verified Pros</div>
+                                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Every tech is background checked and insured.</p>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; gap: 16px;">
+                                        <div style="color: var(--primary); font-size: 24px;"><i class="fas fa-brain"></i></div>
+                                        <div>
+                                            <div style="font-weight: 700; font-size: 14px;">AI First Aid</div>
+                                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Save hundreds with AI-guided troubleshooting.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Revenue/Jobs Card -->
-                        <div class="card">
-                            <div class="card-title">Service Activity</div>
-                            <div style="height: 180px; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px;">
-                                <div style="flex:1; background: #e2e8f0; height: 30%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #cbd5e1; height: 50%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: var(--primary); height: 80%; border-radius: 4px;"></div>
-                                <div style="flex:1; background: #94a3b8; height: 45%; border-radius: 4px;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="grid-col-right">
-                        <!-- Recent Bids -->
-                        <div class="card" style="margin-bottom: 24px;">
-                            <div class="card-title">Incoming Service Proposals</div>
-                            <div class="orders-list">
-                                <div class="order-item">
-                                    <div class="order-prod-img"><i class="fas fa-tools"></i></div>
-                                    <div class="order-info"><div class="order-name">Sam's Electric</div><div class="order-price">$80 • 4.9⭐</div></div>
-                                    <div class="order-status status-pending">View</div>
-                                </div>
-                                <div class="order-item">
-                                    <div class="order-prod-img"><i class="fas fa-shower"></i></div>
-                                    <div class="order-info"><div class="order-name">City Plumbers</div><div class="order-price">$120 • 4.7⭐</div></div>
-                                    <div class="order-status status-pending">View</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Quick Map Tracker -->
-                        <div class="grant-card">
-                            <div class="grant-header">
-                                <img src="https://ui-avatars.com/api/?name=Aaron&background=fff&color=7c4dff" class="grant-avatar">
-                                <div class="grant-text">Track your Technician<span class="grant-date">Coming for Kitchen Repair</span></div>
-                            </div>
-                            <div class="grant-btns">
-                                <button class="btn-grant">Live Chat</button>
-                                <button class="btn-cancel">Map View</button>
+                        <div class="grid-col-right">
+                             <div class="card" style="background: var(--primary); color: white;">
+                                <h3 style="font-size: 18px; margin-bottom: 12px;">Ready to hire?</h3>
+                                <p style="font-size: 12px; opacity: 0.9; margin-bottom: 20px;">Sign up to see thousands of verified local technicians and their exact pricing.</p>
+                                <button class="auth-btn" style="background: white; color: var(--primary); width: 100%;">Create Free Account</button>
                             </div>
                         </div>
                     </div>
@@ -209,44 +171,36 @@
     <script src="js/services/firebase-config.js"></script>
     <script src="js/app.js"></script>
     <script>
-        const database = firebase.database();
-        
-        // AI Diagnosis Simulation
-        const btnAI = document.getElementById('btnRunAI');
+        const btnAskAI = document.getElementById('btnAskAIHero');
+        const aiInput = document.getElementById('aiInputHero');
         const aiResult = document.getElementById('aiResult');
-        const aiInput = document.getElementById('aiInput');
         const aiSuggestion = document.getElementById('aiSuggestion');
         const aiTechs = document.getElementById('aiTechs');
 
-        btnAI.addEventListener('click', () => {
-            const problem = aiInput.value.toLowerCase();
-            if(!problem) return alert('Describe the problem first!');
+        btnAskAI?.addEventListener('click', () => {
+            const problem = aiInput.value;
+            if(!problem) return alert('Describe your problem first!');
             
             aiResult.style.display = 'block';
-            aiSuggestion.innerText = "Analyzing your issue for '" + problem + "' using GPT-4-Turbo...";
-            
+            aiSuggestion.innerText = "Simulating AI analysis for '" + problem + "'...";
+            window.scrollTo({ top: aiResult.offsetTop - 100, behavior: 'smooth' });
+
             setTimeout(() => {
-                let fix = "It sounds like you have a minor leak. Check the rubber gasket inside the handle. If it's worn, replace it to stop the drip.";
-                let techList = [
-                    { name: 'John Doe', rate: '$45/hr', rating: '4.9', color: '7c4dff' },
-                    { name: 'Mike Ross', rate: '$60/hr', rating: '4.8', color: 'ec4899' }
-                ];
-
-                if(problem.includes('light') || problem.includes('electric')) {
-                    fix = "A clicking light switch usually indicates a faulty inner contact. Turn off the breaker immediately and replace the switch.";
-                    techList = [{ name: 'Zap Services', rate: '$90/hr', rating: '5.0', color: 'eab308' }];
-                }
-
-                aiSuggestion.innerHTML = `<strong>Root Cause:</strong> ${fix}<br><br><strong>DIY Cost:</strong> ~$10 for parts. <br><strong>Pro Quote:</strong> ~$75-$150.`;
-                
-                aiTechs.innerHTML = techList.map(t => `
+                aiSuggestion.innerHTML = "<strong>The Probable Issue:</strong> Degraded seals or a blockage.<br><strong>DIY Fix:</strong> Tighten the intake hose or clear the filter at the base.<br><strong>Benefit:</strong> You could save ~$120 by checking this yourself.";
+                aiTechs.innerHTML = `
                     <div style="background:white; padding:12px; border-radius:12px; min-width:140px; border:1px solid #fbcfe8;">
-                        <img src="https://ui-avatars.com/api/?name=${t.name.split(' ').join('+')}&background=${t.color}&color=fff" style="width:32px; height:32px; border-radius:50%; margin-bottom:8px;">
-                        <div style="font-weight:800; font-size:12px; color:#1e293b;">${t.name}</div>
-                        <div style="font-size:10px; color:#64748b;">${t.rate} • ${t.rating}⭐</div>
+                        <img src="https://ui-avatars.com/api/?name=Local+Pro&background=7c4dff&color=fff" style="width:32px; border-radius:50%; margin-bottom:8px;">
+                        <div style="font-weight:800; font-size:12px;">Appliance Pros</div>
+                        <div style="font-size:10px; color:var(--text-muted);">$85/hr • 4.9⭐</div>
                     </div>
-                `).join('');
-            }, 1500);
+                `;
+            }, 1000);
+        });
+
+        // Toggle Dev Hook (for demo purposes)
+        document.getElementById('btnSignUp').addEventListener('click', () => {
+            document.body.classList.remove('guest-mode');
+            localStorage.setItem('hv_logged_in', 'true');
         });
     </script>
 </body>
