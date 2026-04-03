@@ -17,196 +17,282 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/dashboard_new.css">
+    
     <style>
-        /* Multi-role Logic Classes */
+        /* Role-based Visibility */
         [data-role] { display: none; }
         body[data-current-role="guest"] [data-role="guest"] { display: block; }
         body[data-current-role="user"] [data-role="user"] { display: flex; }
         body[data-current-role="tech"] [data-role="tech"] { display: flex; }
-        body[data-current-role="admin"] [data-role="admin"] { display: flex; }
 
-        /* Animation for AI Results */
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .ai-result-area.active { display: block !important; animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* General Styles for AI */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .ai-active { display: block !important; animation: fadeIn 0.6s ease; }
 
-        /* Icon Buttons */
-        .icon-btn { cursor: pointer; color: var(--text-light); transition: 0.3s; padding: 10px; border-radius: 50%; }
-        .icon-btn:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
+        /* Auth Modals Styling to Match Dark Theme */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 5000; align-items: center; justify-content: center; }
+        .modal-content { background: #1e293b; border: 1px solid rgba(255,255,255,0.1); border-radius: 28px; padding: 48px; width: 440px; box-shadow: 0 40px 60px rgba(0,0,0,0.5); }
+        .modal-content h2 { margin-bottom: 32px; font-weight: 800; color: white; letter-spacing: -1px; }
+        .form-input { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: white; margin-bottom: 20px; font-size: 14px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        .btn-action { width: 100%; padding: 14px; border-radius: 14px; background: var(--primary-gradient); color: white; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-action:hover { box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4); transform: translateY(-2px); }
+
+        /* Result areas */
+        .ai-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--divider); padding: 24px; border-radius: 20px; }
+        .tech-list { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
     </style>
 </head>
 
 <body data-current-role="guest">
 
-    <!-- ===================== 1. GUEST/MEMBER HEADER ===================== -->
-    <header class="top-header" style="position: sticky; top: 0; background: rgba(10, 14, 23, 0.8); backdrop-filter: blur(20px); z-index: 1000; padding: 16px 48px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-        <div class="logo" style="margin: 0; font-size: 22px;">Home<span>Fix.</span></div>
-        
-        <div style="display: flex; gap: 32px; align-items: center;">
-             <div class="guest-only" style="display: flex; gap: 24px; align-items: center;">
-                <a href="#" onclick="setRole('user')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Find a Tech</a>
-                <a href="#" onclick="setRole('tech')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Become a Pro</a>
-                <button class="upgrade-btn" style="margin: 0; padding: 10px 24px;" onclick="setRole('admin')">Platform Admin</button>
+    <!-- ===================== 1. DASHBOARD OVERHAUL (Sidebar + Content) ===================== -->
+    <div data-role="user" class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-tools"></i> <span>Home<span>Fix.</span></span>
             </div>
-            <div id="profileSection" style="display: none; align-items: center; gap: 14px;">
-                 <div class="user-meta" style="text-align: right;">
-                    <div class="user-name">Welcome Back</div>
-                    <div class="user-email">Aaron Smith</div>
-                </div>
-                <img src="https://ui-avatars.com/api/?name=Aaron+Smith&background=7c3aed&color=fff" class="user-avatar">
-            </div>
-        </div>
-    </header>
 
-    <!-- ===================== 2. SHARED AI ANALYSIS AREA (GUEST & USER) ===================== -->
-    <div id="shared-ai-view">
-        <section class="hero-guest" id="heroGuestSection">
-            <h1 style="font-size: 64px; font-weight: 900; margin-bottom: 24px; letter-spacing: -3px; line-height: 1.1;">Fix Anything. <br><span style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Smarter.</span></h1>
-            <p style="color: var(--text-muted); font-size: 20px; max-width: 600px; margin: 0 auto 48px auto;">Describe your issue via text, photo, or voice. Our AI determines the fix instantly.</p>
-            
-            <div class="card" style="max-width: 800px; margin: 0 auto; padding: 16px; border-radius: 28px; background: rgba(255,255,255,0.03);">
-                <div style="display: flex; align-items: center; gap: 12px; padding: 16px 24px;">
-                    <i class="fas fa-magic" style="color: var(--primary); font-size: 20px;"></i>
-                    <input type="text" id="aiInput" placeholder="E.g. Sink is leaking from the gasket..." style="background: transparent; border: none; flex: 1; color: white; padding: 16px; outline: none; font-size: 18px; font-weight: 500;">
-                    
-                    <div style="display: flex; gap: 8px;">
-                        <label title="Upload Photo" class="icon-btn"><i class="fas fa-camera"></i><input type="file" id="photoInput" accept="image/*" style="display: none;"></label>
-                        <i class="fas fa-microphone icon-btn" title="Voice Input" id="micBtn"></i>
-                        <button class="upgrade-btn" style="width: auto; padding: 14px 40px; margin: 0;" id="btnAnalyzeMain">Analyze</button>
-                    </div>
-                </div>
-
-                <div id="aiAnalysisResult" class="ai-result-area" style="text-align: left; background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(255,255,255,0.1); margin: 16px; padding: 32px; border-radius: 20px; display: none;">
-                    <div style="display: flex; gap: 20px; margin-bottom: 24px;">
-                        <div style="background: var(--primary-gradient); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px;"><i class="fas fa-robot text-white"></i></div>
-                        <div style="flex: 1;">
-                            <h3 style="color: white; margin-bottom: 4px;">AI Analysis Result</h3>
-                            <p id="analysisSummary" style="color: var(--text-muted); font-size: 15px; line-height: 1.6;">Our vision models are analyzing your input...</p>
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
-                        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 24px; border-radius: 16px;">
-                            <h4 style="color: #10b981; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> Suggested DIY Fix</h4>
-                            <div id="diySteps" style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">1. Turn off supply. 2. Tighten gasket.</div>
-                        </div>
-                         <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); padding: 24px; border-radius: 16px;">
-                            <h4 style="color: #f59e0b; margin-bottom: 12px;"><i class="fas fa-info-circle"></i> Complexity Score</h4>
-                            <div id="compScore" style="font-size: 18px; font-weight: 800; color: white;">2 / 5 (Low)</div>
-                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Estimated Repair Time: 20 mins</p>
-                        </div>
-                    </div>
-
-                    <h4 style="margin-bottom: 16px; font-weight: 800; letter-spacing: 0.5px;">Recommended Local Pros</h4>
-                    <div id="techGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
-                         <!-- Dynamic Techs -->
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Dashboards (User/Tech/Admin) - Logic remains same but they can toggle the AI sections -->
-    <div data-role="user" class="dashboard-container" style="display: none; padding-top: 50px;">
-         <aside class="sidebar" style="top: 85px;">
             <nav class="sidebar-menu">
+                <div class="menu-label">Menu</div>
                 <a href="#" class="nav-link active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-                <a href="#" class="nav-link"><i class="fas fa-tools"></i><span>My Jobs</span></a>
-                <a href="#" class="nav-link"><i class="fas fa-wallet"></i><span>Finance</span></a>
-                <a href="#" onclick="logout()" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-chart-line"></i><span>Analytics</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-shopping-bag"></i><span>Orders</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-users"></i><span>Customers</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-dollar-sign"></i><span>Sales</span></a>
+                
+                <div class="menu-label">Repair Center</div>
+                <a href="#" class="nav-link"><i class="fas fa-robot"></i><span>AI Assistant</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-history"></i><span>My Reports</span></a>
             </nav>
-        </aside>
-        <main class="main-content">
-             <div class="dashboard-header">
-                <h1>Active Subscriptions & Repairs</h1>
-                <p>Track your AI-guided home maintenance.</p>
+
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </div>
-            <div class="stats-row">
-                 <div class="stat-card"><div class="stat-label">Active Job</div><div class="stat-val">Kitchen Sink</div></div>
-                 <div class="stat-card"><div class="stat-label">Messages</div><div class="stat-val">3 Unread</div></div>
-                 <div class="stat-card"><div class="stat-label">Next Service</div><div class="stat-val">AC Cleaning</div></div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search Anything">
+                </div>
+                <div class="user-block">
+                    <div class="user-info">
+                        <div class="username" id="userNameDash">Guest User</div>
+                        <div class="useremail" id="userEmailDash">not logged in</div>
+                    </div>
+                    <img id="userAvatarDash" src="https://ui-avatars.com/api/?background=7c3aed&color=fff" class="user-avatar">
+                </div>
+            </header>
+
+            <!-- Stats Page -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon icon-blue"><i class="fas fa-box"></i></div>
+                    <div class="stat-value">8,98,879</div>
+                    <div class="stat-title">Total Products</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-purple"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-value">32,80.89</div>
+                    <div class="stat-title">Total Sales</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon icon-green"><i class="fas fa-dollar-sign"></i></div>
+                    <div class="stat-value">5,00.15</div>
+                    <div class="stat-title">Total Profit</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Layout V1 -->
+            <div class="content-grid">
+                <!-- Left: AI Hub -->
+                <div class="left-col">
+                    <div class="ai-box">
+                        <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 8px;">Run AI Diagnosis?</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 15px;">Paste your issue or upload a photo for an instant root-cause analysis.</p>
+                        
+                        <div style="display: flex; gap: 14px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 20px; border: 1px solid var(--divider);">
+                            <input type="text" id="aiInput" placeholder="E.g. Sink leaking from handle..." style="flex:1; border:none; background:transparent; outline:none; color:white; padding: 10px 20px; font-size: 16px;">
+                            <button class="btn-action" style="width: auto; padding: 0 40px;" onclick="analyzeIssue()">Solve It</button>
+                        </div>
+
+                        <!-- AI Result Display -->
+                        <div id="aiResult" style="display: none; text-align: left; margin-top: 32px;">
+                            <div class="ai-card">
+                                <h4 style="color: #5c67f2; margin-bottom: 8px;"><i class="fas fa-rocket"></i> Root Cause Detected</h4>
+                                <p id="resultText" style="line-height: 1.6; color: var(--text-muted); font-size: 14px;">The vision model is calculating your repair steps...</p>
+                                
+                                <h4 style="margin-top: 24px;">Recommended Professionals</h4>
+                                <div id="techListArea" class="tech-list">
+                                     <!-- Injection -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-v1">
+                         <div class="card-title-v1">Revenue Statements <i class="fas fa-ellipsis-h text-muted"></i></div>
+                         <div style="height: 180px; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px;">
+                             <div style="flex:1; background: #1e293b; height: 30%; border-radius: 4px;"></div>
+                             <div style="flex:1; background: var(--primary-gradient); height: 75%; border-radius: 4px;"></div>
+                             <div style="flex:1; background: #1e293b; height: 50%; border-radius: 4px;"></div>
+                             <div style="flex:1; background: var(--primary-gradient); height: 90%; border-radius: 4px;"></div>
+                         </div>
+                    </div>
+                </div>
+
+                <!-- Right: Orders -->
+                <div class="right-col">
+                    <div class="card-v1">
+                        <div class="card-title-v1">Recent Orders <i class="fas fa-angle-right"></i></div>
+                        <div class="list-item">
+                            <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-faucet text-muted"></i></div>
+                            <div style="flex:1;"><div class="username">Water Leak Patch</div><div class="useremail">$45 • Brooklyn</div></div>
+                            <div class="status-tag status-blue">Pending</div>
+                        </div>
+                        <div class="list-item">
+                            <div style="width: 44px; height: 44px; background: rgba(255,255,255,0.03); border-radius: 12px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-bolt text-muted"></i></div>
+                            <div style="flex:1;"><div class="username">Panel Upgrade</div><div class="useremail">$1,200 • Manhattan</div></div>
+                            <div class="status-tag status-green">Done</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/mock-data.js"></script>
-    <script>
-        // Core Logic
-        const state = { currentRole: 'guest' };
+    <!-- GUEST (Registration Portal) -->
+    <div data-role="guest" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at center, #1e293b 0%, #0a0e17 100%);">
+        <div class="modal-content" style="display: block;">
+            <div class="logo" style="justify-content: center;"><i class="fas fa-tools"></i> <span>Home<span>Fix.</span></span></div>
+            <h2 style="text-align: center; font-size: 24px;">Welcome to HomeFix Pro</h2>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <button class="btn-action" onclick="openModal('signupModal')">Create Your Account</button>
+                <button class="btn-action" style="background: rgba(255,255,255,0.05); border: 1px solid var(--divider);" onclick="openModal('loginModal')">Sign In</button>
+            </div>
+            <p style="text-align: center; color: var(--text-muted); font-size: 12px; margin-top: 24px;">AI-Driven maintenance at your fingertips.</p>
+        </div>
+    </div>
 
+    <!-- MODALS -->
+    <div id="loginModal" class="modal-overlay" onclick="closeOnOverlay(event)">
+        <div class="modal-content">
+            <h2>Sign In</h2>
+            <form id="loginForm">
+                <label class="form-label">Email Address</label><input type="email" id="loginEmail" class="form-input" required>
+                <label class="form-label">Secure Password</label><input type="password" id="loginPass" class="form-input" required>
+                <button type="submit" class="btn-action">Enter Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="signupModal" class="modal-overlay" onclick="closeOnOverlay(event)">
+        <div class="modal-content">
+            <h2>Register</h2>
+            <form id="signupForm">
+                <label class="form-label">Full Name</label><input type="text" id="signupName" class="form-input" required>
+                <label class="form-label">Role</label>
+                <select id="signupRole" class="form-input"><option value="user">Homeowner</option><option value="tech">Service Pro</option></select>
+                <label class="form-label">Email</label><input type="email" id="signupEmail" class="form-input" required>
+                <label class="form-label">Set Password</label><input type="password" id="signupPass" class="form-input" required>
+                <button type="submit" class="btn-action">Let's Fix It!</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase System -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="js/services/firebase-config.js"></script>
+    <script src="js/mock-data.js"></script>
+
+    <script>
+        // Modal Control
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function closeOnOverlay(e) { if(e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; }
+
+        // Role Management
         function setRole(role) {
-            state.currentRole = role;
             document.body.setAttribute('data-current-role', role);
-            
-            // Header toggle
-            const profile = document.getElementById('profileSection');
-            const guestLinks = document.querySelector('.guest-only');
-            if(role === 'guest') {
-                profile.style.display = 'none';
-                guestLinks.style.display = 'flex';
-                document.getElementById('heroGuestSection').style.display = 'block';
-            } else {
-                profile.style.display = 'flex';
-                guestLinks.style.display = 'none';
-                // Member view hides the big hero to show their specific dash
-                if(role === 'user') document.getElementById('heroGuestSection').style.display = 'block'; // Keep AI for user dash
-                else document.getElementById('heroGuestSection').style.display = 'none';
-            }
         }
 
-        function logout() { setRole('guest'); }
+        // Firebase Sync
+        auth.onAuthStateChanged(user => {
+            if(user) {
+                database.ref('users/' + user.uid).once('value', snapshot => {
+                    const data = snapshot.val();
+                    setRole(data?.role || 'user');
+                    document.getElementById('userNameDash').innerText = data?.name || 'User';
+                    document.getElementById('userEmailDash').innerText = user.email;
+                    document.getElementById('userAvatarDash').src = `https://ui-avatars.com/api/?name=${data?.name || 'U'}&background=7c3aed&color=fff`;
+                });
+            } else {
+                setRole('guest');
+            }
+        });
 
-        // --- Actionable AI Logic ---
-        const btnAnalyze = document.getElementById('btnAnalyzeMain');
-        const resultSection = document.getElementById('aiAnalysisResult');
-        const techGrid = document.getElementById('techGrid');
+        // AI Diagnosis Feature
+        async function analyzeIssue() {
+            const resultBox = document.getElementById('aiResult');
+            const resultText = document.getElementById('resultText');
+            const techArea = document.getElementById('techListArea');
+            const input = document.getElementById('aiInput').value.toLowerCase();
 
-        async function handleAIAnalysis(type = 'text', payload = null) {
-            const inputVal = document.getElementById('aiInput').value.toLowerCase();
-            
-            // Show loading
-            resultSection.className = 'ai-result-area active';
-            resultSection.style.display = 'block';
-            document.getElementById('analysisSummary').innerHTML = `<i class="fas fa-spinner fa-spin"></i> Analyzed ${type}... Processing with HomeFix GPT-V1...`;
+            resultBox.style.display = 'block';
+            resultBox.classList.add('ai-active');
+            resultText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Neural models analyzing your problem description...';
 
-            await new Promise(r => setTimeout(r, 1500)); // Simulating cloud analysis
+            await new Promise(r => setTimeout(r, 1500));
 
-            // Determine data from Mock
+            // Matching Logic from Mock Data
             let domain = 'plumbing';
-            if(inputVal.includes('light') || inputVal.includes('wire') || inputVal.includes('breaker')) domain = 'electrical';
-            if(inputVal.includes('ac') || inputVal.includes('cool') || inputVal.includes('heat')) domain = 'hvac';
+            if(input.includes('electric') || input.includes('wire')) domain = 'electrical';
+            if(input.includes('ac') || input.includes('heat')) domain = 'hvac';
 
             const data = MockData.diagnoses[domain];
             const techs = MockData.technicians.filter(t => t.specialties.includes(domain.charAt(0).toUpperCase() + domain.slice(1)));
 
-            // Update UI
-            document.getElementById('analysisSummary').innerHTML = `<strong>Likely Cause:</strong> ${data.cause}`;
-            document.getElementById('diySteps').innerHTML = data.fix.split('. ').map(s => `<div>• ${s}</div>`).join('');
-            document.getElementById('compScore').innerText = data.difficulty;
+            resultText.innerHTML = `<strong>Probable Root Cause:</strong> ${data.cause}<br><br><strong>HomeFix Suggestion:</strong> ${data.fix}`;
             
-            techGrid.innerHTML = techs.map(t => `
-                <div class="card" style="padding: 16px; border-radius: 16px; background: rgba(255,255,255,0.02);">
-                    <div style="display:flex; gap:12px; align-items:center;">
-                        <img src="${t.avatar}" style="width:40px; height:40px; border-radius:10px;">
-                        <div>
-                            <div style="font-weight:700; font-size:14px;">${t.name}</div>
-                            <div style="font-size:11px; color:var(--text-muted);">${t.rating}⭐ • ${t.reviews} Reviews</div>
-                        </div>
-                        <button class="upgrade-btn" style="width:auto; margin:0; padding:6px 12px; font-size:10px; margin-left:auto;">Hire</button>
-                    </div>
-                </div>
+            techArea.innerHTML = techs.slice(0,2).map(t => `
+                 <div class="list-item" style="background: rgba(255,255,255,0.02); padding: 12px; border-radius: 12px;">
+                    <img src="${t.avatar}" style="width:36px; height:36px; border-radius:10px;">
+                    <div style="flex:1;"><div class="username" style="font-size:13px;">${t.name}</div><div class="useremail">${t.rating}⭐ • ${t.base_rate}</div></div>
+                    <button class="btn-action" style="width:auto; padding: 6px 12px; font-size:10px;">Quote</button>
+                 </div>
             `).join('');
         }
 
-        btnAnalyze.addEventListener('click', () => handleAIAnalysis('Text'));
-        
-        // Multi-modal listeners
-        document.getElementById('photoInput').addEventListener('change', () => handleAIAnalysis('Photo'));
-        document.getElementById('micBtn').addEventListener('click', () => {
-            alert('Listening...');
-            handleAIAnalysis('Voice');
+        // Auth Forms
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const role = document.getElementById('signupRole').value;
+            const pass = document.getElementById('signupPass').value;
+            try {
+                const cred = await auth.createUserWithEmailAndPassword(email, pass);
+                await database.ref('users/' + cred.user.uid).set({ name, email, role });
+                closeModal('signupModal');
+            } catch (err) { alert(err.message); }
         });
 
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            try {
+                await auth.signInWithEmailAndPassword(email, pass);
+                closeModal('loginModal');
+            } catch (err) { alert(err.message); }
+        });
+
+        function logout() { auth.signOut(); }
     </script>
 </body>
 
