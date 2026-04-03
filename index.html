@@ -18,232 +18,195 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/dashboard_new.css">
     <style>
-        /* Role-based Visibility */
+        /* Multi-role Logic Classes */
         [data-role] { display: none; }
         body[data-current-role="guest"] [data-role="guest"] { display: block; }
         body[data-current-role="user"] [data-role="user"] { display: flex; }
         body[data-current-role="tech"] [data-role="tech"] { display: flex; }
         body[data-current-role="admin"] [data-role="admin"] { display: flex; }
 
-        /* General Styles */
-        .services-ribbon { display: flex; gap: 16px; overflow-x: auto; padding: 24px 0; scrollbar-width: none; }
-        .service-pill { background: white; padding: 12px 24px; border-radius: 50px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 600; color: var(--text-muted); cursor: pointer; border: 1px solid transparent; }
-        .service-pill.active { background: var(--primary); color: white; }
-        .ai-result-area { background: #fdf2f8; border: 1px solid #fbcfe8; border-radius: 16px; padding: 24px; margin-top: 24px; display: none; }
+        /* Animation for AI Results */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .ai-result-area.active { display: block !important; animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        /* Icon Buttons */
+        .icon-btn { cursor: pointer; color: var(--text-light); transition: 0.3s; padding: 10px; border-radius: 50%; }
+        .icon-btn:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
     </style>
 </head>
 
 <body data-current-role="guest">
 
-    <!-- ===================== 1. GUEST LANDING PAGE ===================== -->
-    <div data-role="guest" class="guest-layout">
-        <header class="top-header" style="position: sticky; top: 0; background: white; z-index: 1000; padding: 16px 48px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-            <div class="logo" style="margin: 0; font-size: 20px;">Home<span>Fix.</span></div>
-            <div style="display: flex; gap: 24px; align-items: center;">
+    <!-- ===================== 1. GUEST/MEMBER HEADER ===================== -->
+    <header class="top-header" style="position: sticky; top: 0; background: rgba(10, 14, 23, 0.8); backdrop-filter: blur(20px); z-index: 1000; padding: 16px 48px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+        <div class="logo" style="margin: 0; font-size: 22px;">Home<span>Fix.</span></div>
+        
+        <div style="display: flex; gap: 32px; align-items: center;">
+             <div class="guest-only" style="display: flex; gap: 24px; align-items: center;">
                 <a href="#" onclick="setRole('user')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Find a Tech</a>
                 <a href="#" onclick="setRole('tech')" style="text-decoration: none; color: var(--text-dark); font-weight: 600;">Become a Pro</a>
-                <button class="upgrade-btn" style="margin: 0; padding: 10px 24px;" onclick="setRole('admin')">Admin Portal</button>
+                <button class="upgrade-btn" style="margin: 0; padding: 10px 24px;" onclick="setRole('admin')">Platform Admin</button>
             </div>
-        </header>
+            <div id="profileSection" style="display: none; align-items: center; gap: 14px;">
+                 <div class="user-meta" style="text-align: right;">
+                    <div class="user-name">Welcome Back</div>
+                    <div class="user-email">Aaron Smith</div>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Aaron+Smith&background=7c3aed&color=fff" class="user-avatar">
+            </div>
+        </div>
+    </header>
 
-        <section style="background: linear-gradient(135deg, #fdf4ff 0%, #f5f3ff 100%); padding: 100px 48px; text-align: center;">
-            <h1 style="font-size: 56px; font-weight: 800; margin-bottom: 24px; letter-spacing: -2px;">AI-Powered <span style="color: var(--primary);">Home Care.</span></h1>
-            <p style="color: var(--text-muted); font-size: 20px; max-width: 650px; margin: 0 auto 48px auto;">Instant AI diagnostics, DIY troubleshooting, and a marketplace for verified professional technicians.</p>
+    <!-- ===================== 2. SHARED AI ANALYSIS AREA (GUEST & USER) ===================== -->
+    <div id="shared-ai-view">
+        <section class="hero-guest" id="heroGuestSection">
+            <h1 style="font-size: 64px; font-weight: 900; margin-bottom: 24px; letter-spacing: -3px; line-height: 1.1;">Fix Anything. <br><span style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Smarter.</span></h1>
+            <p style="color: var(--text-muted); font-size: 20px; max-width: 600px; margin: 0 auto 48px auto;">Describe your issue via text, photo, or voice. Our AI determines the fix instantly.</p>
             
-            <div class="card" style="max-width: 750px; margin: 0 auto; padding: 12px 12px 12px 24px; box-shadow: 0 20px 40px rgba(124, 77, 255, 0.15); display: flex; align-items: center; border-radius: 20px;">
-                <i class="fas fa-magic" style="color: var(--primary); font-size: 20px;"></i>
-                <input type="text" id="aiInputHero" placeholder="E.g. My AC is making a loud buzzing sound..." style="border: none; flex: 1; padding: 16px; outline: none; font-size: 16px; font-weight: 500;">
-                <button class="upgrade-btn" style="width: auto; padding: 14px 40px; margin: 0;" onclick="handleGuestAI()">Analyze</button>
-            </div>
-            
-            <div id="aiResultGuest" class="ai-result-area" style="max-width: 750px; margin: 32px auto 0 auto; text-align: left;">
-                <!-- Result injected here -->
+            <div class="card" style="max-width: 800px; margin: 0 auto; padding: 16px; border-radius: 28px; background: rgba(255,255,255,0.03);">
+                <div style="display: flex; align-items: center; gap: 12px; padding: 16px 24px;">
+                    <i class="fas fa-magic" style="color: var(--primary); font-size: 20px;"></i>
+                    <input type="text" id="aiInput" placeholder="E.g. Sink is leaking from the gasket..." style="background: transparent; border: none; flex: 1; color: white; padding: 16px; outline: none; font-size: 18px; font-weight: 500;">
+                    
+                    <div style="display: flex; gap: 8px;">
+                        <label title="Upload Photo" class="icon-btn"><i class="fas fa-camera"></i><input type="file" id="photoInput" accept="image/*" style="display: none;"></label>
+                        <i class="fas fa-microphone icon-btn" title="Voice Input" id="micBtn"></i>
+                        <button class="upgrade-btn" style="width: auto; padding: 14px 40px; margin: 0;" id="btnAnalyzeMain">Analyze</button>
+                    </div>
+                </div>
+
+                <div id="aiAnalysisResult" class="ai-result-area" style="text-align: left; background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(255,255,255,0.1); margin: 16px; padding: 32px; border-radius: 20px; display: none;">
+                    <div style="display: flex; gap: 20px; margin-bottom: 24px;">
+                        <div style="background: var(--primary-gradient); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px;"><i class="fas fa-robot text-white"></i></div>
+                        <div style="flex: 1;">
+                            <h3 style="color: white; margin-bottom: 4px;">AI Analysis Result</h3>
+                            <p id="analysisSummary" style="color: var(--text-muted); font-size: 15px; line-height: 1.6;">Our vision models are analyzing your input...</p>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+                        <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 24px; border-radius: 16px;">
+                            <h4 style="color: #10b981; margin-bottom: 12px;"><i class="fas fa-check-circle"></i> Suggested DIY Fix</h4>
+                            <div id="diySteps" style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">1. Turn off supply. 2. Tighten gasket.</div>
+                        </div>
+                         <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); padding: 24px; border-radius: 16px;">
+                            <h4 style="color: #f59e0b; margin-bottom: 12px;"><i class="fas fa-info-circle"></i> Complexity Score</h4>
+                            <div id="compScore" style="font-size: 18px; font-weight: 800; color: white;">2 / 5 (Low)</div>
+                            <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Estimated Repair Time: 20 mins</p>
+                        </div>
+                    </div>
+
+                    <h4 style="margin-bottom: 16px; font-weight: 800; letter-spacing: 0.5px;">Recommended Local Pros</h4>
+                    <div id="techGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                         <!-- Dynamic Techs -->
+                    </div>
+                </div>
             </div>
         </section>
-
-        <section style="padding: 100px 48px;">
-            <div style="text-align: center; margin-bottom: 60px;">
-                <h2 style="font-size: 32px; font-weight: 800;">Browse All Services</h2>
-            </div>
-            <div class="services-ribbon" style="justify-content: center; flex-wrap: wrap;">
-                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-faucet"></i> Plumbing</div>
-                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-bolt"></i> Electrical</div>
-                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-snowflake"></i> HVAC</div>
-                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-hammer"></i> Carpentry</div>
-                <div class="service-pill" onclick="setRole('user')"><i class="fas fa-paint-roller"></i> Painting</div>
-            </div>
-        </section>
     </div>
 
-    <!-- ===================== 2. USER/HOMEOWNER DASHBOARD ===================== -->
-    <div data-role="user" class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">Home<span>Fix.</span></div>
+    <!-- Dashboards (User/Tech/Admin) - Logic remains same but they can toggle the AI sections -->
+    <div data-role="user" class="dashboard-container" style="display: none; padding-top: 50px;">
+         <aside class="sidebar" style="top: 85px;">
             <nav class="sidebar-menu">
-                <div class="menu-section-label">User Dashboard</div>
-                <a href="#" class="nav-link active" onclick="showSubPage('user-main')"><i class="fas fa-th-large"></i><span>Home</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('user-jobs')"><i class="fas fa-tools"></i><span>My Repairs</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('user-bids')"><i class="fas fa-hand-holding-dollar"></i><span>Bids (3)</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('user-messages')"><i class="fas fa-comment-dots"></i><span>Messages</span></a>
-                <div class="menu-section-label">Account</div>
-                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+                <a href="#" class="nav-link active"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-tools"></i><span>My Jobs</span></a>
+                <a href="#" class="nav-link"><i class="fas fa-wallet"></i><span>Finance</span></a>
+                <a href="#" onclick="logout()" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
             </nav>
         </aside>
-
         <main class="main-content">
-            <div id="user-main" class="sub-page active">
-                <h1>Welcome Back, Aaron!</h1>
-                <p class="text-muted">Need anything fixed today?</p>
-                <div class="dashboard-grid" style="margin-top: 32px;">
-                    <div class="card" style="grid-column: span 2;">
-                        <h3>Run Quick Diagnosis</h3>
-                        <div class="search-box" style="width: 100%; margin-top: 16px;">
-                            <i class="fas fa-magic"></i>
-                            <input type="text" placeholder="Describe the problem...">
-                            <button class="upgrade-btn" style="width: auto; margin: 0; padding: 8px 16px;">Ask AI</button>
-                        </div>
-                    </div>
-                </div>
+             <div class="dashboard-header">
+                <h1>Active Subscriptions & Repairs</h1>
+                <p>Track your AI-guided home maintenance.</p>
             </div>
-            <div id="user-jobs" class="sub-page" style="display: none;">
-                <h1>My Repairs</h1>
-                <div class="card" style="margin-top: 24px;">No active repairs found.</div>
+            <div class="stats-row">
+                 <div class="stat-card"><div class="stat-label">Active Job</div><div class="stat-val">Kitchen Sink</div></div>
+                 <div class="stat-card"><div class="stat-label">Messages</div><div class="stat-val">3 Unread</div></div>
+                 <div class="stat-card"><div class="stat-label">Next Service</div><div class="stat-val">AC Cleaning</div></div>
             </div>
         </main>
     </div>
 
-    <!-- ===================== 3. TECHNICIAN DASHBOARD ===================== -->
-    <div data-role="tech" class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">Home<span>Pro.</span></div>
-            <nav class="sidebar-menu">
-                <div class="menu-section-label">Provider Dash</div>
-                <a href="#" class="nav-link active" onclick="showSubPage('tech-main')"><i class="fas fa-briefcase"></i><span>Marketplace</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('tech-active')"><i class="fas fa-tasks"></i><span>My Active Jobs</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('tech-earnings')"><i class="fas fa-wallet"></i><span>Earnings</span></a>
-                <div class="menu-section-label">Account</div>
-                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <div id="tech-main" class="sub-page active">
-                <header class="top-header">
-                     <div class="dashboard-header" style="margin: 0;">
-                        <h1>Open Marketplace</h1>
-                        <p>Available jobs in NYC Matching Plumbing & HVAC</p>
-                    </div>
-                    <div class="user-profile">
-                         <div class="user-meta">
-                            <div class="user-name">Sam's Plumbing</div>
-                            <div class="user-email">Verified Tech #2049</div>
-                        </div>
-                        <img src="https://ui-avatars.com/api/?name=Sam+P&background=7c4dff&color=fff" class="user-avatar">
-                    </div>
-                </header>
-
-                <div class="dashboard-grid">
-                    <div class="grid-col-left">
-                        <div class="card" style="margin-bottom: 24px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                                <div class="order-status status-pending">New Request</div>
-                                <span class="text-muted small">Brooklyn • 2 miles</span>
-                            </div>
-                            <h3>Burst Pipe in Kitchen</h3>
-                            <p style="font-size: 14px; margin: 12px 0;">"My main pipe burst under the sink. Need urgent help to prevent flooding."</p>
-                            <div style="display: flex; gap: 8px;">
-                                <button class="btn-grant">Send $150 Bid</button>
-                                <button class="btn-cancel">Contact Homeowner</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid-col-right">
-                        <div class="card">
-                            <h3>Current Earnings</h3>
-                            <div style="font-size: 32px; font-weight: 800; color: var(--primary); margin: 12px 0;">$1,240.50</div>
-                            <p class="text-muted small">Available for withdrawal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- ===================== 4. ADMIN DASHBOARD ===================== -->
-    <div data-role="admin" class="dashboard-container">
-        <aside class="sidebar">
-            <div class="logo">Home<span>Admin.</span></div>
-            <nav class="sidebar-menu">
-                <div class="menu-section-label">System Admin</div>
-                <a href="#" class="nav-link active" onclick="showSubPage('admin-main')"><i class="fas fa-chart-pie"></i><span>System Health</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('admin-users')"><i class="fas fa-users-cog"></i><span>User Manager</span></a>
-                <a href="#" class="nav-link" onclick="showSubPage('admin-verify')"><i class="fas fa-user-check"></i><span>Verification Queue (12)</span></a>
-                <div class="menu-section-label">Account</div>
-                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <div id="admin-main" class="sub-page active">
-                <h1>Platform Metrics</h1>
-                <div class="stats-row" style="margin-top: 32px;">
-                    <div class="stat-card">
-                        <div class="stat-label">Active Users</div>
-                        <div class="stat-val">12,402</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Platform Revenue</div>
-                        <div class="stat-val">$84,923</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">System Status</div>
-                        <div class="stat-val" style="color: var(--success); font-size: 18px;">Healthy</div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Main Logic Script -->
+    <!-- Scripts -->
+    <script src="js/mock-data.js"></script>
     <script>
+        // Core Logic
+        const state = { currentRole: 'guest' };
+
         function setRole(role) {
+            state.currentRole = role;
             document.body.setAttribute('data-current-role', role);
-            localStorage.setItem('current_role', role);
-            // Default subpage reset
-            document.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
-            document.getElementById(role + '-main')?.setAttribute('style', 'display: block');
-        }
-
-        function logout() {
-            setRole('guest');
-            localStorage.removeItem('current_role');
-        }
-
-        function showSubPage(pageId) {
-            document.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
-            document.getElementById(pageId).style.display = 'block';
             
-            // Handle nav link active state
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            // Header toggle
+            const profile = document.getElementById('profileSection');
+            const guestLinks = document.querySelector('.guest-only');
+            if(role === 'guest') {
+                profile.style.display = 'none';
+                guestLinks.style.display = 'flex';
+                document.getElementById('heroGuestSection').style.display = 'block';
+            } else {
+                profile.style.display = 'flex';
+                guestLinks.style.display = 'none';
+                // Member view hides the big hero to show their specific dash
+                if(role === 'user') document.getElementById('heroGuestSection').style.display = 'block'; // Keep AI for user dash
+                else document.getElementById('heroGuestSection').style.display = 'none';
+            }
         }
 
-        function handleGuestAI() {
-            const result = document.getElementById('aiResultGuest');
-            result.style.display = 'block';
-            result.innerHTML = '<i class="fas fa-spinner fa-spin"></i> AI is analyzing your problem...';
-            setTimeout(() => {
-                result.innerHTML = '<div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #fbcfe8;">' +
-                    '<h4 style="color: var(--primary);">Probable Cause: Internal Mechanism Failure</h4>' +
-                    '<p style="font-size: 14px; margin-top: 8px;">It looks like a major component needs replacement. We suggest hiring a pro to avoid further damage.</p>' +
-                    '<button class="upgrade-btn" style="width: auto; margin-top: 12px;" onclick="setRole(\'user\')">Create Account to See Bids</button>' +
-                    '</div>';
-            }, 1000);
+        function logout() { setRole('guest'); }
+
+        // --- Actionable AI Logic ---
+        const btnAnalyze = document.getElementById('btnAnalyzeMain');
+        const resultSection = document.getElementById('aiAnalysisResult');
+        const techGrid = document.getElementById('techGrid');
+
+        async function handleAIAnalysis(type = 'text', payload = null) {
+            const inputVal = document.getElementById('aiInput').value.toLowerCase();
+            
+            // Show loading
+            resultSection.className = 'ai-result-area active';
+            resultSection.style.display = 'block';
+            document.getElementById('analysisSummary').innerHTML = `<i class="fas fa-spinner fa-spin"></i> Analyzed ${type}... Processing with HomeFix GPT-V1...`;
+
+            await new Promise(r => setTimeout(r, 1500)); // Simulating cloud analysis
+
+            // Determine data from Mock
+            let domain = 'plumbing';
+            if(inputVal.includes('light') || inputVal.includes('wire') || inputVal.includes('breaker')) domain = 'electrical';
+            if(inputVal.includes('ac') || inputVal.includes('cool') || inputVal.includes('heat')) domain = 'hvac';
+
+            const data = MockData.diagnoses[domain];
+            const techs = MockData.technicians.filter(t => t.specialties.includes(domain.charAt(0).toUpperCase() + domain.slice(1)));
+
+            // Update UI
+            document.getElementById('analysisSummary').innerHTML = `<strong>Likely Cause:</strong> ${data.cause}`;
+            document.getElementById('diySteps').innerHTML = data.fix.split('. ').map(s => `<div>• ${s}</div>`).join('');
+            document.getElementById('compScore').innerText = data.difficulty;
+            
+            techGrid.innerHTML = techs.map(t => `
+                <div class="card" style="padding: 16px; border-radius: 16px; background: rgba(255,255,255,0.02);">
+                    <div style="display:flex; gap:12px; align-items:center;">
+                        <img src="${t.avatar}" style="width:40px; height:40px; border-radius:10px;">
+                        <div>
+                            <div style="font-weight:700; font-size:14px;">${t.name}</div>
+                            <div style="font-size:11px; color:var(--text-muted);">${t.rating}⭐ • ${t.reviews} Reviews</div>
+                        </div>
+                        <button class="upgrade-btn" style="width:auto; margin:0; padding:6px 12px; font-size:10px; margin-left:auto;">Hire</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Initialize from storage
-        const savedRole = localStorage.getItem('current_role') || 'guest';
-        setRole(savedRole);
+        btnAnalyze.addEventListener('click', () => handleAIAnalysis('Text'));
+        
+        // Multi-modal listeners
+        document.getElementById('photoInput').addEventListener('change', () => handleAIAnalysis('Photo'));
+        document.getElementById('micBtn').addEventListener('click', () => {
+            alert('Listening...');
+            handleAIAnalysis('Voice');
+        });
+
     </script>
 </body>
 
