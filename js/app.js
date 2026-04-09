@@ -12,12 +12,12 @@ const App = (() => {
         selectedTech: null,
         myRequests: [],
         technicians: [
-            { id: 1, title: 'Master Plumber', company: 'ExpertFlow Team', rate: '$45', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], desc: 'Highly experienced in leak detection, emergency pipe repairs, and premium smart bathroom installations.', reviews: 124 },
-            { id: 2, title: 'Senior Electrician', company: 'VoltGuard Studios', rate: '$60', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety', 'Industrial'], desc: 'Industrial and residential wiring specialist. Expert in panel upgrades and smart home safety audits.', reviews: 89 },
-            { id: 3, title: 'HVAC Specialist', company: 'AirPure Ltd.', rate: '$55', logo: 'H', color: 'logo-pink', loc: 'Paris, France', rating: 4.7, tags: ['AC', 'Ventilation'], desc: 'Precision maintenance and urgent repair for complex central ventilation systems and heat pumps.', reviews: 56 },
-            { id: 4, title: 'Appliance Repair', company: 'HomeFix Crew', rate: '$40', logo: 'A', color: 'logo-green', loc: 'Madrid, Spain', rating: 4.9, tags: ['Repair', 'Washing Machine'], desc: 'Certified expert for all household brands. Rapid fix for refrigerators, dishwashers, and ovens.', reviews: 210 },
-            { id: 5, title: 'Carpentry Pro', company: 'WoodCraft Studios', rate: '$65', logo: 'C', color: 'logo-blue', loc: 'NYC, USA', rating: 5.0, tags: ['Custom', 'Renovation'], desc: 'Bespoke cabinetry and structural carpentry. Specializing in high-end restoration and modern furniture.', reviews: 42 },
-            { id: 6, title: 'Smart Home Tech', company: 'SecureIoT Team', rate: '$75', logo: 'S', color: 'logo-green', loc: 'Tokyo, Japan', rating: 4.6, tags: ['IoT', 'Security', 'Automation'], desc: 'Designing and installing complex IoT ecosystems, smart lighting, and 4K security networks.', reviews: 78 }
+            { id: 1, title: 'Master Plumber', company: 'ExpertFlow Team', rate: '$45', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], hires: 84, yearsInBusiness: 12, isTopPro: true, desc: 'Highly experienced in leak detection, emergency pipe repairs, and premium smart bathroom installations.', reviews: 124 },
+            { id: 2, title: 'Senior Electrician', company: 'VoltGuard Studios', rate: '$60', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety', 'Industrial'], hires: 142, yearsInBusiness: 8, isTopPro: true, desc: 'Industrial and residential wiring specialist. Expert in panel upgrades and smart home safety audits.', reviews: 89 },
+            { id: 3, title: 'HVAC Specialist', company: 'AirPure Ltd.', rate: '$55', logo: 'H', color: 'logo-pink', loc: 'Paris, France', rating: 4.7, tags: ['AC', 'Ventilation'], hires: 95, yearsInBusiness: 6, isTopPro: false, desc: 'Precision maintenance and urgent repair for complex central ventilation systems and heat pumps.', reviews: 56 },
+            { id: 4, title: 'Appliance Repair', company: 'HomeFix Crew', rate: '$40', logo: 'A', color: 'logo-green', loc: 'Madrid, Spain', rating: 4.9, tags: ['Repair', 'Washing Machine'], hires: 310, yearsInBusiness: 15, isTopPro: true, desc: 'Certified expert for all household brands. Rapid fix for refrigerators, dishwashers, and ovens.', reviews: 210 },
+            { id: 5, title: 'Carpentry Pro', company: 'WoodCraft Studios', rate: '$65', logo: 'C', color: 'logo-blue', loc: 'NYC, USA', rating: 5.0, tags: ['Custom', 'Renovation'], hires: 28, yearsInBusiness: 20, isTopPro: true, desc: 'Bespoke cabinetry and structural carpentry. Specializing in high-end restoration and modern furniture.', reviews: 42 },
+            { id: 6, title: 'Smart Home Tech', company: 'SecureIoT Team', rate: '$75', logo: 'S', color: 'logo-green', loc: 'Tokyo, Japan', rating: 4.6, tags: ['IoT', 'Security', 'Automation'], hires: 52, yearsInBusiness: 4, isTopPro: false, desc: 'Designing and installing complex IoT ecosystems, smart lighting, and 4K security networks.', reviews: 78 }
         ]
     };
 
@@ -33,15 +33,18 @@ const App = (() => {
             <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
                 <div class="card-header">
                     <div class="company-info">
-                        <div class="company-name">${tech.company}</div>
+                        <div class="company-name">${tech.company} ${tech.isTopPro ? '<span style="color:#F97316; font-size:10px; margin-left:5px;"><i class="fas fa-trophy"></i> TOP PRO</span>' : ''}</div>
                         <h4>${tech.title}</h4>
                     </div>
                     <div class="company-logo ${tech.color}">${tech.logo}</div>
                 </div>
-                <div class="salary-range">${tech.rate}/hr</div>
+                <div style="display:flex; gap:15px; margin-bottom:15px; font-size:13px; font-weight:700;">
+                    <span>⭐ ${tech.rating} (${tech.reviews})</span>
+                    <span style="color:#888;">${tech.hires} hires on HomeFix</span>
+                </div>
                 <p class="job-desc">${tech.desc}</p>
                 <div class="card-footer">
-                    <div class="badge-tag badge-remote">VERIFIED</div>
+                    <div class="badge-tag" style="background:#E8F5E9; color:#2E7D32; font-size:10px;">PROMOTED</div>
                     <div class="location"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>${tech.loc}</div>
                 </div>
             </div>
@@ -95,26 +98,42 @@ const App = (() => {
         state.selectedTech = tech;
         const body = document.getElementById('drawerBody');
         body.innerHTML = `
-            <div style="text-align:center; margin-bottom:30px;">
-                <div class="company-logo ${tech.color}" style="width:100px; height:100px; border-radius:30px; font-size:40px; margin:0 auto 20px;">${tech.logo}</div>
-                <h2 style="font-weight:900; font-size:28px;">${tech.title}</h2>
-                <div style="color:var(--jobie-purple); font-weight:800; font-size:18px; margin-top:5px;">${tech.rate}/hour</div>
-                <div style="margin-top:10px; font-weight:700;">⭐ ${tech.rating} <span style="color:#AAA; font-weight:500;">(${tech.reviews} Reviews)</span></div>
+            <div style="display:flex; gap:20px; align-items:flex-start; margin-bottom:30px;">
+                <div class="company-logo ${tech.color}" style="width:80px; height:80px; border-radius:20px; font-size:30px; flex-shrink:0;">${tech.logo}</div>
+                <div>
+                    <h2 style="font-weight:900; font-size:24px;">${tech.company}</h2>
+                    <h4 style="color:#666; font-weight:600;">${tech.title}</h4>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:30px;">
+                <div style="background:#F8F9FD; padding:15px; border-radius:15px; text-align:center;">
+                    <div style="font-weight:900; font-size:18px;">${tech.rating} ⭐</div>
+                    <div style="font-size:12px; color:#888; font-weight:600;">${tech.reviews} Reviews</div>
+                </div>
+                <div style="background:#F8F9FD; padding:15px; border-radius:15px; text-align:center;">
+                    <div style="font-weight:900; font-size:18px;">${tech.hires}</div>
+                    <div style="font-size:12px; color:#888; font-weight:600;">Hires on site</div>
+                </div>
             </div>
             
             <div style="margin-bottom:30px;">
-                <h4 style="font-weight:800; margin-bottom:12px; font-size:16px;">About Professional</h4>
-                <p style="color:#666; line-height:1.7; font-size:15px;">${tech.desc}</p>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                    <i class="fas fa-award" style="color:var(--jobie-purple)"></i>
+                    <span style="font-weight:700; font-size:14px;">Top Pro with ${tech.yearsInBusiness} years in business</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                    <i class="fas fa-user-shield" style="color:#10B981"></i>
+                    <span style="font-weight:700; font-size:14px; color:#10B981;">Background checked</span>
+                </div>
             </div>
 
-            <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:40px;">
-                ${tech.tags.map(t => `<span class="tag" style="padding:8px 15px; font-size:12px;">#${t}</span>`).join('')}
+            <div style="margin-bottom:30px;">
+                <h4 style="font-weight:800; margin-bottom:10px;">About</h4>
+                <p style="color:#666; line-height:1.6; font-size:14px;">${tech.desc}</p>
             </div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                <button onclick="App.openBooking()" style="background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer;">Hire Expert</button>
-                <button style="background:#EEE; color:#333; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer;">Contact</button>
-            </div>
+            <button onclick="App.openBooking()" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:20px; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CHECK AVAILABILITY</button>
         `;
         document.getElementById('techDetailDrawer').style.display = 'flex';
     }
