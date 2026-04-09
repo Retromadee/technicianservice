@@ -23,10 +23,10 @@
     <nav class="nav-menu">
         <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
         <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Search Job</span></button>
-        <button class="menu-item" data-page="my-repairs"><i class="fas fa-puzzle-piece"></i><span>Applications</span></button>
+        <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
+        <button class="menu-item" data-page="my-repairs"><i class="fas fa-puzzle-piece"></i><span>My Requests</span></button>
         <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Message</span></button>
         <button class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i><span>Statistics</span></button>
-        <button class="menu-item" data-page="news"><i class="fas fa-file-alt"></i><span>News</span></button>
     </nav>
 
     <div class="sidebar-footer">
@@ -57,11 +57,11 @@
                 <i class="fas fa-bell"></i>
                 <div class="badge">52</div>
             </div>
-            <div class="user-profile" id="userProfileBtn" onclick="toggleAuthModal()" style="cursor: pointer;">
+            <div class="user-profile" id="userProfileBtn" style="cursor: pointer;">
                 <img id="topAvatar" src="https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff">
                 <div class="user-info">
-                    <div class="name" id="topName" style="font-size: 14px; font-weight: 700;">Guest User</div>
-                    <div class="role" id="topRole" style="font-size: 12px; color: #888;">Public Visitor</div>
+                    <div class="name" id="topName" onclick="toggleAuthModal()">Guest User</div>
+                    <div class="role" id="topRole" onclick="App.toggleRole()" style="cursor:pointer; background:rgba(76, 57, 172, 0.1); padding:2px 8px; border-radius:5px; margin-top:30px;">Switch to Pro</div>
                 </div>
             </div>
         </div>
@@ -142,6 +142,79 @@
                 <p>Track your customer requests, earnings, and technician stats here.</p>
             </div>
         </div>
+
+        <!-- Messages Page -->
+        <div class="page-content" id="page-chat" style="display: none;">
+            <div class="results-header"><h1>Messages</h1></div>
+            <div style="background:white; height:calc(100vh - 250px); border-radius:30px; box-shadow: var(--shadow-subtle); display:flex; overflow:hidden;">
+                <!-- Chat Sidebar -->
+                <div style="width:300px; border-right:1px solid #EEE; display:flex; flex-direction:column;">
+                    <div style="padding:25px; border-bottom:1px solid #EEE;">
+                        <input type="text" placeholder="Search chats..." style="width:100%; padding:12px; border:none; background:#F8F9FD; border-radius:10px; font-size:14px;">
+                    </div>
+                    <div id="chatList" style="flex:1; overflow-y:auto;">
+                        <!-- Mock Chats -->
+                        <div class="chat-item active" style="padding:20px; cursor:pointer; background:#F0F0FF; border-right:3px solid var(--jobie-purple); display:flex; gap:12px; align-items:center;">
+                            <div class="company-logo logo-blue" style="width:40px; height:40px; font-size:18px;">P</div>
+                            <div>
+                                <div style="font-weight:700; font-size:14px;">Master Plumber</div>
+                                <div style="font-size:12px; color:#888;">ExpertFlow Team</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Active Chat -->
+                <div style="flex:1; display:flex; flex-direction:column;">
+                    <div style="padding:20px 30px; border-bottom:1px solid #EEE; display:flex; justify-content:space-between; align-items:center;">
+                        <h4 style="font-weight:800;">Chat with ExpertFlow</h4>
+                        <div style="color:#10B981; font-size:12px; font-weight:700;"><i class="fas fa-circle" style="font-size:8px;"></i> Online</div>
+                    </div>
+                    <div id="activeChatWindow" style="flex:1; padding:30px; overflow-y:auto; background:#FAFAFF; display:flex; flex-direction:column; gap:15px;">
+                        <div style="align-self:flex-start; background:white; padding:15px 20px; border-radius:0 20px 20px 20px; box-shadow:0 4px 10px rgba(0,0,0,0.02); max-width:70%; font-size:14px;">
+                            Hi there! I've received your request for the sink repair. I can be there tomorrow at 10 AM. Does that work?
+                        </div>
+                        <div style="align-self:flex-end; background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; max-width:70%; font-size:14px;">
+                            Yes, that works perfect! Thank you for the quick response.
+                        </div>
+                    </div>
+                    <div style="padding:25px; border-top:1px solid #EEE; display:flex; gap:15px;">
+                        <input type="text" placeholder="Type your message..." style="flex:1; padding:15px; border:none; background:#F8F9FD; border-radius:15px; outline:none;">
+                        <button style="background:var(--jobie-purple); color:white; border:none; width:50px; height:50px; border-radius:15px; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Page -->
+        <div class="page-content" id="page-statistics" style="display: none;">
+            <div class="results-header"><h1>Statistics</h1></div>
+            <div class="job-grid">
+                <div class="job-card" style="text-align:center; padding:50px;">
+                    <div class="company-logo logo-orange" style="margin:0 auto 20px; width:70px; height:70px;"><i class="fas fa-wallet"></i></div>
+                    <h2 style="font-size:32px; font-weight:900;">$0.00</h2>
+                    <p style="color:#888;">Total Spending</p>
+                </div>
+                <div class="job-card" style="text-align:center; padding:50px;">
+                    <div class="company-logo logo-blue" style="margin:0 auto 20px; width:70px; height:70px;"><i class="fas fa-tools"></i></div>
+                    <h2 style="font-size:32px; font-weight:900;">0</h2>
+                    <p style="color:#888;">Completed Repairs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Leads (Technician Only) -->
+        <div class="page-content" id="page-leads" style="display: none;">
+            <div class="results-header">
+                <div>
+                    <h1>Open Leads</h1>
+                    <p>New customer requests in your area</p>
+                </div>
+                <button class="btn-filter" style="border:none;"><i class="fas fa-satellite-dish"></i> LIVE FEED</button>
+            </div>
+            <div class="job-grid" id="leadsGrid"></div>
+        </div>
+
+
     </main>
 </div>
 

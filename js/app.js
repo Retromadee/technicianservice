@@ -191,9 +191,139 @@ const App = (() => {
         if (mainInput) mainInput.addEventListener('input', filterFn);
     }
 
+    // ---- AI Diagnosis ----
+    function runAIDiagnosis() {
+        const query = document.getElementById('aiQueryInput').value.trim().toLowerCase();
+        if (!query) return;
+
+        const btn = document.getElementById('btnRunAI');
+        const chat = document.getElementById('aiChatWindow');
+        const resArea = document.getElementById('aiResultArea');
+        
+        // Show Loading State
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ANALYZING...';
+        
+        // Add user message to chat
+        chat.innerHTML += `
+            <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
+                <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
+                    ${query}
+                </div>
+                <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
+            </div>
+        `;
+
+        setTimeout(() => {
+            let category = 'plumbing';
+            let advice = "Your issue suggests a plumbing related problem. Check for moisture around the pipes and ensure the main valve is accessible if a major leak occurs.";
+            
+            if (query.includes('electric') || query.includes('spark') || query.includes('outlet') || query.includes('wire')) {
+                category = 'electrical';
+                advice = "Sparking or non-functional outlets are high-priority electrical hazards. Avoid touching exposed wires and consult a professional immediately to prevent fire risk.";
+            } else if (query.includes('ac') || query.includes('hvac') || query.includes('cool') || query.includes('heat') || query.includes('filter')) {
+                category = 'hvac';
+                advice = "HVAC efficiency issues often stem from clogged filters or coolant leaks. We recommend a full system pressure check and filter replacement.";
+            }
+
+            // Update UI
+            document.getElementById('aiResultText').textContent = advice;
+            document.getElementById('aiDifficultyTag').textContent = `DIFFICULTY: ${category === 'electrical' ? 'HIGH' : 'MEDIUM'}`;
+            resArea.style.display = 'block';
+            resArea.scrollIntoView({ behavior: 'smooth' });
+
+            // Match Techs
+            const matched = state.technicians.filter(t => t.tags.some(tag => tag.toLowerCase().includes(category)) || t.title.toLowerCase().includes(category));
+            const grid = document.getElementById('aiTechGrid');
+            grid.innerHTML = matched.map(tech => `
+                <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
+                    <div class="card-header">
+                        <div class="company-info">
+                            <div class="company-name">${tech.company}</div>
+                            <h4>${tech.title}</h4>
+                        </div>
+                        <div class="company-logo ${tech.color}">${tech.logo}</div>
+                    </div>
+                    <div class="salary-range">${tech.rate}/hr</div>
+                    <div class="card-footer">
+                        <div class="badge-tag" style="background:var(--jobie-bg); color:var(--jobie-purple);">98% MATCH</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${tech.loc}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-magic"></i> ANALYZE';
+        }, 1500);
+    }
+
+    // ---- Role Logic ----
+    function toggleRole() {
+        state.role = state.role === 'technician' ? 'user' : 'technician';
+        const roleBtn = document.getElementById('topRole');
+        const searchLabel = document.querySelector('.menu-item[data-page="marketplace"] span');
+        const statsLabel = document.querySelector('.menu-item[data-page="statistics"] span');
+        
+        if (state.role === 'technician') {
+            roleBtn.textContent = 'Switch to User';
+            roleBtn.style.background = 'rgba(16, 185, 129, 0.1)';
+            roleBtn.style.color = '#10B981';
+            if (searchLabel) searchLabel.textContent = 'Open Leads';
+            if (statsLabel) statsLabel.textContent = 'Earnings';
+            navigate('leads');
+            renderLeads();
+        } else {
+            roleBtn.textContent = 'Switch to Pro';
+            roleBtn.style.background = 'rgba(76, 57, 172, 0.1)';
+            roleBtn.style.color = 'var(--jobie-purple)';
+            if (searchLabel) searchLabel.textContent = 'Search Job';
+            if (statsLabel) statsLabel.textContent = 'Statistics';
+            navigate('marketplace');
+        }
+    }
+
+    function renderLeads() {
+        const grid = document.getElementById('leadsGrid');
+        if (!grid) return;
+        
+        // Mock global leads
+        const mockLeads = [
+            { id: 101, title: 'Kitchen Pipe Leak', client: 'Sarah Johnson', location: 'London', budget: '$150-$200', desc: 'Water dripping from under-sink joint. Urgent fix needed.' },
+            { id: 102, title: 'EV Charger Install', client: 'Mike Ross', location: 'Manchester', budget: '$800', desc: 'Need a professional to install Level 2 charger in home garage.' },
+            { id: 103, title: 'AC Filter Clean', client: 'Dave B.', location: 'London', budget: '$50-$80', desc: 'Seasonal maintenance for 2 units. Central area.' }
+        ];
+
+        grid.innerHTML = mockLeads.map(lead => `
+            <div class="job-card animate-in">
+                <div class="card-header">
+                    <div class="company-info">
+                        <div class="company-name">Posted by ${lead.client}</div>
+                        <h4>${lead.title}</h4>
+                    </div>
+                    <div style="font-weight:900; color:var(--jobie-purple); font-size:18px;">${lead.budget}</div>
+                </div>
+                <p class="job-desc">${lead.desc}</p>
+                <div class="card-footer" style="justify-content:space-between;">
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${lead.location}</div>
+                    <button onclick="App.bidOnLead(${lead.id})" style="background:var(--jobie-purple); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:700; cursor:pointer;">BID NOW</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function bidOnLead(id) {
+        alert("Success! Your bid has been sent to the customer. You'll be notified if they accept.");
+    }
+
     function init() {
         document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', () => navigate(item.dataset.page));
+            item.addEventListener('click', () => {
+                if (state.role === 'technician' && item.dataset.page === 'marketplace') {
+                    navigate('leads');
+                } else {
+                    navigate(item.dataset.page);
+                }
+            });
         });
 
         initSearch();
@@ -205,6 +335,7 @@ const App = (() => {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) {
                     state.user = user;
+                    // Default to user role first
                     state.role = 'user';
                 }
             });
@@ -214,6 +345,8 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, state };
+    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, state };
 })();
+
+
 
