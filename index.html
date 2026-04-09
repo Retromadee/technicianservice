@@ -3,475 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HomeFix Pro — AI-Powered Home Service Platform with smart diagnostics and verified technician matching.">
-    <title>HomeFix Pro | Intelligent Home Care</title>
+    <meta name="description" content="Jobie — The Premium Service Technician Marketplace. Hire verified pros or find your next gig.">
+    <title>Jobie | Service Technician Marketplace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="css/dashboard_new.css">
+    <link rel="stylesheet" href="css/jobie_theme.css">
 </head>
 <body data-current-role="guest">
 
-<!-- ==================== GUEST LANDING ==================== -->
-<div data-role="guest" class="landing-page">
-    <nav class="navbar">
-        <div class="logo">Home<span>Fix.</span></div>
-        <div class="nav-auth-btns">
-            <button class="btn-ghost" onclick="openModal('loginModal')">Log In</button>
-            <button class="btn-primary" onclick="openModal('signupModal')"><span>Get Started</span></button>
-        </div>
+<!-- ==================== SIDEBAR ==================== -->
+<div class="sidebar">
+    <div class="logo">
+        <div class="company-logo logo-pink" style="width:36px; height:36px; border-radius:10px; font-size:18px; display: flex; align-items: center; justify-content: center; background: #EC4899; color: white; font-weight: 800;">J</div>
+        <span>Jobie</span>
+    </div>
+    
+    <nav class="nav-menu">
+        <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
+        <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Search Job</span></button>
+        <button class="menu-item" data-page="my-repairs"><i class="fas fa-puzzle-piece"></i><span>Applications</span></button>
+        <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Message</span></button>
+        <button class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i><span>Statistics</span></button>
+        <button class="menu-item" data-page="news"><i class="fas fa-file-alt"></i><span>News</span></button>
     </nav>
 
-    <section class="hero">
-        <h1>Fix Everything.<br><span class="gradient-text">Smarter.</span></h1>
-        <p>AI-powered diagnostics instantly identify your home issues and match you with verified local technicians — at competitive prices.</p>
-        <div class="hero-actions">
-            <button class="btn-hero-primary" onclick="openModal('signupModal')">Start Free</button>
-            <button class="btn-hero-secondary" onclick="openModal('loginModal')"><i class="fas fa-robot"></i> Try AI Diagnosis</button>
-        </div>
-    </section>
-
-    <div class="trust-bar">
-        <div class="trust-item"><div class="trust-value">10K+</div><div class="trust-label">Homes Served</div></div>
-        <div class="trust-item"><div class="trust-value">4.9★</div><div class="trust-label">Avg Rating</div></div>
-        <div class="trust-item"><div class="trust-value">500+</div><div class="trust-label">Verified Techs</div></div>
-        <div class="trust-item"><div class="trust-value">24/7</div><div class="trust-label">AI Support</div></div>
+    <div class="sidebar-footer">
+        Jobie Tech Portal Dashboard<br>
+        © 2026 All Rights Reserved<br><br>
+        Made with ❤️ by Antigravity
     </div>
-
-    <section class="services-section">
-        <h2>What We Fix</h2>
-        <div class="services-grid">
-            <div class="service-card"><div class="card-icon"><i class="fas fa-faucet"></i></div><h3>Plumbing</h3><p>Leaks, burst pipes, drain clogs, water heater repairs and full bathroom renovations.</p></div>
-            <div class="service-card"><div class="card-icon" style="background:rgba(245,158,11,0.12);color:#fbbf24"><i class="fas fa-bolt"></i></div><h3>Electrical</h3><p>Wiring, panel upgrades, outlet repairs, smart home installations and safety inspections.</p></div>
-            <div class="service-card"><div class="card-icon" style="background:rgba(59,130,246,0.12);color:#60a5fa"><i class="fas fa-snowflake"></i></div><h3>HVAC</h3><p>AC repair, furnace tune-ups, duct cleaning, thermostat installation and air quality checks.</p></div>
-            <div class="service-card"><div class="card-icon" style="background:rgba(16,185,129,0.12);color:#34d399"><i class="fas fa-broom"></i></div><h3>Cleaning</h3><p>Deep cleaning, carpet shampooing, window washing and post-renovation cleanup.</p></div>
-        </div>
-    </section>
 </div>
 
-<!-- ==================== USER DASHBOARD ==================== -->
-<div data-role="user" class="dashboard-shell" id="userDashboard">
-    <aside class="sidebar" id="userSidebar">
-        <div class="logo">Home<span>Fix.</span></div>
-        <nav>
-            <div class="menu-section-label">Main</div>
-            <a class="menu-item active" data-page="dashboard"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-            <a class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></a>
-            <a class="menu-item" data-page="marketplace"><i class="fas fa-store"></i><span>Marketplace</span></a>
-            <a class="menu-item" data-page="my-repairs"><i class="fas fa-tools"></i><span>My Repairs</span></a>
-            <div class="menu-section-label">Account</div>
-            <a class="menu-item" data-page="payments"><i class="fas fa-credit-card"></i><span>Payments</span></a>
-            <a class="menu-item" data-page="chat"><i class="fas fa-comments"></i><span>Messages</span></a>
-            <a class="menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-        </nav>
-        <div class="sidebar-footer">
-            <div class="sidebar-user">
-                <img class="sidebar-avatar" id="sidebarAvatar" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff">
-                <div class="sidebar-user-info"><div class="sidebar-user-name" id="sidebarName">User</div><div class="sidebar-user-role" id="sidebarRole">Homeowner</div></div>
+<!-- ==================== MAIN WRAPPER ==================== -->
+<div class="main-wrapper">
+    <header class="top-bar">
+        <div class="top-left">
+            <button class="icon-btn" style="border:none; background:transparent; font-size:22px; cursor:pointer; color: #333;"><i class="fas fa-bars"></i></button>
+            <h2 id="pageTitle" style="font-size: 24px; font-weight: 800; color: #333; margin-left: 10px;">Search Jobs</h2>
+            <div class="global-search" style="margin-left: 30px;">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search something here..." id="globalSearchInput">
             </div>
         </div>
-    </aside>
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search anything..." id="searchInput"></div>
-            <div class="top-bar-right">
-                <button class="icon-btn"><i class="fas fa-bell"></i><span class="badge-dot"></span></button>
-                <div class="top-bar-user">
-                    <img class="top-bar-avatar" id="topAvatar" src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff">
-                    <div><div class="top-bar-name" id="topName">User</div><div class="top-bar-email" id="topEmail">user@email.com</div></div>
+        
+        <div class="top-right">
+            <div class="action-icon">
+                <i class="fas fa-comment-dots"></i>
+                <div class="badge">18</div>
+            </div>
+            <div class="action-icon">
+                <i class="fas fa-bell"></i>
+                <div class="badge">52</div>
+            </div>
+            <div class="user-profile" id="userProfileBtn" onclick="toggleAuthModal()" style="cursor: pointer;">
+                <img id="topAvatar" src="https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff">
+                <div class="user-info">
+                    <div class="name" id="topName" style="font-size: 14px; font-weight: 700;">Guest User</div>
+                    <div class="role" id="topRole" style="font-size: 12px; color: #888;">Public Visitor</div>
                 </div>
-            </div>
-        </header>
-        <div class="page-area">
-            <!-- Dashboard Page -->
-            <div class="page-content active" id="page-dashboard">
-                <div class="page-header"><h1>Service Dashboard</h1><p>Welcome back! Here's your home health overview.</p></div>
-                <div class="stats-row">
-                    <div class="stat-card animate-in stagger-1"><div class="stat-icon purple"><i class="fas fa-stethoscope"></i></div><div class="stat-val">42</div><div class="stat-label">AI Diagnoses</div><div class="stat-tag">+3 New</div></div>
-                    <div class="stat-card animate-in stagger-2"><div class="stat-icon blue"><i class="fas fa-gavel"></i></div><div class="stat-val">8</div><div class="stat-label">Active Bids</div><div class="stat-tag">+2 Proposals</div></div>
-                    <div class="stat-card animate-in stagger-3"><div class="stat-icon green"><i class="fas fa-calendar-check"></i></div><div class="stat-val">3</div><div class="stat-label">Booked</div><div class="stat-tag">En Route</div></div>
-                    <div class="stat-card animate-in stagger-4"><div class="stat-icon yellow"><i class="fas fa-star"></i></div><div class="stat-val">4.9</div><div class="stat-label">Avg Rating</div></div>
-                </div>
-                <div class="dashboard-grid">
-                    <div class="grid-col-left">
-                        <div class="ai-hub animate-in stagger-2">
-                            <div class="card-title"><i class="fas fa-magic"></i> AI Diagnosis Hub</div>
-                            <div class="ai-input-row">
-                                <input type="text" class="ai-input" id="aiInput" placeholder="Describe your issue... e.g. Sink is leaking">
-                                <button class="btn-ai" onclick="runAI()"><i class="fas fa-bolt"></i> Diagnose</button>
-                            </div>
-                            <div class="ai-result" id="aiResult">
-                                <h4><i class="fas fa-lightbulb"></i> AI Suggested Fix</h4>
-                                <p id="aiSuggestion"></p>
-                                <h4 style="margin-top:16px"><i class="fas fa-user-md"></i> Matched Specialists</h4>
-                                <div class="ai-techs" id="aiTechs"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid-col-right">
-                        <div class="card animate-in stagger-3">
-                            <div class="card-title"><i class="fas fa-stream"></i> Recent Activity</div>
-                            <div class="activity-item"><div class="activity-dot success"></div><div><div class="activity-text"><strong>Robert Miller</strong> accepted your plumbing job</div><div class="activity-time">2 hours ago</div></div></div>
-                            <div class="activity-item"><div class="activity-dot info"></div><div><div class="activity-text">AI diagnosed <strong>HVAC filter issue</strong></div><div class="activity-time">5 hours ago</div></div></div>
-                            <div class="activity-item"><div class="activity-dot warning"></div><div><div class="activity-text">New quote from <strong>Sarah Zhang</strong> — $80</div><div class="activity-time">Yesterday</div></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- AI Assistant Page -->
-            <div class="page-content" id="page-ai-assistant">
-                <div class="page-header"><h1>AI Assistant</h1><p>Describe your home issue and get instant AI-powered diagnostics.</p></div>
-                <div id="diagnosisContent"></div>
-            </div>
-            <!-- Marketplace Page -->
-            <div class="page-content" id="page-marketplace">
-                <div class="page-header"><h1>Marketplace</h1><p>Browse active service requests and competitive bids.</p></div>
-                <div id="marketplaceContent"><div class="empty-state"><i class="fas fa-store"></i><h4>Marketplace Loading</h4><p>Connecting to live marketplace...</p></div></div>
-            </div>
-            <!-- My Repairs Page -->
-            <div class="page-content" id="page-my-repairs">
-                <div class="page-header"><h1>My Repairs</h1><p>Track all your past and ongoing repair jobs.</p></div>
-                <div id="dashboardContent"></div>
-            </div>
-            <!-- Payments Page -->
-            <div class="page-content" id="page-payments">
-                <div class="page-header"><h1>Payments</h1><p>Manage your payment methods and transaction history.</p></div>
-                <div class="card"><div class="card-title"><i class="fas fa-credit-card"></i> Payment Methods</div><div class="empty-state"><i class="fas fa-wallet"></i><h4>No Payment Methods</h4><p>Add a payment method to book services.</p></div></div>
-            </div>
-            <!-- Chat Page -->
-            <div class="page-content" id="page-chat">
-                <div class="page-header"><h1>Messages</h1><p>Chat with technicians and support.</p></div>
-                <div id="chatContent"><div class="empty-state"><i class="fas fa-comments"></i><h4>No Messages Yet</h4><p>Start a conversation after booking a service.</p></div></div>
-            </div>
-            <!-- Booking Page -->
-            <div class="page-content" id="page-booking">
-                <div class="page-header"><h1>Book Service</h1><p>Complete your booking details below.</p></div>
-                <div id="bookingContent"></div>
-            </div>
-            <!-- Submit Problem Page -->
-            <div class="page-content" id="page-submit-problem">
-                <div class="page-header"><h1>Submit Problem</h1><p>Describe your issue for AI analysis.</p></div>
-                <div id="submitProblemContent"></div>
-            </div>
-            <!-- Diagnosis Page -->
-            <div class="page-content" id="page-diagnosis">
-                <div class="page-header"><h1>Diagnosis Results</h1><p>AI analysis of your home issue.</p></div>
-                <div id="diagnosisResultContent"></div>
-            </div>
-            <!-- DIY Guide Page -->
-            <div class="page-content" id="page-diy-guide">
-                <div class="page-header"><h1>DIY Guide</h1><p>Step-by-step repair instructions.</p></div>
-                <div id="diyGuideContent"></div>
-            </div>
-            <!-- Technician Profile Page -->
-            <div class="page-content" id="page-technician-profile">
-                <div class="page-header"><h1>Technician Profile</h1></div>
-                <div id="techProfileContent"></div>
-            </div>
-            <!-- Admin Page -->
-            <div class="page-content" id="page-admin">
-                <div class="page-header"><h1>Admin Panel</h1><p>Platform management and analytics.</p></div>
-                <div id="adminContent"></div>
             </div>
         </div>
-    </main>
-</div>
+    </header>
 
-<!-- ==================== TECHNICIAN DASHBOARD ==================== -->
-<div data-role="technician" class="dashboard-shell" id="techDashboard">
-    <aside class="sidebar">
-        <div class="logo">Home<span>Fix.</span></div>
-        <nav>
-            <div class="menu-section-label">Jobs</div>
-            <a class="menu-item active" data-page="tech-dashboard"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-            <a class="menu-item" data-page="tech-jobs"><i class="fas fa-briefcase"></i><span>Open Jobs</span></a>
-            <a class="menu-item" data-page="tech-bids"><i class="fas fa-gavel"></i><span>My Bids</span></a>
-            <div class="menu-section-label">Account</div>
-            <a class="menu-item" data-page="tech-earnings"><i class="fas fa-wallet"></i><span>Earnings</span></a>
-            <a class="menu-item" data-page="chat"><i class="fas fa-comments"></i><span>Messages</span></a>
-            <a class="menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-        </nav>
-    </aside>
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search jobs..."></div>
-            <div class="top-bar-right">
-                <button class="icon-btn"><i class="fas fa-bell"></i><span class="badge-dot"></span></button>
-            </div>
-        </header>
-        <div class="page-area">
-            <div class="page-content active" id="page-tech-dashboard">
-                <div class="page-header"><h1>Technician Dashboard</h1><p>Your jobs and earnings at a glance.</p></div>
-                <div class="stats-row">
-                    <div class="stat-card animate-in stagger-1"><div class="stat-icon blue"><i class="fas fa-clipboard-list"></i></div><div class="stat-val">12</div><div class="stat-label">Active Jobs</div></div>
-                    <div class="stat-card animate-in stagger-2"><div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div><div class="stat-val">$3,240</div><div class="stat-label">This Month</div><div class="stat-tag">+18%</div></div>
-                    <div class="stat-card animate-in stagger-3"><div class="stat-icon yellow"><i class="fas fa-star"></i></div><div class="stat-val">4.9</div><div class="stat-label">Rating</div></div>
-                    <div class="stat-card animate-in stagger-4"><div class="stat-icon purple"><i class="fas fa-check-double"></i></div><div class="stat-val">87</div><div class="stat-label">Completed</div></div>
+    <main class="content-area">
+        <!-- Marketplace / Job Search View -->
+        <div class="page-content active" id="page-marketplace">
+            <div class="search-container">
+                <div class="location-picker">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Around You</span>
+                    <i class="fas fa-chevron-down" style="font-size:12px; margin-left:10px; color:#AAA"></i>
                 </div>
-                <div class="card-title" style="margin-bottom:16px"><i class="fas fa-fire"></i> New Jobs Near You</div>
-                <div id="techJobsList">
-                    <div class="bid-card"><div class="bid-header"><span class="bid-category">Plumbing</span><span class="bid-urgency high">Urgent</span></div><div class="bid-title">Kitchen Sink Leak — Water Damage Risk</div><div class="bid-desc">Water leaking from under kitchen sink, causing damage to cabinet floor. Need immediate repair.</div><div class="bid-meta"><span><i class="fas fa-map-marker-alt"></i>Brooklyn, NY</span><span><i class="fas fa-clock"></i>Posted 1h ago</span><span><i class="fas fa-gavel"></i>3 bids</span></div><div class="bid-actions"><button class="btn-sm btn-accent">Place Bid</button><button class="btn-sm btn-outline">View Details</button></div></div>
-                    <div class="bid-card"><div class="bid-header"><span class="bid-category">Electrical</span><span class="bid-urgency medium">Medium</span></div><div class="bid-title">Outlet Sparking When Plugged In</div><div class="bid-desc">Living room outlet produces sparks when inserting plugs. Safety hazard.</div><div class="bid-meta"><span><i class="fas fa-map-marker-alt"></i>Queens, NY</span><span><i class="fas fa-clock"></i>Posted 3h ago</span><span><i class="fas fa-gavel"></i>5 bids</span></div><div class="bid-actions"><button class="btn-sm btn-accent">Place Bid</button><button class="btn-sm btn-outline">View Details</button></div></div>
-                    <div class="bid-card"><div class="bid-header"><span class="bid-category">HVAC</span><span class="bid-urgency low">Low</span></div><div class="bid-title">AC Unit Not Cooling Properly</div><div class="bid-desc">Central AC running but not cooling rooms. Filter was replaced last month.</div><div class="bid-meta"><span><i class="fas fa-map-marker-alt"></i>Manhattan, NY</span><span><i class="fas fa-clock"></i>Posted 6h ago</span><span><i class="fas fa-gavel"></i>2 bids</span></div><div class="bid-actions"><button class="btn-sm btn-accent">Place Bid</button><button class="btn-sm btn-outline">View Details</button></div></div>
+                <div class="search-input-group">
+                    <input type="text" class="main-search" placeholder="Search by Title, Company or any jobs keyword...">
+                </div>
+                <div class="search-btns">
+                    <button class="btn-filter" style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-sliders-h"></i> FILTER</button>
+                    <button class="btn-find" style="display: flex; align-items: center; gap: 10px;"><i class="fas fa-search"></i> FIND</button>
                 </div>
             </div>
-            <div class="page-content" id="page-tech-jobs"><div class="page-header"><h1>Open Jobs</h1><p>Browse and bid on available service requests.</p></div></div>
-            <div class="page-content" id="page-tech-bids"><div class="page-header"><h1>My Bids</h1><p>Track your submitted bids and their status.</p></div></div>
-            <div class="page-content" id="page-tech-earnings"><div class="page-header"><h1>Earnings</h1><p>Your payment history and stats.</p></div></div>
-        </div>
-    </main>
-</div>
 
-<!-- ==================== ADMIN DASHBOARD ==================== -->
-<div data-role="admin" class="dashboard-shell" id="adminDashboard">
-    <aside class="sidebar">
-        <div class="logo">Home<span>Fix.</span></div>
-        <nav>
-            <div class="menu-section-label">Overview</div>
-            <a class="menu-item active" data-page="admin-home"><i class="fas fa-chart-line"></i><span>Analytics</span></a>
-            <a class="menu-item" data-page="admin-users"><i class="fas fa-users"></i><span>Users</span></a>
-            <a class="menu-item" data-page="admin-jobs"><i class="fas fa-clipboard-list"></i><span>All Jobs</span></a>
-            <a class="menu-item" data-page="admin-techs"><i class="fas fa-user-check"></i><span>Technicians</span></a>
-            <div class="menu-section-label">System</div>
-            <a class="menu-item" data-page="admin-settings"><i class="fas fa-cog"></i><span>Settings</span></a>
-            <a class="menu-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
-        </nav>
-    </aside>
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="search-box"><i class="fas fa-search"></i><input type="text" placeholder="Search platform..."></div>
-            <div class="top-bar-right"><span class="status-badge active">System Online</span></div>
-        </header>
-        <div class="page-area">
-            <div class="page-content active" id="page-admin-home">
-                <div class="page-header"><h1>Platform Analytics</h1><p>Real-time platform health and metrics.</p></div>
-                <div class="stats-row">
-                    <div class="stat-card animate-in stagger-1"><div class="stat-icon purple"><i class="fas fa-users"></i></div><div class="stat-val">1,248</div><div class="stat-label">Total Users</div><div class="stat-tag">+12%</div></div>
-                    <div class="stat-card animate-in stagger-2"><div class="stat-icon blue"><i class="fas fa-clipboard-list"></i></div><div class="stat-val">342</div><div class="stat-label">Total Jobs</div><div class="stat-tag">+8%</div></div>
-                    <div class="stat-card animate-in stagger-3"><div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div><div class="stat-val">$18.4K</div><div class="stat-label">Revenue</div><div class="stat-tag">+22%</div></div>
-                    <div class="stat-card animate-in stagger-4"><div class="stat-icon yellow"><i class="fas fa-chart-line"></i></div><div class="stat-val">94%</div><div class="stat-label">Satisfaction</div></div>
+            <div class="suggestions">
+                <span style="font-weight: 600; color: #888;">Suggestions:</span>
+                <div class="tag active">Your Skill</div>
+                <div class="tag">Plumbing</div>
+                <div class="tag">Electrical</div>
+                <div class="tag">HVAC Repair</div>
+                <div class="tag">Cleaning</div>
+            </div>
+
+            <div class="results-header">
+                <div class="results-count">
+                    <h3>Showing <span id="jobCount">246</span> Jobs Results</h3>
+                    <p>Based on your preferences</p>
                 </div>
-                <div class="dashboard-grid">
-                    <div class="grid-col-left">
-                        <div class="card">
-                            <div class="card-title"><i class="fas fa-users"></i> Recent Users</div>
-                            <table class="data-table">
-                                <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th></tr></thead>
-                                <tbody>
-                                    <tr><td style="color:var(--text-white);font-weight:600">John Doe</td><td>Customer</td><td><span class="status-badge active">Active</span></td><td>Mar 15</td></tr>
-                                    <tr><td style="color:var(--text-white);font-weight:600">Mike Johnson</td><td>Technician</td><td><span class="status-badge active">Active</span></td><td>Mar 10</td></tr>
-                                    <tr><td style="color:var(--text-white);font-weight:600">Sarah Davis</td><td>Technician</td><td><span class="status-badge completed">Verified</span></td><td>Mar 8</td></tr>
-                                    <tr><td style="color:var(--text-white);font-weight:600">Emily Chen</td><td>Customer</td><td><span class="status-badge pending">Pending</span></td><td>Mar 5</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="results-filters">
+                    <label class="filter-toggle">
+                        <div class="switch"></div>
+                        Fulltime
+                    </label>
+                    <label class="filter-toggle" style="margin-left: 15px;">
+                        <div class="switch on"></div>
+                        Freelance
+                    </label>
+                    <label class="filter-toggle" style="margin-left:20px">
+                        Details
+                        <div class="switch"></div>
+                    </label>
+                    <label class="filter-toggle" style="margin-left: 15px;">
+                        Salary
+                        <div class="switch on"></div>
+                    </label>
+                    
+                    <div class="dropdown-filter" style="margin-left:15px; padding:10px 20px; border-radius:10px; border:1px solid #EEE; background:white; font-weight:700; font-size:14px; display:flex; gap:10px; align-items:center;">
+                        <i class="fas fa-sort-amount-down"></i> Newest <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="grid-col-right">
-                        <div class="card" style="margin-bottom:20px">
-                            <div class="card-title"><i class="fas fa-bell"></i> System Alerts</div>
-                            <div style="background:rgba(16,185,129,0.08);border-radius:var(--radius-sm);padding:12px;font-size:13px;margin-bottom:10px;color:var(--success)"><i class="fas fa-check-circle"></i> All services operational</div>
-                            <div style="background:rgba(245,158,11,0.08);border-radius:var(--radius-sm);padding:12px;font-size:13px;margin-bottom:10px;color:var(--warning)"><i class="fas fa-exclamation-triangle"></i> AI API usage at 78%</div>
-                            <div style="background:rgba(59,130,246,0.08);border-radius:var(--radius-sm);padding:12px;font-size:13px;color:var(--info)"><i class="fas fa-info-circle"></i> 5 pending tech verifications</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title"><i class="fas fa-chart-pie"></i> Categories</div>
-                            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Plumbing</span><strong style="color:var(--text-white)">38%</strong></div>
-                            <div class="custom-progress" style="margin-bottom:14px"><div class="custom-progress-fill" style="width:38%"></div></div>
-                            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Electrical</span><strong style="color:var(--text-white)">25%</strong></div>
-                            <div class="custom-progress" style="margin-bottom:14px"><div class="custom-progress-fill" style="width:25%"></div></div>
-                            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>HVAC</span><strong style="color:var(--text-white)">20%</strong></div>
-                            <div class="custom-progress" style="margin-bottom:14px"><div class="custom-progress-fill" style="width:20%"></div></div>
-                            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Other</span><strong style="color:var(--text-white)">17%</strong></div>
-                            <div class="custom-progress"><div class="custom-progress-fill" style="width:17%"></div></div>
-                        </div>
+
+                    <div style="display:flex; gap:10px; margin-left:15px;">
+                        <div class="action-icon shadow-sm" style="width: 40px; height: 40px; border-radius: 8px; font-size: 14px;"><i class="fas fa-list"></i></div>
+                        <div class="action-icon shadow-sm active" style="width: 40px; height: 40px; border-radius: 8px; font-size: 14px; background:var(--jobie-purple); color:white;"><i class="fas fa-th-large"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="page-content" id="page-admin-users"><div class="page-header"><h1>User Management</h1></div></div>
-            <div class="page-content" id="page-admin-jobs"><div class="page-header"><h1>All Jobs</h1></div></div>
-            <div class="page-content" id="page-admin-techs"><div class="page-header"><h1>Technician Verification</h1></div></div>
-            <div class="page-content" id="page-admin-settings"><div class="page-header"><h1>Settings</h1></div></div>
+
+            <div class="job-grid" id="jobGrid">
+                <!-- Data-driven cards will be injected here -->
+            </div>
+        </div>
+
+        <!-- Dashboard Placeholder -->
+        <div class="page-content" id="page-dashboard" style="display: none;">
+            <div class="results-header"><h1>Dashboard Overview</h1></div>
+            <div style="background: white; padding: 40px; border-radius: 20px; text-align: center;">
+                <i class="fas fa-rocket" style="font-size: 60px; color: var(--jobie-purple); margin-bottom: 20px;"></i>
+                <h2>Welcome Back!</h2>
+                <p>Track your applications, earnings, and stats here.</p>
+            </div>
         </div>
     </main>
 </div>
 
 <!-- ==================== MODALS ==================== -->
-<div id="loginModal" class="modal-overlay" onclick="closeOnOverlay(event)">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
-        <h2>Welcome Back</h2>
-        <p class="modal-subtitle">Sign in to your HomeFix account</p>
+<div id="loginModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+    <div class="modal-content" style="background:white; padding:40px; border-radius:20px; width:400px;">
+        <h2 style="margin-bottom:10px;">Welcome Back</h2>
+        <p style="color:#666; margin-bottom:30px;">Sign in to your account</p>
         <form id="loginForm">
-            <div class="form-group"><label>Email</label><input type="email" class="form-input" id="lEmail" placeholder="you@example.com" required></div>
-            <div class="form-group"><label>Password</label><input type="password" class="form-input" id="lPass" placeholder="••••••••" required></div>
-            <button type="submit" class="btn-full">Sign In</button>
+            <input type="email" id="lEmail" placeholder="Email" style="width:100%; padding:15px; border:1px solid #EEE; border-radius:12px; margin-bottom:15px; outline:none;" required>
+            <input type="password" id="lPass" placeholder="Password" style="width:100%; padding:15px; border:1px solid #EEE; border-radius:12px; margin-bottom:25px; outline:none;" required>
+            <button type="submit" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:15px; border-radius:12px; font-weight:800; cursor:pointer;">SIGN IN</button>
         </form>
-        <div class="modal-switch">Don't have an account? <a onclick="closeModal('loginModal');openModal('signupModal')">Register</a></div>
+        <div style="text-align:center; margin-top:20px;">
+            <a href="#" onclick="closeModal('loginModal')" style="color:#888; font-size:14px;">Cancel</a>
+        </div>
     </div>
 </div>
 
-<div id="signupModal" class="modal-overlay" onclick="closeOnOverlay(event)">
-    <div class="modal-content">
-        <button class="modal-close" onclick="closeModal('signupModal')"><i class="fas fa-times"></i></button>
-        <h2>Create Account</h2>
-        <p class="modal-subtitle">Join the future of home services</p>
-        <form id="signupForm">
-            <div class="form-group"><label>Full Name</label><input type="text" class="form-input" id="sName" placeholder="John Doe" required></div>
-            <div class="form-group"><label>Email</label><input type="email" class="form-input" id="sEmail" placeholder="you@example.com" required></div>
-            <div class="form-group"><label>Password</label><input type="password" class="form-input" id="sPass" placeholder="Min 6 characters" required></div>
-            <div class="form-group"><label>I am a...</label>
-                <select class="form-select" id="sRole"><option value="user">Homeowner</option><option value="technician">Technician</option></select>
-            </div>
-            <button type="submit" class="btn-full">Create Account</button>
-        </form>
-        <div class="modal-switch">Already have an account? <a onclick="closeModal('signupModal');openModal('loginModal')">Sign In</a></div>
-    </div>
-</div>
-
-<!-- Loading Overlay -->
-<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div><div class="loading-text" id="loadingText">Loading...</div></div>
-
-<!-- Toast Container -->
-<div class="toast-container" id="toastContainer"></div>
-
-<!-- ==================== SCRIPTS ==================== -->
+<!-- Firebase & Scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 <script src="js/services/firebase-config.js"></script>
-<script src="js/mock-data.js"></script>
+<script src="js/app.js"></script>
 
 <script>
-/* ============================================
-   HOMEFIX PRO — Unified SPA Controller
-   Auth, Routing, AI, Role Management
-   ============================================ */
+    // --- Global Helpers ---
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function toggleAuthModal() { 
+        if (typeof firebase !== 'undefined' && firebase.auth().currentUser) {
+            firebase.auth().signOut().then(() => location.reload());
+        } else {
+            openModal('loginModal'); 
+        }
+    }
 
-// ---- Modal Helpers ----
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-function closeOnOverlay(e) { if (e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; }
-
-// ---- Toast System ----
-function showToast(msg, type = 'success') {
-    const t = document.createElement('div');
-    t.className = `toast ${type}`;
-    t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'times-circle' : 'exclamation-circle'}"></i>${msg}`;
-    document.getElementById('toastContainer').appendChild(t);
-    setTimeout(() => t.remove(), 4000);
-}
-
-// ---- Loading ----
-function showLoading(msg) { document.getElementById('loadingText').textContent = msg || 'Loading...'; document.getElementById('loadingOverlay').classList.add('visible'); }
-function hideLoading() { document.getElementById('loadingOverlay').classList.remove('visible'); }
-
-// ---- SPA Router ----
-function navigatePage(page, dashShell) {
-    const shell = dashShell || document.querySelector('.dashboard-shell[style*="display"]') || document.querySelector('[data-role]:not([style*="none"])') || document.getElementById('userDashboard');
-    shell.querySelectorAll('.page-content').forEach(p => { p.style.display = 'none'; p.classList.remove('active'); });
-    const target = shell.querySelector(`#page-${page}`) || document.getElementById(`page-${page}`);
-    if (target) { target.style.display = 'block'; target.classList.add('active'); }
-    shell.querySelectorAll('.menu-item').forEach(m => m.classList.toggle('active', m.dataset.page === page));
-}
-
-// Global Menu click handler
-document.addEventListener('click', (e) => {
-    const item = e.target.closest('.menu-item[data-page]');
-    if (item) {
+    // Handle Login Form
+    document.getElementById('loginForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
-        const page = item.dataset.page;
-        const shell = item.closest('.dashboard-shell');
-        navigatePage(page, shell);
-    }
-});
+        const email = document.getElementById('lEmail').value;
+        const pass = document.getElementById('lPass').value;
+        if (typeof firebase !== 'undefined') {
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .then(() => {
+                    closeModal('loginModal');
+                    location.reload();
+                })
+                .catch(err => alert(err.message));
+        }
+    });
 
-// ---- Auth Handlers ----
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    showLoading('Signing in...');
-    try {
-        await auth.signInWithEmailAndPassword(document.getElementById('lEmail').value, document.getElementById('lPass').value);
-        closeModal('loginModal');
-    } catch (err) { showToast(err.message, 'error'); }
-    hideLoading();
-});
-
-document.getElementById('signupForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    showLoading('Creating account...');
-    try {
-        const cred = await auth.createUserWithEmailAndPassword(document.getElementById('sEmail').value, document.getElementById('sPass').value);
-        await database.ref('users/' + cred.user.uid).set({
-            name: document.getElementById('sName').value,
-            role: document.getElementById('sRole').value,
-            email: document.getElementById('sEmail').value,
-            createdAt: new Date().toISOString()
-        });
-        closeModal('signupModal');
-        showToast('Account created successfully!');
-    } catch (err) { showToast(err.message, 'error'); }
-    hideLoading();
-});
-
-function logout() { auth.signOut(); showToast('Logged out'); }
-
-// ---- Update UI for role ----
-function setDashboardUI(name, email, role) {
-    const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=6366f1&color=fff`;
-    document.body.setAttribute('data-current-role', role);
-    ['sidebarName','topName'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = name; });
-    ['topEmail'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = email; });
-    ['sidebarRole'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = role === 'user' ? 'Homeowner' : role.charAt(0).toUpperCase() + role.slice(1); });
-    ['sidebarAvatar','topAvatar'].forEach(id => { const el = document.getElementById(id); if (el) el.src = avatarUrl; });
-}
-
-// ---- Firebase Auth State ----
-auth.onAuthStateChanged(user => {
-    if (user) {
-        database.ref('users/' + user.uid).once('value', snapshot => {
-            const data = snapshot.val() || {};
-            const role = data.role || 'user';
-            const name = data.name || 'User';
-            setDashboardUI(name, user.email, role);
-        });
-    } else {
-        document.body.setAttribute('data-current-role', 'guest');
-    }
-});
-
-// ---- AI Diagnosis ----
-async function runAI() {
-    const input = document.getElementById('aiInput').value.trim().toLowerCase();
-    if (!input) { showToast('Please describe your issue', 'warning'); return; }
-    const res = document.getElementById('aiResult');
-    const sug = document.getElementById('aiSuggestion');
-    const techs = document.getElementById('aiTechs');
-
-    res.classList.add('visible');
-    sug.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing your issue...';
-    techs.innerHTML = '';
-
-    await new Promise(r => setTimeout(r, 1500));
-
-    let domain = 'plumbing';
-    if (input.includes('spark') || input.includes('electric') || input.includes('outlet') || input.includes('wire')) domain = 'electrical';
-    if (input.includes('ac') || input.includes('hvac') || input.includes('cool') || input.includes('heat') || input.includes('filter')) domain = 'hvac';
-
-    const data = MockData.diagnoses[domain];
-    const matched = MockData.technicians.filter(t => t.specialties.some(s => s.toLowerCase() === domain));
-
-    sug.innerHTML = `<strong>Likely Cause:</strong> ${data.cause}<br><strong>Suggested Fix:</strong> ${data.fix}<br><strong>Difficulty:</strong> ${data.difficulty} · <strong>Parts:</strong> ${data.est_parts}`;
-    techs.innerHTML = matched.map(t => `
-        <div class="tech-card-mini">
-            <img src="${t.avatar}" alt="${t.name}">
-            <div class="name">${t.name}</div>
-            <div class="rate">${t.base_rate}/hr · ⭐ ${t.rating}</div>
-        </div>
-    `).join('') || '<p style="color:var(--text-muted);font-size:13px">No specialists found for this category.</p>';
-}
-
-console.log('🔧 HomeFix Pro — Premium SPA Loaded');
+    // Toggle Switch (Visual)
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('switch')) {
+            e.target.classList.toggle('on');
+        }
+    });
 </script>
+
+
 </body>
 </html>
