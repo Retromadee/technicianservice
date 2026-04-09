@@ -199,15 +199,25 @@ const App = (() => {
 
     function initSearch() {
         const mainInput = document.querySelector('.main-search');
-        const filterFn = (e) => {
-            const query = e.target.value.toLowerCase();
-            const filtered = state.technicians.filter(t => 
-                t.title.toLowerCase().includes(query) || 
-                t.company.toLowerCase().includes(query)
-            );
+        const zipInput = document.querySelector('.location-picker input');
+        
+        const filterFn = () => {
+            const query = mainInput ? mainInput.value.toLowerCase() : '';
+            const zip = zipInput ? zipInput.value.toLowerCase() : '';
+            
+            const filtered = state.technicians.filter(t => {
+                const matchesQuery = !query || 
+                    t.title.toLowerCase().includes(query) || 
+                    t.company.toLowerCase().includes(query) || 
+                    t.desc.toLowerCase().includes(query);
+                const matchesZip = !zip || t.loc.toLowerCase().includes(zip);
+                return matchesQuery && matchesZip;
+            });
             renderTechnicians(filtered);
         };
+
         if (mainInput) mainInput.addEventListener('input', filterFn);
+        if (zipInput) zipInput.addEventListener('input', filterFn);
     }
 
     // ---- AI Diagnosis ----
