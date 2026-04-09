@@ -74,9 +74,9 @@ const App = (() => {
                 <div style="margin-bottom:15px; font-size:13px; color:#666;">
                     <strong>Problem:</strong> ${req.problem.substring(0, 50)}...
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" style="justify-content:space-between;">
                     <div class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING QUOTE</div>
-                    <div class="location">London, UK</div>
+                    <button onclick="App.completeJobSim(${state.myRequests.indexOf(req)})" style="background:#E8F5E9; color:#2E7D32; border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">COMPLETE (TEST)</button>
                 </div>
             </div>
         `).join('');
@@ -203,6 +203,11 @@ const App = (() => {
         };
 
         state.myRequests.push(request);
+        
+        // Trigger Email Notification
+        const userEmail = state.user ? state.user.email : "customer@example.com";
+        NotificationService.send('JOB_PENDING', userEmail, { title: request.tech.title });
+
         closeModal('bookingModal');
         closeDrawer();
         
@@ -215,6 +220,13 @@ const App = (() => {
         setTimeout(() => toast.remove(), 4000);
 
         navigate('dashboard');
+    }
+
+    function completeJobSim(index) {
+        const req = state.myRequests[index];
+        const userEmail = state.user ? state.user.email : "customer@example.com";
+        NotificationService.send('JOB_DONE', userEmail, { title: req.tech.title });
+        alert(`Verification email for Job Completion sent to ${userEmail}!`);
     }
 
     function navigate(page) {
@@ -442,7 +454,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, nextStep, prevStep, state };
+    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, state };
 })();
 
 

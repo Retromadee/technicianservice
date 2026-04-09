@@ -52,6 +52,39 @@ async def get_stats():
     except Exception as e:
         return {"error": str(e)}
 
+from pydantic import BaseModel
+import resend
+
+class EmailRequest(BaseModel):
+    to_email: str
+    subject: str
+    type: str # 'JOB_PENDING', 'JOB_DONE', 'NEW_MESSAGE'
+    data: dict
+
+@app.post("/api/send-email")
+async def send_email(req: EmailRequest):
+    resend.api_key = os.getenv("RESEND_API_KEY")
+    
+    html_content = ""
+    if req.type == 'JOB_PENDING':
+        html_content = f"<h1>Job Request Pending</h1><p>Your request for <b>{req.data.get('title')}</b> is currently pending approval.</p>"
+    elif req.type == 'JOB_DONE':
+        html_content = f"<h1>Job Completed!</h1><p>Good news! Your service for <b>{req.data.get('title')}</b> has been marked as completed.</p>"
+    elif req.type == 'NEW_MESSAGE':
+        html_content = f"<h1>New Message Alert</h1><p>You have a new message regarding your <b>{req.data.get('title')}</b> project.</p>"
+
+    try:
+        params = {
+            "from": "HomeFix Pro <onboarding@resend.dev>",
+            "to": [req.to_email],
+            "subject": req.subject,
+            "html": html_content
+        }
+        res = resend.Emails.send(params)
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/api/orders")
 async def get_orders():
     try:
