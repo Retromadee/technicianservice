@@ -91,6 +91,36 @@
                 <div class="tag">Cleaning</div>
             </div>
 
+            <!-- Popular Projects (Thumbtack Style) -->
+            <div style="margin-bottom:50px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h3 style="font-weight:900; font-size:20px;">Average costs for local projects</h3>
+                    <a href="#" style="color:var(--jobie-purple); font-weight:700; font-size:14px; text-decoration:none;">See all estimates <i class="fas fa-chevron-right" style="font-size:10px;"></i></a>
+                </div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:20px;">
+                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
+                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(59, 130, 246, 0.1); color:#3B82F6; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-sink"></i></div>
+                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Kitchen Sink</div>
+                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$150 - $450</div>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
+                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(245, 158, 11, 0.1); color:#F59E0B; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-plug"></i></div>
+                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Smart Switch</div>
+                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$90 - $220</div>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
+                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(16, 185, 129, 0.1); color:#10B981; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-wind"></i></div>
+                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">AC Tune-up</div>
+                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$125 - $300</div>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
+                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(239, 68, 68, 0.1); color:#EF4444; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-paint-roller"></i></div>
+                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Room Paint</div>
+                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$300 - $800</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="results-header">
                 <div class="results-count">
                     <h3>Showing <span id="jobCount">246</span> Jobs Results</h3>
@@ -224,7 +254,28 @@
         <form id="loginForm">
             <input type="email" id="lEmail" placeholder="Email Address" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:15px; outline:none; background:#F8F9FD;" required>
             <input type="password" id="lPass" placeholder="Password" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:25px; outline:none; background:#F8F9FD;" required>
-            <button type="submit" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SIGN IN</button>
+            <div style="margin-bottom:40px;">
+                <h4 style="font-weight:800; margin-bottom:15px;">Recent Reviews</h4>
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <span style="font-weight:700; font-size:14px;">Jane D.</span>
+                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p style="color:#666; font-size:13px; line-height:1.5;">"Absolutely amazing service! Came right on time and fixed my leak in 20 minutes. Very professional."</p>
+                    </div>
+                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <span style="font-weight:700; font-size:14px;">Robert M.</span>
+                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p style="color:#666; font-size:13px; line-height:1.5;">"Great communication and fair pricing. Highly recommend for any electrical emergency."</p>
+                    </div>
+                </div>
+                <a href="#" style="color:var(--jobie-purple); font-weight:800; font-size:13px; display:block; margin-top:15px;">Read all ${tech.reviews} reviews</a>
+            </div>
+
+            <button onclick="App.openBooking()" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:22px; border-radius:20px; font-weight:800; cursor:pointer; font-size:16px; box-shadow: 0 10px 30px rgba(76, 57, 172, 0.3);">CHECK AVAILABILITY</button>
         </form>
         <div style="text-align:center; margin-top:25px; color:#888; font-size:14px;">
             Don't have an account? <a href="#" style="color:var(--jobie-purple); font-weight:700;">Join as Pro</a> or <a href="#" style="color:var(--jobie-purple); font-weight:700;">Sign up</a>
@@ -243,42 +294,72 @@
     </div>
 </div>
 
-<!-- ==================== BOOKING MODAL ==================== -->
+<!-- ==================== BOOKING MODAL (THUMBTACK FLOW) ==================== -->
 <div id="bookingModal" class="modal-overlay" onclick="if(event.target === this) closeModal('bookingModal')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2100; align-items:center; justify-content:center;">
-    <div class="modal-content" style="background:white; padding:40px; border-radius:30px; width:550px; position:relative;">
-        <button onclick="closeModal('bookingModal')" style="position:absolute; top:25px; right:25px; border:none; background:none; font-size:20px; cursor:pointer; color:#AAA;"><i class="fas fa-times"></i></button>
-        <h2 style="margin-bottom:10px; font-weight:800; font-size:24px;">Confirm Service Request</h2>
-        <p style="color:#666; margin-bottom:30px;">Describe the issue and set your preferred time.</p>
-        <form id="bookingForm">
-            <div style="margin-bottom:15px;">
-                <label style="display:block; font-weight:700; margin-bottom:8px; font-size:14px;">Technician</label>
-                <input type="text" id="bTechName" readonly style="width:100%; padding:14px; border:1px solid #EEE; border-radius:12px; background:#F8F9FD; font-weight:600;">
-            </div>
-            <div style="margin-bottom:15px;">
-                <label style="display:block; font-weight:700; margin-bottom:8px; font-size:14px;">Service Type</label>
-                <select id="bServiceType" style="width:100%; padding:14px; border:1px solid #EEE; border-radius:12px; font-weight:500;">
-                    <option>Standard Repair</option>
-                    <option>Urgent Fix</option>
-                    <option>Installation</option>
-                    <option>Consultation</option>
-                </select>
-            </div>
-            <div style="margin-bottom:20px;">
-                <label style="display:block; font-weight:700; margin-bottom:8px; font-size:14px;">Problem Description</label>
-                <textarea id="bProblem" placeholder="e.g. My sink is leaking from the main pipe..." style="width:100%; padding:14px; border:1px solid #EEE; border-radius:12px; min-height:100px; resize:none;"></textarea>
-            </div>
-            <div style="display:flex; gap:15px; margin-bottom:30px;">
-                <div style="flex:1;">
-                    <label style="display:block; font-weight:700; margin-bottom:8px; font-size:14px;">Date</label>
-                    <input type="date" style="width:100%; padding:14px; border:1px solid #EEE; border-radius:12px;">
+    <div class="modal-content" style="background:white; padding:0; border-radius:30px; width:650px; overflow:hidden; position:relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+        <button onclick="closeModal('bookingModal')" style="position:absolute; top:20px; right:20px; border:none; background:white; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; color:#AAA; z-index:10;"><i class="fas fa-times"></i></button>
+        
+        <div style="height:8px; background:#EEE; width:100%;">
+            <div id="bookingProgress" style="height:100%; background:var(--jobie-purple); width:25%; transition:0.4s;"></div>
+        </div>
+
+        <div style="padding:50px;">
+            <form id="bookingForm">
+                <!-- Step 1: Scope -->
+                <div class="booking-step active" id="step1" style="display:block;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">What do you need help with?</h2>
+                    <p style="color:#666; margin-bottom:30px;">Select all that apply to your project.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px;">
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
+                            <input type="checkbox" style="width:20px; height:20px;"> Repair Existing
+                        </label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
+                            <input type="checkbox" style="width:20px; height:20px;"> New Installation
+                        </label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
+                            <input type="checkbox" style="width:20px; height:20px;"> Maintenance
+                        </label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
+                            <input type="checkbox" style="width:20px; height:20px;"> Emergency Fix
+                        </label>
+                    </div>
                 </div>
-                <div style="flex:1;">
-                    <label style="display:block; font-weight:700; margin-bottom:8px; font-size:14px;">Time</label>
-                    <input type="time" style="width:100%; padding:14px; border:1px solid #EEE; border-radius:12px;">
+
+                <!-- Step 2: Urgency & Type -->
+                <div class="booking-step" id="step2" style="display:none;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">When's the best time?</h2>
+                    <p style="color:#666; margin-bottom:30px;">Technicians will prioritize your request based on urgency.</p>
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:30px;">
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
+                            <input type="radio" name="urgency" style="width:22px; height:22px;"> ASAP (Today)
+                        </label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
+                            <input type="radio" name="urgency" style="width:22px; height:22px;"> Within 48 Hours
+                        </label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
+                            <input type="radio" name="urgency" style="width:22px; height:22px;"> This Weekend
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <button type="submit" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer;">SUBMIT REQUEST</button>
-        </form>
+
+                <!-- Step 3: Details -->
+                <div class="booking-step" id="step3" style="display:none;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">Tell us more</h2>
+                    <p style="color:#666; margin-bottom:20px;">Any specific details or brand of appliance?</p>
+                    <textarea id="bProblem" placeholder="e.g. My LG Refrigerator is leaking from the bottom right corner..." style="width:100%; padding:20px; border:1px solid #EEE; border-radius:15px; min-height:150px; font-size:16px; outline:none; background:#F8F9FD; margin-bottom:20px;"></textarea>
+                    <div style="border:2px dashed #EEE; padding:30px; border-radius:20px; text-align:center; color:#888;">
+                        <i class="fas fa-camera" style="font-size:24px; margin-bottom:10px;"></i><br>
+                        Add photos of the issue (optional)
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-top:40px;">
+                    <button type="button" id="btnBookingBack" onclick="App.prevStep()" style="display:none; padding:15px 30px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">BACK</button>
+                    <button type="button" id="btnBookingNext" onclick="App.nextStep()" style="margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CONTINUE</button>
+                    <button type="submit" id="btnBookingSubmit" style="display:none; margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SEND REQUEST</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

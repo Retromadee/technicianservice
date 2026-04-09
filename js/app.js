@@ -11,6 +11,7 @@ const App = (() => {
         role: 'guest',
         selectedTech: null,
         myRequests: [],
+        currentBookingStep: 1,
         technicians: [
             { id: 1, title: 'Master Plumber', company: 'ExpertFlow Team', rate: '$45', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], hires: 84, yearsInBusiness: 12, isTopPro: true, desc: 'Highly experienced in leak detection, emergency pipe repairs, and premium smart bathroom installations.', reviews: 124 },
             { id: 2, title: 'Senior Electrician', company: 'VoltGuard Studios', rate: '$60', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety', 'Industrial'], hires: 142, yearsInBusiness: 8, isTopPro: true, desc: 'Industrial and residential wiring specialist. Expert in panel upgrades and smart home safety audits.', reviews: 89 },
@@ -107,33 +108,58 @@ const App = (() => {
             </div>
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:30px;">
-                <div style="background:#F8F9FD; padding:15px; border-radius:15px; text-align:center;">
-                    <div style="font-weight:900; font-size:18px;">${tech.rating} ⭐</div>
+                <div style="background:#F8F9FD; padding:20px; border-radius:15px; text-align:center;">
+                    <div style="font-weight:900; font-size:20px;">${tech.rating} ⭐</div>
                     <div style="font-size:12px; color:#888; font-weight:600;">${tech.reviews} Reviews</div>
                 </div>
-                <div style="background:#F8F9FD; padding:15px; border-radius:15px; text-align:center;">
-                    <div style="font-weight:900; font-size:18px;">${tech.hires}</div>
+                <div style="background:#F8F9FD; padding:20px; border-radius:15px; text-align:center;">
+                    <div style="font-weight:900; font-size:20px;">${tech.hires}</div>
                     <div style="font-size:12px; color:#888; font-weight:600;">Hires on site</div>
                 </div>
             </div>
             
             <div style="margin-bottom:30px;">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                    <i class="fas fa-award" style="color:var(--jobie-purple)"></i>
-                    <span style="font-weight:700; font-size:14px;">Top Pro with ${tech.yearsInBusiness} years in business</span>
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
+                    <button style="width:40px; height:40px; border-radius:50%; background:#E8F5E9; border:none; color:#2E7D32;"><i class="fas fa-check"></i></button>
+                    <span style="font-weight:700; font-size:15px;">Background checked</span>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
-                    <i class="fas fa-user-shield" style="color:#10B981"></i>
-                    <span style="font-weight:700; font-size:14px; color:#10B981;">Background checked</span>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <button style="width:40px; height:40px; border-radius:50%; background:#FFF8E1; border:none; color:#F97316;"><i class="fas fa-medal"></i></button>
+                    <span style="font-weight:700; font-size:15px;">Top Pro — ${tech.yearsInBusiness} years in business</span>
                 </div>
             </div>
 
-            <div style="margin-bottom:30px;">
-                <h4 style="font-weight:800; margin-bottom:10px;">About</h4>
-                <p style="color:#666; line-height:1.6; font-size:14px;">${tech.desc}</p>
+            <div style="margin-bottom:40px;">
+                <h4 style="font-weight:800; margin-bottom:15px;">Work Gallery</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
+                    <div style="aspect-ratio:1; background:#EEE; border-radius:12px; overflow:hidden;"><img src="https://picsum.photos/seed/${tech.id}1/200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div style="aspect-ratio:1; background:#EEE; border-radius:12px; overflow:hidden;"><img src="https://picsum.photos/seed/${tech.id}2/200" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div style="aspect-ratio:1; background:#EEE; border-radius:12px; overflow:hidden;"><img src="https://picsum.photos/seed/${tech.id}3/200" style="width:100%; height:100%; object-fit:cover;"></div>
+                </div>
             </div>
 
-            <button onclick="App.openBooking()" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:20px; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CHECK AVAILABILITY</button>
+            <div style="margin-bottom:40px;">
+                <h4 style="font-weight:800; margin-bottom:15px;">Recent Reviews</h4>
+                <div style="display:flex; flex-direction:column; gap:20px;">
+                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <span style="font-weight:700; font-size:14px;">Jane D.</span>
+                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p style="color:#666; font-size:13px; line-height:1.5;">"Absolutely amazing service! Fixed my leak in 20 minutes. Very professional."</p>
+                    </div>
+                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                            <span style="font-weight:700; font-size:14px;">Robert M.</span>
+                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
+                        </div>
+                        <p style="color:#666; font-size:13px; line-height:1.5;">"Great communication and fair pricing. Highly recommend for any emergency."</p>
+                    </div>
+                </div>
+                <a href="#" style="color:var(--jobie-purple); font-weight:800; font-size:13px; display:block; margin-top:15px; text-decoration:none;">Read all ${tech.reviews} reviews <i class="fas fa-chevron-right" style="font-size:10px;"></i></a>
+            </div>
+
+            <button onclick="App.openBooking()" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:22px; border-radius:20px; font-weight:800; cursor:pointer; font-size:16px; box-shadow: 0 10px 30px rgba(76, 57, 172, 0.3);">CHECK AVAILABILITY</button>
         `;
         document.getElementById('techDetailDrawer').style.display = 'flex';
     }
@@ -149,8 +175,31 @@ const App = (() => {
             return;
         }
         
-        document.getElementById('bTechName').value = `${state.selectedTech.title} — ${state.selectedTech.company}`;
+        state.currentBookingStep = 1;
+        updateBookingStepUI();
         document.getElementById('bookingModal').style.display = 'flex';
+    }
+
+    function updateBookingStepUI() {
+        document.querySelectorAll('.booking-step').forEach(s => s.style.display = 'none');
+        document.getElementById(`step${state.currentBookingStep}`).style.display = 'block';
+        
+        const progress = document.getElementById('bookingProgress');
+        progress.style.width = `${(state.currentBookingStep / 3) * 100}%`;
+        
+        document.getElementById('btnBookingBack').style.display = state.currentBookingStep > 1 ? 'block' : 'none';
+        document.getElementById('btnBookingNext').style.display = state.currentBookingStep < 3 ? 'block' : 'none';
+        document.getElementById('btnBookingSubmit').style.display = state.currentBookingStep === 3 ? 'block' : 'none';
+    }
+
+    function nextStep() {
+        state.currentBookingStep++;
+        updateBookingStepUI();
+    }
+
+    function prevStep() {
+        state.currentBookingStep--;
+        updateBookingStepUI();
     }
 
     // ---- Functionality ----
@@ -158,17 +207,15 @@ const App = (() => {
         e.preventDefault();
         const request = {
             tech: state.selectedTech,
-            service: document.getElementById('bServiceType').value,
             problem: document.getElementById('bProblem').value,
-            date: document.querySelector('#bookingForm input[type="date"]').value,
-            time: document.querySelector('#bookingForm input[type="time"]').value
+            urgency: document.querySelector('input[name="urgency"]:checked')?.parentElement.textContent.trim() || 'Standard'
         };
 
         state.myRequests.push(request);
         closeModal('bookingModal');
         closeDrawer();
         
-        // Show Success Toast (Simulated)
+        // Show Success Toast
         const toast = document.createElement('div');
         toast.className = 'animate-in';
         toast.style = "position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#333; color:white; padding:15px 30px; border-radius:50px; font-weight:700; z-index:3000; box-shadow:0 10px 30px rgba(0,0,0,0.3);";
@@ -374,7 +421,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, state };
+    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, nextStep, prevStep, state };
 })();
 
 
