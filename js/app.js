@@ -53,42 +53,32 @@ const App = (() => {
     }
 
     function renderDashboard() {
-        const dash = document.getElementById('page-dashboard');
-        if (!dash) return;
+        const grid = document.getElementById('serviceHistoryGrid');
+        if (!grid) return;
         
         if (state.myRequests.length === 0) {
-            dash.innerHTML = `
-                <div class="results-header"><h1>Dashboard Overview</h1></div>
-                <div style="background: white; padding: 60px; border-radius: 30px; text-align: center; box-shadow: var(--shadow-subtle);">
-                    <i class="fas fa-rocket" style="font-size: 80px; color: var(--jobie-purple); margin-bottom: 25px; opacity: 0.1;"></i>
-                    <h2 style="font-weight: 800;">No Active Requests</h2>
-                    <p style="color: #888; margin-bottom: 30px;">You haven't booked any technicians yet. Start by exploring the marketplace.</p>
-                    <button onclick="App.navigate('marketplace')" style="background: var(--jobie-purple); color: white; border: none; padding: 15px 40px; border-radius: 12px; font-weight: 800; cursor: pointer;">Explore Marketplace</button>
-                </div>
-            `;
-        } else {
-            dash.innerHTML = `
-                <div class="results-header"><h1>My Active Requests</h1></div>
-                <div class="job-grid">
-                    ${state.myRequests.map(req => `
-                        <div class="job-card" style="border-left: 4px solid var(--jobie-purple);">
-                            <div class="card-header" style="margin-bottom: 10px;">
-                                <div class="company-info">
-                                    <div class="company-name">Request ID: #${Math.floor(Math.random()*10000)}</div>
-                                    <h4 style="color: var(--jobie-purple);">${req.tech.title}</h4>
-                                </div>
-                                <div class="badge-tag" style="background: #E8F5E9; color: #2E7D32;">PENDING</div>
-                            </div>
-                            <div style="font-size: 14px; font-weight: 700; margin-bottom: 15px;">Target: ${req.tech.company}</div>
-                            <p class="job-desc" style="margin-bottom: 15px;"><strong>Your Issue:</strong> ${req.problem}</p>
-                            <div class="card-footer" style="padding-top: 15px; border-top: 1px solid #EEE;">
-                                <div class="location"><i class="fas fa-calendar-alt"></i> ${req.date || 'TBD'} at ${req.time || 'TBD'}</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
+            grid.innerHTML = '<div style="grid-column:1/-1; padding:40px; text-align:center; background:white; border-radius:20px; color:#888; font-weight:700;">No active requests yet. Explore services below!</div>';
+            return;
         }
+
+        grid.innerHTML = state.myRequests.map(req => `
+            <div class="job-card animate-in">
+                <div class="card-header">
+                    <div class="company-info">
+                        <div class="company-name">${req.tech.company}</div>
+                        <h4>${req.tech.title}</h4>
+                    </div>
+                    <div class="company-logo ${req.tech.color}">${req.tech.logo}</div>
+                </div>
+                <div style="margin-bottom:15px; font-size:13px; color:#666;">
+                    <strong>Problem:</strong> ${req.problem.substring(0, 50)}...
+                </div>
+                <div class="card-footer">
+                    <div class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING QUOTE</div>
+                    <div class="location">London, UK</div>
+                </div>
+            </div>
+        `).join('');
     }
 
     // ---- Drawer & Selection ----
@@ -390,19 +380,24 @@ const App = (() => {
 
     // ---- Role Logic ----
     function toggleRole() {
-        state.role = state.role === 'technician' ? 'user' : 'technician';
+        if (state.role === 'guest' || state.role === 'user') state.role = 'technician';
+        else if (state.role === 'technician') state.role = 'admin';
+        else state.role = 'user';
+
         const roleBtn = document.getElementById('topRole');
-        const searchLabel = document.querySelector('.menu-item[data-page="marketplace"] span');
-        const statsLabel = document.querySelector('.menu-item[data-page="statistics"] span');
+        const adminMenu = document.getElementById('menu-admin');
+        const searchSpan = document.querySelector('.menu-item[data-page="marketplace"] span');
         
-        if (state.role === 'technician') {
+        if (searchSpan) searchSpan.textContent = "Search Technicians";
+        
+        if (state.role === 'admin') {
             roleBtn.textContent = 'Switch to User';
+            roleBtn.style.background = 'rgba(76, 57, 172, 0.1)';
+            adminMenu.style.display = 'flex';
+        } else if (state.role === 'technician') {
+            roleBtn.textContent = 'Switch to Admin';
             roleBtn.style.background = 'rgba(16, 185, 129, 0.1)';
-            roleBtn.style.color = '#10B981';
-            if (searchLabel) searchLabel.textContent = 'Open Leads';
-            if (statsLabel) statsLabel.textContent = 'Earnings';
-            navigate('leads');
-            renderLeads();
+            adminMenu.style.display = 'none';
         } else {
             roleBtn.textContent = 'Switch to Pro';
             roleBtn.style.background = 'rgba(76, 57, 172, 0.1)';

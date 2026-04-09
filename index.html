@@ -25,8 +25,9 @@
         <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Search Job</span></button>
         <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
         <button class="menu-item" data-page="my-repairs"><i class="fas fa-puzzle-piece"></i><span>My Requests</span></button>
-        <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Message</span></button>
-        <button class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i><span>Statistics</span></button>
+        <div class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
+        <div class="menu-item" data-page="leads"><i class="fas fa-briefcase"></i> <span>Pro Panel</span></div>
+        <div class="menu-item" id="menu-admin" data-page="admin" style="display:none;"><i class="fas fa-user-shield"></i> <span>Admin Panel</span></div>
     </nav>
 
     <div class="sidebar-footer">
@@ -158,13 +159,37 @@
             </div>
         </div>
 
-        <!-- Dashboard Placeholder -->
+        <!-- User Dashboard (Services Offered & History) -->
         <div class="page-content" id="page-dashboard" style="display: none;">
             <div class="results-header"><h1>Dashboard Overview</h1></div>
-            <div style="background: white; padding: 40px; border-radius: 20px; text-align: center;">
-                <i class="fas fa-rocket" style="font-size: 60px; color: var(--jobie-purple); margin-bottom: 20px;"></i>
-                <h2>Welcome Back!</h2>
-                <p>Track your customer requests, earnings, and technician stats here.</p>
+            
+            <div style="margin-bottom:40px;">
+                <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Requested Services</h3>
+                <div id="serviceHistoryGrid" class="job-grid">
+                    <!-- Dynamic requests here -->
+                </div>
+            </div>
+
+            <div>
+                <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Our Services</h3>
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px;">
+                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <i class="fas fa-hammer" style="color:var(--jobie-purple); font-size:24px;"></i>
+                        <span style="font-weight:700;">Handyman</span>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <i class="fas fa-faucet" style="color:#3B82F6; font-size:24px;"></i>
+                        <span style="font-weight:700;">Plumbing</span>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <i class="fas fa-bolt" style="color:#F59E0B; font-size:24px;"></i>
+                        <span style="font-weight:700;">Electrical</span>
+                    </div>
+                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
+                        <i class="fas fa-broom" style="color:#10B981; font-size:24px;"></i>
+                        <span style="font-weight:700;">Cleaning</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -280,16 +305,60 @@
             </div>
         </div>
 
-        <!-- Open Leads (Technician Only) -->
+        <!-- Pro Panel (Technician Dashboard) -->
         <div class="page-content" id="page-leads" style="display: none;">
             <div class="results-header">
                 <div>
-                    <h1>Open Leads</h1>
-                    <p>New customer requests in your area</p>
+                    <h1>Pro Lead Center</h1>
+                    <p>Manage your active bids and browse open customer requests.</p>
                 </div>
-                <button class="btn-filter" style="border:none;"><i class="fas fa-satellite-dish"></i> LIVE FEED</button>
+                <div style="display:flex; gap:15px;">
+                    <div style="background:white; padding:15px 25px; border-radius:15px; box-shadow:var(--shadow-subtle); text-align:center;">
+                        <div style="font-weight:900; font-size:18px; color:#10B981;">$1,240</div>
+                        <div style="font-size:11px; font-weight:700; color:#888;">WEEKLY REVENUE</div>
+                    </div>
+                </div>
             </div>
             <div class="job-grid" id="leadsGrid"></div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="page-content" id="page-admin" style="display: none;">
+            <div class="results-header">
+                <h1>Admin Command Center</h1>
+                <p>Global oversight of platform operations</p>
+            </div>
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-bottom:40px;">
+                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
+                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">TOTAL USERS</div>
+                    <div style="font-size:28px; font-weight:900;">2,840</div>
+                </div>
+                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
+                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">ACTIVE PROS</div>
+                    <div style="font-size:28px; font-weight:900;">142</div>
+                </div>
+                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
+                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">MONTHLY GMV</div>
+                    <div style="font-size:28px; font-weight:900;">$42.5K</div>
+                </div>
+                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
+                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">PENDING VERIF.</div>
+                    <div style="font-size:28px; font-weight:900; color:#F59E0B;">12</div>
+                </div>
+            </div>
+            <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
+                <h3 style="font-weight:900; margin-bottom:20px;">Recent Activity Logs</h3>
+                <div style="display:flex; flex-direction:column; gap:15px; font-size:14px; color:#666;">
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #F0F0F0; padding-bottom:10px;">
+                        <span>New Technician "PurePower Solar" applied for verification.</span>
+                        <span style="font-weight:700; color:#3B82F6;">REVIEW</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; border-bottom:1px solid #F0F0F0; padding-bottom:10px;">
+                        <span>User "Alice W." reported an issue with "ExpertFlow Team".</span>
+                        <span style="font-weight:700; color:#EF4444;">HIGH PRIORITY</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
