@@ -267,44 +267,96 @@ const App = (() => {
         if (zipInput) zipInput.addEventListener('input', filterFn);
     }
 
-    // ---- AI Diagnosis ----
-    function runAIDiagnosis() {
-        const query = document.getElementById('aiQueryInput').value.trim().toLowerCase();
-        if (!query) return;
+    // ---- AI Multimodal Diagnosis ----
+    function handleAIImage(input) {
+        if (input.files && input.files[0]) {
+            const chat = document.getElementById('aiChatWindow');
+            chat.innerHTML += `
+                <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
+                    <div style="background:white; border:1px solid #EEE; padding:5px; border-radius:15px; max-width:150px;">
+                        <img src="${URL.createObjectURL(input.files[0])}" style="width:100%; border-radius:10px;">
+                    </div>
+                </div>
+            `;
+            // Trigger analysis automatically
+            runAIDiagnosis(true);
+        }
+    }
+
+    function toggleVoiceInput() {
+        const btn = document.getElementById('btnVoiceAI');
+        btn.classList.toggle('active');
+        if (btn.classList.contains('active')) {
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            btn.style.color = '#EF4444';
+            // Simulate voice to text
+            setTimeout(() => {
+                document.getElementById('aiQueryInput').value = "My kitchen light is flickering and the socket smells burnt.";
+                toggleVoiceInput();
+            }, 3000);
+        } else {
+            btn.innerHTML = '<i class="fas fa-microphone"></i>';
+            btn.style.color = '#666';
+        }
+    }
+
+    function runAIDiagnosis(isImage = false) {
+        const inputField = document.getElementById('aiQueryInput');
+        const query = inputField.value.trim().toLowerCase();
+        if (!query && !isImage) return;
 
         const btn = document.getElementById('btnRunAI');
         const chat = document.getElementById('aiChatWindow');
         const resArea = document.getElementById('aiResultArea');
+        const list = document.getElementById('aiQuickFixList');
         
-        // Show Loading State
         btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ANALYZING...';
+        btn.innerHTML = isImage ? '<i class="fas fa-eye fa-spin"></i> ANALYZING PHOTO...' : '<i class="fas fa-spinner fa-spin"></i> ANALYZING...';
         
-        // Add user message to chat
-        chat.innerHTML += `
-            <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
-                <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
-                    ${query}
+        if (query && !isImage) {
+            chat.innerHTML += `
+                <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
+                    <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
+                        ${inputField.value}
+                    </div>
+                    <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
                 </div>
-                <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
-            </div>
-        `;
+            `;
+            inputField.value = '';
+        }
 
         setTimeout(() => {
             let category = 'plumbing';
-            let advice = "Your issue suggests a plumbing related problem. Check for moisture around the pipes and ensure the main valve is accessible if a major leak occurs.";
+            let advice = "Based on our analysis, this looks like a plumbing system issue. We recommend checking for visible corrosion on joints.";
+            let quickFixes = [
+                "Locate and close the main water supply valve if leaking persists.",
+                "Place a bucket under the joint to prevent floor damage.",
+                "Check if any debris is clogging the drain screen."
+            ];
             
-            if (query.includes('electric') || query.includes('spark') || query.includes('outlet') || query.includes('wire')) {
+            if (query.includes('electric') || query.includes('spark') || query.includes('light') || query.includes('socket')) {
                 category = 'electrical';
-                advice = "Sparking or non-functional outlets are high-priority electrical hazards. Avoid touching exposed wires and consult a professional immediately to prevent fire risk.";
-            } else if (query.includes('ac') || query.includes('hvac') || query.includes('cool') || query.includes('heat') || query.includes('filter')) {
+                advice = "WARNING: Electrical hazard detected. This requires immediate attention from a certified pro.";
+                quickFixes = [
+                    "Turn off the breaker for the affected area immediately.",
+                    "Do not touch any exposed wires or charred sockets.",
+                    "Unplug all expensive electronics in the same circuit."
+                ];
+            } else if (query.includes('ac') || query.includes('hvac') || query.includes('cool')) {
                 category = 'hvac';
-                advice = "HVAC efficiency issues often stem from clogged filters or coolant leaks. We recommend a full system pressure check and filter replacement.";
+                advice = "Your HVAC system may be experiencing a coolant leak or compressor failure.";
+                quickFixes = [
+                    "Turn off the thermostat to prevent compressor burnout.",
+                    "Check the external unit for ice buildup.",
+                    "Ensure secondary drain pans aren't overflowing."
+                ];
             }
 
             // Update UI
             document.getElementById('aiResultText').textContent = advice;
             document.getElementById('aiDifficultyTag').textContent = `DIFFICULTY: ${category === 'electrical' ? 'HIGH' : 'MEDIUM'}`;
+            list.innerHTML = quickFixes.map(f => `<li>${f}</li>`).join('');
+            
             resArea.style.display = 'block';
             resArea.scrollIntoView({ behavior: 'smooth' });
 
@@ -320,9 +372,12 @@ const App = (() => {
                         </div>
                         <div class="company-logo ${tech.color}">${tech.logo}</div>
                     </div>
-                    <div class="salary-range">${tech.rate}/hr</div>
+                    <div style="display:flex; gap:10px; margin-bottom:10px; font-size:12px; font-weight:700;">
+                        <span>⭐ ${tech.rating}</span>
+                        <span style="color:#10B981;">98% System Match</span>
+                    </div>
                     <div class="card-footer">
-                        <div class="badge-tag" style="background:var(--jobie-bg); color:var(--jobie-purple);">98% MATCH</div>
+                        <div class="badge-tag" style="background:#E8F5E9; color:#2E7D32;">AVAILABLE TODAY</div>
                         <div class="location"><i class="fas fa-map-marker-alt"></i> ${tech.loc}</div>
                     </div>
                 </div>
@@ -330,7 +385,7 @@ const App = (() => {
 
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-magic"></i> ANALYZE';
-        }, 1500);
+        }, 2000);
     }
 
     // ---- Role Logic ----

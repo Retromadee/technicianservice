@@ -153,8 +153,6 @@
                         <div class="action-icon shadow-sm active" style="width: 40px; height: 40px; border-radius: 8px; font-size: 14px; background:var(--jobie-purple); color:white;"><i class="fas fa-th-large"></i></div>
                     </div>
                 </div>
-            </div>
-
             <div class="job-grid" id="jobGrid">
                 <!-- Data-driven cards will be injected here -->
             </div>
@@ -167,6 +165,59 @@
                 <i class="fas fa-rocket" style="font-size: 60px; color: var(--jobie-purple); margin-bottom: 20px;"></i>
                 <h2>Welcome Back!</h2>
                 <p>Track your customer requests, earnings, and technician stats here.</p>
+            </div>
+        </div>
+
+        <!-- AI Assistant Page (Restored & Upgraded) -->
+        <div class="page-content" id="page-ai-assistant" style="display: none;">
+            <div class="results-header">
+                <h1>AI Home Diagnosis</h1>
+                <p>Attach a photo, use voice, or type your issue for a smart solution.</p>
+            </div>
+            
+            <div style="background:white; padding:40px; border-radius:30px; box-shadow: var(--shadow-subtle);">
+                <div id="aiChatWindow" style="min-height:200px; padding-bottom:30px;">
+                    <div style="display:flex; gap:15px; margin-bottom:20px;">
+                        <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
+                        <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
+                            Hello! I am your HomeFix AI Assistant. How can I help you today? You can upload a photo of the problem for a better diagnosis.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:15px; border-top:1px solid #EEE; padding-top:20px;">
+                    <div style="display:flex; gap:10px;">
+                        <button onclick="document.getElementById('aiFileInput').click()" style="width:50px; height:50px; border-radius:15px; border:1px solid #EEE; background:white; color:#666; cursor:pointer;"><i class="fas fa-camera"></i></button>
+                        <button id="btnVoiceAI" onclick="App.toggleVoiceInput()" style="width:50px; height:50px; border-radius:15px; border:1px solid #EEE; background:white; color:#666; cursor:pointer;"><i class="fas fa-microphone"></i></button>
+                        <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
+                    </div>
+                    <input type="text" id="aiQueryInput" placeholder="Describe your issue..." style="flex:1; padding:18px; border:1px solid #EEE; border-radius:15px; outline:none; font-size:15px; background:#F8F9FD;">
+                    <button id="btnRunAI" onclick="App.runAIDiagnosis()" style="background:var(--jobie-purple); color:white; border:none; padding:15px 30px; border-radius:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:10px;">
+                        <i class="fas fa-magic"></i> ANALYZE
+                    </button>
+                </div>
+            </div>
+            
+            <div id="aiResultArea" style="margin-top:30px; display:none;">
+                <div style="background:linear-gradient(135deg, #4c39ac 0%, #6b52e1 100%); color:white; padding:35px; border-radius:30px; margin-bottom:20px;">
+                    <h3 style="font-weight:800; font-size:22px; margin-bottom:15px;"><i class="fas fa-lightbulb"></i> AI Diagnosis Result</h3>
+                    <p id="aiResultText" style="line-height:1.7; font-size:16px; opacity:0.9; margin-bottom:20px;"></p>
+                    <div id="aiDifficultyTag" class="badge-tag" style="background:rgba(255,255,255,0.2); color:white; display:inline-block;">DIFFICULTY: MEDIUM</div>
+                </div>
+
+                <!-- Quick Fix Section (Premium UI) -->
+                <div id="aiQuickFix" style="background:#FFF9C4; border-left:5px solid #FBC02D; padding:25px; border-radius:15px; margin-bottom:30px; box-shadow:0 10px 20px rgba(251, 192, 45, 0.1);">
+                    <h4 style="font-weight:900; color:#AF8B00; margin-bottom:15px; display:flex; align-items:center; gap:10px;">
+                        <span style="display:inline-block; width:10px; height:10px; background:#FBC02D; border-radius:50%; animation: pulse-yellow 1.5s infinite;"></span>
+                        <i class="fas fa-tools"></i> RECOMMENDED QUICK FIXES
+                    </h4>
+                    <ul id="aiQuickFixList" style="margin:0; padding-left:20px; font-size:15px; color:#5D4037; line-height:1.7; font-weight:600;">
+                        <!-- Injected via JS -->
+                    </ul>
+                </div>
+                
+                <h3 style="font-weight:800; font-size:20px; margin-bottom:20px;">Matched Professionals for this issue:</h3>
+                <div class="job-grid" id="aiTechGrid"></div>
             </div>
         </div>
 
@@ -254,28 +305,7 @@
         <form id="loginForm">
             <input type="email" id="lEmail" placeholder="Email Address" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:15px; outline:none; background:#F8F9FD;" required>
             <input type="password" id="lPass" placeholder="Password" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:25px; outline:none; background:#F8F9FD;" required>
-            <div style="margin-bottom:40px;">
-                <h4 style="font-weight:800; margin-bottom:15px;">Recent Reviews</h4>
-                <div style="display:flex; flex-direction:column; gap:20px;">
-                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                            <span style="font-weight:700; font-size:14px;">Jane D.</span>
-                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <p style="color:#666; font-size:13px; line-height:1.5;">"Absolutely amazing service! Came right on time and fixed my leak in 20 minutes. Very professional."</p>
-                    </div>
-                    <div style="border-bottom:1px solid #EEE; padding-bottom:15px;">
-                        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                            <span style="font-weight:700; font-size:14px;">Robert M.</span>
-                            <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
-                        </div>
-                        <p style="color:#666; font-size:13px; line-height:1.5;">"Great communication and fair pricing. Highly recommend for any electrical emergency."</p>
-                    </div>
-                </div>
-                <a href="#" style="color:var(--jobie-purple); font-weight:800; font-size:13px; display:block; margin-top:15px;">Read all ${tech.reviews} reviews</a>
-            </div>
-
-            <button onclick="App.openBooking()" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:22px; border-radius:20px; font-weight:800; cursor:pointer; font-size:16px; box-shadow: 0 10px 30px rgba(76, 57, 172, 0.3);">CHECK AVAILABILITY</button>
+            <button type="submit" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SIGN IN</button>
         </form>
         <div style="text-align:center; margin-top:25px; color:#888; font-size:14px;">
             Don't have an account? <a href="#" style="color:var(--jobie-purple); font-weight:700;">Join as Pro</a> or <a href="#" style="color:var(--jobie-purple); font-weight:700;">Sign up</a>
