@@ -12,6 +12,7 @@ const App = (() => {
         selectedTech: null,
         myRequests: [],
         currentBookingStep: 1,
+        currentAIImages: [],
         technicians: [
             { id: 1, title: 'Master Plumber', company: 'ExpertFlow Team', rate: '$45', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], hires: 84, yearsInBusiness: 12, isTopPro: true, desc: 'Highly experienced in leak detection, emergency pipe repairs, and premium smart bathroom installations.', reviews: 124 },
             { id: 2, title: 'Senior Electrician', company: 'VoltGuard Studios', rate: '$60', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety', 'Industrial'], hires: 142, yearsInBusiness: 8, isTopPro: true, desc: 'Industrial and residential wiring specialist. Expert in panel upgrades and smart home safety audits.', reviews: 89 },
@@ -254,45 +255,31 @@ const App = (() => {
         };
 
         if (mainInput) mainInput.addEventListener('input', filterFn);
-        if (zipInput) zipInput.addEventListener('input', filterFn);
-    }
-
-    // ---- AI Multimodal Diagnosis ----
+        if (zipInput) zipInput.addEventListener    // ---- AI Multimodal Diagnosis ----
     function handleAIImage(input) {
         if (input.files && input.files[0]) {
-            const chat = document.getElementById('aiChatWindow');
-            chat.innerHTML += `
-                <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
-                    <div style="background:white; border:1px solid #EEE; padding:5px; border-radius:15px; max-width:150px;">
-                        <img src="${URL.createObjectURL(input.files[0])}" style="width:100%; border-radius:10px;">
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const base64 = e.target.result;
+                state.currentAIImages.push(base64);
+                
+                const chat = document.getElementById('aiChatWindow');
+                chat.innerHTML += `
+                    <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
+                        <div style="background:white; border:1px solid #EEE; padding:5px; border-radius:15px; max-width:150px;">
+                            <img src="${base64}" style="width:100%; border-radius:10px;">
+                        </div>
                     </div>
-                </div>
-            `;
-            // Trigger analysis automatically
-            runAIDiagnosis(true);
+                `;
+                runAIDiagnosis(true);
+            };
+            reader.readAsDataURL(input.files[0]);
         }
     }
 
-    function toggleVoiceInput() {
-        const btn = document.getElementById('btnVoiceAI');
-        btn.classList.toggle('active');
-        if (btn.classList.contains('active')) {
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
-            btn.style.color = '#EF4444';
-            // Simulate voice to text
-            setTimeout(() => {
-                document.getElementById('aiQueryInput').value = "My kitchen light is flickering and the socket smells burnt.";
-                toggleVoiceInput();
-            }, 3000);
-        } else {
-            btn.innerHTML = '<i class="fas fa-microphone"></i>';
-            btn.style.color = '#666';
-        }
-    }
-
-    function runAIDiagnosis(isImage = false) {
+    async function runAIDiagnosis(isImage = false) {
         const inputField = document.getElementById('aiQueryInput');
-        const query = inputField.value.trim().toLowerCase();
+        const query = inputField.value.trim();
         if (!query && !isImage) return;
 
         const btn = document.getElementById('btnRunAI');
@@ -307,7 +294,7 @@ const App = (() => {
             chat.innerHTML += `
                 <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
                     <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
-                        ${inputField.value}
+                        ${query}
                     </div>
                     <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
                 </div>
@@ -315,42 +302,22 @@ const App = (() => {
             inputField.value = '';
         }
 
-        setTimeout(() => {
-            let category = 'plumbing';
-            let advice = "Based on our analysis, this looks like a plumbing system issue. We recommend checking for visible corrosion on joints.";
-            let quickFixes = [
-                "Locate and close the main water supply valve if leaking persists.",
-                "Place a bucket under the joint to prevent floor damage.",
-                "Check if any debris is clogging the drain screen."
-            ];
-            
-            if (query.includes('electric') || query.includes('spark') || query.includes('light') || query.includes('socket')) {
-                category = 'electrical';
-                advice = "WARNING: Electrical hazard detected. This requires immediate attention from a certified pro.";
-                quickFixes = [
-                    "Turn off the breaker for the affected area immediately.",
-                    "Do not touch any exposed wires or charred sockets.",
-                    "Unplug all expensive electronics in the same circuit."
-                ];
-            } else if (query.includes('ac') || query.includes('hvac') || query.includes('cool')) {
-                category = 'hvac';
-                advice = "Your HVAC system may be experiencing a coolant leak or compressor failure.";
-                quickFixes = [
-                    "Turn off the thermostat to prevent compressor burnout.",
-                    "Check the external unit for ice buildup.",
-                    "Ensure secondary drain pans aren't overflowing."
-                ];
-            }
+        try {
+            const result = await AIService.analyze({
+                description: query,
+                images: state.currentAIImages
+            });
 
             // Update UI
-            document.getElementById('aiResultText').textContent = advice;
-            document.getElementById('aiDifficultyTag').textContent = `DIFFICULTY: ${category === 'electrical' ? 'HIGH' : 'MEDIUM'}`;
-            list.innerHTML = quickFixes.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('aiResultText').textContent = result.advice;
+            document.getElementById('aiDifficultyTag').textContent = `DIFFICULTY: ${result.difficulty || 'MEDIUM'}`;
+            list.innerHTML = result.quickFixes.map(f => `<li>${f}</li>`).join('');
             
             resArea.style.display = 'block';
             resArea.scrollIntoView({ behavior: 'smooth' });
 
             // Match Techs
+            const category = result.category || 'plumbing';
             const matched = state.technicians.filter(t => t.tags.some(tag => tag.toLowerCase().includes(category)) || t.title.toLowerCase().includes(category));
             const grid = document.getElementById('aiTechGrid');
             grid.innerHTML = matched.map(tech => `
@@ -373,9 +340,13 @@ const App = (() => {
                 </div>
             `).join('');
 
+        } catch (error) {
+            console.error(error);
+        } finally {
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-magic"></i> ANALYZE';
-        }, 2000);
+            state.currentAIImages = []; // Clear for next run
+        }
     }
 
     // ---- Role Logic ----
