@@ -24,7 +24,7 @@
         <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
         <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Search Job</span></button>
         <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
-        <button class="menu-item" data-page="my-repairs"><i class="fas fa-puzzle-piece"></i><span>My Requests</span></button>
+        <button class="menu-item" data-page="dashboard"><i class="fas fa-puzzle-piece"></i><span>My Requests</span></button>
         <div class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
         <div class="menu-item" data-page="leads"><i class="fas fa-briefcase"></i> <span>Pro Panel</span></div>
         <div class="menu-item" id="menu-admin" data-page="admin" style="display:none;"><i class="fas fa-user-shield"></i> <span>Admin Panel</span></div>
@@ -481,6 +481,12 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 <script src="js/services/firebase-config.js"></script>
+<script src="js/services/auth-service.js"></script>
+<script src="js/services/firestore-service.js"></script>
+<script src="js/services/ai-service.js"></script>
+<script src="js/services/notification-service.js"></script>
+<script src="js/services/chat-service.js"></script>
+<script src="js/services/storage-service.js"></script>
 <script src="js/app.js"></script>
 
 <script>
@@ -508,6 +514,20 @@
                 })
                 .catch(err => alert(err.message));
         }
+    });
+
+    // Handle Suggestion Tags
+    document.querySelectorAll('.suggestions .tag').forEach(tag => {
+        tag.addEventListener('click', () => {
+            const query = tag.textContent === 'Your Skill' ? '' : tag.textContent;
+            const input = document.querySelector('.main-search');
+            if (input) {
+                input.value = query;
+                input.dispatchEvent(new Event('input')); // Trigger search
+            }
+            document.querySelectorAll('.suggestions .tag').forEach(t => t.classList.remove('active'));
+            tag.classList.add('active');
+        });
     });
 
     // Toggle Switch (Visual)

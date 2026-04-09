@@ -267,7 +267,8 @@ const App = (() => {
         };
 
         if (mainInput) mainInput.addEventListener('input', filterFn);
-        if (zipInput) zipInput.addEventListener    // ---- AI Multimodal Diagnosis ----
+        if (zipInput) zipInput.addEventListener('input', filterFn);
+    }
     function handleAIImage(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -287,6 +288,38 @@ const App = (() => {
             };
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function toggleVoiceInput() {
+        const btn = document.getElementById('btnVoiceAI');
+        const input = document.getElementById('aiQueryInput');
+        
+        if (!('webkitSpeechRecognition' in window)) {
+            alert("Speech recognition not supported in this browser.");
+            return;
+        }
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+            btn.style.color = '#EF4444';
+            btn.innerHTML = '<i class="fas fa-microphone fa-pulse"></i>';
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            input.value = transcript;
+            runAIDiagnosis();
+        };
+
+        recognition.onend = () => {
+            btn.style.color = '#666';
+            btn.innerHTML = '<i class="fas fa-microphone"></i>';
+        };
+
+        recognition.start();
     }
 
     async function runAIDiagnosis(isImage = false) {
@@ -369,26 +402,33 @@ const App = (() => {
 
         const roleBtn = document.getElementById('topRole');
         const adminMenu = document.getElementById('menu-admin');
-        const searchSpan = document.querySelector('.menu-item[data-page="marketplace"] span');
+        const searchItem = document.querySelector('.menu-item[data-page="marketplace"]');
+        const statsItem = document.querySelector('.menu-item[data-page="statistics"]');
         
-        if (searchSpan) searchSpan.textContent = "Search Technicians";
+        const searchSpan = searchItem ? searchItem.querySelector('span') : null;
+        const statsSpan = statsItem ? statsItem.querySelector('span') : null;
         
         if (state.role === 'admin') {
             roleBtn.textContent = 'Switch to User';
             roleBtn.style.background = 'rgba(76, 57, 172, 0.1)';
-            adminMenu.style.display = 'flex';
+            if (adminMenu) adminMenu.style.display = 'flex';
         } else if (state.role === 'technician') {
             roleBtn.textContent = 'Switch to Admin';
             roleBtn.style.background = 'rgba(16, 185, 129, 0.1)';
-            adminMenu.style.display = 'none';
+            if (adminMenu) adminMenu.style.display = 'none';
+            if (searchSpan) searchSpan.textContent = "Pro Panel";
         } else {
             roleBtn.textContent = 'Switch to Pro';
             roleBtn.style.background = 'rgba(76, 57, 172, 0.1)';
             roleBtn.style.color = 'var(--jobie-purple)';
-            if (searchLabel) searchLabel.textContent = 'Search Job';
-            if (statsLabel) statsLabel.textContent = 'Statistics';
+            if (adminMenu) adminMenu.style.display = 'none';
+            if (searchSpan) searchSpan.textContent = 'Search Job';
+            if (statsSpan) statsSpan.textContent = 'Statistics';
             navigate('marketplace');
         }
+        
+        // Render role-specific data
+        if (state.role === 'technician') renderLeads();
     }
 
     function renderLeads() {
@@ -424,13 +464,45 @@ const App = (() => {
         alert("Success! Your bid has been sent to the customer. You'll be notified if they accept.");
     }
 
+    function setUser(user) {
+        state.user = user;
+        if (user) {
+            state.role = user.role || 'user';
+        } else {
+            state.role = 'guest';
+        }
+        updateUI();
+    }
+
+    function updateUI() {
+        const topName = document.getElementById('topName');
+        const topAvatar = document.getElementById('topAvatar');
+        const topRole = document.getElementById('topRole');
+
+        if (state.user) {
+            if (topName) topName.textContent = state.user.displayName || state.user.firstName || state.user.email;
+            if (topAvatar) topAvatar.src = state.user.photoURL || `https://ui-avatars.com/api/?name=${state.user.firstName || 'User'}&background=4b39ac&color=fff`;
+            if (topRole) topRole.textContent = `Role: ${state.role.toUpperCase()}`;
+        } else {
+            if (topName) topName.textContent = 'Guest User';
+            if (topAvatar) topAvatar.src = "https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff";
+            if (topRole) topRole.textContent = 'Switch to Pro';
+        }
+
+        // Refresh dynamic content
+        if (state.currentPage === 'dashboard') renderDashboard();
+        if (state.role === 'technician') renderLeads();
+    }
+
     function init() {
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', () => {
-                if (state.role === 'technician' && item.dataset.page === 'marketplace') {
+                const page = item.dataset.page;
+                state.currentPage = page;
+                if (state.role === 'technician' && page === 'marketplace') {
                     navigate('leads');
                 } else {
-                    navigate(item.dataset.page);
+                    navigate(page);
                 }
             });
         });
@@ -440,13 +512,13 @@ const App = (() => {
 
         document.getElementById('bookingForm')?.addEventListener('submit', submitBooking);
 
+        // Preload user from storage
+        const storedUser = localStorage.getItem('hv_user');
+        if (storedUser) setUser(JSON.parse(storedUser));
+
         if (typeof firebase !== 'undefined') {
             firebase.auth().onAuthStateChanged(user => {
-                if (user) {
-                    state.user = user;
-                    // Default to user role first
-                    state.role = 'user';
-                }
+                if (user) setUser(user);
             });
         }
     }
@@ -454,7 +526,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, state };
+    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state };
 })();
 
 

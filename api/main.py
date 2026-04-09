@@ -63,7 +63,7 @@ class EmailRequest(BaseModel):
 
 @app.post("/api/send-email")
 async def send_email(req: EmailRequest):
-    resend.api_key = os.getenv("RESEND_API_KEY")
+    resend.api_key = os.getenv("CAPSTONE_RESEND_API_KEY")
     
     html_content = ""
     if req.type == 'JOB_PENDING':
