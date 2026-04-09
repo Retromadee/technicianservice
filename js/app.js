@@ -1,5 +1,5 @@
 /* ============================================
-   JOBIE — Main Application Controller
+   HOMEFIX PRO — Main Application Controller
    SPA Router, Search, Mock Leads & Pros
    ============================================ */
 
@@ -10,12 +10,12 @@ const App = (() => {
         user: null,
         role: 'guest', // guest, customer, technician
         technicians: [
-            { id: 1, title: 'Master Plumber', company: 'Maximoz Team', salary: '$1,400 - $2,500', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], desc: 'Highly experienced in leak detection and smart pipe installations.' },
-            { id: 2, title: 'Senior Electrician', company: 'Colo Colo Studios', salary: '$3,400 - $5,000', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety'], desc: 'Industrial and residential wiring specialist with focus on smart home safety.' },
-            { id: 3, title: 'HVAC Specialist', company: 'Kleanify Ltd.', salary: '$2,800 - $4,200', logo: 'H', color: 'logo-pink', loc: 'Paris, France', rating: 4.7, tags: ['AC', 'Ventilation'], desc: 'Maintenance and urgent repair for large scale central ventilation systems.' },
-            { id: 4, title: 'Appliance Repair', company: 'Kitakita Crew', salary: '$1,200 - $1,800', logo: 'A', color: 'logo-green', loc: 'Madrid, Spain', rating: 4.9, tags: ['Repair', 'Tech'], desc: 'Expert fix for all household appliances, including refrigerators and stoves.' },
-            { id: 5, title: 'Carpentry Pro', company: 'Madju Djaja Studios', salary: '$2,500 - $4,000', logo: 'C', color: 'logo-blue', loc: 'NYC, USA', rating: 5.0, tags: ['Custom', 'Wood'], desc: 'Handcrafted cabinetry and high-end furniture repair for premium homes.' },
-            { id: 6, title: 'Smart Home Tech', company: 'Junaids Team', salary: '$3,000 - $4,800', logo: 'S', color: 'logo-green', loc: 'Tokyo, Japan', rating: 4.6, tags: ['IoT', 'Security'], desc: 'Installation of high-tech security, smart hubs, and automated systems.' }
+            { id: 1, title: 'Master Plumber', company: 'ExpertFlow Team', salary: '$1,400 - $2,500', logo: 'P', color: 'logo-blue', loc: 'London, England', rating: 4.9, tags: ['Pipeline', 'Bathroom'], desc: 'Highly experienced in leak detection and smart pipe installations.' },
+            { id: 2, title: 'Senior Electrician', company: 'VoltGuard Studios', salary: '$3,400 - $5,000', logo: 'E', color: 'logo-orange', loc: 'Berlin, Germany', rating: 4.8, tags: ['Wiring', 'Safety'], desc: 'Industrial and residential wiring specialist with focus on smart home safety.' },
+            { id: 3, title: 'HVAC Specialist', company: 'AirPure Ltd.', salary: '$2,800 - $4,200', logo: 'H', color: 'logo-pink', loc: 'Paris, France', rating: 4.7, tags: ['AC', 'Ventilation'], desc: 'Maintenance and urgent repair for large scale central ventilation systems.' },
+            { id: 4, title: 'Appliance Repair', company: 'HomeFix Crew', salary: '$1,200 - $1,800', logo: 'A', color: 'logo-green', loc: 'Madrid, Spain', rating: 4.9, tags: ['Repair', 'Tech'], desc: 'Expert fix for all household appliances, including refrigerators and stoves.' },
+            { id: 5, title: 'Carpentry Pro', company: 'WoodCraft Studios', salary: '$2,500 - $4,000', logo: 'C', color: 'logo-blue', loc: 'NYC, USA', rating: 5.0, tags: ['Custom', 'Wood'], desc: 'Handcrafted cabinetry and high-end furniture repair for premium homes.' },
+            { id: 6, title: 'Smart Home Tech', company: 'SecureIoT Team', salary: '$3,000 - $4,800', logo: 'S', color: 'logo-green', loc: 'Tokyo, Japan', rating: 4.6, tags: ['IoT', 'Security'], desc: 'Installation of high-tech security, smart hubs, and automated systems.' }
         ]
     };
 
@@ -39,7 +39,7 @@ const App = (() => {
                 <div class="salary-range">${tech.salary}</div>
                 <p class="job-desc">${tech.desc}</p>
                 <div class="card-footer">
-                    <div class="badge-tag badge-remote">REMOTE</div>
+                    <div class="badge-tag badge-remote">VERIFIED</div>
                     <div class="location"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>${tech.loc}</div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ const App = (() => {
         
         if (state.user) {
             if (topName) topName.textContent = state.user.displayName || state.user.email.split('@')[0];
-            if (topRole) topRole.textContent = state.user.role || 'Verified Technician';
+            if (topRole) topRole.textContent = state.user.role || 'Verified Expert';
             if (topAvatar) topAvatar.src = state.user.photoURL || `https://ui-avatars.com/api/?name=${state.user.email}&background=4b39ac&color=fff`;
         }
     }
@@ -74,8 +74,8 @@ const App = (() => {
         
         const titleMap = {
             'dashboard': 'Dashboard Overview',
-            'marketplace': 'Search Jobs',
-            'my-repairs': 'My Applications',
+            'marketplace': 'Find Experts',
+            'my-repairs': 'My Requests',
             'chat': 'Messages'
         };
         const titleEl = document.getElementById('pageTitle');
@@ -144,7 +144,7 @@ const App = (() => {
             });
         }
 
-        console.log('🚀 Jobie — Powered by Antigravity');
+        console.log('🚀 HomeFix Pro — Powered by Antigravity');
     }
 
     // Boot
