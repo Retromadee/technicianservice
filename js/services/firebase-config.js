@@ -17,6 +17,23 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth();
 const database = firebase.database();
-const storage = firebase.storage();
+// Optional: storage if included later
+// const storage = firebase.storage();
 
 console.log("Firebase initialized successfully with Realtime Database.");
+
+const FirebaseConfig = {
+    getDb: () => {
+        // Return a mock Firestore-like db object to prevent crashes in the legacy code
+        return {
+            collection: (col) => ({
+                onSnapshot: () => { console.log('Mocked snapshot for ' + col); return () => {}; },
+                doc: (id) => ({
+                    collection: (subcol) => ({
+                        onSnapshot: () => { return () => {}; }
+                    })
+                })
+            })
+        };
+    }
+};
