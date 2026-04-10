@@ -20,8 +20,51 @@ const App = (() => {
             { id: 4, title: 'Appliance Repair', company: 'HomeFix Crew', rate: '$40', logo: 'A', color: 'logo-green', loc: 'Madrid, Spain', rating: 4.9, tags: ['Repair', 'Washing Machine'], hires: 310, yearsInBusiness: 15, isTopPro: true, desc: 'Certified expert for all household brands. Rapid fix for refrigerators, dishwashers, and ovens.', reviews: 210 },
             { id: 5, title: 'Carpentry Pro', company: 'WoodCraft Studios', rate: '$65', logo: 'C', color: 'logo-blue', loc: 'NYC, USA', rating: 5.0, tags: ['Custom', 'Renovation'], hires: 28, yearsInBusiness: 20, isTopPro: true, desc: 'Bespoke cabinetry and structural carpentry. Specializing in high-end restoration and modern furniture.', reviews: 42 },
             { id: 6, title: 'Smart Home Tech', company: 'SecureIoT Team', rate: '$75', logo: 'S', color: 'logo-green', loc: 'Tokyo, Japan', rating: 4.6, tags: ['IoT', 'Security', 'Automation'], hires: 52, yearsInBusiness: 4, isTopPro: false, desc: 'Designing and installing complex IoT ecosystems, smart lighting, and 4K security networks.', reviews: 78 }
-        ]
+        ],
+        events: {}
     };
+
+    // ---- Event System ----
+    function on(event, callback) {
+        if (!state.events[event]) state.events[event] = [];
+        state.events[event].push(callback);
+    }
+
+    function emit(event, data) {
+        if (state.events[event]) {
+            state.events[event].forEach(cb => cb(data));
+        }
+    }
+
+    // ---- UI Helpers ----
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `animate-in status-badge ${type === 'error' ? 'danger' : type === 'success' ? 'completed' : 'pending'}`;
+        toast.style = "position:fixed; bottom:40px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:50px; font-weight:700; z-index:3000; box-shadow:0 10px 30px rgba(0,0,0,0.3); border:none;";
+        toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}" style="margin-right:10px;"></i> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+    }
+
+    function showLoading(text = 'Loading...') {
+        let loader = document.getElementById('globalLoader');
+        if (!loader) {
+            loader = document.createElement('div');
+            loader.id = 'globalLoader';
+            loader.style = "position:fixed; inset:0; background:rgba(255,255,255,0.8); backdrop-filter:blur(5px); z-index:4000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;";
+            loader.innerHTML = `
+                <div class="company-logo logo-blue shadow-lg" style="width:80px; height:80px; font-size:40px; animation: bounce 1s infinite alternate;">H</div>
+                <div style="font-weight:800; font-size:18px; color:var(--jobie-purple)">${text}</div>
+                <div class="confidence-meter" style="width:200px;"><div class="confidence-fill" style="width:100%; animation: pulse 1s infinite;"></div></div>
+            `;
+            document.body.appendChild(loader);
+        }
+    }
+
+    function hideLoading() {
+        const loader = document.getElementById('globalLoader');
+        if (loader) loader.remove();
+    }
 
     // ---- UI Renderers ----
     function renderTechnicians(list = state.technicians) {
@@ -526,7 +569,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state };
+    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 

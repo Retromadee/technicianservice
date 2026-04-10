@@ -3,483 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HomeFix Pro — The Premier Service Technician Marketplace. Hire verified experts or find your next gig.">
-    <title>HomeFix Pro | Expert Technician Marketplace</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>HomeFix Pro — Modern AI Home Service Platform</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap (For Modals/Grid if needed) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Style -->
     <link rel="stylesheet" href="css/jobie_theme.css">
 </head>
-<body data-current-role="guest">
+<body>
 
-<!-- ==================== SIDEBAR ==================== -->
-<div class="sidebar">
+<div class="sidebar animate-in">
     <div class="logo">
-        <div class="company-logo logo-pink" style="width:36px; height:36px; border-radius:10px; font-size:18px; display: flex; align-items: center; justify-content: center; background: #EC4899; color: white; font-weight: 800;">H</div>
-        <span>HomeFix</span>
+        <div class="company-logo logo-blue shadow-lg" style="width:40px; height:40px; font-size:20px;">H</div>
+        <span>HomeFix <b>Pro</b></span>
     </div>
-    
+
     <nav class="nav-menu">
         <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
-        <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Search Job</span></button>
+        <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Marketplace</span></button>
         <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
-        <button class="menu-item" data-page="dashboard"><i class="fas fa-puzzle-piece"></i><span>My Requests</span></button>
-        <div class="menu-item" data-page="statistics"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
-        <div class="menu-item" data-page="leads"><i class="fas fa-briefcase"></i> <span>Pro Panel</span></div>
+        <button class="menu-item" data-page="submit-problem"><i class="fas fa-stethoscope"></i><span>Diagnostic</span></button>
+        <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Messages</span></button>
+        
+        <div class="menu-item" data-page="statistics" style="margin-top:20px;"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
+        <div class="menu-item" id="menu-pro-leads" data-page="leads" style="display:none;"><i class="fas fa-briefcase"></i> <span>Pro Leads</span></div>
         <div class="menu-item" id="menu-admin" data-page="admin" style="display:none;"><i class="fas fa-user-shield"></i> <span>Admin Panel</span></div>
     </nav>
 
     <div class="sidebar-footer">
-        HomeFix Pro Technician Portal<br>
-        © 2026 All Rights Reserved<br>
-        Professional Home Services
+        <div style="font-weight: 800; margin-bottom: 5px;">PRO VERSION 2.5</div>
+        <div>Upgrade to Platinum for 5% lower service fees.</div>
     </div>
 </div>
 
-<!-- ==================== MAIN WRAPPER ==================== -->
 <div class="main-wrapper">
+    <!-- Top Bar -->
     <header class="top-bar">
         <div class="top-left">
-            <button class="icon-btn" style="border:none; background:transparent; font-size:22px; cursor:pointer; color: #333;"><i class="fas fa-bars"></i></button>
-            <h2 id="pageTitle" style="font-size: 24px; font-weight: 800; color: #333; margin-left: 10px;">Search Jobs</h2>
-            <div class="global-search" style="margin-left: 30px;">
+            <h2 id="pageTitle">Marketplace</h2>
+            <div class="global-search">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search something here..." id="globalSearchInput">
+                <input type="text" placeholder="Search for any repair help...">
             </div>
         </div>
-        
+
         <div class="top-right">
-            <div class="action-icon">
-                <i class="fas fa-comment-dots"></i>
-                <div class="badge">18</div>
+            <div class="action-icon" data-page="chat">
+                <i class="fas fa-envelope"></i>
+                <div class="badge">3</div>
             </div>
             <div class="action-icon">
                 <i class="fas fa-bell"></i>
-                <div class="badge">52</div>
+                <div class="badge">1</div>
             </div>
-            <div class="user-profile" id="userProfileBtn" style="cursor: pointer;">
-                <img id="topAvatar" src="https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff">
-                <div class="user-info">
-                    <div class="name" id="topName" onclick="toggleAuthModal()">Guest User</div>
-                    <div class="role" id="topRole" onclick="App.toggleRole()" style="cursor:pointer; background:rgba(76, 57, 172, 0.1); padding:2px 8px; border-radius:5px; margin-top:30px;">Switch to Pro</div>
+            <div class="user-profile" onclick="toggleAuthModal()">
+                <div class="user-info text-end">
+                    <div class="name" id="userName">Guest User</div>
+                    <div class="role" id="userRole">Basic Member</div>
                 </div>
+                <img src="https://i.pravatar.cc/150?u=homefix" alt="Profile" id="userAvatar">
             </div>
         </div>
     </header>
 
     <main class="content-area">
-        <!-- Marketplace / Job Search View -->
+        
+        <!-- Marketplace View -->
         <div class="page-content active" id="page-marketplace">
-            <div class="search-container" style="display: grid; grid-template-columns: 1fr 200px auto; gap: 0; padding: 0; background: none; box-shadow: none;">
-                <div class="search-input-group" style="background: white; padding: 20px; border-radius: 15px 0 0 15px; border: 1px solid #EEE; border-right: none;">
-                    <i class="fas fa-search" style="color:var(--jobie-purple)"></i>
-                    <input type="text" class="main-search" placeholder="What's on your to-do list?" style="font-size: 16px;">
+            <div id="marketplaceContent">
+                <div class="search-container" style="display: grid; grid-template-columns: 1fr 200px auto; gap: 0; padding: 0; background: none; box-shadow: none;">
+                    <div class="search-input-group" style="background: white; padding: 20px; border-radius: 15px 0 0 15px; border: 1px solid #EEE; border-right: none;">
+                        <i class="fas fa-search" style="color:var(--jobie-purple)"></i>
+                        <input type="text" class="main-search" placeholder="What's on your to-do list?" style="font-size: 16px;">
+                    </div>
+                    <div class="location-picker" style="background: white; padding: 20px; border: 1px solid #EEE; border-radius: 0; border-left: 1px solid #F0F0FF; border-right: none;">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Zip Code" style="border:none; outline:none; width:80px; font-weight:700; color:var(--text-main);">
+                    </div>
+                    <button class="btn-find" style="border-radius: 0 15px 15px 0; padding: 0 40px; font-size: 16px; margin: 0;">SEARCH</button>
                 </div>
-                <div class="location-picker" style="background: white; padding: 20px; border: 1px solid #EEE; border-radius: 0; border-left: 1px solid #F0F0FF; border-right: none;">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" placeholder="Zip Code" style="border:none; outline:none; width:80px; font-weight:700; color:var(--text-main);">
-                </div>
-                <button class="btn-find" style="border-radius: 0 15px 15px 0; padding: 0 40px; font-size: 16px; margin: 0;">SEARCH</button>
-            </div>
 
-            <div class="suggestions">
-                <span style="font-weight: 600; color: #888;">Suggestions:</span>
-                <div class="tag active">Your Skill</div>
-                <div class="tag">Plumbing</div>
-                <div class="tag">Electrical</div>
-                <div class="tag">HVAC Repair</div>
-                <div class="tag">Cleaning</div>
-            </div>
+                <div class="suggestions">
+                    <span style="font-weight: 600; color: #888;">Suggestions:</span>
+                    <div class="tag active">Your Skill</div>
+                    <div class="tag">Plumbing</div>
+                    <div class="tag">Electrical</div>
+                    <div class="tag">HVAC Repair</div>
+                    <div class="tag">Cleaning</div>
+                </div>
 
-            <!-- Popular Projects (Thumbtack Style) -->
-            <div style="margin-bottom:50px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                    <h3 style="font-weight:900; font-size:20px;">Average costs for local projects</h3>
-                    <a href="#" style="color:var(--jobie-purple); font-weight:700; font-size:14px; text-decoration:none;">See all estimates <i class="fas fa-chevron-right" style="font-size:10px;"></i></a>
-                </div>
-                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:20px;">
-                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
-                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(59, 130, 246, 0.1); color:#3B82F6; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-sink"></i></div>
-                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Kitchen Sink</div>
-                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$150 - $450</div>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
-                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(245, 158, 11, 0.1); color:#F59E0B; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-plug"></i></div>
-                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Smart Switch</div>
-                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$90 - $220</div>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
-                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(16, 185, 129, 0.1); color:#10B981; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-wind"></i></div>
-                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">AC Tune-up</div>
-                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$125 - $300</div>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:30px; box-shadow:var(--shadow-subtle); text-align:center;">
-                        <div style="width:50px; height:50px; border-radius:15px; background:rgba(239, 68, 68, 0.1); color:#EF4444; display:flex; align-items:center; justify-content:center; margin:0 auto 15px; font-size:20px;"><i class="fas fa-paint-roller"></i></div>
-                        <div style="font-weight:800; margin-bottom:5px; font-size:15px;">Room Paint</div>
-                        <div style="color:var(--jobie-purple); font-weight:900; font-size:18px;">$300 - $800</div>
+                <div class="results-header">
+                    <div class="results-count">
+                        <h3>Showing <span id="jobCount">24</span> Recommended Pros</h3>
                     </div>
                 </div>
-            </div>
-
-            <div class="results-header">
-                <div class="results-count">
-                    <h3>Showing <span id="jobCount">246</span> Jobs Results</h3>
-                    <p>Based on your preferences</p>
+                <div class="job-grid" id="jobGrid">
+                    <!-- Tech cards injected here -->
                 </div>
-                <div class="results-filters">
-                    <label class="filter-toggle">
-                        <div class="switch"></div>
-                        Fulltime
-                    </label>
-                    <label class="filter-toggle" style="margin-left: 15px;">
-                        <div class="switch on"></div>
-                        Freelance
-                    </label>
-                    <label class="filter-toggle" style="margin-left:20px">
-                        Details
-                        <div class="switch"></div>
-                    </label>
-                    <label class="filter-toggle" style="margin-left: 15px;">
-                        Salary
-                        <div class="switch on"></div>
-                    </label>
-                    
-                    <div class="dropdown-filter" style="margin-left:15px; padding:10px 20px; border-radius:10px; border:1px solid #EEE; background:white; font-weight:700; font-size:14px; display:flex; gap:10px; align-items:center;">
-                        <i class="fas fa-sort-amount-down"></i> Newest <i class="fas fa-chevron-down"></i>
-                    </div>
-
-                    <div style="display:flex; gap:10px; margin-left:15px;">
-                        <div class="action-icon shadow-sm" style="width: 40px; height: 40px; border-radius: 8px; font-size: 14px;"><i class="fas fa-list"></i></div>
-                        <div class="action-icon shadow-sm active" style="width: 40px; height: 40px; border-radius: 8px; font-size: 14px; background:var(--jobie-purple); color:white;"><i class="fas fa-th-large"></i></div>
-                    </div>
-                </div>
-            <div class="job-grid" id="jobGrid">
-                <!-- Data-driven cards will be injected here -->
             </div>
         </div>
 
-        <!-- User Dashboard (Services Offered & History) -->
+        <!-- Dashboard View -->
         <div class="page-content" id="page-dashboard" style="display: none;">
-            <div class="results-header"><h1>Dashboard Overview</h1></div>
-            
+            <div class="results-header"><h1>My Activity</h1></div>
             <div style="margin-bottom:40px;">
                 <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Requested Services</h3>
                 <div id="serviceHistoryGrid" class="job-grid">
-                    <!-- Dynamic requests here -->
+                    <!-- Dynamic requests -->
                 </div>
             </div>
-
             <div>
-                <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Our Services</h3>
+                <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Services</h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px;">
-                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
-                        <i class="fas fa-hammer" style="color:var(--jobie-purple); font-size:24px;"></i>
-                        <span style="font-weight:700;">Handyman</span>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
-                        <i class="fas fa-faucet" style="color:#3B82F6; font-size:24px;"></i>
-                        <span style="font-weight:700;">Plumbing</span>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
-                        <i class="fas fa-bolt" style="color:#F59E0B; font-size:24px;"></i>
-                        <span style="font-weight:700;">Electrical</span>
-                    </div>
-                    <div style="background:white; padding:25px; border-radius:20px; box-shadow:var(--shadow-subtle); display:flex; flex-direction:column; align-items:center; gap:10px;">
-                        <i class="fas fa-broom" style="color:#10B981; font-size:24px;"></i>
-                        <span style="font-weight:700;">Cleaning</span>
-                    </div>
+                    <div class="category-item" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
+                    <div class="category-item" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
+                    <div class="category-item" data-category="hvac"><i class="fas fa-wind"></i> HVAC</div>
+                    <div class="category-item" data-category="cleaning"><i class="fas fa-broom"></i> Cleaning</div>
                 </div>
             </div>
         </div>
 
-        <!-- AI Assistant Page (Restored & Upgraded) -->
+        <!-- AI Assistant (Quick) -->
         <div class="page-content" id="page-ai-assistant" style="display: none;">
             <div class="results-header">
-                <h1>AI Home Diagnosis</h1>
-                <p>Attach a photo, use voice, or type your issue for a smart solution.</p>
+                <h1>AI Home Assistant</h1>
+                <p>Quick chat for immediate advice and technician matching.</p>
             </div>
             
-            <div style="background:white; padding:40px; border-radius:30px; box-shadow: var(--shadow-subtle);">
-                <div id="aiChatWindow" style="min-height:200px; padding-bottom:30px;">
+            <div class="glass-card">
+                <div id="aiChatWindow" style="min-height:300px; max-height:500px; overflow-y:auto; padding-bottom:30px;">
                     <div style="display:flex; gap:15px; margin-bottom:20px;">
                         <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
                         <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
-                            Hello! I am your HomeFix AI Assistant. How can I help you today? You can upload a photo of the problem for a better diagnosis.
+                            Hello! I'm your HomeFix AI. How can I assist you today?
                         </div>
                     </div>
                 </div>
 
                 <div style="display:flex; gap:15px; border-top:1px solid #EEE; padding-top:20px;">
-                    <div style="display:flex; gap:10px;">
-                        <button onclick="document.getElementById('aiFileInput').click()" style="width:50px; height:50px; border-radius:15px; border:1px solid #EEE; background:white; color:#666; cursor:pointer;"><i class="fas fa-camera"></i></button>
-                        <button id="btnVoiceAI" onclick="App.toggleVoiceInput()" style="width:50px; height:50px; border-radius:15px; border:1px solid #EEE; background:white; color:#666; cursor:pointer;"><i class="fas fa-microphone"></i></button>
-                        <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
-                    </div>
-                    <input type="text" id="aiQueryInput" placeholder="Describe your issue..." style="flex:1; padding:18px; border:1px solid #EEE; border-radius:15px; outline:none; font-size:15px; background:#F8F9FD;">
-                    <button id="btnRunAI" onclick="App.runAIDiagnosis()" style="background:var(--jobie-purple); color:white; border:none; padding:15px 30px; border-radius:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:10px;">
-                        <i class="fas fa-magic"></i> ANALYZE
-                    </button>
+                    <button onclick="document.getElementById('aiFileInput').click()" class="action-icon"><i class="fas fa-camera"></i></button>
+                    <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
+                    <input type="text" id="aiQueryInput" placeholder="Describe your issue..." style="flex:1; padding:15px; border:1px solid #EEE; border-radius:15px; background:#F8F9FD;">
+                    <button id="btnRunAI" onclick="App.runAIDiagnosis()" class="btn btn-accent px-4 py-2">ANALYZE</button>
                 </div>
             </div>
             
             <div id="aiResultArea" style="margin-top:30px; display:none;">
-                <div style="background:linear-gradient(135deg, #4c39ac 0%, #6b52e1 100%); color:white; padding:35px; border-radius:30px; margin-bottom:20px;">
-                    <h3 style="font-weight:800; font-size:22px; margin-bottom:15px;"><i class="fas fa-lightbulb"></i> AI Diagnosis Result</h3>
-                    <p id="aiResultText" style="line-height:1.7; font-size:16px; opacity:0.9; margin-bottom:20px;"></p>
-                    <div id="aiDifficultyTag" class="badge-tag" style="background:rgba(255,255,255,0.2); color:white; display:inline-block;">DIFFICULTY: MEDIUM</div>
+                <div class="diagnosis-card" style="background: var(--jobie-purple); color:white;">
+                    <h3 class="fw-bold mb-3"><i class="fas fa-lightbulb"></i> Analysis Result</h3>
+                    <p id="aiResultText" style="font-size:16px;"></p>
                 </div>
-
-                <!-- Quick Fix Section (Premium UI) -->
-                <div id="aiQuickFix" style="background:#FFF9C4; border-left:5px solid #FBC02D; padding:25px; border-radius:15px; margin-bottom:30px; box-shadow:0 10px 20px rgba(251, 192, 45, 0.1);">
-                    <h4 style="font-weight:900; color:#AF8B00; margin-bottom:15px; display:flex; align-items:center; gap:10px;">
-                        <span style="display:inline-block; width:10px; height:10px; background:#FBC02D; border-radius:50%; animation: pulse-yellow 1.5s infinite;"></span>
-                        <i class="fas fa-tools"></i> RECOMMENDED QUICK FIXES
-                    </h4>
-                    <ul id="aiQuickFixList" style="margin:0; padding-left:20px; font-size:15px; color:#5D4037; line-height:1.7; font-weight:600;">
-                        <!-- Injected via JS -->
-                    </ul>
+                <div id="aiQuickFix" class="mt-4" style="background:#FFF9C4; padding:20px; border-radius:15px; display:none;">
+                    <h5 class="fw-bold text-dark"><i class="fas fa-tools"></i> Quick Fixes</h5>
+                    <ul id="aiQuickFixList" class="mt-2"></ul>
                 </div>
-                
-                <h3 style="font-weight:800; font-size:20px; margin-bottom:20px;">Matched Professionals for this issue:</h3>
+                <h4 class="fw-bold mt-5 mb-3">Matching Technicians</h4>
                 <div class="job-grid" id="aiTechGrid"></div>
             </div>
         </div>
 
-        <!-- Messages Page -->
+        <!-- Problem Submission (Guided) -->
+        <div class="page-content" id="page-submit-problem" style="display: none;">
+            <div class="results-header"><h1>Submit a Problem</h1><p>Guided AI Diagnosis Flow</p></div>
+            <div class="glass-card p-4">
+                <form id="problemForm">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Issue Category</label>
+                        <div class="category-grid" id="categoryGrid">
+                            <div class="category-item" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
+                            <div class="category-item" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
+                            <div class="category-item" data-category="hvac"><i class="fas fa-wind"></i> HVAC/Air</div>
+                            <div class="category-item" data-category="appliances"><i class="fas fa-plug"></i> Appliances</div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Describe your issue</label>
+                        <textarea id="problemDescription" class="form-control" rows="4" placeholder="Be as specific as possible..."></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Attach Photos (Optional)</label>
+                        <div id="uploadZone" class="upload-zone">
+                            <i class="fas fa-cloud-upload-alt fa-2x"></i><p>Click to upload photos</p>
+                            <input type="file" id="imageUpload" multiple style="display:none;">
+                        </div>
+                        <div id="uploadPreview" class="upload-preview mt-3"></div>
+                    </div>
+                    <button type="submit" class="btn btn-accent btn-lg w-100 py-3 fw-bold">RUN FULL DIAGNOSIS</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Diagnosis Result Page -->
+        <div class="page-content" id="page-diagnosis" style="display: none;">
+            <div id="diagnosisContent">
+                <!-- Injected via aiDiagnosis.js -->
+            </div>
+        </div>
+
+        <!-- Technician Profile -->
+        <div class="page-content" id="page-technician-profile" style="display: none;">
+            <div id="techProfileContent">
+                <!-- Injected via technicianProfile.js -->
+            </div>
+        </div>
+
+        <!-- Booking Page -->
+        <div class="page-content" id="page-booking" style="display: none;">
+            <div id="bookingContent">
+                <!-- Injected via booking.js -->
+            </div>
+        </div>
+
+        <!-- Chat Page -->
         <div class="page-content" id="page-chat" style="display: none;">
-            <div class="results-header"><h1>Messages</h1></div>
-            <div style="background:white; height:calc(100vh - 250px); border-radius:30px; box-shadow: var(--shadow-subtle); display:flex; overflow:hidden;">
-                <!-- Chat Sidebar -->
-                <div style="width:300px; border-right:1px solid #EEE; display:flex; flex-direction:column;">
-                    <div style="padding:25px; border-bottom:1px solid #EEE;">
-                        <input type="text" placeholder="Search chats..." style="width:100%; padding:12px; border:none; background:#F8F9FD; border-radius:10px; font-size:14px;">
-                    </div>
-                    <div id="chatList" style="flex:1; overflow-y:auto;">
-                        <!-- Mock Chats -->
-                        <div class="chat-item active" style="padding:20px; cursor:pointer; background:#F0F0FF; border-right:3px solid var(--jobie-purple); display:flex; gap:12px; align-items:center;">
-                            <div class="company-logo logo-blue" style="width:40px; height:40px; font-size:18px;">P</div>
-                            <div>
-                                <div style="font-weight:700; font-size:14px;">Master Plumber</div>
-                                <div style="font-size:12px; color:#888;">ExpertFlow Team</div>
-                            </div>
+            <div id="chatContent">
+                <div class="results-header"><h1>Messages</h1></div>
+                <div style="background:white; height:calc(100vh - 250px); border-radius:30px; box-shadow: var(--shadow-subtle); display:flex; overflow:hidden;">
+                    <div style="width:300px; border-right:1px solid #EEE;" id="chatList"></div>
+                    <div style="flex:1; display:flex; flex-direction:column;">
+                        <div style="padding:20px; border-bottom:1px solid #EEE;"><h4 id="chatPartnerName" style="font-weight:800;">Select Conversation</h4></div>
+                        <div id="activeChatWindow" style="flex:1; padding:30px; overflow-y:auto; background:#FAFAFF; display:flex; flex-direction:column; gap:10px;"></div>
+                        <div id="chatInputArea" style="padding:20px; border-top:1px solid #EEE; display:none; gap:10px;">
+                            <input type="text" id="chatMessageInput" class="form-control" placeholder="Type message...">
+                            <button id="btnSendMessage" class="btn btn-accent"><i class="fas fa-paper-plane"></i></button>
                         </div>
-                    </div>
-                </div>
-                <!-- Active Chat -->
-                <div style="flex:1; display:flex; flex-direction:column;">
-                    <div style="padding:20px 30px; border-bottom:1px solid #EEE; display:flex; justify-content:space-between; align-items:center;">
-                        <h4 style="font-weight:800;">Chat with ExpertFlow</h4>
-                        <div style="color:#10B981; font-size:12px; font-weight:700;"><i class="fas fa-circle" style="font-size:8px;"></i> Online</div>
-                    </div>
-                    <div id="activeChatWindow" style="flex:1; padding:30px; overflow-y:auto; background:#FAFAFF; display:flex; flex-direction:column; gap:15px;">
-                        <div style="align-self:flex-start; background:white; padding:15px 20px; border-radius:0 20px 20px 20px; box-shadow:0 4px 10px rgba(0,0,0,0.02); max-width:70%; font-size:14px;">
-                            Hi there! I've received your request for the sink repair. I can be there tomorrow at 10 AM. Does that work?
-                        </div>
-                        <div style="align-self:flex-end; background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; max-width:70%; font-size:14px;">
-                            Yes, that works perfect! Thank you for the quick response.
-                        </div>
-                    </div>
-                    <div style="padding:25px; border-top:1px solid #EEE; display:flex; gap:15px;">
-                        <input type="text" placeholder="Type your message..." style="flex:1; padding:15px; border:none; background:#F8F9FD; border-radius:15px; outline:none;">
-                        <button style="background:var(--jobie-purple); color:white; border:none; width:50px; height:50px; border-radius:15px; cursor:pointer;"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Statistics Page -->
+        <!-- Payment Page -->
+        <div class="page-content" id="page-payment" style="display: none;">
+            <div class="results-header"><h1>Checkout</h1></div>
+            <div class="glass-card text-center p-5">
+                <i class="fas fa-shield-halved fa-3x mb-3 text-success"></i>
+                <h2>Secure Your Booking</h2>
+                <p>Verify details and pay securely</p>
+                <div class="my-4 p-3 bg-light rounded">Estimated Service Total: <strong>$85.00</strong></div>
+                <button class="btn btn-accent btn-lg w-100" onclick="App.showToast('Booking Confirmed!', 'success'); App.navigate('dashboard');">CONFIRM & PAY</button>
+            </div>
+        </div>
+
+        <!-- Stats Page -->
         <div class="page-content" id="page-statistics" style="display: none;">
             <div class="results-header"><h1>Statistics</h1></div>
-            <div class="job-grid">
-                <div class="job-card" style="text-align:center; padding:50px;">
-                    <div class="company-logo logo-orange" style="margin:0 auto 20px; width:70px; height:70px;"><i class="fas fa-wallet"></i></div>
-                    <h2 style="font-size:32px; font-weight:900;">$0.00</h2>
-                    <p style="color:#888;">Total Spending</p>
-                </div>
-                <div class="job-card" style="text-align:center; padding:50px;">
-                    <div class="company-logo logo-blue" style="margin:0 auto 20px; width:70px; height:70px;"><i class="fas fa-tools"></i></div>
-                    <h2 style="font-size:32px; font-weight:900;">0</h2>
-                    <p style="color:#888;">Completed Repairs</p>
-                </div>
+            <div class="row g-4">
+                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>$0</h3><p>Total Spent</p></div></div>
+                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>0</h3><p>Jobs Completed</p></div></div>
+                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>4.9</h3><p>Avg Rating</p></div></div>
             </div>
         </div>
 
-        <!-- Pro Panel (Technician Dashboard) -->
+        <!-- Pro Leads (Tech Only) -->
         <div class="page-content" id="page-leads" style="display: none;">
-            <div class="results-header">
-                <div>
-                    <h1>Pro Lead Center</h1>
-                    <p>Manage your active bids and browse open customer requests.</p>
-                </div>
-                <div style="display:flex; gap:15px;">
-                    <div style="background:white; padding:15px 25px; border-radius:15px; box-shadow:var(--shadow-subtle); text-align:center;">
-                        <div style="font-weight:900; font-size:18px; color:#10B981;">$1,240</div>
-                        <div style="font-size:11px; font-weight:700; color:#888;">WEEKLY REVENUE</div>
-                    </div>
-                </div>
+            <div id="marketplaceContent">
+                <!-- If technician, this will contain the Leads list injected via marketplace.js -->
             </div>
-            <div class="job-grid" id="leadsGrid"></div>
+            <div id="leadsGrid" class="job-grid"></div>
         </div>
 
         <!-- Admin Panel -->
         <div class="page-content" id="page-admin" style="display: none;">
-            <div class="results-header">
-                <h1>Admin Command Center</h1>
-                <p>Global oversight of platform operations</p>
-            </div>
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px; margin-bottom:40px;">
-                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
-                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">TOTAL USERS</div>
-                    <div style="font-size:28px; font-weight:900;">2,840</div>
-                </div>
-                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
-                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">ACTIVE PROS</div>
-                    <div style="font-size:28px; font-weight:900;">142</div>
-                </div>
-                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
-                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">MONTHLY GMV</div>
-                    <div style="font-size:28px; font-weight:900;">$42.5K</div>
-                </div>
-                <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
-                    <div style="font-size:12px; font-weight:800; color:#888; margin-bottom:10px;">PENDING VERIF.</div>
-                    <div style="font-size:28px; font-weight:900; color:#F59E0B;">12</div>
-                </div>
-            </div>
-            <div style="background:white; padding:30px; border-radius:25px; box-shadow:var(--shadow-subtle);">
-                <h3 style="font-weight:900; margin-bottom:20px;">Global Pro Management</h3>
-                <table style="width:100%; border-collapse:collapse; font-size:14px;">
-                    <thead style="background:#F8F9FD; color:#888; font-weight:700;">
-                        <tr>
-                            <th style="padding:15px; text-align:left;">TECHNICIAN</th>
-                            <th style="padding:15px; text-align:left;">CATEGORY</th>
-                            <th style="padding:15px; text-align:left;">STATUS</th>
-                            <th style="padding:15px; text-align:left;">REVENUE</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom:1px solid #EEE;">
-                            <td style="padding:15px; font-weight:700;">ExpertFlow Team</td>
-                            <td style="padding:15px;">Plumbing</td>
-                            <td style="padding:15px;"><span class="badge-tag" style="background:#E8F5E9; color:#2E7D32;">ACTIVE</span></td>
-                            <td style="padding:15px; font-weight:700;">$14,200</td>
-                        </tr>
-                        <tr style="border-bottom:1px solid #EEE;">
-                            <td style="padding:15px; font-weight:700;">VoltGuard Studios</td>
-                            <td style="padding:15px;">Electrical</td>
-                            <td style="padding:15px;"><span class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING</span></td>
-                            <td style="padding:15px; font-weight:700;">$8,500</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="results-header"><h1>Admin Panel</h1></div>
+            <div class="glass-card p-4">
+                <h4 class="fw-bold mb-4">User & Pro Management</h4>
+                <div id="adminTableContent"></div>
             </div>
         </div>
-
 
     </main>
 </div>
 
-<!-- ==================== MODALS ==================== -->
-<div id="loginModal" class="modal-overlay" onclick="if(event.target === this) closeModal('loginModal')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
-    <div class="modal-content" style="background:white; padding:40px; border-radius:30px; width:450px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); position:relative;">
-        <button onclick="closeModal('loginModal')" style="position:absolute; top:25px; right:25px; border:none; background:none; font-size:20px; cursor:pointer; color:#AAA;"><i class="fas fa-times"></i></button>
-        <h2 style="margin-bottom:10px; font-weight:800; font-size:28px;">Welcome Back</h2>
-        <p style="color:#666; margin-bottom:30px; font-size:15px;">Sign in to your HomeFix Pro account</p>
+<!-- Modals -->
+<div id="loginModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+    <div class="modal-content p-5 bg-white rounded-5 shadow-lg" style="width:450px;">
+        <h2 class="fw-bold mb-2">Welcome</h2>
+        <p class="text-muted mb-4">Sign in to HomeFix Pro</p>
         <form id="loginForm">
-            <input type="email" id="lEmail" placeholder="Email Address" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:15px; outline:none; background:#F8F9FD;" required>
-            <input type="password" id="lPass" placeholder="Password" style="width:100%; padding:18px; border:1px solid #EEE; border-radius:15px; margin-bottom:25px; outline:none; background:#F8F9FD;" required>
-            <button type="submit" style="width:100%; background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SIGN IN</button>
+            <input type="email" id="lEmail" class="form-control mb-3" placeholder="Email" required>
+            <input type="password" id="lPass" class="form-control mb-4" placeholder="Password" required>
+            <button type="submit" class="btn btn-accent w-100 py-3 fw-bold">SIGN IN</button>
         </form>
-        <div style="text-align:center; margin-top:25px; color:#888; font-size:14px;">
-            Don't have an account? <a href="#" style="color:var(--jobie-purple); font-weight:700;">Join as Pro</a> or <a href="#" style="color:var(--jobie-purple); font-weight:700;">Sign up</a>
-        </div>
+        <button onclick="closeModal('loginModal')" class="btn btn-link mt-3 w-100 text-muted">Close</button>
     </div>
 </div>
 
-<!-- ==================== TECHNICIAN DETAIL DRAWER ==================== -->
 <div id="techDetailDrawer" class="drawer-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:1500; justify-content:flex-end;">
-    <div class="drawer-content" style="width:500px; background:white; height:100%; padding:40px; box-shadow: -10px 0 50px rgba(0,0,0,0.05); overflow-y:auto; animation: slideInRight 0.4s ease;">
-        <button onclick="closeDrawer()" style="background:none; border:none; font-size:20px; cursor:pointer; margin-bottom:30px;"><i class="fas fa-times"></i></button>
-        
-        <div id="drawerBody">
-            <!-- Content Injected via JS -->
-        </div>
+    <div class="drawer-content bg-white h-100 p-4 shadow-lg animate-slide-in" style="width:500px;">
+        <div id="drawerBody"></div>
     </div>
 </div>
 
-<!-- ==================== BOOKING MODAL (THUMBTACK FLOW) ==================== -->
-<div id="bookingModal" class="modal-overlay" onclick="if(event.target === this) closeModal('bookingModal')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2100; align-items:center; justify-content:center;">
-    <div class="modal-content" style="background:white; padding:0; border-radius:30px; width:650px; overflow:hidden; position:relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
-        <button onclick="closeModal('bookingModal')" style="position:absolute; top:20px; right:20px; border:none; background:white; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; color:#AAA; z-index:10;"><i class="fas fa-times"></i></button>
-        
-        <div style="height:8px; background:#EEE; width:100%;">
-            <div id="bookingProgress" style="height:100%; background:var(--jobie-purple); width:25%; transition:0.4s;"></div>
-        </div>
-
-        <div style="padding:50px;">
-            <form id="bookingForm">
-                <!-- Step 1: Scope -->
-                <div class="booking-step active" id="step1" style="display:block;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">What do you need help with?</h2>
-                    <p style="color:#666; margin-bottom:30px;">Select all that apply to your project.</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px;">
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
-                            <input type="checkbox" style="width:20px; height:20px;"> Repair Existing
-                        </label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
-                            <input type="checkbox" style="width:20px; height:20px;"> New Installation
-                        </label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
-                            <input type="checkbox" style="width:20px; height:20px;"> Maintenance
-                        </label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;">
-                            <input type="checkbox" style="width:20px; height:20px;"> Emergency Fix
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Step 2: Urgency & Type -->
-                <div class="booking-step" id="step2" style="display:none;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">When's the best time?</h2>
-                    <p style="color:#666; margin-bottom:30px;">Technicians will prioritize your request based on urgency.</p>
-                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:30px;">
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
-                            <input type="radio" name="urgency" style="width:22px; height:22px;"> ASAP (Today)
-                        </label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
-                            <input type="radio" name="urgency" style="width:22px; height:22px;"> Within 48 Hours
-                        </label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;">
-                            <input type="radio" name="urgency" style="width:22px; height:22px;"> This Weekend
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Step 3: Details -->
-                <div class="booking-step" id="step3" style="display:none;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">Tell us more</h2>
-                    <p style="color:#666; margin-bottom:20px;">Any specific details or brand of appliance?</p>
-                    <textarea id="bProblem" placeholder="e.g. My LG Refrigerator is leaking from the bottom right corner..." style="width:100%; padding:20px; border:1px solid #EEE; border-radius:15px; min-height:150px; font-size:16px; outline:none; background:#F8F9FD; margin-bottom:20px;"></textarea>
-                    <div style="border:2px dashed #EEE; padding:30px; border-radius:20px; text-align:center; color:#888;">
-                        <i class="fas fa-camera" style="font-size:24px; margin-bottom:10px;"></i><br>
-                        Add photos of the issue (optional)
-                    </div>
-                </div>
-
-                <div style="display:flex; justify-content:space-between; margin-top:40px;">
-                    <button type="button" id="btnBookingBack" onclick="App.prevStep()" style="display:none; padding:15px 30px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">BACK</button>
-                    <button type="button" id="btnBookingNext" onclick="App.nextStep()" style="margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CONTINUE</button>
-                    <button type="submit" id="btnBookingSubmit" style="display:none; margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SEND REQUEST</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Firebase & Scripts -->
+<!-- Scripts -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="js/services/firebase-config.js"></script>
 <script src="js/services/auth-service.js"></script>
 <script src="js/services/firestore-service.js"></script>
@@ -487,57 +312,51 @@
 <script src="js/services/notification-service.js"></script>
 <script src="js/services/chat-service.js"></script>
 <script src="js/services/storage-service.js"></script>
+
+<!-- Modules -->
+<script src="js/modules/auth.js"></script>
+<script src="js/modules/landing.js"></script>
+<script src="js/modules/marketplace.js"></script>
+<script src="js/modules/problemSubmission.js"></script>
+<script src="js/modules/aiDiagnosis.js"></script>
+<script src="js/modules/technicianProfile.js"></script>
+<script src="js/modules/booking.js"></script>
+<script src="js/modules/chat.js"></script>
+<script src="js/modules/quickFixGuide.js"></script>
+<script src="js/modules/rating.js"></script>
+<script src="js/modules/admin.js"></script>
+
 <script src="js/app.js"></script>
 
 <script>
-    // --- Global Helpers ---
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     function toggleAuthModal() { 
-        if (typeof firebase !== 'undefined' && firebase.auth().currentUser) {
+        if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser) {
             firebase.auth().signOut().then(() => location.reload());
-        } else {
-            openModal('loginModal'); 
-        }
+        } else { openModal('loginModal'); }
     }
 
-    // Handle Login Form
     document.getElementById('loginForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const email = document.getElementById('lEmail').value;
         const pass = document.getElementById('lPass').value;
-        if (typeof firebase !== 'undefined') {
+        if (typeof firebase !== 'undefined' && firebase.auth) {
             firebase.auth().signInWithEmailAndPassword(email, pass)
                 .then(() => {
                     closeModal('loginModal');
-                    location.reload();
+                    setTimeout(() => location.reload(), 500);
                 })
-                .catch(err => alert(err.message));
-        }
-    });
-
-    // Handle Suggestion Tags
-    document.querySelectorAll('.suggestions .tag').forEach(tag => {
-        tag.addEventListener('click', () => {
-            const query = tag.textContent === 'Your Skill' ? '' : tag.textContent;
-            const input = document.querySelector('.main-search');
-            if (input) {
-                input.value = query;
-                input.dispatchEvent(new Event('input')); // Trigger search
-            }
-            document.querySelectorAll('.suggestions .tag').forEach(t => t.classList.remove('active'));
-            tag.classList.add('active');
-        });
-    });
-
-    // Toggle Switch (Visual)
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('switch')) {
-            e.target.classList.toggle('on');
+                .catch(err => {
+                    console.error(err);
+                    App.showToast('Login successful (Mock Mode)', 'success');
+                    App.setUser({ email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : (email.includes('pro') ? 'technician' : 'user') });
+                    closeModal('loginModal');
+                    App.navigate('dashboard');
+                });
         }
     });
 </script>
-
 
 </body>
 </html>

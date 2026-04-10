@@ -4,12 +4,15 @@ const MarketplaceModule = (() => {
     let currentFilter = 'all';
 
     App.on('navigate', ({ page }) => {
-        if (page !== 'marketplace') return;
-        render();
+        if (page !== 'leads') return; // Only render dynamic jobs for the Pro Leads view
+        render(page);
     });
 
-    async function render() {
-        const container = document.getElementById('marketplaceContent');
+    async function render(page = 'leads') {
+        const containerId = page === 'leads' ? 'leadsGrid' : 'marketplaceContent';
+        const container = document.getElementById(containerId);
+
+        if (!container) return;
         const db = FirebaseConfig.getDb();
         
         // Initial fetch from REST API
