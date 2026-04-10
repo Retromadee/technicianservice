@@ -13,6 +13,9 @@ const ChatService = (() => {
                 } else {
                     conversations = [];
                 }
+                if (window.App && typeof window.App.emit === 'function') {
+                    App.emit('chatUpdated');
+                }
             });
         }
     }, 1000);

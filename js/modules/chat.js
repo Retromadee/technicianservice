@@ -13,6 +13,12 @@ const ChatModule = (() => {
         }
     });
 
+    App.on('chatUpdated', () => {
+        if (document.getElementById('page-chat').style.display !== 'none') {
+            render();
+        }
+    });
+
     function render() {
         const container = document.getElementById('chatContent');
         const convs = ChatService.getConversations();
