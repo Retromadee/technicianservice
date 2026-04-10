@@ -124,10 +124,10 @@
             <div>
                 <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Services</h3>
                 <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px;">
-                    <div class="category-item" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
-                    <div class="category-item" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
-                    <div class="category-item" data-category="hvac"><i class="fas fa-wind"></i> HVAC</div>
-                    <div class="category-item" data-category="cleaning"><i class="fas fa-broom"></i> Cleaning</div>
+                    <div class="category-item" onclick="App.exploreService('Plumbing')" style="cursor:pointer;" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
+                    <div class="category-item" onclick="App.exploreService('Electrical')" style="cursor:pointer;" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
+                    <div class="category-item" onclick="App.exploreService('HVAC')" style="cursor:pointer;" data-category="hvac"><i class="fas fa-wind"></i> HVAC</div>
+                    <div class="category-item" onclick="App.exploreService('Cleaning')" style="cursor:pointer;" data-category="cleaning"><i class="fas fa-broom"></i> Cleaning</div>
                 </div>
             </div>
         </div>

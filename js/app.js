@@ -433,6 +433,16 @@ const App = (() => {
         if (zipInput) zipInput.addEventListener('input', filterFn);
         if (searchBtn) searchBtn.addEventListener('click', filterFn);
     }
+    
+    function exploreService(category) {
+        navigate('marketplace');
+        const searchBox = document.querySelector('.main-search');
+        if (searchBox) {
+            searchBox.value = category;
+            searchBox.dispatchEvent(new Event('input'));
+        }
+    }
+
     function handleAIImage(input) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
@@ -733,7 +743,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, exploreService, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 
