@@ -156,9 +156,21 @@ const App = (() => {
         state.selectedTech = tech;
         const body = document.getElementById('drawerBody');
 
-        // Find similar technicians (same primary tag) for price comparison
+        // Find similar technicians for price comparison
+        // Try primary tag first, then any overlapping tag, then nearest-priced
         const primaryTag = tech.tags[0];
-        const similar = state.technicians.filter(t => t.id !== tech.id && t.tags.some(tag => tag === primaryTag)).slice(0, 3);
+        let similar = state.technicians.filter(t => t.id !== tech.id && t.tags.some(tag => tag === primaryTag)).slice(0, 3);
+        if (similar.length < 2) {
+            // Broaden: match any shared tag
+            similar = state.technicians.filter(t => t.id !== tech.id && t.tags.some(tag => tech.tags.includes(tag))).slice(0, 3);
+        }
+        if (similar.length < 2) {
+            // Fallback: nearest priced techs
+            similar = state.technicians
+                .filter(t => t.id !== tech.id)
+                .sort((a, b) => Math.abs((a.rateNum || 50) - (tech.rateNum || 50)) - Math.abs((b.rateNum || 50) - (tech.rateNum || 50)))
+                .slice(0, 3);
+        }
         const allCompare = [tech, ...similar];
         const maxRate = Math.max(...allCompare.map(t => t.rateNum || parseInt(t.rate) || 50));
 
@@ -242,7 +254,7 @@ const App = (() => {
                         </div>`;
                     }).join('')}
                     <div style="text-align:center; margin-top:8px; font-size:11px; color:#888; font-weight:600;">
-                        ${tech.rateNum <= Math.min(...similar.map(s => s.rateNum || 50)) ? '🏆 Best value in this category!' : `💡 ${similar.filter(s => (s.rateNum || 50) < (tech.rateNum || 50)).length > 0 ? similar.filter(s => (s.rateNum||50) < (tech.rateNum||50)).length + ' cheaper option(s) available' : 'Competitive pricing'}`}
+                        ${similar.length === 0 ? '📊 Only pro in this specialty' : (tech.rateNum <= Math.min(...similar.map(s => s.rateNum || 50)) ? '🏆 Best value in this category!' : `💡 ${similar.filter(s => (s.rateNum || 50) < (tech.rateNum || 50)).length > 0 ? similar.filter(s => (s.rateNum||50) < (tech.rateNum||50)).length + ' cheaper option(s) available' : 'Competitive pricing'}`)}
                     </div>
                 </div>
             </div>
