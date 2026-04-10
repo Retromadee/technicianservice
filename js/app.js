@@ -140,9 +140,12 @@ const App = (() => {
                 <div style="margin-bottom:15px; font-size:13px; color:#666;">
                     <strong>Problem:</strong> ${req.problem.substring(0, 50)}...
                 </div>
-                <div class="card-footer" style="justify-content:space-between;">
+                <div class="card-footer" style="justify-content:space-between; gap:10px;">
                     <div class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING QUOTE</div>
-                    <button onclick="App.completeJobSim(${state.myRequests.indexOf(req)})" style="background:#E8F5E9; color:#2E7D32; border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">COMPLETE (TEST)</button>
+                    <div style="display:flex; gap: 8px;">
+                        <button onclick="App.openChatForTech(${req.tech.id})" style="background:#E8E0FF; color:var(--jobie-purple); border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">MESSAGE</button>
+                        <button onclick="App.completeJobSim(${state.myRequests.indexOf(req)})" style="background:#E8F5E9; color:#2E7D32; border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">COMPLETE (TEST)</button>
+                    </div>
                 </div>
             </div>
         `).join('');
@@ -719,6 +722,15 @@ const App = (() => {
         }
     }
 
+    function handleNotifClick(id, type) {
+        toggleNotifications();
+        if (type === 'NEW_MESSAGE') {
+            navigate('chat');
+        } else {
+            navigate('dashboard');
+        }
+    }
+
     function openChatForTech(techId) {
         const tech = state.technicians.find(t => t.id == techId);
         if (!tech) return showToast("Technician not found.", "error");
@@ -799,7 +811,7 @@ const App = (() => {
                 list.innerHTML = `<div style="padding:15px; text-align:center; color:#888; font-size:13px;">No new alerts</div>`;
             } else {
                 list.innerHTML = notifs.map(n => `
-                    <div style="padding:12px 15px; border-bottom:1px solid #EEE; background:${n.read ? '#FFF' : '#F0F9FF'}; cursor:pointer;" onclick="App.toggleNotifications();">
+                    <div style="padding:12px 15px; border-bottom:1px solid #EEE; background:${n.read ? '#FFF' : '#F0F9FF'}; cursor:pointer;" onclick="App.handleNotifClick('${n.id}', '${n.type}')">
                         <div style="font-weight:700; font-size:13px; color:#333;">${n.title}</div>
                         <div style="font-size:11px; color:#666; margin-top:3px;">${n.description}</div>
                         <div style="font-size:9px; color:#AAA; margin-top:5px;">${new Date(n.time).toLocaleString()}</div>
@@ -868,7 +880,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, exploreService, openChatForTech, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 

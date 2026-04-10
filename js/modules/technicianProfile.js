@@ -27,7 +27,7 @@ const TechnicianProfileModule = (() => {
                             <div class="text-center"><div class="fw-bold">${tech.experience} yrs</div><div class="text-muted" style="font-size:var(--font-size-xs)">Experience</div></div>
                             <div class="text-center"><div class="fw-bold">${tech.responseTime}</div><div class="text-muted" style="font-size:var(--font-size-xs)">Response</div></div>
                         </div>
-                        <button class="btn btn-accent w-100"><i class="fas fa-comments me-2"></i>Message</button>
+                        <button class="btn btn-accent w-100" onclick="App.openChatForTech('${tech.id}')"><i class="fas fa-comments me-2"></i>Message</button>
                     </div>
                 </div>
                 <div class="col-lg-8">

@@ -61,6 +61,14 @@ const DashboardModule = (() => {
                 tab.classList.add('active');
             });
         });
+
+        // Intercept navigation links
+        container.querySelectorAll('a[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                App.navigate(link.dataset.page);
+            });
+        });
     }
 
     return {};

@@ -145,7 +145,7 @@ const MarketplaceModule = (() => {
                                 </div>
                                 <div class="quote-actions">
                                     <button class="btn btn-accent btn-sm accept-quote-btn" data-quote-id="${q.id}" data-tech-id="${q.techId}"><i class="fas fa-check me-1"></i>Accept Quote</button>
-                                    <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-comments me-1"></i>Message</button>
+                                    <button class="btn btn-outline-secondary btn-sm" onclick="App.openChatForTech('${q.techId}')"><i class="fas fa-comments me-1"></i>Message</button>
                                     <button class="btn btn-outline-secondary btn-sm view-profile-btn" data-tech-id="${q.techId}"><i class="fas fa-user me-1"></i>Profile</button>
                                 </div>
                             </div>
