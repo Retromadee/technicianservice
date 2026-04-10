@@ -670,13 +670,13 @@ const App = (() => {
     }
 
     function updateUI() {
-        const topName = document.getElementById('topName');
-        const topAvatar = document.getElementById('topAvatar');
-        const topRole = document.getElementById('topRole');
+        const topName = document.getElementById('userName');
+        const topAvatar = document.getElementById('userAvatar');
+        const topRole = document.getElementById('userRole');
 
         if (state.user) {
-            if (topName) topName.textContent = state.user.displayName || state.user.firstName || state.user.email;
-            if (topAvatar) topAvatar.src = state.user.photoURL || `https://ui-avatars.com/api/?name=${state.user.firstName || 'User'}&background=4b39ac&color=fff`;
+            if (topName) topName.textContent = state.user.displayName || state.user.name || state.user.firstName || state.user.email;
+            if (topAvatar) topAvatar.src = state.user.photoURL || `https://ui-avatars.com/api/?name=${state.user.name || 'User'}&background=4b39ac&color=fff`;
             if (topRole) topRole.textContent = `Role: ${state.role.toUpperCase()}`;
         } else {
             if (topName) topName.textContent = 'Guest User';

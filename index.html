@@ -385,8 +385,15 @@
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     function toggleAuthModal() { 
-        if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser) {
-            firebase.auth().signOut().then(() => location.reload());
+        if (App.state && App.state.user) {
+            if (typeof firebase !== 'undefined' && firebase.auth && firebase.auth().currentUser) {
+                firebase.auth().signOut().then(() => location.reload());
+            } else {
+                App.setUser(null);
+                localStorage.removeItem('hv_user');
+                App.showToast('Logged out successfully', 'success');
+                setTimeout(() => location.reload(), 500);
+            }
         } else { openModal('loginModal'); }
     }
 
@@ -403,7 +410,9 @@
                 .catch(err => {
                     console.error(err);
                     App.showToast('Login successful (Mock Mode)', 'success');
-                    App.setUser({ email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : (email.includes('pro') ? 'technician' : 'user') });
+                    const mockUser = { email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : (email.includes('pro') ? 'technician' : 'user') };
+                    App.setUser(mockUser);
+                    localStorage.setItem('hv_user', JSON.stringify(mockUser));
                     closeModal('loginModal');
                     App.navigate('dashboard');
                 });
