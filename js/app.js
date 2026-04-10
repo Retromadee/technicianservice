@@ -531,11 +531,14 @@ const App = (() => {
             const resultText = document.getElementById('aiResultText');
             const diffTag = document.getElementById('aiDifficultyTag');
             const quickFixSection = document.getElementById('aiQuickFix');
+            const quickFixList = document.getElementById('aiQuickFixList');
 
             if (resultText) resultText.textContent = result.advice || result.description;
-            if (diffTag) diffTag.textContent = `DIFFICULTY: ${result.difficulty || 'MEDIUM'}`;
-            if (list) list.innerHTML = (result.quickFixes || []).map(f => `<li>${f}</li>`).join('');
-            if (quickFixSection) quickFixSection.style.display = (result.quickFixes && result.quickFixes.length) ? 'block' : 'none';
+            if (diffTag) diffTag.textContent = `DIFFICULTY: ${result.difficulty || result.severity || 'MEDIUM'}`.toUpperCase();
+            
+            const fixes = result.quickFixes || result.steps || [];
+            if (quickFixList) quickFixList.innerHTML = fixes.map(f => `<li>${f}</li>`).join('');
+            if (quickFixSection) quickFixSection.style.display = fixes.length > 0 ? 'block' : 'none';
             
             resArea.style.display = 'block';
             resArea.scrollIntoView({ behavior: 'smooth' });
