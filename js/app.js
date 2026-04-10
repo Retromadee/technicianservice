@@ -411,6 +411,7 @@ const App = (() => {
     function initSearch() {
         const mainInput = document.querySelector('.main-search');
         const zipInput = document.querySelector('.location-picker input');
+        const searchBtn = document.querySelector('.btn-find');
         
         const filterFn = () => {
             const query = mainInput ? mainInput.value.toLowerCase() : '';
@@ -420,7 +421,8 @@ const App = (() => {
                 const matchesQuery = !query || 
                     t.title.toLowerCase().includes(query) || 
                     t.company.toLowerCase().includes(query) || 
-                    t.desc.toLowerCase().includes(query);
+                    t.desc.toLowerCase().includes(query) ||
+                    t.tags.some(tag => tag.toLowerCase().includes(query));
                 const matchesZip = !zip || t.loc.toLowerCase().includes(zip);
                 return matchesQuery && matchesZip;
             });
@@ -429,6 +431,7 @@ const App = (() => {
 
         if (mainInput) mainInput.addEventListener('input', filterFn);
         if (zipInput) zipInput.addEventListener('input', filterFn);
+        if (searchBtn) searchBtn.addEventListener('click', filterFn);
     }
     function handleAIImage(input) {
         if (input.files && input.files[0]) {
@@ -705,7 +708,7 @@ const App = (() => {
         // Suggestion tags
         document.querySelectorAll('.suggestions .tag').forEach(tag => {
             tag.addEventListener('click', () => {
-                const query = tag.textContent === 'Your Skill' ? '' : tag.textContent;
+                const query = tag.textContent === 'All Pros' ? '' : tag.textContent;
                 const input = document.querySelector('.main-search');
                 if (input) { input.value = query; input.dispatchEvent(new Event('input')); }
                 document.querySelectorAll('.suggestions .tag').forEach(t => t.classList.remove('active'));
