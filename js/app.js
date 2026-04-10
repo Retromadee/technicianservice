@@ -710,13 +710,19 @@ const App = (() => {
     }
 
     function openChatForTech(techId) {
+        const tech = state.technicians.find(t => t.id == techId);
+        if (!tech) return showToast("Technician not found.", "error");
+
+        const conv = ChatService.getOrCreateConversationForTech(tech);
+        closeDrawer();
         navigate('chat');
+
         setTimeout(() => {
-            const targetChat = document.querySelector(`.chat-list-item[data-conv-id="${techId}"]`);
+            const targetChat = document.querySelector(`.chat-list-item[data-conv-id="${conv.id}"]`);
             if (targetChat) {
                 targetChat.click();
             } else {
-                showToast("Chat thread unavailable.", "error");
+                showToast("Chat thread unexpectedly unavailable.", "error");
             }
         }, 100);
     }

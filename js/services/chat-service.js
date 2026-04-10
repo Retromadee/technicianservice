@@ -21,6 +21,8 @@ const ChatService = (() => {
         const conv = conversations.find(c => c.id === convId);
         if (!conv) return;
         const msg = { id: 'm' + Date.now(), sender: 'user', text, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
+        // ensure messages array exists
+        if(!conv.messages) conv.messages = [];
         conv.messages.push(msg);
         conv.lastMessage = text;
         conv.lastTime = msg.time;
@@ -36,5 +38,24 @@ const ChatService = (() => {
         return msg;
     }
 
-    return { getConversations, getConversation, sendMessage };
+    function getOrCreateConversationForTech(tech) {
+        let conv = conversations.find(c => c.techId == tech.id); // Loose equality just in case string vs int
+        if (!conv) {
+            conv = {
+                id: 'conv_' + Date.now(),
+                techId: tech.id,
+                techName: tech.company || tech.title,
+                techAvatar: tech.logo || 'PRO',
+                online: true,
+                lastMessage: 'Ready to help!',
+                lastTime: 'Just now',
+                unread: 0,
+                messages: []
+            };
+            conversations.unshift(conv);
+        }
+        return conv;
+    }
+
+    return { getConversations, getConversation, sendMessage, getOrCreateConversationForTech };
 })();
