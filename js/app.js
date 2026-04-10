@@ -273,6 +273,7 @@ const App = (() => {
     }
 
     function navigate(page) {
+        state.currentPage = page;
         document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
         document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
         
@@ -287,7 +288,14 @@ const App = (() => {
         
         if (page === 'dashboard') renderDashboard();
 
-        document.getElementById('pageTitle').textContent = menuItem ? menuItem.querySelector('span').textContent : 'Overview';
+        const titleEl = document.getElementById('pageTitle');
+        if (titleEl) {
+            const span = menuItem ? menuItem.querySelector('span') : null;
+            titleEl.textContent = span ? span.textContent : page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
+        }
+
+        // Notify modules
+        emit('navigate', { page });
     }
 
     function initSearch() {
@@ -396,10 +404,25 @@ const App = (() => {
                 images: state.currentAIImages
             });
 
-            // Update UI
-            document.getElementById('aiResultText').textContent = result.advice;
-            document.getElementById('aiDifficultyTag').textContent = `DIFFICULTY: ${result.difficulty || 'MEDIUM'}`;
-            list.innerHTML = result.quickFixes.map(f => `<li>${f}</li>`).join('');
+            // Add AI response to chat window
+            chat.innerHTML += `
+                <div style="display:flex; gap:15px; margin-bottom:20px;">
+                    <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
+                    <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
+                        ${result.advice || result.description || 'Analysis complete. See details below.'}
+                    </div>
+                </div>
+            `;
+
+            // Update result panel
+            const resultText = document.getElementById('aiResultText');
+            const diffTag = document.getElementById('aiDifficultyTag');
+            const quickFixSection = document.getElementById('aiQuickFix');
+
+            if (resultText) resultText.textContent = result.advice || result.description;
+            if (diffTag) diffTag.textContent = `DIFFICULTY: ${result.difficulty || 'MEDIUM'}`;
+            if (list) list.innerHTML = (result.quickFixes || []).map(f => `<li>${f}</li>`).join('');
+            if (quickFixSection) quickFixSection.style.display = (result.quickFixes && result.quickFixes.length) ? 'block' : 'none';
             
             resArea.style.display = 'block';
             resArea.scrollIntoView({ behavior: 'smooth' });
@@ -408,28 +431,31 @@ const App = (() => {
             const category = result.category || 'plumbing';
             const matched = state.technicians.filter(t => t.tags.some(tag => tag.toLowerCase().includes(category)) || t.title.toLowerCase().includes(category));
             const grid = document.getElementById('aiTechGrid');
-            grid.innerHTML = matched.map(tech => `
-                <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
-                    <div class="card-header">
-                        <div class="company-info">
-                            <div class="company-name">${tech.company}</div>
-                            <h4>${tech.title}</h4>
+            if (grid) {
+                grid.innerHTML = matched.length > 0 ? matched.map(tech => `
+                    <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
+                        <div class="card-header">
+                            <div class="company-info">
+                                <div class="company-name">${tech.company}</div>
+                                <h4>${tech.title}</h4>
+                            </div>
+                            <div class="company-logo ${tech.color}">${tech.logo}</div>
                         </div>
-                        <div class="company-logo ${tech.color}">${tech.logo}</div>
+                        <div style="display:flex; gap:10px; margin-bottom:10px; font-size:12px; font-weight:700;">
+                            <span>⭐ ${tech.rating}</span>
+                            <span style="color:#10B981;">98% System Match</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="badge-tag" style="background:#E8F5E9; color:#2E7D32;">AVAILABLE TODAY</div>
+                            <div class="location"><i class="fas fa-map-marker-alt"></i> ${tech.loc}</div>
+                        </div>
                     </div>
-                    <div style="display:flex; gap:10px; margin-bottom:10px; font-size:12px; font-weight:700;">
-                        <span>⭐ ${tech.rating}</span>
-                        <span style="color:#10B981;">98% System Match</span>
-                    </div>
-                    <div class="card-footer">
-                        <div class="badge-tag" style="background:#E8F5E9; color:#2E7D32;">AVAILABLE TODAY</div>
-                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${tech.loc}</div>
-                    </div>
-                </div>
-            `).join('');
+                `).join('') : '<p style="color:#888; grid-column:1/-1; text-align:center;">No exact matches — browse the Marketplace for more pros.</p>';
+            }
 
         } catch (error) {
-            console.error(error);
+            console.error('AI Diagnosis Error:', error);
+            showToast('AI analysis encountered an issue. Showing fallback results.', 'error');
         } finally {
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-magic"></i> ANALYZE';
@@ -554,6 +580,28 @@ const App = (() => {
         renderTechnicians();
 
         document.getElementById('bookingForm')?.addEventListener('submit', submitBooking);
+
+        // Enter key for AI input
+        document.getElementById('aiQueryInput')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); runAIDiagnosis(); }
+        });
+
+        // Top-bar action icons (messages, etc.)
+        document.querySelectorAll('.action-icon[data-page]').forEach(icon => {
+            icon.style.cursor = 'pointer';
+            icon.addEventListener('click', () => navigate(icon.dataset.page));
+        });
+
+        // Suggestion tags
+        document.querySelectorAll('.suggestions .tag').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const query = tag.textContent === 'Your Skill' ? '' : tag.textContent;
+                const input = document.querySelector('.main-search');
+                if (input) { input.value = query; input.dispatchEvent(new Event('input')); }
+                document.querySelectorAll('.suggestions .tag').forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+            });
+        });
 
         // Preload user from storage
         const storedUser = localStorage.getItem('hv_user');

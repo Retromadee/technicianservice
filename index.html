@@ -154,13 +154,16 @@
             </div>
             
             <div id="aiResultArea" style="margin-top:30px; display:none;">
-                <div class="diagnosis-card" style="background: var(--jobie-purple); color:white;">
-                    <h3 class="fw-bold mb-3"><i class="fas fa-lightbulb"></i> Analysis Result</h3>
-                    <p id="aiResultText" style="font-size:16px;"></p>
+                <div class="diagnosis-card" style="background: var(--jobie-purple); color:white; padding:30px; border-radius:20px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <h3 class="fw-bold mb-0"><i class="fas fa-lightbulb"></i> Analysis Result</h3>
+                        <span id="aiDifficultyTag" style="background:rgba(255,255,255,0.2); padding:6px 16px; border-radius:20px; font-size:12px; font-weight:800;">DIFFICULTY: MEDIUM</span>
+                    </div>
+                    <p id="aiResultText" style="font-size:16px; line-height:1.7;"></p>
                 </div>
-                <div id="aiQuickFix" class="mt-4" style="background:#FFF9C4; padding:20px; border-radius:15px; display:none;">
-                    <h5 class="fw-bold text-dark"><i class="fas fa-tools"></i> Quick Fixes</h5>
-                    <ul id="aiQuickFixList" class="mt-2"></ul>
+                <div id="aiQuickFix" class="mt-4" style="background:#FFF9C4; padding:25px; border-radius:20px;">
+                    <h5 class="fw-bold text-dark"><i class="fas fa-tools me-2"></i>Quick Fixes You Can Try</h5>
+                    <ul id="aiQuickFixList" class="mt-3" style="padding-left:20px; line-height:2;"></ul>
                 </div>
                 <h4 class="fw-bold mt-5 mb-3">Matching Technicians</h4>
                 <div class="job-grid" id="aiTechGrid"></div>
@@ -293,9 +296,54 @@
     </div>
 </div>
 
-<div id="techDetailDrawer" class="drawer-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:1500; justify-content:flex-end;">
-    <div class="drawer-content bg-white h-100 p-4 shadow-lg animate-slide-in" style="width:500px;">
+<div id="techDetailDrawer" class="drawer-overlay" onclick="if(event.target===this) App.closeDrawer()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:1500; justify-content:flex-end;">
+    <div class="drawer-content bg-white h-100 shadow-lg" style="width:500px; overflow-y:auto; padding:40px; animation: slideInRight 0.3s ease;">
+        <button onclick="App.closeDrawer()" style="background:none; border:none; font-size:22px; cursor:pointer; color:#888; margin-bottom:20px;"><i class="fas fa-times"></i></button>
         <div id="drawerBody"></div>
+    </div>
+</div>
+
+<!-- Booking Modal (Multi-Step) -->
+<div id="bookingModal" class="modal-overlay" onclick="if(event.target===this) closeModal('bookingModal')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2100; align-items:center; justify-content:center;">
+    <div class="modal-content" style="background:white; padding:0; border-radius:30px; width:650px; overflow:hidden; position:relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+        <button onclick="closeModal('bookingModal')" style="position:absolute; top:20px; right:20px; border:none; background:white; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; color:#AAA; z-index:10;"><i class="fas fa-times"></i></button>
+        <div style="height:8px; background:#EEE; width:100%;">
+            <div id="bookingProgress" style="height:100%; background:var(--jobie-purple); width:33%; transition:0.4s;"></div>
+        </div>
+        <div style="padding:50px;">
+            <form id="bookingForm">
+                <div class="booking-step" id="step1" style="display:block;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">What do you need help with?</h2>
+                    <p style="color:#666; margin-bottom:30px;">Select all that apply.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px;">
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Repair Existing</label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> New Installation</label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Maintenance</label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Emergency Fix</label>
+                    </div>
+                </div>
+                <div class="booking-step" id="step2" style="display:none;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">When's the best time?</h2>
+                    <p style="color:#666; margin-bottom:30px;">Select your preferred timing.</p>
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:30px;">
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> ASAP (Today)</label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> Within 48 Hours</label>
+                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> This Weekend</label>
+                    </div>
+                </div>
+                <div class="booking-step" id="step3" style="display:none;">
+                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">Tell us more</h2>
+                    <p style="color:#666; margin-bottom:20px;">Any specific details?</p>
+                    <textarea id="bProblem" placeholder="e.g. My LG Refrigerator is leaking from the bottom right corner..." style="width:100%; padding:20px; border:1px solid #EEE; border-radius:15px; min-height:150px; font-size:16px; outline:none; background:#F8F9FD; margin-bottom:20px;"></textarea>
+                    <div style="border:2px dashed #EEE; padding:30px; border-radius:20px; text-align:center; color:#888;"><i class="fas fa-camera" style="font-size:24px; margin-bottom:10px;"></i><br>Add photos (optional)</div>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:40px;">
+                    <button type="button" id="btnBookingBack" onclick="App.prevStep()" style="display:none; padding:15px 30px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">BACK</button>
+                    <button type="button" id="btnBookingNext" onclick="App.nextStep()" style="margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CONTINUE</button>
+                    <button type="submit" id="btnBookingSubmit" style="display:none; margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SEND REQUEST</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
