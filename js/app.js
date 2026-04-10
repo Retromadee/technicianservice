@@ -709,6 +709,16 @@ const App = (() => {
         alert("Success! Your bid has been sent to the customer. You'll be notified if they accept.");
     }
 
+    function toggleNotifications() {
+        const box = document.getElementById('notificationDropdown');
+        if (box.style.display === 'none') {
+            box.style.display = 'block';
+            NotificationService.markRead(); // Mark them instantly read when viewed
+        } else {
+            box.style.display = 'none';
+        }
+    }
+
     function openChatForTech(techId) {
         const tech = state.technicians.find(t => t.id == techId);
         if (!tech) return showToast("Technician not found.", "error");
@@ -773,6 +783,31 @@ const App = (() => {
         initSearch();
         renderTechnicians();
 
+        App.on('notifUpdated', (notifs) => {
+            const list = document.getElementById('notificationList');
+            const badge = document.getElementById('notifBadge');
+            
+            const unread = notifs.filter(n => !n.read).length;
+            if (unread > 0) {
+                badge.style.display = 'block';
+                badge.textContent = unread;
+            } else {
+                badge.style.display = 'none';
+            }
+
+            if (notifs.length === 0) {
+                list.innerHTML = `<div style="padding:15px; text-align:center; color:#888; font-size:13px;">No new alerts</div>`;
+            } else {
+                list.innerHTML = notifs.map(n => `
+                    <div style="padding:12px 15px; border-bottom:1px solid #EEE; background:${n.read ? '#FFF' : '#F0F9FF'}; cursor:pointer;" onclick="App.toggleNotifications();">
+                        <div style="font-weight:700; font-size:13px; color:#333;">${n.title}</div>
+                        <div style="font-size:11px; color:#666; margin-top:3px;">${n.description}</div>
+                        <div style="font-size:9px; color:#AAA; margin-top:5px;">${new Date(n.time).toLocaleString()}</div>
+                    </div>
+                `).join('');
+            }
+        });
+
         document.getElementById('bookingForm')?.addEventListener('submit', submitBooking);
 
         // Enter key for AI input
@@ -833,7 +868,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, exploreService, openChatForTech, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, exploreService, openChatForTech, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 
