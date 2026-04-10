@@ -1,18 +1,30 @@
-/* Chat Service — Mock real-time chat */
+/* Chat Service — Firebase Connected */
 const ChatService = (() => {
-    const conversations = [
-        { id: 'conv1', techId: 't1', techName: 'Mike Johnson', techAvatar: 'MJ', online: true, lastMessage: 'I can come today at 3 PM', lastTime: '2:15 PM', unread: 2, messages: [
-            { id: 'm1', sender: 'tech', text: 'Hi! I saw your kitchen sink issue. I have experience with this exact problem.', time: '2:00 PM' },
-            { id: 'm2', sender: 'user', text: 'Great! How much would it cost?', time: '2:05 PM' },
-            { id: 'm3', sender: 'tech', text: 'Based on the description, it sounds like a worn gasket. I quoted $85 which includes parts.', time: '2:10 PM' },
-            { id: 'm4', sender: 'tech', text: 'I can come today at 3 PM', time: '2:15 PM' }
-        ]},
-        { id: 'conv2', techId: 't4', techName: 'David Park', techAvatar: 'DP', online: false, lastMessage: 'Will send the invoice after completion', lastTime: 'Yesterday', unread: 0, messages: [
-            { id: 'm5', sender: 'tech', text: 'Hi, I specialize in HVAC systems. Your AC issue sounds like low refrigerant.', time: 'Yesterday 3:00 PM' },
-            { id: 'm6', sender: 'user', text: 'Can you check it this week?', time: 'Yesterday 3:15 PM' },
-            { id: 'm7', sender: 'tech', text: 'Will send the invoice after completion', time: 'Yesterday 4:00 PM' }
-        ]}
-    ];
+    let conversations = [];
+    
+    // Subscribe to Firebase explicitly 
+    setTimeout(() => {
+        if(typeof firebase !== 'undefined' && firebase.database) {
+            const dbRef = firebase.database().ref('chats');
+            dbRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    conversations = Object.values(data);
+                } else {
+                    conversations = [];
+                }
+            });
+        }
+    }, 1000);
+
+    function syncToFirebase() {
+        if(typeof firebase !== 'undefined' && firebase.database) {
+            const dbRef = firebase.database().ref('chats');
+            const dataObj = {};
+            conversations.forEach(c => dataObj[c.id] = c);
+            dbRef.set(dataObj).catch(e => console.error("Firebase Sync Error", e));
+        }
+    }
 
     function getConversations() { return conversations; }
     function getConversation(id) { return conversations.find(c => c.id === id); }
@@ -21,25 +33,30 @@ const ChatService = (() => {
         const conv = conversations.find(c => c.id === convId);
         if (!conv) return;
         const msg = { id: 'm' + Date.now(), sender: 'user', text, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
-        // ensure messages array exists
+        
         if(!conv.messages) conv.messages = [];
         conv.messages.push(msg);
         conv.lastMessage = text;
         conv.lastTime = msg.time;
-        // Simulate auto-reply after 2s
+        
+        syncToFirebase();
+
+        // Simulate technician auto-reply logically after 2s and dynamically resync 
         setTimeout(() => {
-            const replies = ['Got it, thanks!', 'Sure, no problem.', 'I\'ll take care of that.', 'Let me check and get back to you.', 'Sounds good! 👍'];
+            const replies = ['Got it, thanks!', 'I\'ve received the pictures.', 'I\'ll take care of that.', 'Let me check and get back to you.', 'Sounds fine, see you soon! 👍'];
             const reply = { id: 'm' + Date.now(), sender: 'tech', text: replies[Math.floor(Math.random() * replies.length)], time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) };
             conv.messages.push(reply);
             conv.lastMessage = reply.text;
             conv.lastTime = reply.time;
+            
+            syncToFirebase();
             App.emit('newMessage', { convId, message: reply });
-        }, 2000);
+        }, 3000);
         return msg;
     }
 
     function getOrCreateConversationForTech(tech) {
-        let conv = conversations.find(c => c.techId == tech.id); // Loose equality just in case string vs int
+        let conv = conversations.find(c => c.techId == tech.id);
         if (!conv) {
             conv = {
                 id: 'conv_' + Date.now(),
@@ -53,6 +70,7 @@ const ChatService = (() => {
                 messages: []
             };
             conversations.unshift(conv);
+            syncToFirebase();
         }
         return conv;
     }

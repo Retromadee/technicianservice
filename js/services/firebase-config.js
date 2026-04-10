@@ -24,16 +24,7 @@ console.log("Firebase initialized successfully with Realtime Database.");
 
 const FirebaseConfig = {
     getDb: () => {
-        // Return a mock Firestore-like db object to prevent crashes in the legacy code
-        return {
-            collection: (col) => ({
-                onSnapshot: () => { console.log('Mocked snapshot for ' + col); return () => {}; },
-                doc: (id) => ({
-                    collection: (subcol) => ({
-                        onSnapshot: () => { return () => {}; }
-                    })
-                })
-            })
-        };
+        // Expose real Firebase Realtime database natively
+        return database;
     }
 };

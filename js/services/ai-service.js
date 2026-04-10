@@ -72,27 +72,32 @@ const AIService = (() => {
 
     function heuristicMock(data) {
         const query = (data.description || "").toLowerCase();
-        let category = data.category || "plumbing";
-        if (query.includes('light') || query.includes('spark') || query.includes('socket')) category = "electrical";
-        if (query.includes('ac') || query.includes('hvac')) category = "hvac";
+        
+        let category = "appliance"; // Better default than plumbing for random electronics
+        
+        if (query.match(/leak|pipe|water|sink|toilet|drain|plumb/)) category = "plumbing";
+        else if (query.match(/light|spark|socket|power|breaker|wire|electrical|tv/)) category = "electrical";
+        else if (query.match(/ac|hvac|heat|cool|air/)) category = "hvac";
+        else if (query.match(/paint|wall|drywall/)) category = "painting";
+        else if (query.match(/clean|dust|mop|sweep/)) category = "cleaning";
 
-        const isHigh = category === 'electrical' || query.includes('leak') || query.includes('flood');
+        const isHigh = category === 'electrical' || query.includes('leak') || query.includes('fire') || query.includes('smoke');
 
         return new Promise(res => setTimeout(() => {
             const result = {
                 problem: `${category.charAt(0).toUpperCase() + category.slice(1)} Issue Detected`,
-                advice: `Our analysis of your input suggests a ${category} issue. ${isHigh ? 'WARNING: High risk detected.' : 'Please follow the safety steps below.'}`,
+                advice: `Our analysis of your input suggests a ${category} issue. ${isHigh ? 'WARNING: High risk detected.' : 'Please review the troubleshooting steps below.'}`,
                 description: `We've analyzed your description: "${data.description}". This appears to be a ${category} related problem that requires ${isHigh ? 'urgent attention' : 'standard maintenance'}.`,
                 difficulty: isHigh ? 'HIGH' : 'MEDIUM',
                 severity: isHigh ? 'high' : 'medium',
                 confidence: 85 + Math.floor(Math.random() * 10),
                 quickFixes: isHigh ? 
-                    ["Turn off main breaker/valve.", "Do not touch affected area.", "Evacuate if smoke persists."] :
-                    ["Stop usage immediately.", "Clear work area.", "Locate shutoff if applicable."],
+                    ["Turn off power/water source.", "Do not touch exposed wiring.", "Evacuate area if danger persists."] :
+                    ["Unplug the device (if applicable).", "Check basic connections.", "Consult the user manual."],
                 category: category,
-                riskFactors: isHigh ? ["Fire hazard", "Structural damage", "Safety risk"] : ["Minor leak", "Operational failure"],
+                riskFactors: isHigh ? ["Fire hazard", "Structural damage", "Shock risk"] : ["Minor failure", "Operational pause"],
                 estimatedTime: isHigh ? "2-4 hours" : "1 hour",
-                tools: isHigh ? ["Professional multimanometer", "Insulated tools"] : ["Wrench", "Screwdriver", "Plubming tape"],
+                tools: isHigh ? ["Professional tools", "Insulated gear"] : ["Basic toolkit", "Flashlight"],
                 recommendation: isHigh ? 'professional' : 'diy',
                 analyzedAt: new Date().toISOString(),
                 userDescription: data.description
