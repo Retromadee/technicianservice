@@ -301,7 +301,7 @@ const App = (() => {
 
             <!-- CTA Buttons -->
             <div style="display:flex; gap:10px;">
-                <button onclick="App.navigate('chat')" style="flex:1; background:#F8F9FD; color:var(--jobie-purple); border:none; padding:18px; border-radius:16px; font-weight:800; cursor:pointer; font-size:15px;"><i class="fas fa-comment-dots" style="margin-right:8px;"></i>MESSAGE</button>
+                <button onclick="App.openChatForTech(${tech.id})" style="flex:1; background:#F8F9FD; color:var(--jobie-purple); border:none; padding:18px; border-radius:16px; font-weight:800; cursor:pointer; font-size:15px;"><i class="fas fa-comment-dots" style="margin-right:8px;"></i>MESSAGE</button>
                 <button onclick="App.openBooking()" style="flex:2; background:var(--jobie-purple); color:white; border:none; padding:18px; border-radius:16px; font-weight:800; cursor:pointer; font-size:15px; box-shadow: 0 8px 25px rgba(76, 57, 172, 0.3);">CHECK AVAILABILITY</button>
             </div>
         `;
@@ -589,6 +589,56 @@ const App = (() => {
         }
     }
 
+    // ---- Voice Input ----
+    let isRecordingVoice = false;
+    function toggleVoiceInput() {
+        const btn = document.getElementById('btnVoiceAI');
+        const input = document.getElementById('aiQueryInput');
+        
+        if (!('webkitSpeechRecognition' in window)) {
+            showToast('Voice recognition is not supported in this browser.', 'error');
+            return;
+        }
+
+        if (isRecordingVoice) {
+            // SpeechRecognition is handled fully asynchronously, just UI state here.
+            isRecordingVoice = false;
+            btn.style.color = '';
+            btn.style.animation = '';
+            return;
+        }
+
+        const recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        
+        recognition.onstart = () => {
+            isRecordingVoice = true;
+            btn.style.color = '#EF4444';
+            btn.style.animation = 'pulse 1s infinite';
+            input.placeholder = "Listening...";
+        };
+        
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            input.value = transcript;
+            isRecordingVoice = false;
+            btn.style.color = '';
+            btn.style.animation = '';
+            input.placeholder = "Describe your issue...";
+        };
+        
+        recognition.onerror = () => {
+            isRecordingVoice = false;
+            btn.style.color = '';
+            btn.style.animation = '';
+            input.placeholder = "Describe your issue...";
+            showToast('Voice recognition failed.', 'error');
+        };
+        
+        recognition.start();
+    }
+
     // ---- Role Logic ----
     function toggleRole() {
         if (state.role === 'guest' || state.role === 'user') state.role = 'technician';
@@ -657,6 +707,18 @@ const App = (() => {
 
     function bidOnLead(id) {
         alert("Success! Your bid has been sent to the customer. You'll be notified if they accept.");
+    }
+
+    function openChatForTech(techId) {
+        navigate('chat');
+        setTimeout(() => {
+            const targetChat = document.querySelector(`.chat-list-item[data-conv-id="${techId}"]`);
+            if (targetChat) {
+                targetChat.click();
+            } else {
+                showToast("Chat thread unavailable.", "error");
+            }
+        }, 100);
     }
 
     function setUser(user) {
@@ -733,6 +795,9 @@ const App = (() => {
         const storedUser = localStorage.getItem('hv_user');
         if (storedUser) setUser(JSON.parse(storedUser));
 
+        // Geolocation Logic
+        fetchGeolocation();
+
         if (typeof firebase !== 'undefined') {
             firebase.auth().onAuthStateChanged(user => {
                 if (user) setUser(user);
@@ -740,10 +805,29 @@ const App = (() => {
         }
     }
 
+    function fetchGeolocation() {
+        const bdg = document.getElementById('liveLocationBadge');
+        if (!bdg) return;
+        
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    // For mockup, assume Cyprus based application
+                    setTimeout(() => { bdg.innerHTML = '<i class="fas fa-map-marker-alt" style="color:#10B981"></i> Nicosia, Cyprus (Live)'; }, 1000);
+                },
+                (err) => {
+                    bdg.innerHTML = '<i class="fas fa-map-marker-alt"></i> Cyprus (Default)';
+                }
+            );
+        } else {
+            bdg.innerHTML = '<i class="fas fa-map-marker-alt"></i> Cyprus';
+        }
+    }
+
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, exploreService, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, exploreService, openChatForTech, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 

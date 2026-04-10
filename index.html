@@ -27,7 +27,7 @@
         <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
         <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Marketplace</span></button>
         <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
-        <button class="menu-item" data-page="submit-problem"><i class="fas fa-stethoscope"></i><span>Diagnostic</span></button>
+
         <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Messages</span></button>
         
         <div class="menu-item" data-page="statistics" style="margin-top:20px;"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
@@ -76,14 +76,13 @@
         <!-- Marketplace View -->
         <div class="page-content active" id="page-marketplace">
             <div id="marketplaceContent">
-                <div class="search-container" style="display: grid; grid-template-columns: 1fr 200px auto; gap: 0; padding: 0; background: none; box-shadow: none;">
+                <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+                    <div id="liveLocationBadge" style="background:#E0F2FE; color:#0369A1; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:700;"><i class="fas fa-map-marker-alt fa-pulse me-1"></i> Locating...</div>
+                </div>
+                <div class="search-container" style="display: grid; grid-template-columns: 1fr auto; gap: 0; padding: 0; background: none; box-shadow: none;">
                     <div class="search-input-group" style="background: white; padding: 20px; border-radius: 15px 0 0 15px; border: 1px solid #EEE; border-right: none;">
                         <i class="fas fa-search" style="color:var(--jobie-purple)"></i>
-                        <input type="text" class="main-search" placeholder="What's on your to-do list?" style="font-size: 16px;">
-                    </div>
-                    <div class="location-picker" style="background: white; padding: 20px; border: 1px solid #EEE; border-radius: 0; border-left: 1px solid #F0F0FF; border-right: none;">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <input type="text" placeholder="Zip Code" style="border:none; outline:none; width:80px; font-weight:700; color:var(--text-main);">
+                        <input type="text" class="main-search" placeholder="What's on your to-do list in Cyprus?" style="font-size: 16px;">
                     </div>
                     <button class="btn-find" style="border-radius: 0 15px 15px 0; padding: 0 40px; font-size: 16px; margin: 0;">SEARCH</button>
                 </div>
@@ -152,6 +151,7 @@
                 <div style="display:flex; gap:15px; border-top:1px solid #EEE; padding-top:20px;">
                     <button onclick="document.getElementById('aiFileInput').click()" class="action-icon"><i class="fas fa-camera"></i></button>
                     <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
+                    <button id="btnVoiceAI" class="action-icon" onclick="App.toggleVoiceInput()"><i class="fas fa-microphone"></i></button>
                     <input type="text" id="aiQueryInput" placeholder="Describe your issue..." style="flex:1; padding:15px; border:1px solid #EEE; border-radius:15px; background:#F8F9FD;">
                     <button id="btnRunAI" onclick="App.runAIDiagnosis()" class="btn btn-accent px-4 py-2">ANALYZE</button>
                 </div>
@@ -174,43 +174,7 @@
             </div>
         </div>
 
-        <!-- Problem Submission (Guided) -->
-        <div class="page-content" id="page-submit-problem" style="display: none;">
-            <div class="results-header"><h1>Submit a Problem</h1><p>Guided AI Diagnosis Flow</p></div>
-            <div class="glass-card p-4">
-                <form id="problemForm">
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Issue Category</label>
-                        <div class="category-grid" id="categoryGrid">
-                            <div class="category-item" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
-                            <div class="category-item" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
-                            <div class="category-item" data-category="hvac"><i class="fas fa-wind"></i> HVAC/Air</div>
-                            <div class="category-item" data-category="appliances"><i class="fas fa-plug"></i> Appliances</div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Describe your issue</label>
-                        <textarea id="problemDescription" class="form-control" rows="4" placeholder="Be as specific as possible..."></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label fw-bold">Attach Photos (Optional)</label>
-                        <div id="uploadZone" class="upload-zone">
-                            <i class="fas fa-cloud-upload-alt fa-2x"></i><p>Click to upload photos</p>
-                            <input type="file" id="imageUpload" multiple style="display:none;">
-                        </div>
-                        <div id="uploadPreview" class="upload-preview mt-3"></div>
-                    </div>
-                    <button type="submit" class="btn btn-accent btn-lg w-100 py-3 fw-bold">RUN FULL DIAGNOSIS</button>
-                </form>
-            </div>
-        </div>
 
-        <!-- Diagnosis Result Page -->
-        <div class="page-content" id="page-diagnosis" style="display: none;">
-            <div id="diagnosisContent">
-                <!-- Injected via aiDiagnosis.js -->
-            </div>
-        </div>
 
         <!-- Technician Profile -->
         <div class="page-content" id="page-technician-profile" style="display: none;">
@@ -372,8 +336,7 @@
 <script src="js/modules/auth.js"></script>
 <script src="js/modules/landing.js"></script>
 <script src="js/modules/marketplace.js"></script>
-<script src="js/modules/problemSubmission.js"></script>
-<script src="js/modules/aiDiagnosis.js"></script>
+
 <script src="js/modules/technicianProfile.js"></script>
 <script src="js/modules/booking.js"></script>
 <script src="js/modules/chat.js"></script>
@@ -408,9 +371,18 @@
                     setTimeout(() => location.reload(), 500);
                 })
                 .catch(err => {
-                    console.error(err);
-                    App.showToast('Login successful (Mock Mode)', 'success');
-                    const mockUser = { email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : (email.includes('pro') ? 'technician' : 'user') };
+                    console.error("Firebase Auth fallback to Mock Mode", err);
+                    App.showToast('Login successful (Mock Mode) - Syncing to Firebase', 'success');
+                    const mockUser = { email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : (email.includes('pro') ? 'technician' : 'user'), lastLogin: new Date().toISOString() };
+                    
+                    // Sync to Firebase DB even if Auth failed (Mock persistence)
+                    if (typeof firebase !== 'undefined' && firebase.firestore) {
+                        try {
+                            const mockUserId = btoa(email); // Base64 basic ID
+                            firebase.firestore().collection('users').doc(mockUserId).set(mockUser, {merge: true});
+                        } catch(e) {}
+                    }
+
                     App.setUser(mockUser);
                     localStorage.setItem('hv_user', JSON.stringify(mockUser));
                     closeModal('loginModal');
