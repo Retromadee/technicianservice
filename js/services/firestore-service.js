@@ -1,17 +1,17 @@
-/* Firestore Service — Backend Connected */
+/* Firebase Data Service — Realtime Sync */
 const FirestoreService = (() => {
-    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
-        ? 'http://localhost:8081/api' 
-        : 'https://technician-service-production.up.railway.app/api'; // Assuming this is the Java backend URL
+    const getDb = () => FirebaseConfig.getDb();
 
     async function getJobs(filter = {}) {
-        let url = `${API_BASE}/jobs`;
-        if (filter.category) url += `?category=${filter.category}`;
+        const snapshot = await getDb().ref('jobs').once('value');
+        const data = snapshot.val();
+        if (!data) return [];
         
-        const response = await fetch(url, {
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('hv_token')}` }
-        });
-        return response.ok ? await response.json() : [];
+        let jobs = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+        if (filter.category) {
+            jobs = jobs.filter(j => j.category === filter.category);
+        }
+        return jobs;
     }
 
     async function getJob(id) {
