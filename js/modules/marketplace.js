@@ -18,16 +18,27 @@ const MarketplaceModule = (() => {
         // Initial fetch from REST API
         let jobs = await FirestoreService.getJobs({ status: 'active' });
 
-        // Listen for real-time updates via Firestore
-        const unsubscribe = db.collection('jobs').onSnapshot((snapshot) => {
-            // In a real implementation, merge Firestore updates with local state
+        // Listen for real-time updates via Realtime Database
+        const jobsRef = db.ref('jobs');
+        const onValueChange = jobsRef.on('value', (snapshot) => {
             console.log('🔥 Real-time marketplace update received');
-            // Re-render or update specific elements
+            const data = snapshot.val();
+            if (data) {
+                jobs = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                // Re-render if filter is 'all' or update local state
+                if (currentFilter === 'all') {
+                    const grid = document.getElementById('jobsGrid');
+                    if (grid) {
+                        grid.innerHTML = jobs.map(job => renderJobCard(job)).join('');
+                        bindJobActions();
+                    }
+                }
+            }
         });
 
-        // Store unsubscribe in App state or local list
+        // Store unsubscribe (off) function in App state
         App.currentUnsubscribes = App.currentUnsubscribes || [];
-        App.currentUnsubscribes.push(unsubscribe);
+        App.currentUnsubscribes.push(() => jobsRef.off('value', onValueChange));
 
         container.innerHTML = `
             <div class="marketplace-header">
@@ -164,11 +175,12 @@ const MarketplaceModule = (() => {
         });
 
         // Real-time listener for NEW quotes while modal is open
-        const quoteUnsubscribe = db.collection('jobs').doc(jobId).collection('quotes')
-            .onSnapshot((snapshot) => {
-                console.log('🔥 New quote received for job:', jobId);
-                // Optionally update the modal content dynamically
-            });
+        const quotesRef = db.ref(`jobs/${jobId}/quotes`);
+        const onQuoteChange = quotesRef.on('value', (snapshot) => {
+            console.log('🔥 New quote received for job:', jobId);
+            // In a full implementation, you'd re-render the modal content here
+        });
+        const quoteUnsubscribe = () => quotesRef.off('value', onQuoteChange);
 
         // Accept quote
         modal.querySelectorAll('.accept-quote-btn').forEach(btn => {

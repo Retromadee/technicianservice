@@ -24,7 +24,7 @@ const ChatModule = (() => {
         const convs = ChatService.getConversations();
 
         container.innerHTML = `
-            <div class="chat-container" id="chatContainer">
+            <div class="chat-container ${activeConvId ? 'chat-open' : ''}" id="chatContainer">
                 <div class="chat-sidebar">
                     <div class="chat-sidebar-header">
                         <h5><i class="fas fa-comments me-2"></i>Messages</h5>
@@ -59,9 +59,14 @@ const ChatModule = (() => {
     }
 
     function renderConversation() {
-        const conv = ChatService.getConversation(activeConvId);
-        if (!conv) return;
+        if (!activeConvId) return;
+        const conv = ChatService.getConversation(activeConvId.toString());
+        if (!conv) {
+            console.warn("Conversation not found:", activeConvId);
+            return;
+        }
         const main = document.getElementById('chatMain');
+        if (!main) return;
 
         main.innerHTML = `
             <div class="chat-main-header">
@@ -73,7 +78,7 @@ const ChatModule = (() => {
                 <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-phone"></i></button>
             </div>
             <div class="chat-messages" id="chatMessages">
-                ${conv.messages.map(m => `<div class="message ${m.sender === 'user' ? 'sent' : 'received'}"><span>${m.text}</span><span class="message-time">${m.time}</span></div>`).join('')}
+                ${(conv.messages || []).map(m => `<div class="message ${m.sender === 'user' ? 'sent' : 'received'}"><span>${m.text}</span><span class="message-time">${m.time}</span></div>`).join('')}
             </div>
             <div class="chat-input-area">
                 <div class="chat-input-group">
