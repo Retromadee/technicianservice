@@ -431,6 +431,34 @@ const App = (() => {
             }
         }
     }
+    function logout() {
+        AuthService.logout();
+        showToast('Logged out successfully', 'success');
+        setTimeout(() => location.reload(), 500);
+    }
+
+    function toggleAuthTab(tab) {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginTab = document.getElementById('tab-login');
+        const registerTab = document.getElementById('tab-signup');
+
+        if (tab === 'login') {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+            loginTab.style.background = 'white';
+            loginTab.style.color = 'var(--jobie-purple)';
+            registerTab.style.background = 'none';
+            registerTab.style.color = '#888';
+        } else {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            registerTab.style.background = 'white';
+            registerTab.style.color = 'var(--jobie-purple)';
+            loginTab.style.background = 'none';
+            loginTab.style.color = '#888';
+        }
+    }
 
     function initSearch() {
         const mainInput = document.querySelector('.main-search');
@@ -901,7 +929,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, toggleSidebar, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, toggleSidebar, logout, toggleAuthTab, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 

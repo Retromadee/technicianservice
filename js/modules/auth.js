@@ -50,7 +50,12 @@ const AuthModule = (() => {
         // Toggle technician fields
         document.querySelectorAll('input[name="userRole"]').forEach(radio => {
             radio.addEventListener('change', () => {
-                document.getElementById('technicianFields').style.display = radio.value === 'technician' ? 'block' : 'none';
+                const techFields = document.getElementById('technicianFields');
+                if (techFields) techFields.style.display = radio.value === 'technician' ? 'block' : 'none';
+                
+                // Update UI active state
+                document.querySelectorAll('.role-label').forEach(lbl => lbl.classList.remove('active'));
+                radio.closest('.role-label').classList.add('active');
             });
         });
     });

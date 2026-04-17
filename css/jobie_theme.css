@@ -145,6 +145,12 @@ body {
     z-index: 999;
 }
 
+.role-label.active {
+    border-color: var(--jobie-purple) !important;
+    background: var(--jobie-purple-soft) !important;
+    color: var(--jobie-purple) !important;
+}
+
 /* --- Top Bar --- */
 .top-bar {
     height: var(--header-height);
