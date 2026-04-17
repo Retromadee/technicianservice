@@ -53,12 +53,47 @@ const AuthModule = (() => {
                 const techFields = document.getElementById('technicianFields');
                 if (techFields) techFields.style.display = radio.value === 'technician' ? 'block' : 'none';
                 
-                // Update UI active state
+        // Update UI active state
                 document.querySelectorAll('.role-label').forEach(lbl => lbl.classList.remove('active'));
                 radio.closest('.role-label').classList.add('active');
             });
         });
     });
 
-    return {};
+    async function signInWithGoogle() {
+        if (typeof firebase === 'undefined' || !firebase.auth) {
+            App.showToast('Firebase not initialized', 'error');
+            return;
+        }
+
+        const provider = new firebase.auth.GoogleAuthProvider();
+        try {
+            App.showLoading('Connecting to Google...');
+            const result = await firebase.auth().signInWithPopup(provider);
+            const user = result.user;
+            
+            const userData = {
+                id: user.uid,
+                email: user.email,
+                firstName: user.displayName ? user.displayName.split(' ')[0] : 'User',
+                lastName: user.displayName ? (user.displayName.split(' ').slice(1).join(' ') || '') : '',
+                photo: user.photoURL,
+                role: 'user' // Default role for Google login
+            };
+
+            // Store in our app state
+            App.setUser(userData);
+            localStorage.setItem('hv_user', JSON.stringify(userData));
+            
+            App.hideLoading();
+            App.showToast(`Welcome, ${userData.firstName}! 👋`, 'success');
+            App.navigate('dashboard');
+        } catch (error) {
+            App.hideLoading();
+            console.error("Google Auth Error:", error);
+            App.showToast(error.message, 'error');
+        }
+    }
+
+    return { signInWithGoogle };
 })();

@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<div class="sidebar animate-in">
+<div class="sidebar">
     <div class="logo">
         <div class="company-logo logo-blue shadow-lg" style="width:40px; height:40px; font-size:20px;">H</div>
         <span>HomeFix <b>Pro</b></span>
@@ -285,7 +285,15 @@
                     <label class="form-label fw-bold small">PASSWORD</label>
                     <input type="password" id="loginPassword" class="form-control py-3 rounded-3" placeholder="••••••••" required>
                 </div>
-                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm">SIGN IN</button>
+                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">SIGN IN</button>
+                
+                <div class="text-center mb-3 text-muted small">OR CONTINUE WITH</div>
+                
+                <button type="button" onclick="AuthModule.signInWithGoogle()" class="btn btn-outline-secondary w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mb-3">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18">
+                    <span class="fw-bold">Google</span>
+                </button>
+
                 <p class="text-center mt-3 small text-muted">Forgot password? <a href="#" class="text-primary text-decoration-none fw-bold">Reset here</a></p>
             </form>
 
@@ -355,7 +363,14 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm">CREATE ACCOUNT</button>
+                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">CREATE ACCOUNT</button>
+                
+                <div class="text-center mb-3 text-muted small">OR REGISTER WITH</div>
+                
+                <button type="button" onclick="AuthModule.signInWithGoogle()" class="btn btn-outline-secondary w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mb-3">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18">
+                    <span class="fw-bold">Google</span>
+                </button>
             </form>
 
             <button onclick="closeModal('loginModal')" class="btn btn-link mt-4 w-100 text-muted small text-decoration-none">Back to Website</button>

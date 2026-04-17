@@ -760,16 +760,12 @@ const App = (() => {
 
         const conv = ChatService.getOrCreateConversationForTech(tech);
         closeDrawer();
-        navigate('chat');
-
-        setTimeout(() => {
-            const targetChat = document.querySelector(`.chat-list-item[data-conv-id="${conv.id}"]`);
-            if (targetChat) {
-                targetChat.click();
-            } else {
-                showToast("Chat thread unexpectedly unavailable.", "error");
-            }
-        }, 100);
+        
+        if (typeof ChatModule !== 'undefined' && ChatModule.openConversation) {
+            ChatModule.openConversation(conv.id);
+        } else {
+            navigate('chat');
+        }
     }
 
     function setUser(user) {

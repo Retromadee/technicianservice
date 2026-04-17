@@ -1152,4 +1152,79 @@ body {
     #btnBookingBack {
         padding: 15px 10px !important;
     }
+    /* Mobile Polish - Final Touches */
+    .top-bar {
+        height: 60px !important;
+        padding: 0 15px !important;
+    }
+    
+    .top-bar h2 {
+        font-size: 18px !important;
+    }
+
+    .job-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 0 !important;
+    }
+
+    .job-card {
+        border-radius: 15px !important;
+        margin-bottom: 0 !important;
+        width: 100% !important;
+    }
+
+    .main-search-wrapper {
+        flex-direction: column !important;
+        gap: 10px !important;
+        border: none !important;
+        background: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+
+    .location-picker, .main-search-input {
+        background: white !important;
+        border: 1px solid #EEE !important;
+        border-radius: 15px !important;
+        padding: 15px !important;
+        width: 100% !important;
+    }
+
+    .btn-find {
+        width: 100% !important;
+        border-radius: 15px !important;
+        padding: 15px !important;
+        height: 55px !important;
+    }
+
+    .suggestions-container {
+        padding: 10px 0 15px 0 !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        display: block !important;
+    }
+
+    .suggestion-chip {
+        display: inline-block !important;
+        margin-right: 8px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Modal Mobile Fixes */
+    .modal-dialog {
+        margin: 10px !important;
+        max-width: calc(100% - 20px) !important;
+    }
+
+    .modal-content {
+        border-radius: 20px !important;
+        padding: 5px !important;
+    }
+
+    .auth-tabs {
+        margin: -25px -25px 25px -25px !important;
+        border-radius: 20px 20px 0 0 !important;
+    }
 }

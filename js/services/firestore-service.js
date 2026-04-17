@@ -15,36 +15,47 @@ const FirestoreService = (() => {
     }
 
     async function getJob(id) {
-        const response = await fetch(`${API_BASE}/jobs/${id}`, {
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('hv_token')}` }
-        });
-        return response.ok ? await response.json() : null;
+        const snapshot = await getDb().ref(`jobs/${id}`).once('value');
+        return snapshot.val();
     }
 
     async function getQuotesForJob(jobId) {
-        const response = await fetch(`${API_BASE}/marketplace/jobs/${jobId}/quotes`, {
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('hv_token')}` }
-        });
-        return response.ok ? await response.json() : [];
+        const snapshot = await getDb().ref(`jobs/${jobId}/quotes`).once('value');
+        const data = snapshot.val();
+        if (!data) return [];
+        return Object.keys(data).map(key => ({ id: key, ...data[key] }));
     }
 
     async function createJob(jobData) {
-        const response = await fetch(`${API_BASE}/jobs`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('hv_token')}`
-            },
-            body: JSON.stringify(jobData)
-        });
-        
-        if (!response.ok) throw new Error('Failed to post job');
-        return await response.json();
+        const newJobRef = getDb().ref('jobs').push();
+        const data = {
+            ...jobData,
+            createdAt: new Date().toISOString(),
+            quotesCount: 0,
+            status: 'active'
+        };
+        await newJobRef.set(data);
+        return { id: newJobRef.key, ...data };
     }
 
-    // Technicians might still be mocked if we haven't implemented a Tech profile API yet
-    async function getTechnicians() { return []; } 
-    async function getTechnician(id) { return null; }
+    async function getTechnicians() {
+        try {
+            const snapshot = await getDb().ref('technicians').once('value');
+            const data = snapshot.val();
+            if (!data) return [];
+            // Handle numeric keys returning as sparse array with nulls
+            const list = Array.isArray(data) ? data : Object.values(data);
+            return list.filter(t => t !== null);
+        } catch (e) {
+            console.error("Error fetching technicians:", e);
+            return [];
+        }
+    }
+
+    async function getTechnician(id) {
+        const snapshot = await getDb().ref(`technicians/${id}`).once('value');
+        return snapshot.val();
+    }
 
     return { getJobs, getJob, getQuotesForJob, getTechnician, getTechnicians, createJob };
 })();

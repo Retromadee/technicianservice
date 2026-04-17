@@ -115,5 +115,14 @@ const ChatModule = (() => {
         msgs.scrollTop = msgs.scrollHeight;
     }
 
-    return {};
+    function openConversation(convId) {
+        activeConvId = convId;
+        if (App.state.currentPage === 'chat') {
+            render();
+        } else {
+            App.navigate('chat');
+        }
+    }
+
+    return { openConversation };
 })();
