@@ -40,11 +40,15 @@
         <div>Upgrade to Platinum for 5% lower service fees.</div>
     </div>
 </div>
+<div class="sidebar-overlay" onclick="App.toggleSidebar()"></div>
 
 <div class="main-wrapper">
     <!-- Top Bar -->
     <header class="top-bar">
         <div class="top-left">
+            <button class="mobile-nav-toggle" onclick="App.toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
             <h2 id="pageTitle">Marketplace</h2>
             <div class="global-search">
                 <i class="fas fa-search"></i>

@@ -409,6 +409,27 @@ const App = (() => {
 
         // Notify modules
         emit('navigate', { page });
+
+        // Close sidebar on mobile after navigation
+        if (window.innerWidth <= 1024) {
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar && sidebar.classList.contains('active')) {
+                toggleSidebar();
+            }
+        }
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.classList.toggle('active');
+            // Prevent body scroll when sidebar is open on mobile
+            if (sidebar.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
     }
 
     function initSearch() {
@@ -880,7 +901,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, toggleSidebar, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
 })();
 
 
