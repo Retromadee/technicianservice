@@ -1,6 +1,6 @@
 /* Auth Service — Backend Connected */
 const AuthService = (() => {
-    const API_BASE = 'http://localhost:8081/api/auth';
+    const API_BASE = window.AppConfig ? AppConfig.getAuthBase() : 'http://localhost:8081/api/auth';
 
     async function login(email, password) {
         const response = await fetch(`${API_BASE}/signin`, {

@@ -14,16 +14,22 @@ const App = (() => {
         currentBookingStep: 1,
         currentAIImages: [],
         technicians: [],
-        events: {}
+        events: {},
+        isReady: false
     };
 
-    // ---- Event System ----
     function on(event, callback) {
         if (!state.events[event]) state.events[event] = [];
         state.events[event].push(callback);
+        
+        // If app is already ready and someone listens for appReady, fire it immediately
+        if (event === 'appReady' && state.isReady) {
+            callback();
+        }
     }
 
     function emit(event, data) {
+        if (event === 'appReady') state.isReady = true;
         if (state.events[event]) {
             state.events[event].forEach(cb => cb(data));
         }
@@ -888,6 +894,8 @@ const App = (() => {
                 if (user) setUser(user);
             });
         }
+
+        emit('appReady');
     }
 
     function fetchGeolocation() {
@@ -912,7 +920,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, toggleSidebar, logout, toggleAuthTab, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, on, emit };
+    return { navigate, toggleSidebar, logout, toggleAuthTab, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, showLoading, hideLoading, on, emit };
 })();
 
 
