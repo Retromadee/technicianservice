@@ -27,14 +27,14 @@ const AuthModule = (() => {
                 firstName: document.getElementById('regFirstName').value,
                 lastName: document.getElementById('regLastName').value,
                 email: document.getElementById('regEmail').value,
-                phone: document.getElementById('regPhone').value,
+                phone: document.getElementById('regPhone')?.value || '',
                 password: document.getElementById('regPassword').value,
                 role
             };
             if (role === 'technician') {
-                userData.specialization = document.getElementById('regSpecialization').value;
-                userData.experience = document.getElementById('regExperience').value;
-                userData.bio = document.getElementById('regBio').value;
+                userData.specialization = document.getElementById('regSpecialization')?.value || '';
+                userData.experience = document.getElementById('regExperience')?.value || '';
+                userData.bio = document.getElementById('regBio')?.value || '';
             }
             try {
                 App.showLoading('Creating account...');
