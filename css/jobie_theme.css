@@ -26,6 +26,17 @@
     --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
     --sidebar-width: 260px;
     --header-height: 80px;
+
+    /* Semantic Surface Colors (for dark mode toggling) */
+    --surface-card: #FFFFFF;
+    --surface-input: #F8F9FD;
+    --surface-hover: #F8F9FD;
+    --border-color: #EEEEEE;
+    --border-light: #F0F0F0;
+    --modal-bg: #FFFFFF;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --chat-bubble-received: #FFFFFF;
+    --chat-bubble-bg: #FAFAFF;
 }
 
 * {
@@ -1227,4 +1238,324 @@ body {
         margin: -25px -25px 25px -25px !important;
         border-radius: 20px 20px 0 0 !important;
     }
+}
+
+/* ============================================
+   DARK THEME
+   ============================================ */
+body.dark-theme {
+    --jobie-bg: #0f1117;
+    --jobie-white: #1a1b23;
+    --jobie-sidebar-bg: #13141d;
+    --jobie-purple-soft: rgba(76, 57, 172, 0.2);
+
+    --text-main: #e4e4e7;
+    --text-muted: #9ca3af;
+    --text-light: #6b7280;
+
+    --surface-card: #1a1b23;
+    --surface-input: #22232d;
+    --surface-hover: #22232d;
+    --border-color: #2d2e3a;
+    --border-light: #25262f;
+    --modal-bg: #1a1b23;
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --chat-bubble-received: #22232d;
+    --chat-bubble-bg: #15161e;
+
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Global Dark Overrides --- */
+body.dark-theme {
+    background-color: var(--jobie-bg);
+    color: var(--text-main);
+}
+
+body.dark-theme .sidebar {
+    background-color: var(--jobie-sidebar-bg);
+    border-right: 1px solid var(--border-color);
+}
+
+body.dark-theme .menu-item.active {
+    background-color: var(--jobie-bg);
+    color: var(--jobie-purple-light);
+}
+
+body.dark-theme .top-bar {
+    background-color: transparent;
+}
+
+body.dark-theme .action-icon {
+    background: var(--surface-card);
+    color: var(--text-main);
+    box-shadow: var(--shadow-subtle);
+}
+
+body.dark-theme .user-info .name {
+    color: var(--text-main);
+}
+
+/* --- Cards --- */
+body.dark-theme .job-card {
+    background: var(--surface-card);
+    border-color: var(--border-color);
+}
+
+body.dark-theme .job-card:hover {
+    border-color: rgba(76, 57, 172, 0.4);
+    box-shadow: var(--shadow-hover);
+}
+
+body.dark-theme .job-card h4 {
+    color: var(--text-main);
+}
+
+body.dark-theme .glass-card {
+    background: rgba(26, 27, 35, 0.8);
+    border-color: var(--border-color);
+}
+
+body.dark-theme .category-item {
+    background: var(--surface-card);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+
+body.dark-theme .category-item:hover,
+body.dark-theme .category-item.selected {
+    background: var(--jobie-purple-soft);
+    border-color: var(--jobie-purple);
+}
+
+/* --- Search --- */
+body.dark-theme .search-container {
+    background: var(--surface-card);
+    box-shadow: var(--shadow-subtle);
+}
+
+body.dark-theme .main-search {
+    color: var(--text-main);
+    background: transparent;
+}
+
+body.dark-theme .main-search::placeholder {
+    color: var(--text-light);
+}
+
+body.dark-theme .global-search {
+    background-color: var(--surface-input);
+}
+
+body.dark-theme .global-search input {
+    color: var(--text-main);
+}
+
+/* --- Tags --- */
+body.dark-theme .tag {
+    background: var(--surface-card);
+    color: var(--text-main);
+    box-shadow: var(--shadow-subtle);
+}
+
+body.dark-theme .tag:hover,
+body.dark-theme .tag.active {
+    background-color: var(--jobie-purple);
+    color: white;
+}
+
+/* --- Modals --- */
+body.dark-theme .modal-overlay {
+    background: var(--overlay-bg);
+}
+
+body.dark-theme .modal-content {
+    background: var(--modal-bg) !important;
+    color: var(--text-main);
+}
+
+body.dark-theme .modal-content .form-control,
+body.dark-theme .modal-content .form-select {
+    background: var(--surface-input) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body.dark-theme .modal-content .form-control::placeholder {
+    color: var(--text-light);
+}
+
+body.dark-theme .modal-content .form-label {
+    color: var(--text-muted) !important;
+}
+
+body.dark-theme .modal-content h2,
+body.dark-theme .modal-content h3 {
+    color: var(--text-main);
+}
+
+body.dark-theme .role-label {
+    border-color: var(--border-color) !important;
+    color: var(--text-main);
+}
+
+body.dark-theme .role-label.active {
+    border-color: var(--jobie-purple) !important;
+    background: var(--jobie-purple-soft) !important;
+    color: var(--jobie-purple-light) !important;
+}
+
+/* --- Chat --- */
+body.dark-theme .chat-container {
+    background: var(--surface-card);
+}
+
+body.dark-theme .chat-sidebar {
+    border-right-color: var(--border-color);
+}
+
+body.dark-theme .chat-sidebar-header {
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .chat-list-item {
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .chat-list-item:hover {
+    background: var(--surface-hover);
+}
+
+body.dark-theme .chat-list-item.active {
+    background: var(--jobie-purple-soft);
+}
+
+body.dark-theme .chat-main {
+    background: var(--chat-bubble-bg);
+}
+
+body.dark-theme .chat-main-header {
+    background: var(--surface-card);
+    border-bottom-color: var(--border-color);
+}
+
+body.dark-theme .message.received {
+    background: var(--chat-bubble-received);
+    color: var(--text-main);
+}
+
+body.dark-theme .chat-input-area {
+    background: var(--surface-card);
+    border-top-color: var(--border-color);
+}
+
+body.dark-theme .chat-input-group {
+    background: var(--surface-input);
+}
+
+body.dark-theme .chat-input-group input {
+    color: var(--text-main);
+}
+
+/* --- Drawer --- */
+body.dark-theme .drawer-content {
+    background: var(--surface-card) !important;
+    color: var(--text-main);
+}
+
+/* --- Diagnosis --- */
+body.dark-theme .diagnosis-card {
+    background: var(--surface-card);
+    border-top-color: var(--jobie-purple);
+}
+
+/* --- Status Badges --- */
+body.dark-theme .status-badge.active { background: rgba(3, 105, 161, 0.2); }
+body.dark-theme .status-badge.completed { background: rgba(46, 125, 50, 0.2); }
+body.dark-theme .status-badge.pending { background: rgba(230, 81, 0, 0.2); }
+
+/* --- Path Choice --- */
+body.dark-theme .path-choice {
+    background: var(--surface-card);
+    border-color: var(--border-color);
+}
+
+/* --- Upload Zone --- */
+body.dark-theme .upload-zone {
+    border-color: var(--border-color);
+    background: var(--surface-input);
+}
+
+/* --- Booking Modal Dark --- */
+body.dark-theme #bookingModal .modal-content {
+    background: var(--modal-bg) !important;
+    color: var(--text-main);
+}
+
+body.dark-theme #bookingModal label {
+    border-color: var(--border-color) !important;
+    color: var(--text-main);
+}
+
+body.dark-theme #bookingModal textarea {
+    background: var(--surface-input) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* --- Confidence Meter --- */
+body.dark-theme .confidence-meter {
+    background: var(--border-color);
+}
+
+/* --- Scrollbar Styling --- */
+body.dark-theme ::-webkit-scrollbar {
+    width: 8px;
+}
+
+body.dark-theme ::-webkit-scrollbar-track {
+    background: var(--jobie-bg);
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-light);
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-card);
+    box-shadow: var(--shadow-subtle);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    color: var(--text-main);
+    font-size: 18px;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Smooth transition for theme switching */
+body, body * {
+    transition: background-color 0.3s ease, color 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Exclude elements that need instant animation */
+.animate-in, .job-card, .btn-find, .btn, button {
+    transition: background-color 0.3s ease, color 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease !important;
 }

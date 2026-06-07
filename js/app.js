@@ -104,7 +104,7 @@ const App = (() => {
         if (!grid) return;
         
         if (state.myRequests.length === 0) {
-            grid.innerHTML = '<div style="grid-column:1/-1; padding:40px; text-align:center; background:white; border-radius:20px; color:#888; font-weight:700;">No active requests yet. Explore services below!</div>';
+            grid.innerHTML = '<div style="grid-column:1/-1; padding:40px; text-align:center; background:var(--surface-card); border-radius:20px; color:var(--text-muted); font-weight:700;">No active requests yet. Explore services below!</div>';
             return;
         }
 
@@ -794,7 +794,31 @@ const App = (() => {
         if (state.role === 'technician') renderLeads();
     }
 
+    // ---- Theme Toggle ----
+    function toggleTheme() {
+        const isDark = document.body.classList.toggle('dark-theme');
+        const icon = document.getElementById('themeIcon');
+        if (icon) {
+            icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        localStorage.setItem('hf_theme', isDark ? 'dark' : 'light');
+    }
+
+    function initTheme() {
+        const saved = localStorage.getItem('hf_theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved === 'dark' || (!saved && prefersDark);
+        if (useDark) {
+            document.body.classList.add('dark-theme');
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = 'fas fa-sun';
+        }
+    }
+
     async function init() {
+        // Initialize theme
+        initTheme();
+
         // Load technicians and seed if empty
         const techs = await FirestoreService.getTechnicians();
         if (techs.length === 0 && typeof SeedService !== 'undefined') {
@@ -836,13 +860,13 @@ const App = (() => {
             }
 
             if (notifs.length === 0) {
-                list.innerHTML = `<div style="padding:15px; text-align:center; color:#888; font-size:13px;">No new alerts</div>`;
+                list.innerHTML = `<div style="padding:15px; text-align:center; color:var(--text-muted); font-size:13px;">No new alerts</div>`;
             } else {
                 list.innerHTML = notifs.map(n => `
-                    <div style="padding:12px 15px; border-bottom:1px solid #EEE; background:${n.read ? '#FFF' : '#F0F9FF'}; cursor:pointer;" onclick="App.handleNotifClick('${n.id}', '${n.type}')">
-                        <div style="font-weight:700; font-size:13px; color:#333;">${n.title}</div>
-                        <div style="font-size:11px; color:#666; margin-top:3px;">${n.description}</div>
-                        <div style="font-size:9px; color:#AAA; margin-top:5px;">${new Date(n.time).toLocaleString()}</div>
+                    <div style="padding:12px 15px; border-bottom:1px solid var(--border-color); background:${n.read ? 'var(--surface-card)' : 'var(--jobie-purple-soft)'}; cursor:pointer;" onclick="App.handleNotifClick('${n.id}', '${n.type}')">
+                        <div style="font-weight:700; font-size:13px; color:var(--text-main);">${n.title}</div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">${n.description}</div>
+                        <div style="font-size:9px; color:var(--text-light); margin-top:5px;">${new Date(n.time).toLocaleString()}</div>
                     </div>
                 `).join('');
             }
@@ -910,7 +934,7 @@ const App = (() => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();
 
-    return { navigate, toggleSidebar, logout, toggleAuthTab, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, showLoading, hideLoading, on, emit };
+    return { navigate, toggleSidebar, logout, toggleAuthTab, toggleTheme, exploreService, openChatForTech, handleNotifClick, toggleNotifications, renderTechnicians, selectTech, openBooking, closeDrawer, runAIDiagnosis, handleAIImage, toggleVoiceInput, toggleRole, bidOnLead, nextStep, prevStep, completeJobSim, setUser, state, showToast, showLoading, hideLoading, on, emit };
 })();
 
 
