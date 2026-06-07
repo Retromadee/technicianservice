@@ -11,6 +11,7 @@ const AuthModule = (() => {
                 await AuthService.login(email, password);
                 App.hideLoading();
                 App.showToast('Welcome back! 👋', 'success');
+                if (typeof closeModal === 'function') closeModal('loginModal');
                 App.navigate('dashboard');
             } catch (err) {
                 App.hideLoading();
@@ -40,6 +41,7 @@ const AuthModule = (() => {
                 await AuthService.register(userData);
                 App.hideLoading();
                 App.showToast('Account created! Welcome! 🎉', 'success');
+                if (typeof closeModal === 'function') closeModal('loginModal');
                 App.navigate('dashboard');
             } catch (err) {
                 App.hideLoading();
@@ -87,6 +89,7 @@ const AuthModule = (() => {
             
             App.hideLoading();
             App.showToast(`Welcome, ${userData.firstName}! 👋`, 'success');
+            if (typeof closeModal === 'function') closeModal('loginModal');
             App.navigate('dashboard');
         } catch (error) {
             App.hideLoading();
