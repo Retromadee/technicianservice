@@ -420,23 +420,13 @@ const App = (() => {
     function toggleAuthTab(tab) {
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
-        const loginTab = document.getElementById('tab-login');
-        const registerTab = document.getElementById('tab-signup');
 
         if (tab === 'login') {
             loginForm.style.display = 'block';
             registerForm.style.display = 'none';
-            loginTab.style.background = 'white';
-            loginTab.style.color = 'var(--jobie-purple)';
-            registerTab.style.background = 'none';
-            registerTab.style.color = '#888';
         } else {
             loginForm.style.display = 'none';
             registerForm.style.display = 'block';
-            registerTab.style.background = 'white';
-            registerTab.style.color = 'var(--jobie-purple)';
-            loginTab.style.background = 'none';
-            loginTab.style.color = '#888';
         }
     }
 

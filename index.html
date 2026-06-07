@@ -1,351 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeFix Pro — Modern AI Home Service Platform</title>
-    
+
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- Bootstrap (For Modals/Grid if needed) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Custom Style -->
     <link rel="stylesheet" href="css/jobie_theme.css">
 </head>
+
 <body>
 
-<div class="sidebar">
-    <div class="logo">
-        <div class="company-logo logo-blue shadow-lg" style="width:40px; height:40px; font-size:20px;">H</div>
-        <span>HomeFix <b>Pro</b></span>
-    </div>
-
-    <nav class="nav-menu">
-        <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
-        <button class="menu-item active" data-page="marketplace"><i class="fas fa-search"></i><span>Marketplace</span></button>
-        <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
-
-        <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Messages</span></button>
-        
-        <div class="menu-item" data-page="statistics" style="margin-top:20px;"><i class="fas fa-chart-pie"></i> <span>Statistics</span></div>
-        <div class="menu-item" id="menu-pro-leads" data-page="leads" style="display:none;"><i class="fas fa-briefcase"></i> <span>Pro Leads</span></div>
-        <div class="menu-item" id="menu-admin" data-page="admin" style="display:none;"><i class="fas fa-user-shield"></i> <span>Admin Panel</span></div>
-    </nav>
-
-    <div class="sidebar-footer">
-        <div style="font-weight: 800; margin-bottom: 5px;">PRO VERSION 2.5</div>
-        <div>Upgrade to Platinum for 5% lower service fees.</div>
-    </div>
-</div>
-<div class="sidebar-overlay" onclick="App.toggleSidebar()"></div>
-
-<div class="main-wrapper">
-    <!-- Top Bar -->
-    <header class="top-bar">
-        <div class="top-left">
-            <button class="mobile-nav-toggle" onclick="App.toggleSidebar()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <h2 id="pageTitle">Marketplace</h2>
-            <div class="global-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for any repair help...">
-            </div>
+    <div class="sidebar">
+        <div class="logo">
+            <div class="company-logo logo-blue shadow-lg" style="width:40px; height:40px; font-size:20px;">H</div>
+            <span>HomeFix <b>Pro</b></span>
         </div>
 
-        <div class="top-right">
-            <div class="action-icon" data-page="chat">
-                <i class="fas fa-envelope"></i>
-                <div class="badge" id="chatBadge" style="display:none;">0</div>
+        <nav class="nav-menu">
+            <button class="menu-item" data-page="dashboard"><i class="fas fa-home"></i><span>Dashboard</span></button>
+            <button class="menu-item active" data-page="marketplace"><i
+                    class="fas fa-search"></i><span>Marketplace</span></button>
+            <button class="menu-item" data-page="ai-assistant"><i class="fas fa-robot"></i><span>AI
+                    Assistant</span></button>
+
+            <button class="menu-item" data-page="chat"><i class="fas fa-comment-dots"></i><span>Messages</span></button>
+
+            <div class="menu-item" data-page="statistics" style="margin-top:20px;"><i class="fas fa-chart-pie"></i>
+                <span>Statistics</span></div>
+            <div class="menu-item" id="menu-pro-leads" data-page="leads" style="display:none;"><i
+                    class="fas fa-briefcase"></i> <span>Pro Leads</span></div>
+            <div class="menu-item" id="menu-admin" data-page="admin" style="display:none;"><i
+                    class="fas fa-user-shield"></i> <span>Admin Panel</span></div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div style="font-weight: 800; margin-bottom: 5px;">CAPSTONE PROJECT</div>
+            <div>Unegbu David Obichukwu</div>
+            <div>Mbagwu Chidera Genevieve</div>
+            <div>Mohamed Gamal Kasem</div>
+
+        </div>
+    </div>
+    <div class="sidebar-overlay" onclick="App.toggleSidebar()"></div>
+
+    <div class="main-wrapper">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-left">
+                <button class="mobile-nav-toggle" onclick="App.toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2 id="pageTitle">Marketplace</h2>
+                <div class="global-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for any repair help...">
+                </div>
             </div>
-            <div class="action-icon" style="position:relative;" onclick="App.toggleNotifications()">
-                <i class="fas fa-bell"></i>
-                <div class="badge" id="notifBadge" style="display:none;">0</div>
-                <div id="notificationDropdown" style="display:none; position:absolute; top:45px; right:-10px; width:300px; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); border:1px solid #EEE; z-index:100; text-align:left; cursor:default; overflow:hidden;">
-                    <div style="padding:15px; border-bottom:1px solid #EEE; font-weight:800; font-size:14px; background:#F8F9FD;">Notifications</div>
-                    <div id="notificationList" style="max-height:300px; overflow-y:auto; padding:10px 0;">
-                        <div style="padding:15px; text-align:center; color:#888; font-size:13px;">No new notifications</div>
+
+            <div class="top-right">
+                <div class="action-icon" data-page="chat">
+                    <i class="fas fa-envelope"></i>
+                    <div class="badge" id="chatBadge" style="display:none;">0</div>
+                </div>
+                <div class="action-icon" style="position:relative;" onclick="App.toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <div class="badge" id="notifBadge" style="display:none;">0</div>
+                    <div id="notificationDropdown"
+                        style="display:none; position:absolute; top:45px; right:-10px; width:300px; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.1); border:1px solid #EEE; z-index:100; text-align:left; cursor:default; overflow:hidden;">
+                        <div
+                            style="padding:15px; border-bottom:1px solid #EEE; font-weight:800; font-size:14px; background:#F8F9FD;">
+                            Notifications</div>
+                        <div id="notificationList" style="max-height:300px; overflow-y:auto; padding:10px 0;">
+                            <div style="padding:15px; text-align:center; color:#888; font-size:13px;">No new
+                                notifications</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-profile" onclick="toggleAuthModal()">
+                    <div class="user-info text-end">
+                        <div class="name" id="userName">Guest User</div>
+                        <div class="role" id="userRole">Basic Member</div>
+                    </div>
+                    <img src="https://i.pravatar.cc/150?u=homefix" alt="Profile" id="userAvatar">
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area">
+
+            <!-- Marketplace View -->
+            <div class="page-content active" id="page-marketplace">
+                <div id="marketplaceContent">
+                    <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+                        <div id="liveLocationBadge"
+                            style="background:#E0F2FE; color:#0369A1; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:700;">
+                            <i class="fas fa-map-marker-alt fa-pulse me-1"></i> Locating...</div>
+                    </div>
+                    <div class="search-container"
+                        style="display: grid; grid-template-columns: 1fr auto; gap: 0; padding: 0; background: none; box-shadow: none;">
+                        <div class="search-input-group"
+                            style="background: white; padding: 20px; border-radius: 15px 0 0 15px; border: 1px solid #EEE; border-right: none;">
+                            <i class="fas fa-search" style="color:var(--jobie-purple)"></i>
+                            <input type="text" class="main-search" placeholder="What's on your to-do list in Cyprus?"
+                                style="font-size: 16px;">
+                        </div>
+                        <button class="btn-find"
+                            style="border-radius: 0 15px 15px 0; padding: 0 40px; font-size: 16px; margin: 0;">SEARCH</button>
+                    </div>
+
+                    <div class="suggestions">
+                        <span style="font-weight: 600; color: #888;">Suggestions:</span>
+                        <div class="tag active">All Pros</div>
+                        <div class="tag">Plumbing</div>
+                        <div class="tag">Electrical</div>
+                        <div class="tag">HVAC</div>
+                        <div class="tag">Appliance</div>
+                        <div class="tag">Carpentry</div>
+                        <div class="tag">Security</div>
+                        <div class="tag">Cleaning</div>
+                        <div class="tag">Painting</div>
+                    </div>
+
+                    <div class="results-header">
+                        <div class="results-count">
+                            <h3>Showing <span id="jobCount">24</span> Recommended Pros</h3>
+                        </div>
+                    </div>
+                    <div class="job-grid" id="jobGrid">
+                        <!-- Tech cards injected here -->
                     </div>
                 </div>
             </div>
-            <div class="user-profile" onclick="toggleAuthModal()">
-                <div class="user-info text-end">
-                    <div class="name" id="userName">Guest User</div>
-                    <div class="role" id="userRole">Basic Member</div>
-                </div>
-                <img src="https://i.pravatar.cc/150?u=homefix" alt="Profile" id="userAvatar">
-            </div>
-        </div>
-    </header>
 
-    <main class="content-area">
-        
-        <!-- Marketplace View -->
-        <div class="page-content active" id="page-marketplace">
-            <div id="marketplaceContent">
-                <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
-                    <div id="liveLocationBadge" style="background:#E0F2FE; color:#0369A1; padding:5px 15px; border-radius:20px; font-size:12px; font-weight:700;"><i class="fas fa-map-marker-alt fa-pulse me-1"></i> Locating...</div>
-                </div>
-                <div class="search-container" style="display: grid; grid-template-columns: 1fr auto; gap: 0; padding: 0; background: none; box-shadow: none;">
-                    <div class="search-input-group" style="background: white; padding: 20px; border-radius: 15px 0 0 15px; border: 1px solid #EEE; border-right: none;">
-                        <i class="fas fa-search" style="color:var(--jobie-purple)"></i>
-                        <input type="text" class="main-search" placeholder="What's on your to-do list in Cyprus?" style="font-size: 16px;">
+            <!-- Dashboard View -->
+            <div class="page-content" id="page-dashboard" style="display: none;">
+                <div id="dashboardContent">
+                    <div class="results-header">
+                        <h1>My Activity</h1>
                     </div>
-                    <button class="btn-find" style="border-radius: 0 15px 15px 0; padding: 0 40px; font-size: 16px; margin: 0;">SEARCH</button>
+                    <div style="margin-bottom:40px;">
+                        <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Requested Services</h3>
+                        <div id="serviceHistoryGrid" class="job-grid">
+                            <!-- Dynamic requests -->
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Services</h3>
+                        <div
+                            style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px;">
+                            <div class="category-item" onclick="App.exploreService('Plumbing')" style="cursor:pointer;"
+                                data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
+                            <div class="category-item" onclick="App.exploreService('Electrical')"
+                                style="cursor:pointer;" data-category="electrical"><i class="fas fa-bolt"></i>
+                                Electrical</div>
+                            <div class="category-item" onclick="App.exploreService('HVAC')" style="cursor:pointer;"
+                                data-category="hvac"><i class="fas fa-wind"></i> HVAC</div>
+                            <div class="category-item" onclick="App.exploreService('Cleaning')" style="cursor:pointer;"
+                                data-category="cleaning"><i class="fas fa-broom"></i> Cleaning</div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
-                <div class="suggestions">
-                    <span style="font-weight: 600; color: #888;">Suggestions:</span>
-                    <div class="tag active">All Pros</div>
-                    <div class="tag">Plumbing</div>
-                    <div class="tag">Electrical</div>
-                    <div class="tag">HVAC</div>
-                    <div class="tag">Appliance</div>
-                    <div class="tag">Carpentry</div>
-                    <div class="tag">Security</div>
-                    <div class="tag">Cleaning</div>
-                    <div class="tag">Painting</div>
-                </div>
-
+            <!-- AI Assistant (Quick) -->
+            <div class="page-content" id="page-ai-assistant" style="display: none;">
                 <div class="results-header">
-                    <div class="results-count">
-                        <h3>Showing <span id="jobCount">24</span> Recommended Pros</h3>
-                    </div>
+                    <h1>AI Home Assistant</h1>
+                    <p>Quick chat for immediate advice and technician matching.</p>
                 </div>
-                <div class="job-grid" id="jobGrid">
-                    <!-- Tech cards injected here -->
-                </div>
-            </div>
-        </div>
 
-        <!-- Dashboard View -->
-        <div class="page-content" id="page-dashboard" style="display: none;">
-            <div id="dashboardContent">
-                <div class="results-header"><h1>My Activity</h1></div>
-                <div style="margin-bottom:40px;">
-                    <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Requested Services</h3>
-                    <div id="serviceHistoryGrid" class="job-grid">
-                        <!-- Dynamic requests -->
-                    </div>
-                </div>
-                <div>
-                    <h3 style="font-weight:900; font-size:22px; margin-bottom:20px;">Explore Services</h3>
-                    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:20px;">
-                        <div class="category-item" onclick="App.exploreService('Plumbing')" style="cursor:pointer;" data-category="plumbing"><i class="fas fa-sink"></i> Plumbing</div>
-                        <div class="category-item" onclick="App.exploreService('Electrical')" style="cursor:pointer;" data-category="electrical"><i class="fas fa-bolt"></i> Electrical</div>
-                        <div class="category-item" onclick="App.exploreService('HVAC')" style="cursor:pointer;" data-category="hvac"><i class="fas fa-wind"></i> HVAC</div>
-                        <div class="category-item" onclick="App.exploreService('Cleaning')" style="cursor:pointer;" data-category="cleaning"><i class="fas fa-broom"></i> Cleaning</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- AI Assistant (Quick) -->
-        <div class="page-content" id="page-ai-assistant" style="display: none;">
-            <div class="results-header">
-                <h1>AI Home Assistant</h1>
-                <p>Quick chat for immediate advice and technician matching.</p>
-            </div>
-            
-            <div class="glass-card">
-                <div id="aiChatWindow" style="min-height:300px; max-height:500px; overflow-y:auto; padding-bottom:30px;">
-                    <div style="display:flex; gap:15px; margin-bottom:20px;">
-                        <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
-                        <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
-                            Hello! I'm your HomeFix AI. How can I assist you today?
+                <div class="glass-card">
+                    <div id="aiChatWindow"
+                        style="min-height:300px; max-height:500px; overflow-y:auto; padding-bottom:30px;">
+                        <div style="display:flex; gap:15px; margin-bottom:20px;">
+                            <div
+                                style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                <i class="fas fa-robot"></i></div>
+                            <div
+                                style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
+                                Hello! I'm your HomeFix AI. How can I assist you today?
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div style="display:flex; gap:15px; border-top:1px solid #EEE; padding-top:20px;">
-                    <button onclick="document.getElementById('aiFileInput').click()" class="action-icon"><i class="fas fa-camera"></i></button>
-                    <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
-                    <button id="btnVoiceAI" class="action-icon" onclick="App.toggleVoiceInput()"><i class="fas fa-microphone"></i></button>
-                    <input type="text" id="aiQueryInput" placeholder="Describe your issue..." style="flex:1; padding:15px; border:1px solid #EEE; border-radius:15px; background:#F8F9FD;">
-                    <button id="btnRunAI" onclick="App.runAIDiagnosis()" class="btn btn-accent px-4 py-2">ANALYZE</button>
-                </div>
-            </div>
-            
-            <div id="aiResultArea" style="margin-top:30px; display:none;">
-                <div class="diagnosis-card" style="background: var(--jobie-purple); color:white; padding:30px; border-radius:20px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                        <h3 class="fw-bold mb-0"><i class="fas fa-lightbulb"></i> Analysis Result</h3>
-                        <span id="aiDifficultyTag" style="background:rgba(255,255,255,0.2); padding:6px 16px; border-radius:20px; font-size:12px; font-weight:800;">DIFFICULTY: MEDIUM</span>
+                    <div style="display:flex; gap:15px; border-top:1px solid #EEE; padding-top:20px;">
+                        <button onclick="document.getElementById('aiFileInput').click()" class="action-icon"><i
+                                class="fas fa-camera"></i></button>
+                        <input type="file" id="aiFileInput" style="display:none;" onchange="App.handleAIImage(this)">
+                        <button id="btnVoiceAI" class="action-icon" onclick="App.toggleVoiceInput()"><i
+                                class="fas fa-microphone"></i></button>
+                        <input type="text" id="aiQueryInput" placeholder="Describe your issue..."
+                            style="flex:1; padding:15px; border:1px solid #EEE; border-radius:15px; background:#F8F9FD;">
+                        <button id="btnRunAI" onclick="App.runAIDiagnosis()"
+                            class="btn btn-accent px-4 py-2">ANALYZE</button>
                     </div>
-                    <p id="aiResultText" style="font-size:16px; line-height:1.7;"></p>
                 </div>
-                <div id="aiQuickFix" class="mt-4" style="background:#FFF9C4; padding:25px; border-radius:20px;">
-                    <h5 class="fw-bold text-dark"><i class="fas fa-tools me-2"></i>Quick Fixes You Can Try</h5>
-                    <ul id="aiQuickFixList" class="mt-3" style="padding-left:20px; line-height:2;"></ul>
+
+                <div id="aiResultArea" style="margin-top:30px; display:none;">
+                    <div class="diagnosis-card"
+                        style="background: var(--jobie-purple); color:white; padding:30px; border-radius:20px;">
+                        <div
+                            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                            <h3 class="fw-bold mb-0"><i class="fas fa-lightbulb"></i> Analysis Result</h3>
+                            <span id="aiDifficultyTag"
+                                style="background:rgba(255,255,255,0.2); padding:6px 16px; border-radius:20px; font-size:12px; font-weight:800;">DIFFICULTY:
+                                MEDIUM</span>
+                        </div>
+                        <p id="aiResultText" style="font-size:16px; line-height:1.7;"></p>
+                    </div>
+                    <div id="aiQuickFix" class="mt-4" style="background:#FFF9C4; padding:25px; border-radius:20px;">
+                        <h5 class="fw-bold text-dark"><i class="fas fa-tools me-2"></i>Quick Fixes You Can Try</h5>
+                        <ul id="aiQuickFixList" class="mt-3" style="padding-left:20px; line-height:2;"></ul>
+                    </div>
+                    <h4 class="fw-bold mt-5 mb-3">Matching Technicians</h4>
+                    <div class="job-grid" id="aiTechGrid"></div>
                 </div>
-                <h4 class="fw-bold mt-5 mb-3">Matching Technicians</h4>
-                <div class="job-grid" id="aiTechGrid"></div>
             </div>
-        </div>
 
 
 
-        <!-- Technician Profile -->
-        <div class="page-content" id="page-technician-profile" style="display: none;">
-            <div id="techProfileContent">
-                <!-- Injected via technicianProfile.js -->
+            <!-- Technician Profile -->
+            <div class="page-content" id="page-technician-profile" style="display: none;">
+                <div id="techProfileContent">
+                    <!-- Injected via technicianProfile.js -->
+                </div>
             </div>
-        </div>
 
-        <!-- Booking Page -->
-        <div class="page-content" id="page-booking" style="display: none;">
-            <div id="bookingContent">
-                <!-- Injected via booking.js -->
+            <!-- Booking Page -->
+            <div class="page-content" id="page-booking" style="display: none;">
+                <div id="bookingContent">
+                    <!-- Injected via booking.js -->
+                </div>
             </div>
-        </div>
 
-        <!-- Chat Page -->
-        <div class="page-content" id="page-chat" style="display: none;">
-            <div id="chatContent">
-                <div class="results-header"><h1>Messages</h1></div>
-                <div style="background:white; height:calc(100vh - 250px); border-radius:30px; box-shadow: var(--shadow-subtle); display:flex; overflow:hidden;">
-                    <div style="width:300px; border-right:1px solid #EEE;" id="chatList"></div>
-                    <div style="flex:1; display:flex; flex-direction:column;">
-                        <div style="padding:20px; border-bottom:1px solid #EEE;"><h4 id="chatPartnerName" style="font-weight:800;">Select Conversation</h4></div>
-                        <div id="activeChatWindow" style="flex:1; padding:30px; overflow-y:auto; background:#FAFAFF; display:flex; flex-direction:column; gap:10px;"></div>
-                        <div id="chatInputArea" style="padding:20px; border-top:1px solid #EEE; display:none; gap:10px;">
-                            <input type="text" id="chatMessageInput" class="form-control" placeholder="Type message...">
-                            <button id="btnSendMessage" class="btn btn-accent"><i class="fas fa-paper-plane"></i></button>
+            <!-- Chat Page -->
+            <div class="page-content" id="page-chat" style="display: none;">
+                <div id="chatContent">
+                    <div class="results-header">
+                        <h1>Messages</h1>
+                    </div>
+                    <div
+                        style="background:white; height:calc(100vh - 250px); border-radius:30px; box-shadow: var(--shadow-subtle); display:flex; overflow:hidden;">
+                        <div style="width:300px; border-right:1px solid #EEE;" id="chatList"></div>
+                        <div style="flex:1; display:flex; flex-direction:column;">
+                            <div style="padding:20px; border-bottom:1px solid #EEE;">
+                                <h4 id="chatPartnerName" style="font-weight:800;">Select Conversation</h4>
+                            </div>
+                            <div id="activeChatWindow"
+                                style="flex:1; padding:30px; overflow-y:auto; background:#FAFAFF; display:flex; flex-direction:column; gap:10px;">
+                            </div>
+                            <div id="chatInputArea"
+                                style="padding:20px; border-top:1px solid #EEE; display:none; gap:10px;">
+                                <input type="text" id="chatMessageInput" class="form-control"
+                                    placeholder="Type message...">
+                                <button id="btnSendMessage" class="btn btn-accent"><i
+                                        class="fas fa-paper-plane"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Payment Page -->
-        <div class="page-content" id="page-payment" style="display: none;">
-            <div class="results-header"><h1>Checkout</h1></div>
-            <div class="glass-card text-center p-5">
-                <i class="fas fa-shield-halved fa-3x mb-3 text-success"></i>
-                <h2>Secure Your Booking</h2>
-                <p>Verify details and pay securely</p>
-                <div class="my-4 p-3 bg-light rounded">Estimated Service Total: <strong>$85.00</strong></div>
-                <button class="btn btn-accent btn-lg w-100" onclick="App.showToast('Booking Confirmed!', 'success'); App.navigate('dashboard');">CONFIRM & PAY</button>
+            <!-- Payment Page -->
+            <div class="page-content" id="page-payment" style="display: none;">
+                <div class="results-header">
+                    <h1>Checkout</h1>
+                </div>
+                <div class="glass-card text-center p-5">
+                    <i class="fas fa-shield-halved fa-3x mb-3 text-success"></i>
+                    <h2>Secure Your Booking</h2>
+                    <p>Verify details and pay securely</p>
+                    <div class="my-4 p-3 bg-light rounded">Estimated Service Total: <strong>$85.00</strong></div>
+                    <button class="btn btn-accent btn-lg w-100"
+                        onclick="App.showToast('Booking Confirmed!', 'success'); App.navigate('dashboard');">CONFIRM &
+                        PAY</button>
+                </div>
             </div>
-        </div>
 
-        <!-- Stats Page -->
-        <div class="page-content" id="page-statistics" style="display: none;">
-            <div class="results-header"><h1>Statistics</h1></div>
-            <div class="row g-4">
-                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>$0</h3><p>Total Spent</p></div></div>
-                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>0</h3><p>Jobs Completed</p></div></div>
-                <div class="col-md-4"><div class="glass-card text-center p-4"><h3>4.9</h3><p>Avg Rating</p></div></div>
+            <!-- Stats Page -->
+            <div class="page-content" id="page-statistics" style="display: none;">
+                <div class="results-header">
+                    <h1>Statistics</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="glass-card text-center p-4">
+                            <h3>$0</h3>
+                            <p>Total Spent</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card text-center p-4">
+                            <h3>0</h3>
+                            <p>Jobs Completed</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="glass-card text-center p-4">
+                            <h3>4.9</h3>
+                            <p>Avg Rating</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Pro Leads (Tech Only) -->
-        <div class="page-content" id="page-leads" style="display: none;">
-            <div id="marketplaceContent">
-                <!-- If technician, this will contain the Leads list injected via marketplace.js -->
+            <!-- Pro Leads (Tech Only) -->
+            <div class="page-content" id="page-leads" style="display: none;">
+                <div id="marketplaceContent">
+                    <!-- If technician, this will contain the Leads list injected via marketplace.js -->
+                </div>
+                <div id="leadsGrid" class="job-grid"></div>
             </div>
-            <div id="leadsGrid" class="job-grid"></div>
-        </div>
 
-        <!-- Admin Panel -->
-        <div class="page-content" id="page-admin" style="display: none;">
-            <div class="results-header"><h1>Admin Panel</h1></div>
-            <div class="glass-card p-4">
-                <h4 class="fw-bold mb-4">User & Pro Management</h4>
-                <div id="adminTableContent"></div>
+            <!-- Admin Panel -->
+            <div class="page-content" id="page-admin" style="display: none;">
+                <div class="results-header">
+                    <h1>Admin Panel</h1>
+                </div>
+                <div class="glass-card p-4">
+                    <h4 class="fw-bold mb-4">User & Pro Management</h4>
+                    <div id="adminTableContent"></div>
+                </div>
             </div>
-        </div>
 
-    </main>
-</div>
+        </main>
+    </div>
 
-<!-- Modals -->
-<!-- Auth Modal (Login/Signup) -->
-<div id="loginModal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
-    <div class="modal-content bg-white rounded-5 shadow-lg overflow-hidden" style="width:480px; transition: 0.3s ease;">
-        <!-- Modal Tabs -->
-        <div style="display:flex; background:#F8F9FD;">
-            <button id="tab-login" onclick="App.toggleAuthTab('login')" style="flex:1; padding:20px; border:none; background:white; font-weight:800; color:var(--jobie-purple); cursor:pointer;">SIGN IN</button>
-            <button id="tab-signup" onclick="App.toggleAuthTab('signup')" style="flex:1; padding:20px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">SIGN UP</button>
-        </div>
+    <!-- Modals -->
+    <!-- Auth Modal (Login/Signup) -->
+    <div id="loginModal" class="modal-overlay"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:2000; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+        <div class="modal-content bg-white shadow-lg"
+            style="width:420px; border-radius:24px; padding:40px; position:relative; overflow:hidden;">
+            
+            <button onclick="closeModal('loginModal')" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:20px; color:#aaa; cursor:pointer;"><i class="fas fa-times"></i></button>
 
-        <div style="padding:40px;">
             <!-- Login Form -->
             <form id="loginForm" style="display:block;">
-                <h2 class="fw-bold mb-2">Welcome Back</h2>
-                <p class="text-muted mb-4">Access your HomeFix Pro account.</p>
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold mb-1">Welcome Back</h3>
+                    <p class="text-muted small">Sign in to your HomeFix Pro account.</p>
+                </div>
+                
                 <div class="mb-3">
-                    <label class="form-label fw-bold small">EMAIL ADDRESS</label>
-                    <input type="email" id="loginEmail" class="form-control py-3 rounded-3" placeholder="name@example.com" required>
+                    <label class="form-label fw-bold small" style="color:#888;">EMAIL ADDRESS</label>
+                    <input type="email" id="loginEmail" class="form-control py-2" placeholder="name@example.com" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                 </div>
                 <div class="mb-4">
-                    <label class="form-label fw-bold small">PASSWORD</label>
-                    <input type="password" id="loginPassword" class="form-control py-3 rounded-3" placeholder="••••••••" required>
+                    <label class="form-label fw-bold small" style="color:#888;">PASSWORD</label>
+                    <input type="password" id="loginPassword" class="form-control py-2" placeholder="••••••••" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                 </div>
-                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">SIGN IN</button>
                 
-                <div class="text-center mb-3 text-muted small">OR CONTINUE WITH</div>
-                
-                <button type="button" onclick="AuthModule.signInWithGoogle()" class="btn btn-outline-secondary w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mb-3">
+                <button type="submit" class="btn w-100 py-3 fw-bold mb-3" style="border-radius:12px; font-size:15px; background:var(--jobie-purple); color:white; border:none;">Sign In</button>
+
+                <div class="text-center mb-3">
+                    <span class="text-muted small fw-bold">OR CONTINUE WITH</span>
+                </div>
+
+                <button type="button" onclick="AuthModule.signInWithGoogle()" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center gap-2 mb-4" style="border-radius:12px; background:white; border:1px solid #DDD;">
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18">
-                    <span class="fw-bold">Google</span>
+                    <span class="fw-bold text-dark">Google</span>
                 </button>
 
-                <p class="text-center mt-3 small text-muted">Forgot password? <a href="#" class="text-primary text-decoration-none fw-bold">Reset here</a></p>
+                <p class="text-center small text-muted mb-0">Don't have an account? <a href="#" onclick="App.toggleAuthTab('signup'); return false;" class="text-decoration-none" style="color:var(--jobie-purple); font-weight:800;">Sign up</a></p>
             </form>
 
             <!-- Register Form -->
             <form id="registerForm" style="display:none;">
-                <h2 class="fw-bold mb-2">Create Account</h2>
-                <p class="text-muted mb-4">Join HomeFix Pro today.</p>
-                
-                <div class="mb-3 role-toggle" style="display:flex; gap:10px; margin-bottom:25px;">
-                    <label style="flex:1; text-align:center; padding:15px; border:1px solid #EEE; border-radius:12px; cursor:pointer; transition:0.3s;" class="role-label active">
+                <div class="text-center mb-4">
+                    <h3 class="fw-bold mb-1">Create Account</h3>
+                    <p class="text-muted small">Join HomeFix Pro today.</p>
+                </div>
+
+                <div class="mb-3 d-flex gap-2">
+                    <label class="flex-fill text-center p-2 border rounded-3 cursor-pointer role-label active" style="transition:0.3s;">
                         <input type="radio" name="userRole" value="user" checked style="display:none;">
-                        <i class="fas fa-user-circle d-block mb-1"></i>
-                        <span class="small fw-bold">CUSTOMER</span>
+                        <span class="small fw-bold">Customer</span>
                     </label>
-                    <label style="flex:1; text-align:center; padding:15px; border:1px solid #EEE; border-radius:12px; cursor:pointer; transition:0.3s;" class="role-label">
+                    <label class="flex-fill text-center p-2 border rounded-3 cursor-pointer role-label" style="transition:0.3s;">
                         <input type="radio" name="userRole" value="technician" style="display:none;">
-                        <i class="fas fa-tools d-block mb-1"></i>
-                        <span class="small fw-bold">TECHNICIAN</span>
+                        <span class="small fw-bold">Technician</span>
                     </label>
                 </div>
 
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;" class="mb-3">
-                    <div>
-                        <label class="form-label fw-bold small">FIRST NAME</label>
-                        <input type="text" id="regFirstName" class="form-control py-2 rounded-3" placeholder="John" required>
+                <div class="row g-2 mb-3">
+                    <div class="col-6">
+                        <label class="form-label fw-bold small" style="color:#888;">FIRST NAME</label>
+                        <input type="text" id="regFirstName" class="form-control py-2" placeholder="John" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                     </div>
-                    <div>
-                        <label class="form-label fw-bold small">LAST NAME</label>
-                        <input type="text" id="regLastName" class="form-control py-2 rounded-3" placeholder="Doe" required>
+                    <div class="col-6">
+                        <label class="form-label fw-bold small" style="color:#888;">LAST NAME</label>
+                        <input type="text" id="regLastName" class="form-control py-2" placeholder="Doe" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label fw-bold small">EMAIL ADDRESS</label>
-                    <input type="email" id="regEmail" class="form-control py-2 rounded-3" placeholder="email@example.com" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-bold small">PHONE NUMBER</label>
-                    <input type="tel" id="regPhone" class="form-control py-2 rounded-3" placeholder="+357 XXX XXXXX">
+                    <label class="form-label fw-bold small" style="color:#888;">EMAIL ADDRESS</label>
+                    <input type="email" id="regEmail" class="form-control py-2" placeholder="email@example.com" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label fw-bold small">PASSWORD</label>
-                    <input type="password" id="regPassword" class="form-control py-2 rounded-3" placeholder="Min. 8 characters" required>
+                    <label class="form-label fw-bold small" style="color:#888;">PASSWORD</label>
+                    <input type="password" id="regPassword" class="form-control py-2" placeholder="Min. 8 characters" required style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                 </div>
 
                 <!-- Tech Specific Fields -->
-                <div id="technicianFields" style="display:none; border-top:1px solid #EEE; padding-top:20px; margin-top:10px;">
+                <div id="technicianFields" style="display:none;">
                     <div class="mb-3">
-                        <label class="form-label fw-bold small">SPECIALIZATION</label>
-                        <select id="regSpecialization" class="form-select py-2 rounded-3">
+                        <label class="form-label fw-bold small" style="color:#888;">SPECIALIZATION</label>
+                        <select id="regSpecialization" class="form-select py-2" style="border-radius:12px; background:#F8F9FD; border:1px solid #EEE;">
                             <option value="Plumbing">Plumbing</option>
                             <option value="Electrical">Electrical</option>
                             <option value="HVAC">HVAC</option>
@@ -353,124 +426,143 @@
                             <option value="Carpentry">Carpentry</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold small">YEARS OF EXPERIENCE</label>
-                        <input type="number" id="regExperience" class="form-control py-2 rounded-3" placeholder="e.g. 5">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold small">SHORT BIO</label>
-                        <textarea id="regBio" class="form-control rounded-3" placeholder="Tell customers about your expertise..."></textarea>
-                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-accent w-100 py-3 fw-bold rounded-3 shadow-sm mb-3">CREATE ACCOUNT</button>
-                
-                <div class="text-center mb-3 text-muted small">OR REGISTER WITH</div>
-                
-                <button type="button" onclick="AuthModule.signInWithGoogle()" class="btn btn-outline-secondary w-100 py-2 rounded-3 d-flex align-items-center justify-content-center gap-2 mb-3">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18">
-                    <span class="fw-bold">Google</span>
-                </button>
-            </form>
+                <button type="submit" class="btn w-100 py-3 fw-bold mb-3" style="border-radius:12px; font-size:15px; background:var(--jobie-purple); color:white; border:none;">Create Account</button>
 
-            <button onclick="closeModal('loginModal')" class="btn btn-link mt-4 w-100 text-muted small text-decoration-none">Back to Website</button>
-        </div>
-    </div>
-</div>
-
-<div id="techDetailDrawer" class="drawer-overlay" onclick="if(event.target===this) App.closeDrawer()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:1500; justify-content:flex-end;">
-    <div class="drawer-content bg-white h-100 shadow-lg" style="width:500px; overflow-y:auto; padding:40px; animation: slideInRight 0.3s ease;">
-        <button onclick="App.closeDrawer()" style="background:none; border:none; font-size:22px; cursor:pointer; color:#888; margin-bottom:20px;"><i class="fas fa-times"></i></button>
-        <div id="drawerBody"></div>
-    </div>
-</div>
-
-<!-- Booking Modal (Multi-Step) -->
-<div id="bookingModal" class="modal-overlay" onclick="if(event.target===this) closeModal('bookingModal')" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2100; align-items:center; justify-content:center;">
-    <div class="modal-content" style="background:white; padding:0; border-radius:30px; width:650px; overflow:hidden; position:relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
-        <button onclick="closeModal('bookingModal')" style="position:absolute; top:20px; right:20px; border:none; background:white; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; color:#AAA; z-index:10;"><i class="fas fa-times"></i></button>
-        <div style="height:8px; background:#EEE; width:100%;">
-            <div id="bookingProgress" style="height:100%; background:var(--jobie-purple); width:33%; transition:0.4s;"></div>
-        </div>
-        <div style="padding:50px;">
-            <form id="bookingForm">
-                <div class="booking-step" id="step1" style="display:block;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">What do you need help with?</h2>
-                    <p style="color:#666; margin-bottom:30px;">Select all that apply.</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px;">
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Repair Existing</label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> New Installation</label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Maintenance</label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input type="checkbox" style="width:20px; height:20px;"> Emergency Fix</label>
-                    </div>
-                </div>
-                <div class="booking-step" id="step2" style="display:none;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">When's the best time?</h2>
-                    <p style="color:#666; margin-bottom:30px;">Select your preferred timing.</p>
-                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:30px;">
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> ASAP (Today)</label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> Within 48 Hours</label>
-                        <label style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input type="radio" name="urgency" style="width:22px; height:22px;"> This Weekend</label>
-                    </div>
-                </div>
-                <div class="booking-step" id="step3" style="display:none;">
-                    <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">Tell us more</h2>
-                    <p style="color:#666; margin-bottom:20px;">Any specific details?</p>
-                    <textarea id="bProblem" placeholder="e.g. My LG Refrigerator is leaking from the bottom right corner..." style="width:100%; padding:20px; border:1px solid #EEE; border-radius:15px; min-height:150px; font-size:16px; outline:none; background:#F8F9FD; margin-bottom:20px;"></textarea>
-                    <div style="border:2px dashed #EEE; padding:30px; border-radius:20px; text-align:center; color:#888;"><i class="fas fa-camera" style="font-size:24px; margin-bottom:10px;"></i><br>Add photos (optional)</div>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:40px;">
-                    <button type="button" id="btnBookingBack" onclick="App.prevStep()" style="display:none; padding:15px 30px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">BACK</button>
-                    <button type="button" id="btnBookingNext" onclick="App.nextStep()" style="margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CONTINUE</button>
-                    <button type="submit" id="btnBookingSubmit" style="display:none; margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SEND REQUEST</button>
-                </div>
+                <p class="text-center small text-muted mb-0">Already have an account? <a href="#" onclick="App.toggleAuthTab('login'); return false;" class="text-decoration-none" style="color:var(--jobie-purple); font-weight:800;">Sign in</a></p>
             </form>
         </div>
     </div>
-</div>
 
-<!-- Scripts -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div id="techDetailDrawer" class="drawer-overlay" onclick="if(event.target===this) App.closeDrawer()"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.3); z-index:1500; justify-content:flex-end;">
+        <div class="drawer-content bg-white h-100 shadow-lg"
+            style="width:500px; overflow-y:auto; padding:40px; animation: slideInRight 0.3s ease;">
+            <button onclick="App.closeDrawer()"
+                style="background:none; border:none; font-size:22px; cursor:pointer; color:#888; margin-bottom:20px;"><i
+                    class="fas fa-times"></i></button>
+            <div id="drawerBody"></div>
+        </div>
+    </div>
 
-<script src="js/services/firebase-config.js"></script>
-<script src="js/utils/seed-data.js"></script>
-<script src="js/config.js"></script>
-<script src="js/services/auth-service.js"></script>
-<script src="js/services/firestore-service.js"></script>
-<script src="js/services/ai-service.js"></script>
-<script src="js/services/notification-service.js"></script>
-<script src="js/services/chat-service.js"></script>
-<script src="js/services/storage-service.js"></script>
+    <!-- Booking Modal (Multi-Step) -->
+    <div id="bookingModal" class="modal-overlay" onclick="if(event.target===this) closeModal('bookingModal')"
+        style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2100; align-items:center; justify-content:center;">
+        <div class="modal-content"
+            style="background:white; padding:0; border-radius:30px; width:650px; overflow:hidden; position:relative; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+            <button onclick="closeModal('bookingModal')"
+                style="position:absolute; top:20px; right:20px; border:none; background:white; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; color:#AAA; z-index:10;"><i
+                    class="fas fa-times"></i></button>
+            <div style="height:8px; background:#EEE; width:100%;">
+                <div id="bookingProgress"
+                    style="height:100%; background:var(--jobie-purple); width:33%; transition:0.4s;"></div>
+            </div>
+            <div style="padding:50px;">
+                <form id="bookingForm">
+                    <div class="booking-step" id="step1" style="display:block;">
+                        <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">What do you need help with?
+                        </h2>
+                        <p style="color:#666; margin-bottom:30px;">Select all that apply.</p>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px;">
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input
+                                    type="checkbox" style="width:20px; height:20px;"> Repair Existing</label>
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input
+                                    type="checkbox" style="width:20px; height:20px;"> New Installation</label>
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input
+                                    type="checkbox" style="width:20px; height:20px;"> Maintenance</label>
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; align-items:center; gap:15px; font-weight:700;"><input
+                                    type="checkbox" style="width:20px; height:20px;"> Emergency Fix</label>
+                        </div>
+                    </div>
+                    <div class="booking-step" id="step2" style="display:none;">
+                        <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">When's the best time?</h2>
+                        <p style="color:#666; margin-bottom:30px;">Select your preferred timing.</p>
+                        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:30px;">
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input
+                                    type="radio" name="urgency" style="width:22px; height:22px;"> ASAP (Today)</label>
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input
+                                    type="radio" name="urgency" style="width:22px; height:22px;"> Within 48
+                                Hours</label>
+                            <label
+                                style="border:1px solid #EEE; padding:20px; border-radius:15px; cursor:pointer; display:flex; gap:15px; align-items:center; font-weight:700;"><input
+                                    type="radio" name="urgency" style="width:22px; height:22px;"> This Weekend</label>
+                        </div>
+                    </div>
+                    <div class="booking-step" id="step3" style="display:none;">
+                        <h2 style="font-weight:900; font-size:28px; margin-bottom:10px;">Tell us more</h2>
+                        <p style="color:#666; margin-bottom:20px;">Any specific details?</p>
+                        <textarea id="bProblem"
+                            placeholder="e.g. My LG Refrigerator is leaking from the bottom right corner..."
+                            style="width:100%; padding:20px; border:1px solid #EEE; border-radius:15px; min-height:150px; font-size:16px; outline:none; background:#F8F9FD; margin-bottom:20px;"></textarea>
+                        <div
+                            style="border:2px dashed #EEE; padding:30px; border-radius:20px; text-align:center; color:#888;">
+                            <i class="fas fa-camera" style="font-size:24px; margin-bottom:10px;"></i><br>Add photos
+                            (optional)</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-top:40px;">
+                        <button type="button" id="btnBookingBack" onclick="App.prevStep()"
+                            style="display:none; padding:15px 30px; border:none; background:none; font-weight:800; color:#888; cursor:pointer;">BACK</button>
+                        <button type="button" id="btnBookingNext" onclick="App.nextStep()"
+                            style="margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">CONTINUE</button>
+                        <button type="submit" id="btnBookingSubmit"
+                            style="display:none; margin-left:auto; padding:18px 50px; border:none; background:var(--jobie-purple); color:white; border-radius:15px; font-weight:800; cursor:pointer; font-size:16px;">SEND
+                            REQUEST</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<!-- App Core Controller -->
-<script src="js/app.js"></script>
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Modules -->
-<script src="js/modules/auth.js"></script>
-<script src="js/modules/landing.js"></script>
-<script src="js/modules/marketplace.js"></script>
+    <script src="js/services/firebase-config.js"></script>
+    <script src="js/utils/seed-data.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/services/auth-service.js"></script>
+    <script src="js/services/firestore-service.js"></script>
+    <script src="js/services/ai-service.js"></script>
+    <script src="js/services/notification-service.js"></script>
+    <script src="js/services/chat-service.js"></script>
+    <script src="js/services/storage-service.js"></script>
 
-<script src="js/modules/technicianProfile.js"></script>
-<script src="js/modules/booking.js"></script>
-<script src="js/modules/chat.js"></script>
-<script src="js/modules/quickFixGuide.js"></script>
-<script src="js/modules/rating.js"></script>
-<script src="js/modules/admin.js"></script>
+    <!-- App Core Controller -->
+    <script src="js/app.js"></script>
 
-<script>
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function toggleAuthModal() { 
-        if (App.state && App.state.user) {
-            App.logout();
-        } else { 
-            openModal('loginModal'); 
+    <!-- Modules -->
+    <script src="js/modules/auth.js"></script>
+    <script src="js/modules/landing.js"></script>
+    <script src="js/modules/marketplace.js"></script>
+
+    <script src="js/modules/technicianProfile.js"></script>
+    <script src="js/modules/booking.js"></script>
+    <script src="js/modules/chat.js"></script>
+    <script src="js/modules/quickFixGuide.js"></script>
+    <script src="js/modules/rating.js"></script>
+    <script src="js/modules/admin.js"></script>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function toggleAuthModal() {
+            if (App.state && App.state.user) {
+                App.logout();
+            } else {
+                openModal('loginModal');
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
+
 </html>
