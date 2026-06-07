@@ -1,0 +1,17 @@
+# Ignore Maven build output
+target/
+
+# Ignore local IDE files
+.idea/
+*.iml
+.vscode/
+
+# Ignore test outputs
+*.log
+
+# Ignore OS files
+.DS_Store
+
+# Ignore secrets
+serviceAccountKey.json
+*.env

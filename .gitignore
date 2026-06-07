@@ -23,5 +23,9 @@ __pycache__/
 # Secrets
 serviceAccountKey.json
 
+# Docker — local .env holds secrets, never commit it
+# .env.example is safe to commit (no real values)
+.env
+
 # Progress Reports
 Progress_Report_*.html
