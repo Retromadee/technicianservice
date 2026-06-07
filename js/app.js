@@ -14,13 +14,24 @@ const App = (() => {
         currentBookingStep: 1,
         currentAIImages: [],
         technicians: [],
-        events: {},
+        events: new Map(),
         isReady: false
     };
 
+    // ---- Security Helpers ----
+    function escapeHTML(str) {
+        if (str == null) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     function on(event, callback) {
-        if (!state.events[event]) state.events[event] = [];
-        state.events[event].push(callback);
+        if (!state.events.has(event)) state.events.set(event, []);
+        state.events.get(event).push(callback);
         
         // If app is already ready and someone listens for appReady, fire it immediately
         if (event === 'appReady' && state.isReady) {
@@ -30,8 +41,8 @@ const App = (() => {
 
     function emit(event, data) {
         if (event === 'appReady') state.isReady = true;
-        if (state.events[event]) {
-            state.events[event].forEach(cb => cb(data));
+        if (state.events.has(event)) {
+            state.events.get(event).forEach(cb => cb(data));
         }
     }
 
@@ -40,7 +51,7 @@ const App = (() => {
         const toast = document.createElement('div');
         toast.className = `animate-in status-badge ${type === 'error' ? 'danger' : type === 'success' ? 'completed' : 'pending'}`;
         toast.style = "position:fixed; bottom:40px; left:50%; transform:translateX(-50%); padding:15px 30px; border-radius:50px; font-weight:700; z-index:3000; box-shadow:0 10px 30px rgba(0,0,0,0.3); border:none;";
-        toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}" style="margin-right:10px;"></i> ${message}`;
+        toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}" style="margin-right:10px;"></i> ${escapeHTML(message)}`;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 4000);
     }
@@ -53,7 +64,7 @@ const App = (() => {
             loader.style = "position:fixed; inset:0; background:rgba(255,255,255,0.8); backdrop-filter:blur(5px); z-index:4000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px;";
             loader.innerHTML = `
                 <div class="company-logo logo-blue shadow-lg" style="width:80px; height:80px; font-size:40px; animation: bounce 1s infinite alternate;">H</div>
-                <div style="font-weight:800; font-size:18px; color:var(--jobie-purple)">${text}</div>
+                <div style="font-weight:800; font-size:18px; color:var(--jobie-purple)">${escapeHTML(text)}</div>
                 <div class="confidence-meter" style="width:200px;"><div class="confidence-fill" style="width:100%; animation: pulse 1s infinite;"></div></div>
             `;
             document.body.appendChild(loader);
@@ -77,23 +88,23 @@ const App = (() => {
             <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
                 <div class="card-header">
                     <div class="company-info">
-                        <div class="company-name">${tech.company} ${tech.isTopPro ? '<span style="color:#F97316; font-size:10px; margin-left:5px;"><i class="fas fa-trophy"></i> TOP PRO</span>' : ''}</div>
-                        <h4>${tech.title}</h4>
+                        <div class="company-name">${escapeHTML(tech.company)} ${tech.isTopPro ? '<span style="color:#F97316; font-size:10px; margin-left:5px;"><i class="fas fa-trophy"></i> TOP PRO</span>' : ''}</div>
+                        <h4>${escapeHTML(tech.title)}</h4>
                     </div>
-                    <div class="company-logo ${tech.color}">${tech.logo}</div>
+                    <div class="company-logo ${escapeHTML(tech.color)}">${escapeHTML(tech.logo)}</div>
                 </div>
                 <div style="display:flex; gap:12px; margin-bottom:10px; font-size:12px; font-weight:700; flex-wrap:wrap; align-items:center;">
-                    <span>⭐ ${tech.rating} (${tech.reviews})</span>
-                    <span style="color:#10B981;"><i class="fas fa-clock" style="font-size:10px;"></i> ${tech.responseTime || '< 2 hrs'}</span>
-                    <span style="color:var(--jobie-purple); font-weight:900;">${tech.rate}</span>
+                    <span>⭐ ${escapeHTML(tech.rating)} (${escapeHTML(tech.reviews)})</span>
+                    <span style="color:#10B981;"><i class="fas fa-clock" style="font-size:10px;"></i> ${escapeHTML(tech.responseTime || '< 2 hrs')}</span>
+                    <span style="color:var(--jobie-purple); font-weight:900;">${escapeHTML(tech.rate)}</span>
                 </div>
-                <p class="job-desc">${tech.desc}</p>
+                <p class="job-desc">${escapeHTML(tech.desc)}</p>
                 <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
-                    ${tech.tags.slice(0,3).map(tag => `<span style="background:#F0F0FF; color:var(--jobie-purple); padding:3px 10px; border-radius:6px; font-size:10px; font-weight:700;">${tag}</span>`).join('')}
+                    ${tech.tags.slice(0,3).map(tag => `<span style="background:#F0F0FF; color:var(--jobie-purple); padding:3px 10px; border-radius:6px; font-size:10px; font-weight:700;">${escapeHTML(tag)}</span>`).join('')}
                 </div>
                 <div class="card-footer">
-                    <div class="badge-tag" style="background:${tech.pricing && tech.pricing.diagnostic === 0 ? '#E8F5E9; color:#2E7D32' : '#F0F0FF; color:var(--jobie-purple)'}; font-size:10px;">${tech.pricing && tech.pricing.diagnostic === 0 ? 'FREE DIAGNOSTIC' : 'From $' + (tech.pricing ? tech.pricing.standard : '85')}</div>
-                    <div class="location"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>${tech.loc}</div>
+                    <div class="badge-tag" style="background:${tech.pricing && tech.pricing.diagnostic === 0 ? '#E8F5E9; color:#2E7D32' : '#F0F0FF; color:var(--jobie-purple)'}; font-size:10px;">${tech.pricing && tech.pricing.diagnostic === 0 ? 'FREE DIAGNOSTIC' : 'From $' + escapeHTML(tech.pricing ? tech.pricing.standard : '85')}</div>
+                    <div class="location"><i class="fas fa-map-marker-alt" style="margin-right:5px"></i>${escapeHTML(tech.loc)}</div>
                 </div>
             </div>
         `).join('');
@@ -112,13 +123,13 @@ const App = (() => {
             <div class="job-card animate-in">
                 <div class="card-header">
                     <div class="company-info">
-                        <div class="company-name">${req.tech.company}</div>
-                        <h4>${req.tech.title}</h4>
+                        <div class="company-name">${escapeHTML(req.tech.company)}</div>
+                        <h4>${escapeHTML(req.tech.title)}</h4>
                     </div>
-                    <div class="company-logo ${req.tech.color}">${req.tech.logo}</div>
+                    <div class="company-logo ${escapeHTML(req.tech.color)}">${escapeHTML(req.tech.logo)}</div>
                 </div>
                 <div style="margin-bottom:15px; font-size:13px; color:#666;">
-                    <strong>Problem:</strong> ${req.problem.substring(0, 50)}...
+                    <strong>Problem:</strong> ${escapeHTML(req.problem.substring(0, 50))}...
                 </div>
                 <div class="card-footer" style="justify-content:space-between; gap:10px;">
                     <div class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING QUOTE</div>
@@ -165,13 +176,13 @@ const App = (() => {
 
         body.innerHTML = `
             <div style="display:flex; gap:20px; align-items:flex-start; margin-bottom:25px;">
-                <div class="company-logo ${tech.color}" style="width:70px; height:70px; border-radius:18px; font-size:22px; flex-shrink:0;">${tech.logo}</div>
+                <div class="company-logo ${escapeHTML(tech.color)}" style="width:70px; height:70px; border-radius:18px; font-size:22px; flex-shrink:0;">${escapeHTML(tech.logo)}</div>
                 <div>
-                    <h2 style="font-weight:900; font-size:22px; margin-bottom:2px;">${tech.company}</h2>
-                    <h4 style="color:#666; font-weight:600; font-size:15px;">${tech.title}</h4>
+                    <h2 style="font-weight:900; font-size:22px; margin-bottom:2px;">${escapeHTML(tech.company)}</h2>
+                    <h4 style="color:#666; font-weight:600; font-size:15px;">${escapeHTML(tech.title)}</h4>
                     <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
                         ${tech.isTopPro ? '<span style="background:#FFF3E0; color:#F97316; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:800;"><i class="fas fa-trophy"></i> TOP PRO</span>' : ''}
-                        <span style="background:#E8F5E9; color:#2E7D32; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:800;"><i class="fas fa-clock"></i> ${tech.responseTime || '< 2 hrs'}</span>
+                        <span style="background:#E8F5E9; color:#2E7D32; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:800;"><i class="fas fa-clock"></i> ${escapeHTML(tech.responseTime || '< 2 hrs')}</span>
                     </div>
                 </div>
             </div>
@@ -179,11 +190,11 @@ const App = (() => {
             <!-- Stats Row -->
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:25px;">
                 <div style="background:#F8F9FD; padding:15px; border-radius:14px; text-align:center;">
-                    <div style="font-weight:900; font-size:18px;">${tech.rating} ⭐</div>
-                    <div style="font-size:11px; color:#888; font-weight:600;">${tech.reviews} Reviews</div>
+                    <div style="font-weight:900; font-size:18px;">${escapeHTML(tech.rating)} ⭐</div>
+                    <div style="font-size:11px; color:#888; font-weight:600;">${escapeHTML(tech.reviews)} Reviews</div>
                 </div>
                 <div style="background:#F8F9FD; padding:15px; border-radius:14px; text-align:center;">
-                    <div style="font-weight:900; font-size:18px;">${tech.hires}</div>
+                    <div style="font-weight:900; font-size:18px;">${escapeHTML(tech.hires)}</div>
                     <div style="font-size:11px; color:#888; font-weight:600;">Total Hires</div>
                 </div>
                 <div style="background:linear-gradient(135deg, #F0F0FF, #E8E0FF); padding:15px; border-radius:14px; text-align:center;">
@@ -198,7 +209,7 @@ const App = (() => {
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;">
                     <div style="background:white; border:1px solid #EEE; padding:18px 12px; border-radius:14px; text-align:center;">
                         <div style="font-size:10px; font-weight:800; color:#888; text-transform:uppercase; margin-bottom:6px;">Diagnostic</div>
-                        <div style="font-size:22px; font-weight:900; color:#333;">${p.diagnostic > 0 ? '$'+p.diagnostic : 'FREE'}</div>
+                        <div style="font-size:22px; font-weight:900; color:#333;">${escapeHTML(p.diagnostic > 0 ? '$'+p.diagnostic : 'FREE')}</div>
                         <div style="font-size:10px; color:#888; margin-top:4px;">Inspection</div>
                     </div>
                     <div style="background:var(--jobie-purple); color:white; padding:18px 12px; border-radius:14px; text-align:center; position:relative;">
@@ -351,7 +362,7 @@ const App = (() => {
         const toast = document.createElement('div');
         toast.className = 'animate-in';
         toast.style = "position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#333; color:white; padding:15px 30px; border-radius:50px; font-weight:700; z-index:3000; box-shadow:0 10px 30px rgba(0,0,0,0.3);";
-        toast.innerHTML = `<i class="fas fa-check-circle" style="color:#10B981; margin-right:10px;"></i> Request Sent to ${state.selectedTech.company}!`;
+        toast.innerHTML = `<i class="fas fa-check-circle" style="color:#10B981; margin-right:10px;"></i> Request Sent to ${escapeHTML(state.selectedTech.company)}!`;
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 4000);
 
@@ -535,7 +546,7 @@ const App = (() => {
             chat.innerHTML += `
                 <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
                     <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
-                        ${query}
+                        ${escapeHTML(query)}
                     </div>
                     <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
                 </div>
@@ -554,7 +565,7 @@ const App = (() => {
                 <div style="display:flex; gap:15px; margin-bottom:20px;">
                     <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
                     <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
-                        ${result.advice || result.description || 'Analysis complete. See details below.'}
+                        ${escapeHTML(result.advice || result.description || 'Analysis complete. See details below.')}
                     </div>
                 </div>
             `;
@@ -569,7 +580,7 @@ const App = (() => {
             if (diffTag) diffTag.textContent = `DIFFICULTY: ${result.difficulty || result.severity || 'MEDIUM'}`.toUpperCase();
             
             const fixes = result.quickFixes || result.steps || [];
-            if (quickFixList) quickFixList.innerHTML = fixes.map(f => `<li>${f}</li>`).join('');
+            if (quickFixList) quickFixList.innerHTML = fixes.map(f => `<li>${escapeHTML(f)}</li>`).join('');
             if (quickFixSection) quickFixSection.style.display = fixes.length > 0 ? 'block' : 'none';
             
             resArea.style.display = 'block';
@@ -584,10 +595,10 @@ const App = (() => {
                     <div class="job-card animate-in" onclick="App.selectTech(${tech.id})">
                         <div class="card-header">
                             <div class="company-info">
-                                <div class="company-name">${tech.company}</div>
-                                <h4>${tech.title}</h4>
+                                <div class="company-name">${escapeHTML(tech.company)}</div>
+                                <h4>${escapeHTML(tech.title)}</h4>
                             </div>
-                            <div class="company-logo ${tech.color}">${tech.logo}</div>
+                            <div class="company-logo ${escapeHTML(tech.color)}">${escapeHTML(tech.logo)}</div>
                         </div>
                         <div style="display:flex; gap:10px; margin-bottom:10px; font-size:12px; font-weight:700;">
                             <span>⭐ ${tech.rating}</span>
@@ -713,14 +724,14 @@ const App = (() => {
             <div class="job-card animate-in">
                 <div class="card-header">
                     <div class="company-info">
-                        <div class="company-name">Posted by ${lead.client}</div>
-                        <h4>${lead.title}</h4>
+                        <div class="company-name">Posted by ${escapeHTML(lead.client)}</div>
+                        <h4>${escapeHTML(lead.title)}</h4>
                     </div>
-                    <div style="font-weight:900; color:var(--jobie-purple); font-size:18px;">${lead.budget}</div>
+                    <div style="font-weight:900; color:var(--jobie-purple); font-size:18px;">${escapeHTML(lead.budget)}</div>
                 </div>
-                <p class="job-desc">${lead.desc}</p>
+                <p class="job-desc">${escapeHTML(lead.desc)}</p>
                 <div class="card-footer" style="justify-content:space-between;">
-                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${lead.location}</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHTML(lead.location)}</div>
                     <button onclick="App.bidOnLead(${lead.id})" style="background:var(--jobie-purple); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:700; cursor:pointer;">BID NOW</button>
                 </div>
             </div>
@@ -863,9 +874,9 @@ const App = (() => {
                 list.innerHTML = `<div style="padding:15px; text-align:center; color:var(--text-muted); font-size:13px;">No new alerts</div>`;
             } else {
                 list.innerHTML = notifs.map(n => `
-                    <div style="padding:12px 15px; border-bottom:1px solid var(--border-color); background:${n.read ? 'var(--surface-card)' : 'var(--jobie-purple-soft)'}; cursor:pointer;" onclick="App.handleNotifClick('${n.id}', '${n.type}')">
-                        <div style="font-weight:700; font-size:13px; color:var(--text-main);">${n.title}</div>
-                        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">${n.description}</div>
+                    <div style="padding:12px 15px; border-bottom:1px solid var(--border-color); background:${n.read ? 'var(--surface-card)' : 'var(--jobie-purple-soft)'}; cursor:pointer;" onclick="App.handleNotifClick('${escapeHTML(n.id)}', '${escapeHTML(n.type)}')">
+                        <div style="font-weight:700; font-size:13px; color:var(--text-main);">${escapeHTML(n.title)}</div>
+                        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">${escapeHTML(n.description)}</div>
                         <div style="font-size:9px; color:var(--text-light); margin-top:5px;">${new Date(n.time).toLocaleString()}</div>
                     </div>
                 `).join('');

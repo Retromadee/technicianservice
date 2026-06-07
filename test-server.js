@@ -13,19 +13,36 @@ const mimeTypes = {
 };
 
 const server = http.createServer((request, response) => {
+  const basePath = path.resolve('.');
   let filePath = '.' + request.url;
   if (filePath == './') filePath = './index.html';
-  const extname = String(path.extname(filePath)).toLowerCase();
-  const contentType = mimeTypes[extname] || 'application/octet-stream';
 
-  fs.readFile(filePath, (error, content) => {
+  // Normalize and validate path to prevent directory traversal
+  const resolvedPath = path.normalize(path.resolve(filePath));
+  if (!resolvedPath.startsWith(basePath)) {
+    response.writeHead(403);
+    response.end('403 Forbidden');
+    return;
+  }
+
+  // Strict extension allowlist check
+  const extname = String(path.extname(resolvedPath)).toLowerCase();
+  if (!mimeTypes.hasOwnProperty(extname)) {
+    response.writeHead(403);
+    response.end('403 Forbidden: File type not allowed');
+    return;
+  }
+
+  const contentType = mimeTypes[extname];
+
+  fs.readFile(resolvedPath, (error, content) => {
     if (error) {
       if(error.code == 'ENOENT') {
         response.writeHead(404);
         response.end('404 Not Found');
       } else {
         response.writeHead(500);
-        response.end('500 Internal Server Error: ' + error.code);
+        response.end('500 Internal Server Error');
       }
     } else {
       response.writeHead(200, { 'Content-Type': contentType });
