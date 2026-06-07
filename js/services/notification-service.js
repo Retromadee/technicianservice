@@ -1,6 +1,6 @@
 /* Notification Service — Firebase and Email Connected */
 const NotificationService = (() => {
-    const API_URL = '/api/send-email';
+    const API_URL = (window.AppConfig ? AppConfig.getPythonApiBase() : '') + '/send-email';
     let localNotifications = [];
 
     setTimeout(() => {

@@ -10,6 +10,12 @@ const Config = {
     getAuthBase: () => {
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         return isLocal ? 'http://localhost:8081/api/auth' : '/api/auth';
+    },
+
+    // Python FastAPI Base
+    getPythonApiBase: () => {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        return isLocal ? 'http://localhost:8000/api' : '/api';
     }
 };
 

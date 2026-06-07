@@ -12,7 +12,8 @@ const AIService = (() => {
         if (!apiKey) {
             console.warn("AI Service: No local API Key, attempting backend diagnosis...");
             try {
-                const response = await fetch('/api/jobs/diagnose', {
+                const apiBase = window.AppConfig ? AppConfig.getApiBase() : '/api';
+                const response = await fetch(`${apiBase}/jobs/diagnose`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(problemData)
