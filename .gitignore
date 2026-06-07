@@ -19,3 +19,9 @@ __pycache__/
 # Large Documents
 *.docx
 *.pdf
+
+# Secrets
+serviceAccountKey.json
+
+# Progress Reports
+Progress_Report_*.html
