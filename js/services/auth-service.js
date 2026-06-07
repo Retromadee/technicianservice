@@ -50,9 +50,9 @@ const AuthService = (() => {
         }
 
         const data = await response.json();
-        // After registration, typical flow is to log the user in or redirect to login
-        // For simplicity, we'll ask the user to log in
-        return data;
+        
+        // Auto-login after successful registration
+        return await login(userData.email, userData.password);
     }
 
     async function logout() {
