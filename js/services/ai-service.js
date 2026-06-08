@@ -36,8 +36,8 @@ const AIService = (() => {
         }
 
         try {
-            // Real Gemini 1.5 Flash Integration (Multimodal)
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            // Real Gemini Flash Integration (Multimodal)
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
