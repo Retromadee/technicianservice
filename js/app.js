@@ -827,6 +827,11 @@ const App = (() => {
     }
 
     async function init() {
+        // Initialize AI Service with Gemini API Key
+        if (typeof AIService !== 'undefined' && typeof GEMINI_API_KEY !== 'undefined') {
+            AIService.setKey(GEMINI_API_KEY);
+        }
+
         // Initialize theme
         initTheme();
 

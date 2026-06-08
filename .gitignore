@@ -29,3 +29,6 @@ serviceAccountKey.json
 
 # Progress Reports
 Progress_Report_*.html
+
+# Local secrets
+js/secrets.js
