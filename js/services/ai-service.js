@@ -13,11 +13,15 @@ const AIService = (() => {
             console.warn("AI Service: No local API Key, attempting backend diagnosis...");
             try {
                 const apiBase = window.AppConfig ? AppConfig.getApiBase() : '/api';
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 8000);
                 const response = await fetch(`${apiBase}/jobs/diagnose`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(problemData)
+                    body: JSON.stringify(problemData),
+                    signal: controller.signal
                 });
+                clearTimeout(timeoutId);
                 if (response.ok) {
                     const data = await response.json();
                     return {

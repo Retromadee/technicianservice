@@ -556,7 +556,8 @@ const App = (() => {
 
         try {
             const result = await AIService.analyze({
-                description: query,
+                description: query || "Analyze this image for issues.",
+                category: "general",
                 images: state.currentAIImages
             });
 
