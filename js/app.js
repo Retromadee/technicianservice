@@ -789,22 +789,39 @@ const App = (() => {
     function updateUI() {
         const topName = document.getElementById('userName');
         const topAvatar = document.getElementById('userAvatar');
+        const mobAvatar = document.getElementById('mobUserAvatar'); // mobile header
         const topRole = document.getElementById('userRole');
 
         if (state.user) {
-            if (topName) topName.textContent = state.user.displayName || state.user.name || state.user.firstName || state.user.email;
-            if (topAvatar) topAvatar.src = state.user.photoURL || `https://ui-avatars.com/api/?name=${state.user.name || 'User'}&background=4b39ac&color=fff`;
-            if (topRole) topRole.textContent = `Role: ${state.role.toUpperCase()}`;
+            // Resolve display name — cover all field name variants used across auth paths
+            const displayName = state.user.displayName
+                || state.user.firstName
+                || state.user.name
+                || state.user.email
+                || 'User';
+
+            // Resolve photo — Google stores it as 'photo', Firebase SDK uses 'photoURL'
+            const photoSrc = state.user.photo
+                || state.user.photoURL
+                || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=4b39ac&color=fff&bold=true`;
+
+            if (topName)   topName.textContent  = displayName;
+            if (topRole)   topRole.textContent   = `Role: ${state.role.toUpperCase()}`;
+            if (topAvatar) topAvatar.src          = photoSrc;
+            if (mobAvatar) mobAvatar.src          = photoSrc; // ← was never updated
         } else {
-            if (topName) topName.textContent = 'Guest User';
-            if (topAvatar) topAvatar.src = "https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff";
-            if (topRole) topRole.textContent = 'Switch to Pro';
+            const guestAvatar = 'https://ui-avatars.com/api/?name=Guest&background=4b39ac&color=fff&bold=true';
+            if (topName)   topName.textContent  = 'Guest User';
+            if (topAvatar) topAvatar.src         = guestAvatar;
+            if (mobAvatar) mobAvatar.src         = guestAvatar;
+            if (topRole)   topRole.textContent   = 'Switch to Pro';
         }
 
         // Refresh dynamic content
         if (state.currentPage === 'dashboard') renderDashboard();
         if (state.role === 'technician') renderLeads();
     }
+
 
     // ---- Theme Toggle ----
     function toggleTheme() {
