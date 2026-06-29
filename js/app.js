@@ -565,11 +565,9 @@ const App = (() => {
         
         if (query && !isImage) {
             chat.innerHTML += `
-                <div style="display:flex; gap:15px; margin-bottom:20px; justify-content:flex-end;">
-                    <div style="background:var(--jobie-purple); color:white; padding:15px 20px; border-radius:20px 0 20px 20px; font-size:15px; line-height:1.6; max-width:80%;">
-                        ${escapeHTML(query)}
-                    </div>
-                    <div style="width:40px; height:40px; border-radius:12px; background:#EEE; color:#666; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-user"></i></div>
+                <div class="ai-bubble-row ai-bubble-user">
+                    <div class="ai-bubble ai-bubble-msg">${escapeHTML(query)}</div>
+                    <div class="ai-bubble-avatar ai-bubble-avatar-user"><i class="fas fa-user"></i></div>
                 </div>
             `;
             inputField.value = '';
@@ -584,11 +582,9 @@ const App = (() => {
 
             // Add AI response to chat window
             chat.innerHTML += `
-                <div style="display:flex; gap:15px; margin-bottom:20px;">
-                    <div style="width:40px; height:40px; border-radius:12px; background:var(--jobie-purple); color:white; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><i class="fas fa-robot"></i></div>
-                    <div style="background:#F0F0FF; padding:15px 20px; border-radius:15px; font-size:15px; line-height:1.6; max-width:80%;">
-                        ${escapeHTML(result.advice || result.description || 'Analysis complete. See details below.')}
-                    </div>
+                <div class="ai-bubble-row ai-bubble-bot">
+                    <div class="ai-bubble-avatar ai-bubble-avatar-bot"><i class="fas fa-robot"></i></div>
+                    <div class="ai-bubble ai-bubble-reply">${escapeHTML(result.advice || result.description || 'Analysis complete. See details below.')}</div>
                 </div>
             `;
 
