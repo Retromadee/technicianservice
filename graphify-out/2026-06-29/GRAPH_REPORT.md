@@ -1,18 +1,12 @@
-# Graph Report - capv1_Mobile  (2026-06-29)
+# Graph Report - .  (2026-06-29)
 
 ## Corpus Check
-- 181 files · ~805,918 words
-- Verdict: corpus is large enough that graph structure adds value.
+- Large corpus: 267 files · ~800,868 words. Semantic extraction will be expensive (many Claude tokens). Consider running on a subfolder.
 
 ## Summary
-- 655 nodes · 643 edges · 169 communities (49 shown, 120 thin omitted)
+- 651 nodes · 641 edges · 168 communities (50 shown, 118 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `ec678ab0`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Auth Controller & User Identity|Auth Controller & User Identity]]
@@ -167,7 +161,6 @@
 - [[_COMMUNITY_Community 149|Community 149]]
 - [[_COMMUNITY_Community 150|Community 150]]
 - [[_COMMUNITY_Community 151|Community 151]]
-- [[_COMMUNITY_Community 168|Community 168]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `UserDetailsImpl` - 14 edges
@@ -188,11 +181,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (169 total, 120 thin omitted)
+## Communities (168 total, 118 thin omitted)
 
 ### Community 0 - "Auth Controller & User Identity"
-Cohesion: 0.19
-Nodes (8): Long, Override, String, User, Collection, GrantedAuthority, Object, UserDetailsImpl
+Cohesion: 0.14
+Nodes (13): PostMapping, ResponseEntity, Long, Override, String, User, Collection, AuthController (+5 more)
 
 ### Community 1 - "JWT Security Filter Chain"
 Cohesion: 0.13
@@ -203,8 +196,8 @@ Cohesion: 0.17
 Nodes (14): GetMapping, JobDto, List, Long, PostMapping, ResponseEntity, ServiceRequest, String (+6 more)
 
 ### Community 3 - "Marketplace & Quote Controller"
-Cohesion: 0.13
-Nodes (16): GetMapping, List, Long, PostMapping, Quote, QuoteDto, ResponseEntity, List (+8 more)
+Cohesion: 0.18
+Nodes (11): GetMapping, List, Long, PostMapping, Quote, QuoteDto, ResponseEntity, JobDto (+3 more)
 
 ### Community 4 - "Capacitor Package Config"
 Cohesion: 0.11
@@ -219,8 +212,8 @@ Cohesion: 0.12
 Nodes (16): background_color, categories, description, dir, display, icons, lang, name (+8 more)
 
 ### Community 7 - "Spring Security Configuration"
-Cohesion: 0.15
-Nodes (15): AuthenticationConfiguration, AuthenticationManager, AuthTokenFilter, PostMapping, ResponseEntity, Bean, AuthController, CorsConfigurationSource (+7 more)
+Cohesion: 0.23
+Nodes (10): AuthenticationConfiguration, AuthenticationManager, AuthTokenFilter, Bean, CorsConfigurationSource, DaoAuthenticationProvider, HttpSecurity, PasswordEncoder (+2 more)
 
 ### Community 8 - "iOS PWA Manifest"
 Cohesion: 0.12
@@ -257,6 +250,10 @@ Nodes (10): android, allowMixedContent, appId, appName, bundledWebRuntime, ios, 
 ### Community 16 - "Capacitor Root Config"
 Cohesion: 0.18
 Nodes (10): android, allowMixedContent, appId, appName, bundledWebRuntime, ios, contentInset, server (+2 more)
+
+### Community 17 - "Quote & Service Repository"
+Cohesion: 0.46
+Nodes (5): List, Quote, ServiceRequest, User, QuoteRepository
 
 ### Community 18 - "User Repository"
 Cohesion: 0.36
@@ -323,24 +320,24 @@ Cohesion: 0.50
 Nodes (3): auth, database, firebaseConfig
 
 ## Knowledge Gaps
-- **283 isolated node(s):** `App`, `Config`, `MockData`, `BookingModule`, `ProblemSubmission` (+278 more)
+- **281 isolated node(s):** `java.configuration.updateBuildConfiguration`, `java.compile.nullAnalysis.mode`, `appId`, `appName`, `webDir` (+276 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **120 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **118 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `UserDetailsImpl` connect `Auth Controller & User Identity` to `JWT Security Filter Chain`, `Marketplace & Quote Controller`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **What connects `App`, `Config`, `MockData` to the rest of the system?**
-  _284 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `PasswordEncoder` connect `Spring Security Configuration` to `Auth Controller & User Identity`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+- **Why does `AuthenticationManager` connect `Spring Security Configuration` to `Auth Controller & User Identity`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **What connects `java.configuration.updateBuildConfiguration`, `java.compile.nullAnalysis.mode`, `appId` to the rest of the system?**
+  _282 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Auth Controller & User Identity` be split into smaller, more focused modules?**
+  _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
 - **Should `JWT Security Filter Chain` be split into smaller, more focused modules?**
   _Cohesion score 0.1282051282051282 - nodes in this community are weakly interconnected._
-- **Should `Marketplace & Quote Controller` be split into smaller, more focused modules?**
-  _Cohesion score 0.12535612535612536 - nodes in this community are weakly interconnected._
 - **Should `Capacitor Package Config` be split into smaller, more focused modules?**
   _Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected._
-- **Should `iOS AppDelegate` be split into smaller, more focused modules?**
-  _Cohesion score 0.1437908496732026 - nodes in this community are weakly interconnected._
-- **Should `Android PWA Manifest` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._

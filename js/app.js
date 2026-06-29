@@ -895,16 +895,27 @@ const App = (() => {
         // Initialize theme
         initTheme();
 
-        // Load technicians and seed if empty
-        const techs = await FirestoreService.getTechnicians();
-        if (techs.length === 0 && typeof SeedService !== 'undefined') {
+        // Load technicians and seed if empty or containing stale UK/US data
+        let techs = await FirestoreService.getTechnicians();
+        const hasOldData = techs.some(t => 
+            t.loc && (
+                t.loc.includes('UK') || 
+                t.loc.includes('London') || 
+                t.loc.includes('Manchester') || 
+                t.loc.includes('USA') || 
+                t.loc.includes('NY')
+            )
+        );
+
+        if ((techs.length === 0 || hasOldData) && typeof SeedService !== 'undefined') {
+            console.log('🧹 Old or missing data detected, auto-reseeding Cyprus dataset...');
             const seeded = await SeedService.seedTechnicians();
             if (seeded) {
-                state.technicians = await FirestoreService.getTechnicians();
+                techs = await FirestoreService.getTechnicians();
             }
-        } else {
-            state.technicians = techs;
         }
+        state.technicians = techs;
+
 
         renderTechnicians();
 
