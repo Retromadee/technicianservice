@@ -8,6 +8,9 @@
 node_modules/
 .DS_Store
 
+# Secrets — never commit API keys
+js/secrets.js
+
 # Vercel
 .vercel/
 

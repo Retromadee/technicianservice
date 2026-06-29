@@ -1,0 +1,15 @@
+{
+  "appId": "com.homefixpro.app",
+  "appName": "HomeFix Pro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true
+  },
+  "ios": {
+    "contentInset": "always"
+  }
+}

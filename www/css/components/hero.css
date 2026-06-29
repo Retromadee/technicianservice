@@ -1,0 +1,228 @@
+/* ---- Hero Section ---- */
+.hero-section {
+    min-height: 100vh;
+    background: var(--gradient-hero);
+    position: relative;
+    overflow: hidden;
+}
+.hero-particles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+.hero-particles .particle {
+    position: absolute;
+    width: 4px; height: 4px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 6s infinite ease-in-out;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+    50% { transform: translateY(-30px) translateX(15px); opacity: 0.7; }
+}
+.hero-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 50px;
+    padding: 0.4rem 1.2rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-accent-hover);
+    margin-bottom: var(--space-lg);
+    animation: fadeIn 0.8s ease;
+}
+.hero-title {
+    font-size: var(--font-size-hero);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: var(--space-lg);
+}
+.hero-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 500px;
+    margin-bottom: var(--space-xl);
+    line-height: 1.7;
+}
+.hero-cta { margin-bottom: var(--space-2xl); }
+.hero-stats {
+    display: flex;
+    gap: var(--space-xl);
+}
+.stat-item { text-align: center; }
+.stat-number {
+    display: block;
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-text);
+}
+.stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ---- Hero Visual (right side) ---- */
+.hero-visual {
+    position: relative;
+    height: 500px;
+}
+.floating-card {
+    position: absolute;
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    box-shadow: var(--shadow-md);
+    animation: floatCard 4s infinite ease-in-out;
+    z-index: 2;
+}
+.floating-card i { font-size: 1.3rem; }
+.floating-card small { display: block; font-size: var(--font-size-xs); }
+.card-1 { top: 15%; right: 10%; animation-delay: 0s; }
+.card-1 i { color: var(--color-info); }
+.card-2 { top: 40%; left: 5%; animation-delay: 1s; }
+.card-2 i { color: var(--color-warning); }
+.card-3 { bottom: 25%; right: 5%; animation-delay: 2s; }
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ---- Phone Mockup ---- */
+.hero-phone {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    background: var(--color-bg-secondary);
+    border: 2px solid var(--color-border);
+    border-radius: 28px;
+    padding: 12px;
+    box-shadow: var(--shadow-lg);
+}
+.phone-screen { border-radius: 20px; overflow: hidden; }
+.phone-header {
+    background: var(--gradient-accent);
+    color: white;
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+.phone-content { padding: 1rem; }
+.diagnosis-bar {
+    background: var(--color-surface);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xs);
+    position: relative;
+    overflow: hidden;
+}
+.diagnosis-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: var(--width);
+    background: rgba(99,102,241,0.15);
+    border-radius: 6px;
+    transition: width 1s ease;
+}
+
+/* ---- Step Cards (How it Works) ---- */
+.step-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-base);
+    height: 100%;
+}
+.step-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+}
+.step-card::before {
+    content: attr(data-step);
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-accent);
+    color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+}
+.step-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(99,102,241,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-accent-hover);
+    margin: 0 auto var(--space-md);
+}
+.step-card h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+}
+.step-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 0;
+}
+
+/* ---- Feature Cards ---- */
+.feature-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    transition: all var(--transition-base);
+    height: 100%;
+}
+.feature-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+}
+.feature-icon {
+    width: 44px; height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(99,102,241,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--color-accent-hover);
+    margin-bottom: var(--space-sm);
+}
+.feature-card h4 { font-size: var(--font-size-base); font-weight: 700; margin-bottom: 0.3rem; }
+.feature-card p { color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-bottom: 0; }

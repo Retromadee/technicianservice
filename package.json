@@ -1,0 +1,27 @@
+{
+  "name": "homefix-pro-mobile",
+  "version": "1.0.0",
+  "description": "HomeFix Pro Mobile App Wrapper",
+  "main": "js/app.js",
+  "scripts": {
+    "build": "node build.js",
+    "cap:sync": "npm run build && cap sync",
+    "cap:open:ios": "cap open ios",
+    "cap:open:android": "cap open android"
+  },
+  "keywords": [
+    "capacitor",
+    "mobile",
+    "pwa"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.4.0",
+    "@capacitor/core": "^8.4.0",
+    "@capacitor/ios": "^8.4.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.0"
+  }
+}

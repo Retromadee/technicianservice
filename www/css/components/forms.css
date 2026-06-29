@@ -1,0 +1,110 @@
+/* forms.css — Additional form component styles */
+.booking-steps {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: var(--space-xl);
+}
+.booking-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    position: relative;
+}
+.booking-step::after {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background: var(--color-border);
+    margin-left: var(--space-sm);
+}
+.booking-step:last-child::after { display: none; }
+.booking-step.active { color: var(--color-accent-hover); }
+.booking-step.completed { color: var(--color-success); }
+.booking-step-number {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-xs);
+}
+.booking-step.active .booking-step-number { border-color: var(--color-accent); background: rgba(99,102,241,0.15); color: var(--color-accent-hover); }
+.booking-step.completed .booking-step-number { border-color: var(--color-success); background: var(--color-success); color: white; }
+
+/* Payment method cards */
+.payment-method {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+.payment-method:hover { border-color: var(--color-accent); }
+.payment-method.selected { border-color: var(--color-accent); background: rgba(99,102,241,0.05); }
+.payment-method-icon { font-size: 1.5rem; color: var(--color-accent-hover); width: 40px; text-align: center; }
+.payment-method h6 { font-weight: 600; margin-bottom: 0; }
+.payment-method small { color: var(--color-text-muted); }
+
+/* Rating stars */
+.star-rating { display: flex; gap: 0.3rem; font-size: 1.5rem; }
+.star-rating .star { color: var(--color-surface); cursor: pointer; transition: color var(--transition-fast); }
+.star-rating .star.active, .star-rating .star:hover { color: var(--color-warning); }
+
+/* Review card */
+.review-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.review-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-md); }
+.review-stars { color: var(--color-warning); font-size: var(--font-size-sm); }
+.review-text { color: var(--color-text-secondary); font-size: var(--font-size-sm); line-height: 1.6; }
+.review-date { font-size: var(--font-size-xs); color: var(--color-text-muted); margin-top: var(--space-sm); }
+
+/* Profile card */
+.profile-header-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.profile-header-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 120px;
+    background: var(--gradient-accent);
+    opacity: 0.3;
+}
+.profile-avatar-large {
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 auto var(--space-md);
+    position: relative;
+    z-index: 1;
+    border: 3px solid var(--color-bg);
+}

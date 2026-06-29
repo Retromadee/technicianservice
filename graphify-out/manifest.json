@@ -1,0 +1,1762 @@
+{
+  ".vscode/settings.json": {
+    "mtime": 1778749286.8244417,
+    "ast_hash": "6d23aa019752c4ede6ebbb894b9f3e00",
+    "semantic_hash": ""
+  },
+  "api/main.py": {
+    "mtime": 1778749286.8246293,
+    "ast_hash": "3e446586859fe94f95eba57b5a724311",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/HomeFixApplication.java": {
+    "mtime": 1778749286.8476985,
+    "ast_hash": "9badfa6945542f5ef17a8c79f44257e1",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/config/DataInitializer.java": {
+    "mtime": 1778749286.847909,
+    "ast_hash": "8f9bdcb9151352fe37a2a304ef797eeb",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/config/FirebaseConfig.java": {
+    "mtime": 1781080792.0831556,
+    "ast_hash": "c0091f6c69e77e016d3c9b3e8d0dcab2",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/controller/AuthController.java": {
+    "mtime": 1778749286.848241,
+    "ast_hash": "87bc0cbe899948eacba4e581f19defbe",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/controller/DiagnosisController.java": {
+    "mtime": 1778749286.8483472,
+    "ast_hash": "5a5c2093b10b264922ed1902f24c0827",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/controller/HealthController.java": {
+    "mtime": 1781080792.0832522,
+    "ast_hash": "fba56e729a3269a5f651d48860d38fdd",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/controller/JobController.java": {
+    "mtime": 1778749286.8484747,
+    "ast_hash": "73b9e88f0171973c25ca85f68f8ecac1",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/controller/MarketplaceController.java": {
+    "mtime": 1778749286.8485656,
+    "ast_hash": "5dec77ada1c65457c067edf6ef56fc76",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/DiagnosisRequest.java": {
+    "mtime": 1778749286.8487234,
+    "ast_hash": "50ad653c730aedc23b7199f402a398e0",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/DiagnosisResponse.java": {
+    "mtime": 1778749286.8488345,
+    "ast_hash": "d89c835b78e4d4a85bb5c3cd33d226ec",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/JobCreateRequest.java": {
+    "mtime": 1778749286.8489358,
+    "ast_hash": "4121e5bf953eb57ea2a159c29677566b",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/JobDto.java": {
+    "mtime": 1778749286.8490417,
+    "ast_hash": "20b7ca840903e801663d5a062be74aa5",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/JwtResponse.java": {
+    "mtime": 1778749286.849134,
+    "ast_hash": "894bf1deceaa274ff0802a2d761eb9cc",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/LoginRequest.java": {
+    "mtime": 1778749286.849219,
+    "ast_hash": "dfaa491893f137a5e7badb11f38dd665",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/MessageResponse.java": {
+    "mtime": 1778749286.8493164,
+    "ast_hash": "b575e26cc9b4d5e24c0c6467a252cfc0",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/QuoteDto.java": {
+    "mtime": 1778749286.8494074,
+    "ast_hash": "8eaabd78c3a304560260f4657264398b",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/dto/SignupRequest.java": {
+    "mtime": 1778749286.8495088,
+    "ast_hash": "ae2d49be7ae462bfc7636cedf4a590e7",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/model/ERole.java": {
+    "mtime": 1778749286.8496623,
+    "ast_hash": "c376714c2eb76efe999dbdcfe28e8476",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/model/Quote.java": {
+    "mtime": 1778749286.8497627,
+    "ast_hash": "a69d65c52e7abbc89d0ef539ea2bc3e5",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/model/Role.java": {
+    "mtime": 1778749286.8498523,
+    "ast_hash": "90e592aadcfce685551668505bc5a3de",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/model/ServiceRequest.java": {
+    "mtime": 1778749286.8499398,
+    "ast_hash": "820792262650beb4c8aeb69641d3bd0a",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/model/User.java": {
+    "mtime": 1778749286.8500476,
+    "ast_hash": "7049dc4cd88cba0c7763827e3f173978",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/repository/QuoteRepository.java": {
+    "mtime": 1778749286.850215,
+    "ast_hash": "6a743181dbc51bb6cd2008774eb4f321",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/repository/RoleRepository.java": {
+    "mtime": 1778749286.8503072,
+    "ast_hash": "22cb8daa703b7b2887458cb2c2fbffe8",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/repository/ServiceRequestRepository.java": {
+    "mtime": 1778749286.850391,
+    "ast_hash": "387232c4550c42c4dd8ec385e2165264",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/repository/UserRepository.java": {
+    "mtime": 1778749286.850476,
+    "ast_hash": "344c722aae63c46fc72d95934e13327b",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/AuthEntryPointJwt.java": {
+    "mtime": 1778749286.8506367,
+    "ast_hash": "bdcc4c9e017acec382096cb889273b33",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/AuthTokenFilter.java": {
+    "mtime": 1778749286.8507395,
+    "ast_hash": "b334c82c1811e6d81e031f37147c56c5",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/JwtUtils.java": {
+    "mtime": 1778749286.8508332,
+    "ast_hash": "8b528815dcb8c2bf16779e21474e648e",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/UserDetailsImpl.java": {
+    "mtime": 1778749286.8509269,
+    "ast_hash": "3de52fdfabf36d18d6db6c8b0c5d4ee5",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/UserDetailsServiceImpl.java": {
+    "mtime": 1778749286.851022,
+    "ast_hash": "b9c36a09d1fd97edf20c4233d95476ef",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/security/WebSecurityConfig.java": {
+    "mtime": 1781080792.0834894,
+    "ast_hash": "70e1cd8dea2d4399627901c08ccb1437",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/service/AIService.java": {
+    "mtime": 1778749286.8512955,
+    "ast_hash": "2a83d0f4664986ba52aa93395818cadb",
+    "semantic_hash": ""
+  },
+  "backend/src/main/java/com/homefix/service/FirestoreSyncService.java": {
+    "mtime": 1778749286.851393,
+    "ast_hash": "e30381e425de319afcf11c590cea83df",
+    "semantic_hash": ""
+  },
+  "docker.sh": {
+    "mtime": 1781080792.0838168,
+    "ast_hash": "003470a316a1ec73f280cd993f941b72",
+    "semantic_hash": ""
+  },
+  "js/app.js": {
+    "mtime": 1781042494.4909708,
+    "ast_hash": "36357e6b5c05e2009359b30c2f087e99",
+    "semantic_hash": ""
+  },
+  "js/components/toast.js": {
+    "mtime": 1778749286.8538303,
+    "ast_hash": "250ec029752e80145bcd9f2b4856bd54",
+    "semantic_hash": ""
+  },
+  "js/config.js": {
+    "mtime": 1781042483.6049743,
+    "ast_hash": "3b13e65266a0abf0256e8be3eb0ff8b6",
+    "semantic_hash": ""
+  },
+  "js/mock-data.js": {
+    "mtime": 1778749286.8539944,
+    "ast_hash": "e0eae71434119bd30440a1d5ed67c725",
+    "semantic_hash": ""
+  },
+  "js/modules/admin.js": {
+    "mtime": 1778749286.8541975,
+    "ast_hash": "bb3e348e90c14f37d13eb05972a2ea1e",
+    "semantic_hash": ""
+  },
+  "js/modules/aiDiagnosis.js": {
+    "mtime": 1778749286.8543243,
+    "ast_hash": "e7eee206dc325f3ce6bc96157dae3aad",
+    "semantic_hash": ""
+  },
+  "js/modules/auth.js": {
+    "mtime": 1781042494.4866574,
+    "ast_hash": "d7d580335ce8f46e8338b5939a3cfb00",
+    "semantic_hash": ""
+  },
+  "js/modules/booking.js": {
+    "mtime": 1778749286.854571,
+    "ast_hash": "77e13619068c36b0ae0638c3fc90f85a",
+    "semantic_hash": ""
+  },
+  "js/modules/chat.js": {
+    "mtime": 1778749286.8546934,
+    "ast_hash": "9e183958b04a70984163c56476fff5d1",
+    "semantic_hash": ""
+  },
+  "js/modules/dashboard.js": {
+    "mtime": 1778749286.8548236,
+    "ast_hash": "b1da82d64a22a1566c75fdcbc550f6ba",
+    "semantic_hash": ""
+  },
+  "js/modules/landing.js": {
+    "mtime": 1778749286.8549104,
+    "ast_hash": "6fc091f6927ebd3036f207a7e4978f20",
+    "semantic_hash": ""
+  },
+  "js/modules/marketplace.js": {
+    "mtime": 1778749286.8550732,
+    "ast_hash": "9dfc68f3091fc2d01119ee68ce6c3f47",
+    "semantic_hash": ""
+  },
+  "js/modules/payment.js": {
+    "mtime": 1778749286.8551977,
+    "ast_hash": "5d74c2a9be039b89f99cd5f76a3cf56e",
+    "semantic_hash": ""
+  },
+  "js/modules/problemSubmission.js": {
+    "mtime": 1778749286.8553462,
+    "ast_hash": "2ca59c2d73214fc7b40786f712262763",
+    "semantic_hash": ""
+  },
+  "js/modules/quickFixGuide.js": {
+    "mtime": 1778749286.8554895,
+    "ast_hash": "c99626f215fc6c786d0b74800261a9f6",
+    "semantic_hash": ""
+  },
+  "js/modules/rating.js": {
+    "mtime": 1778749286.8556223,
+    "ast_hash": "e8c200fc48fd79fa5728b0c65404ab3c",
+    "semantic_hash": ""
+  },
+  "js/modules/technicianProfile.js": {
+    "mtime": 1778749286.8557627,
+    "ast_hash": "36ac566e21625d688c820696383fc064",
+    "semantic_hash": ""
+  },
+  "js/services/ai-service.js": {
+    "mtime": 1781042494.3628771,
+    "ast_hash": "f475d609ba20dc0e9a93ae257ac7e3f4",
+    "semantic_hash": ""
+  },
+  "js/services/auth-service.js": {
+    "mtime": 1781042494.3596141,
+    "ast_hash": "aafe2d06371d20e8809c19853698df8a",
+    "semantic_hash": ""
+  },
+  "js/services/chat-service.js": {
+    "mtime": 1778749286.856154,
+    "ast_hash": "1cd745886b75d514671c93a0b59ba774",
+    "semantic_hash": ""
+  },
+  "js/services/firebase-config.js": {
+    "mtime": 1778749286.8562524,
+    "ast_hash": "b51f71f96948e3a67f79f49ecffa43bf",
+    "semantic_hash": ""
+  },
+  "js/services/firestore-service.js": {
+    "mtime": 1778749286.856366,
+    "ast_hash": "1e4b0f4f52512d576cfb7d2391cedf6d",
+    "semantic_hash": ""
+  },
+  "js/services/notification-service.js": {
+    "mtime": 1781042494.3651469,
+    "ast_hash": "f7a81bc546b74753fe950a3d073abb5a",
+    "semantic_hash": ""
+  },
+  "js/services/storage-service.js": {
+    "mtime": 1778749286.8565536,
+    "ast_hash": "30f358014242f6ceb0e68deb080b0619",
+    "semantic_hash": ""
+  },
+  "js/utils/seed-data.js": {
+    "mtime": 1778749286.8567472,
+    "ast_hash": "fa324eeaa6086d8d702cdd297f500079",
+    "semantic_hash": ""
+  },
+  "manifest.json": {
+    "mtime": 1781080792.09518,
+    "ast_hash": "cdbd6b3662e3119128b9d1755cd57f21",
+    "semantic_hash": ""
+  },
+  "run_ignore.py": {
+    "mtime": 1781080792.084126,
+    "ast_hash": "ae8e91695f2e3b4eb354d3f846340113",
+    "semantic_hash": ""
+  },
+  "start_backend.sh": {
+    "mtime": 1781080792.0842042,
+    "ast_hash": "a326dfc30e61e72187c7bde7e21888ff",
+    "semantic_hash": ""
+  },
+  "sw.js": {
+    "mtime": 1781080792.0953896,
+    "ast_hash": "a68b281cfa3250369424676b3d5f3012",
+    "semantic_hash": ""
+  },
+  "test-browser.js": {
+    "mtime": 1778749286.8568413,
+    "ast_hash": "eaaa89e564f8e85f5a361f4620cf10c5",
+    "semantic_hash": ""
+  },
+  "test-server.js": {
+    "mtime": 1781080792.08435,
+    "ast_hash": "055d936bc16e1678fc4fd3644746a626",
+    "semantic_hash": ""
+  },
+  "vercel.json": {
+    "mtime": 1778749286.857024,
+    "ast_hash": "24c5b986f5f2fb71686f2a88f97aebc6",
+    "semantic_hash": ""
+  },
+  "api/requirements.txt": {
+    "mtime": 1778749286.8247366,
+    "ast_hash": "0f10de4a2148006158d235a8aeea5d2f",
+    "semantic_hash": ""
+  },
+  "docker-compose.yml": {
+    "mtime": 1781080792.083735,
+    "ast_hash": "6b8b7559b44cdc003dd6ae7e4d2bf7f1",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1781080815.0570629,
+    "ast_hash": "0661678cbc3be5381517cbd79dcf89a9",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-128x128.png": {
+    "mtime": 1781080792.0924213,
+    "ast_hash": "99a3175bc357ab90ea63512922fe5d9e",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-144x144.png": {
+    "mtime": 1781080792.0926836,
+    "ast_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-152x152.png": {
+    "mtime": 1781080792.092917,
+    "ast_hash": "47e06c41615109500df092a54e0d4bfc",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-192x192.png": {
+    "mtime": 1781080792.093183,
+    "ast_hash": "cbef102922f95d00cad3e35b8a139020",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-384x384.png": {
+    "mtime": 1781080792.093538,
+    "ast_hash": "b9b21c7979ec86ed6eb026b39b8e377c",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-512x512.png": {
+    "mtime": 1781080792.093953,
+    "ast_hash": "a0f3be5cbb1535bac984212a24a33d06",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-72x72.png": {
+    "mtime": 1781080792.0941913,
+    "ast_hash": "13db4fdca8c91127cc577637edefd955",
+    "semantic_hash": ""
+  },
+  "assets/icons/icon-96x96.png": {
+    "mtime": 1781080792.0944073,
+    "ast_hash": "d9426056a1f4fb03082f5034e419cd30",
+    "semantic_hash": ""
+  },
+  "assets/preview_admin_dash.png": {
+    "mtime": 1778749286.8275661,
+    "ast_hash": "19e4f9809b6a9c03521b57d4d8f20fbd",
+    "semantic_hash": ""
+  },
+  "assets/preview_landing.png": {
+    "mtime": 1778749286.8352363,
+    "ast_hash": "95c602947bda14a341c1eb17dbe8f19d",
+    "semantic_hash": ""
+  },
+  "assets/preview_scroll.png": {
+    "mtime": 1778749286.8395784,
+    "ast_hash": "2cc05332cd401c222811af47d20c880d",
+    "semantic_hash": ""
+  },
+  "assets/preview_tech_dash.png": {
+    "mtime": 1778749286.842503,
+    "ast_hash": "eda7db519a59db084dc42c72b8af5857",
+    "semantic_hash": ""
+  },
+  "assets/preview_user_dash.png": {
+    "mtime": 1778749286.8466172,
+    "ast_hash": "401c15c3fe8fa83d4a7862cfe51170ea",
+    "semantic_hash": ""
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/.vscode/settings.json": {
+    "mtime": 1778749286.8244417,
+    "ast_hash": "6d23aa019752c4ede6ebbb894b9f3e00",
+    "semantic_hash": "6d23aa019752c4ede6ebbb894b9f3e00"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/build.gradle": {
+    "mtime": 1781100061.1142347,
+    "ast_hash": "24e0bd3f30977ac198968f3105e49169",
+    "semantic_hash": "24e0bd3f30977ac198968f3105e49169"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/capacitor.build.gradle": {
+    "mtime": 1781100067.6792598,
+    "ast_hash": "b863e425fbde80251bd3c68ac8ccba02",
+    "semantic_hash": "b863e425fbde80251bd3c68ac8ccba02"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java": {
+    "mtime": 1780415704.0,
+    "ast_hash": "fbaf7cc870c663eb52dcf218531c439d",
+    "semantic_hash": "fbaf7cc870c663eb52dcf218531c439d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/capacitor.config.json": {
+    "mtime": 1781100067.668006,
+    "ast_hash": "b7be3520698ccee7c6d1c52b6efb4058",
+    "semantic_hash": "b7be3520698ccee7c6d1c52b6efb4058"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/capacitor.plugins.json": {
+    "mtime": 1781100067.6711037,
+    "ast_hash": "58e0494c51d30eb3494f7c9198986bb9",
+    "semantic_hash": "58e0494c51d30eb3494f7c9198986bb9"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/cordova.js": {
+    "mtime": 1781100067.678381,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/cordova_plugins.js": {
+    "mtime": 1781100067.6784637,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/app.js": {
+    "mtime": 1781100067.6636572,
+    "ast_hash": "6d2e882e2012b679c05586dbedd2123d",
+    "semantic_hash": "6d2e882e2012b679c05586dbedd2123d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/components/toast.js": {
+    "mtime": 1781100067.6656475,
+    "ast_hash": "250ec029752e80145bcd9f2b4856bd54",
+    "semantic_hash": "250ec029752e80145bcd9f2b4856bd54"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/config.js": {
+    "mtime": 1781100067.6630988,
+    "ast_hash": "e68798044a6716ac0ac1ceb96c890661",
+    "semantic_hash": "e68798044a6716ac0ac1ceb96c890661"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/mock-data.js": {
+    "mtime": 1781100067.6628058,
+    "ast_hash": "e0eae71434119bd30440a1d5ed67c725",
+    "semantic_hash": "e0eae71434119bd30440a1d5ed67c725"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/admin.js": {
+    "mtime": 1781100067.6662548,
+    "ast_hash": "bb3e348e90c14f37d13eb05972a2ea1e",
+    "semantic_hash": "bb3e348e90c14f37d13eb05972a2ea1e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/aiDiagnosis.js": {
+    "mtime": 1781100067.6658664,
+    "ast_hash": "e7eee206dc325f3ce6bc96157dae3aad",
+    "semantic_hash": "e7eee206dc325f3ce6bc96157dae3aad"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/auth.js": {
+    "mtime": 1781100067.6660595,
+    "ast_hash": "a3957b803387c2d5f064deb03fc33282",
+    "semantic_hash": "a3957b803387c2d5f064deb03fc33282"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/booking.js": {
+    "mtime": 1781100067.665788,
+    "ast_hash": "77e13619068c36b0ae0638c3fc90f85a",
+    "semantic_hash": "77e13619068c36b0ae0638c3fc90f85a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/chat.js": {
+    "mtime": 1781100067.6661508,
+    "ast_hash": "9e183958b04a70984163c56476fff5d1",
+    "semantic_hash": "9e183958b04a70984163c56476fff5d1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/dashboard.js": {
+    "mtime": 1781100067.6663387,
+    "ast_hash": "b1da82d64a22a1566c75fdcbc550f6ba",
+    "semantic_hash": "b1da82d64a22a1566c75fdcbc550f6ba"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/landing.js": {
+    "mtime": 1781100067.6661952,
+    "ast_hash": "6fc091f6927ebd3036f207a7e4978f20",
+    "semantic_hash": "6fc091f6927ebd3036f207a7e4978f20"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/marketplace.js": {
+    "mtime": 1781100067.6664038,
+    "ast_hash": "9dfc68f3091fc2d01119ee68ce6c3f47",
+    "semantic_hash": "9dfc68f3091fc2d01119ee68ce6c3f47"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/payment.js": {
+    "mtime": 1781100067.6662502,
+    "ast_hash": "5d74c2a9be039b89f99cd5f76a3cf56e",
+    "semantic_hash": "5d74c2a9be039b89f99cd5f76a3cf56e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/problemSubmission.js": {
+    "mtime": 1781100067.6660438,
+    "ast_hash": "2ca59c2d73214fc7b40786f712262763",
+    "semantic_hash": "2ca59c2d73214fc7b40786f712262763"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/quickFixGuide.js": {
+    "mtime": 1781100067.6659708,
+    "ast_hash": "c99626f215fc6c786d0b74800261a9f6",
+    "semantic_hash": "c99626f215fc6c786d0b74800261a9f6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/rating.js": {
+    "mtime": 1781100067.6657238,
+    "ast_hash": "e8c200fc48fd79fa5728b0c65404ab3c",
+    "semantic_hash": "e8c200fc48fd79fa5728b0c65404ab3c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/modules/technicianProfile.js": {
+    "mtime": 1781100067.6658366,
+    "ast_hash": "36ac566e21625d688c820696383fc064",
+    "semantic_hash": "36ac566e21625d688c820696383fc064"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/ai-service.js": {
+    "mtime": 1781100067.6668956,
+    "ast_hash": "f475d609ba20dc0e9a93ae257ac7e3f4",
+    "semantic_hash": "f475d609ba20dc0e9a93ae257ac7e3f4"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/auth-service.js": {
+    "mtime": 1781100067.6666124,
+    "ast_hash": "aafe2d06371d20e8809c19853698df8a",
+    "semantic_hash": "aafe2d06371d20e8809c19853698df8a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/chat-service.js": {
+    "mtime": 1781100067.6666944,
+    "ast_hash": "1cd745886b75d514671c93a0b59ba774",
+    "semantic_hash": "1cd745886b75d514671c93a0b59ba774"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/firebase-config.js": {
+    "mtime": 1781100067.666753,
+    "ast_hash": "b51f71f96948e3a67f79f49ecffa43bf",
+    "semantic_hash": "b51f71f96948e3a67f79f49ecffa43bf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/firestore-service.js": {
+    "mtime": 1781100067.6665695,
+    "ast_hash": "1e4b0f4f52512d576cfb7d2391cedf6d",
+    "semantic_hash": "1e4b0f4f52512d576cfb7d2391cedf6d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/notification-service.js": {
+    "mtime": 1781100067.6665564,
+    "ast_hash": "f7a81bc546b74753fe950a3d073abb5a",
+    "semantic_hash": "f7a81bc546b74753fe950a3d073abb5a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/services/storage-service.js": {
+    "mtime": 1781100067.6667092,
+    "ast_hash": "30f358014242f6ceb0e68deb080b0619",
+    "semantic_hash": "30f358014242f6ceb0e68deb080b0619"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/js/utils/seed-data.js": {
+    "mtime": 1781100067.6655962,
+    "ast_hash": "fa324eeaa6086d8d702cdd297f500079",
+    "semantic_hash": "fa324eeaa6086d8d702cdd297f500079"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/manifest.json": {
+    "mtime": 1781100067.6593099,
+    "ast_hash": "cdbd6b3662e3119128b9d1755cd57f21",
+    "semantic_hash": "cdbd6b3662e3119128b9d1755cd57f21"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/sw.js": {
+    "mtime": 1781100067.6593475,
+    "ast_hash": "a68b281cfa3250369424676b3d5f3012",
+    "semantic_hash": "a68b281cfa3250369424676b3d5f3012"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/java/com/homefixpro/app/MainActivity.java": {
+    "mtime": 1781100061.1140063,
+    "ast_hash": "fcc811cc890bcb6fb377b7eea7b04d54",
+    "semantic_hash": "fcc811cc890bcb6fb377b7eea7b04d54"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java": {
+    "mtime": 1780415704.0,
+    "ast_hash": "e91b4501c14da821682fa5c26a16d616",
+    "semantic_hash": "e91b4501c14da821682fa5c26a16d616"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/build.gradle": {
+    "mtime": 1780415704.0,
+    "ast_hash": "682315a426653617c6a74fc12bef55b6",
+    "semantic_hash": "682315a426653617c6a74fc12bef55b6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/capacitor-cordova-android-plugins/build.gradle": {
+    "mtime": 1781100067.679717,
+    "ast_hash": "2af61653d70c95d20802c8b5c433ba90",
+    "semantic_hash": "2af61653d70c95d20802c8b5c433ba90"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/capacitor-cordova-android-plugins/cordova.variables.gradle": {
+    "mtime": 1781100067.6798253,
+    "ast_hash": "d2372a0ae9aa60abb8d03e7f06bf9194",
+    "semantic_hash": "d2372a0ae9aa60abb8d03e7f06bf9194"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/capacitor.settings.gradle": {
+    "mtime": 1781100067.6791682,
+    "ast_hash": "455ebb7f9fe84a6974da6bdae43097c2",
+    "semantic_hash": "455ebb7f9fe84a6974da6bdae43097c2"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/gradlew": {
+    "mtime": 1780415704.0,
+    "ast_hash": "794669d78aef1dd5c7d889ef618b311a",
+    "semantic_hash": "794669d78aef1dd5c7d889ef618b311a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/settings.gradle": {
+    "mtime": 1780415704.0,
+    "ast_hash": "f6cd925b3f859e23c3d819fe2459e0e4",
+    "semantic_hash": "f6cd925b3f859e23c3d819fe2459e0e4"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/variables.gradle": {
+    "mtime": 1780415704.0,
+    "ast_hash": "4b3fce8ea2a515a9d2e47e74757172ec",
+    "semantic_hash": "4b3fce8ea2a515a9d2e47e74757172ec"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/api/main.py": {
+    "mtime": 1778749286.8246293,
+    "ast_hash": "3e446586859fe94f95eba57b5a724311",
+    "semantic_hash": "3e446586859fe94f95eba57b5a724311"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/HomeFixApplication.java": {
+    "mtime": 1778749286.8476985,
+    "ast_hash": "9badfa6945542f5ef17a8c79f44257e1",
+    "semantic_hash": "9badfa6945542f5ef17a8c79f44257e1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/config/DataInitializer.java": {
+    "mtime": 1778749286.847909,
+    "ast_hash": "8f9bdcb9151352fe37a2a304ef797eeb",
+    "semantic_hash": "8f9bdcb9151352fe37a2a304ef797eeb"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/config/FirebaseConfig.java": {
+    "mtime": 1781080792.0831556,
+    "ast_hash": "c0091f6c69e77e016d3c9b3e8d0dcab2",
+    "semantic_hash": "c0091f6c69e77e016d3c9b3e8d0dcab2"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/controller/AuthController.java": {
+    "mtime": 1778749286.848241,
+    "ast_hash": "87bc0cbe899948eacba4e581f19defbe",
+    "semantic_hash": "87bc0cbe899948eacba4e581f19defbe"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/controller/DiagnosisController.java": {
+    "mtime": 1778749286.8483472,
+    "ast_hash": "5a5c2093b10b264922ed1902f24c0827",
+    "semantic_hash": "5a5c2093b10b264922ed1902f24c0827"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/controller/HealthController.java": {
+    "mtime": 1781080792.0832522,
+    "ast_hash": "fba56e729a3269a5f651d48860d38fdd",
+    "semantic_hash": "fba56e729a3269a5f651d48860d38fdd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/controller/JobController.java": {
+    "mtime": 1778749286.8484747,
+    "ast_hash": "73b9e88f0171973c25ca85f68f8ecac1",
+    "semantic_hash": "73b9e88f0171973c25ca85f68f8ecac1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/controller/MarketplaceController.java": {
+    "mtime": 1778749286.8485656,
+    "ast_hash": "5dec77ada1c65457c067edf6ef56fc76",
+    "semantic_hash": "5dec77ada1c65457c067edf6ef56fc76"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/DiagnosisRequest.java": {
+    "mtime": 1778749286.8487234,
+    "ast_hash": "50ad653c730aedc23b7199f402a398e0",
+    "semantic_hash": "50ad653c730aedc23b7199f402a398e0"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/DiagnosisResponse.java": {
+    "mtime": 1778749286.8488345,
+    "ast_hash": "d89c835b78e4d4a85bb5c3cd33d226ec",
+    "semantic_hash": "d89c835b78e4d4a85bb5c3cd33d226ec"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/JobCreateRequest.java": {
+    "mtime": 1778749286.8489358,
+    "ast_hash": "4121e5bf953eb57ea2a159c29677566b",
+    "semantic_hash": "4121e5bf953eb57ea2a159c29677566b"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/JobDto.java": {
+    "mtime": 1778749286.8490417,
+    "ast_hash": "20b7ca840903e801663d5a062be74aa5",
+    "semantic_hash": "20b7ca840903e801663d5a062be74aa5"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/JwtResponse.java": {
+    "mtime": 1778749286.849134,
+    "ast_hash": "894bf1deceaa274ff0802a2d761eb9cc",
+    "semantic_hash": "894bf1deceaa274ff0802a2d761eb9cc"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/LoginRequest.java": {
+    "mtime": 1778749286.849219,
+    "ast_hash": "dfaa491893f137a5e7badb11f38dd665",
+    "semantic_hash": "dfaa491893f137a5e7badb11f38dd665"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/MessageResponse.java": {
+    "mtime": 1778749286.8493164,
+    "ast_hash": "b575e26cc9b4d5e24c0c6467a252cfc0",
+    "semantic_hash": "b575e26cc9b4d5e24c0c6467a252cfc0"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/QuoteDto.java": {
+    "mtime": 1778749286.8494074,
+    "ast_hash": "8eaabd78c3a304560260f4657264398b",
+    "semantic_hash": "8eaabd78c3a304560260f4657264398b"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/dto/SignupRequest.java": {
+    "mtime": 1778749286.8495088,
+    "ast_hash": "ae2d49be7ae462bfc7636cedf4a590e7",
+    "semantic_hash": "ae2d49be7ae462bfc7636cedf4a590e7"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/model/ERole.java": {
+    "mtime": 1778749286.8496623,
+    "ast_hash": "c376714c2eb76efe999dbdcfe28e8476",
+    "semantic_hash": "c376714c2eb76efe999dbdcfe28e8476"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/model/Quote.java": {
+    "mtime": 1778749286.8497627,
+    "ast_hash": "a69d65c52e7abbc89d0ef539ea2bc3e5",
+    "semantic_hash": "a69d65c52e7abbc89d0ef539ea2bc3e5"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/model/Role.java": {
+    "mtime": 1778749286.8498523,
+    "ast_hash": "90e592aadcfce685551668505bc5a3de",
+    "semantic_hash": "90e592aadcfce685551668505bc5a3de"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/model/ServiceRequest.java": {
+    "mtime": 1778749286.8499398,
+    "ast_hash": "820792262650beb4c8aeb69641d3bd0a",
+    "semantic_hash": "820792262650beb4c8aeb69641d3bd0a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/model/User.java": {
+    "mtime": 1778749286.8500476,
+    "ast_hash": "7049dc4cd88cba0c7763827e3f173978",
+    "semantic_hash": "7049dc4cd88cba0c7763827e3f173978"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/repository/QuoteRepository.java": {
+    "mtime": 1778749286.850215,
+    "ast_hash": "6a743181dbc51bb6cd2008774eb4f321",
+    "semantic_hash": "6a743181dbc51bb6cd2008774eb4f321"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/repository/RoleRepository.java": {
+    "mtime": 1778749286.8503072,
+    "ast_hash": "22cb8daa703b7b2887458cb2c2fbffe8",
+    "semantic_hash": "22cb8daa703b7b2887458cb2c2fbffe8"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/repository/ServiceRequestRepository.java": {
+    "mtime": 1778749286.850391,
+    "ast_hash": "387232c4550c42c4dd8ec385e2165264",
+    "semantic_hash": "387232c4550c42c4dd8ec385e2165264"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/repository/UserRepository.java": {
+    "mtime": 1778749286.850476,
+    "ast_hash": "344c722aae63c46fc72d95934e13327b",
+    "semantic_hash": "344c722aae63c46fc72d95934e13327b"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/AuthEntryPointJwt.java": {
+    "mtime": 1778749286.8506367,
+    "ast_hash": "bdcc4c9e017acec382096cb889273b33",
+    "semantic_hash": "bdcc4c9e017acec382096cb889273b33"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/AuthTokenFilter.java": {
+    "mtime": 1778749286.8507395,
+    "ast_hash": "b334c82c1811e6d81e031f37147c56c5",
+    "semantic_hash": "b334c82c1811e6d81e031f37147c56c5"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/JwtUtils.java": {
+    "mtime": 1778749286.8508332,
+    "ast_hash": "8b528815dcb8c2bf16779e21474e648e",
+    "semantic_hash": "8b528815dcb8c2bf16779e21474e648e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/UserDetailsImpl.java": {
+    "mtime": 1778749286.8509269,
+    "ast_hash": "3de52fdfabf36d18d6db6c8b0c5d4ee5",
+    "semantic_hash": "3de52fdfabf36d18d6db6c8b0c5d4ee5"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/UserDetailsServiceImpl.java": {
+    "mtime": 1778749286.851022,
+    "ast_hash": "b9c36a09d1fd97edf20c4233d95476ef",
+    "semantic_hash": "b9c36a09d1fd97edf20c4233d95476ef"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/security/WebSecurityConfig.java": {
+    "mtime": 1782723536.6110203,
+    "ast_hash": "96469e23af1c3dd08d574e273c96858b",
+    "semantic_hash": "96469e23af1c3dd08d574e273c96858b"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/service/AIService.java": {
+    "mtime": 1778749286.8512955,
+    "ast_hash": "2a83d0f4664986ba52aa93395818cadb",
+    "semantic_hash": "2a83d0f4664986ba52aa93395818cadb"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/backend/src/main/java/com/homefix/service/FirestoreSyncService.java": {
+    "mtime": 1778749286.851393,
+    "ast_hash": "e30381e425de319afcf11c590cea83df",
+    "semantic_hash": "e30381e425de319afcf11c590cea83df"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/build.js": {
+    "mtime": 1781100034.0285428,
+    "ast_hash": "598a69ecdabcda4974d002a47c8a7747",
+    "semantic_hash": "598a69ecdabcda4974d002a47c8a7747"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/capacitor.config.json": {
+    "mtime": 1781100038.3966026,
+    "ast_hash": "d4341d2c9242e928074b9c1778df6ccd",
+    "semantic_hash": "d4341d2c9242e928074b9c1778df6ccd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/docker.sh": {
+    "mtime": 1781080792.0838168,
+    "ast_hash": "003470a316a1ec73f280cd993f941b72",
+    "semantic_hash": "003470a316a1ec73f280cd993f941b72"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/AppDelegate.swift": {
+    "mtime": 1780415704.0,
+    "ast_hash": "b2865a48d0e54c1613fa58272418bf98",
+    "semantic_hash": "b2865a48d0e54c1613fa58272418bf98"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/AppIcon.appiconset/Contents.json": {
+    "mtime": 1780415704.0,
+    "ast_hash": "7453c3002126811a57c38b2740f990cf",
+    "semantic_hash": "7453c3002126811a57c38b2740f990cf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/Contents.json": {
+    "mtime": 1780415704.0,
+    "ast_hash": "31cc68f34934a99c0b0c1bebde56309c",
+    "semantic_hash": "31cc68f34934a99c0b0c1bebde56309c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/Splash.imageset/Contents.json": {
+    "mtime": 1780415704.0,
+    "ast_hash": "1162e1cddd7ea769bcacdd1aa7b4ac72",
+    "semantic_hash": "1162e1cddd7ea769bcacdd1aa7b4ac72"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/capacitor.config.json": {
+    "mtime": 1781100223.6989279,
+    "ast_hash": "9fad7f0c4b2c0525da4f9dea61ed5be7",
+    "semantic_hash": "9fad7f0c4b2c0525da4f9dea61ed5be7"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/cordova.js": {
+    "mtime": 1781100223.6943903,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/cordova_plugins.js": {
+    "mtime": 1781100223.6945531,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/app.js": {
+    "mtime": 1781100067.6898808,
+    "ast_hash": "6d2e882e2012b679c05586dbedd2123d",
+    "semantic_hash": "6d2e882e2012b679c05586dbedd2123d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/components/toast.js": {
+    "mtime": 1781100067.69302,
+    "ast_hash": "250ec029752e80145bcd9f2b4856bd54",
+    "semantic_hash": "250ec029752e80145bcd9f2b4856bd54"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/config.js": {
+    "mtime": 1781100067.689437,
+    "ast_hash": "e68798044a6716ac0ac1ceb96c890661",
+    "semantic_hash": "e68798044a6716ac0ac1ceb96c890661"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/mock-data.js": {
+    "mtime": 1781100067.6886938,
+    "ast_hash": "e0eae71434119bd30440a1d5ed67c725",
+    "semantic_hash": "e0eae71434119bd30440a1d5ed67c725"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/admin.js": {
+    "mtime": 1781100067.692647,
+    "ast_hash": "bb3e348e90c14f37d13eb05972a2ea1e",
+    "semantic_hash": "bb3e348e90c14f37d13eb05972a2ea1e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/aiDiagnosis.js": {
+    "mtime": 1781100067.6922626,
+    "ast_hash": "e7eee206dc325f3ce6bc96157dae3aad",
+    "semantic_hash": "e7eee206dc325f3ce6bc96157dae3aad"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/auth.js": {
+    "mtime": 1781100067.692259,
+    "ast_hash": "a3957b803387c2d5f064deb03fc33282",
+    "semantic_hash": "a3957b803387c2d5f064deb03fc33282"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/booking.js": {
+    "mtime": 1781100067.6918418,
+    "ast_hash": "77e13619068c36b0ae0638c3fc90f85a",
+    "semantic_hash": "77e13619068c36b0ae0638c3fc90f85a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/chat.js": {
+    "mtime": 1781100067.6927562,
+    "ast_hash": "9e183958b04a70984163c56476fff5d1",
+    "semantic_hash": "9e183958b04a70984163c56476fff5d1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/dashboard.js": {
+    "mtime": 1781100067.692803,
+    "ast_hash": "b1da82d64a22a1566c75fdcbc550f6ba",
+    "semantic_hash": "b1da82d64a22a1566c75fdcbc550f6ba"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/landing.js": {
+    "mtime": 1781100067.6924357,
+    "ast_hash": "6fc091f6927ebd3036f207a7e4978f20",
+    "semantic_hash": "6fc091f6927ebd3036f207a7e4978f20"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/marketplace.js": {
+    "mtime": 1781100067.6928709,
+    "ast_hash": "9dfc68f3091fc2d01119ee68ce6c3f47",
+    "semantic_hash": "9dfc68f3091fc2d01119ee68ce6c3f47"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/payment.js": {
+    "mtime": 1781100067.6925144,
+    "ast_hash": "5d74c2a9be039b89f99cd5f76a3cf56e",
+    "semantic_hash": "5d74c2a9be039b89f99cd5f76a3cf56e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/problemSubmission.js": {
+    "mtime": 1781100067.692515,
+    "ast_hash": "2ca59c2d73214fc7b40786f712262763",
+    "semantic_hash": "2ca59c2d73214fc7b40786f712262763"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/quickFixGuide.js": {
+    "mtime": 1781100067.6922596,
+    "ast_hash": "c99626f215fc6c786d0b74800261a9f6",
+    "semantic_hash": "c99626f215fc6c786d0b74800261a9f6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/rating.js": {
+    "mtime": 1781100067.692009,
+    "ast_hash": "e8c200fc48fd79fa5728b0c65404ab3c",
+    "semantic_hash": "e8c200fc48fd79fa5728b0c65404ab3c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/modules/technicianProfile.js": {
+    "mtime": 1781100067.6924386,
+    "ast_hash": "36ac566e21625d688c820696383fc064",
+    "semantic_hash": "36ac566e21625d688c820696383fc064"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/ai-service.js": {
+    "mtime": 1781100067.693266,
+    "ast_hash": "f475d609ba20dc0e9a93ae257ac7e3f4",
+    "semantic_hash": "f475d609ba20dc0e9a93ae257ac7e3f4"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/auth-service.js": {
+    "mtime": 1781100067.6935425,
+    "ast_hash": "aafe2d06371d20e8809c19853698df8a",
+    "semantic_hash": "aafe2d06371d20e8809c19853698df8a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/chat-service.js": {
+    "mtime": 1781100067.6931741,
+    "ast_hash": "1cd745886b75d514671c93a0b59ba774",
+    "semantic_hash": "1cd745886b75d514671c93a0b59ba774"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/firebase-config.js": {
+    "mtime": 1781100067.6935096,
+    "ast_hash": "b51f71f96948e3a67f79f49ecffa43bf",
+    "semantic_hash": "b51f71f96948e3a67f79f49ecffa43bf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/firestore-service.js": {
+    "mtime": 1781100067.6932695,
+    "ast_hash": "1e4b0f4f52512d576cfb7d2391cedf6d",
+    "semantic_hash": "1e4b0f4f52512d576cfb7d2391cedf6d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/notification-service.js": {
+    "mtime": 1781100067.6935098,
+    "ast_hash": "f7a81bc546b74753fe950a3d073abb5a",
+    "semantic_hash": "f7a81bc546b74753fe950a3d073abb5a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/services/storage-service.js": {
+    "mtime": 1781100067.6933875,
+    "ast_hash": "30f358014242f6ceb0e68deb080b0619",
+    "semantic_hash": "30f358014242f6ceb0e68deb080b0619"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/js/utils/seed-data.js": {
+    "mtime": 1781100067.6917934,
+    "ast_hash": "fa324eeaa6086d8d702cdd297f500079",
+    "semantic_hash": "fa324eeaa6086d8d702cdd297f500079"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/manifest.json": {
+    "mtime": 1781100067.6850483,
+    "ast_hash": "cdbd6b3662e3119128b9d1755cd57f21",
+    "semantic_hash": "cdbd6b3662e3119128b9d1755cd57f21"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/sw.js": {
+    "mtime": 1781100067.6849816,
+    "ast_hash": "a68b281cfa3250369424676b3d5f3012",
+    "semantic_hash": "a68b281cfa3250369424676b3d5f3012"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/CapApp-SPM/Package.swift": {
+    "mtime": 1781100223.6974432,
+    "ast_hash": "1907cb00c0779dee24bffee0ee187eac",
+    "semantic_hash": "1907cb00c0779dee24bffee0ee187eac"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/CapApp-SPM/Sources/CapApp-SPM/CapApp-SPM.swift": {
+    "mtime": 1780415704.0,
+    "ast_hash": "0d92cb44a62bc3f2d73464a2e4f9a890",
+    "semantic_hash": "0d92cb44a62bc3f2d73464a2e4f9a890"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/app.js": {
+    "mtime": 1781099693.6400049,
+    "ast_hash": "6d2e882e2012b679c05586dbedd2123d",
+    "semantic_hash": "6d2e882e2012b679c05586dbedd2123d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/components/toast.js": {
+    "mtime": 1778749286.8538303,
+    "ast_hash": "250ec029752e80145bcd9f2b4856bd54",
+    "semantic_hash": "250ec029752e80145bcd9f2b4856bd54"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/config.js": {
+    "mtime": 1781099452.5762901,
+    "ast_hash": "e68798044a6716ac0ac1ceb96c890661",
+    "semantic_hash": "e68798044a6716ac0ac1ceb96c890661"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/mock-data.js": {
+    "mtime": 1778749286.8539944,
+    "ast_hash": "e0eae71434119bd30440a1d5ed67c725",
+    "semantic_hash": "e0eae71434119bd30440a1d5ed67c725"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/admin.js": {
+    "mtime": 1778749286.8541975,
+    "ast_hash": "bb3e348e90c14f37d13eb05972a2ea1e",
+    "semantic_hash": "bb3e348e90c14f37d13eb05972a2ea1e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/aiDiagnosis.js": {
+    "mtime": 1778749286.8543243,
+    "ast_hash": "e7eee206dc325f3ce6bc96157dae3aad",
+    "semantic_hash": "e7eee206dc325f3ce6bc96157dae3aad"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/auth.js": {
+    "mtime": 1781099687.3473632,
+    "ast_hash": "a3957b803387c2d5f064deb03fc33282",
+    "semantic_hash": "a3957b803387c2d5f064deb03fc33282"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/booking.js": {
+    "mtime": 1778749286.854571,
+    "ast_hash": "77e13619068c36b0ae0638c3fc90f85a",
+    "semantic_hash": "77e13619068c36b0ae0638c3fc90f85a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/chat.js": {
+    "mtime": 1778749286.8546934,
+    "ast_hash": "9e183958b04a70984163c56476fff5d1",
+    "semantic_hash": "9e183958b04a70984163c56476fff5d1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/dashboard.js": {
+    "mtime": 1778749286.8548236,
+    "ast_hash": "b1da82d64a22a1566c75fdcbc550f6ba",
+    "semantic_hash": "b1da82d64a22a1566c75fdcbc550f6ba"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/landing.js": {
+    "mtime": 1778749286.8549104,
+    "ast_hash": "6fc091f6927ebd3036f207a7e4978f20",
+    "semantic_hash": "6fc091f6927ebd3036f207a7e4978f20"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/marketplace.js": {
+    "mtime": 1778749286.8550732,
+    "ast_hash": "9dfc68f3091fc2d01119ee68ce6c3f47",
+    "semantic_hash": "9dfc68f3091fc2d01119ee68ce6c3f47"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/payment.js": {
+    "mtime": 1778749286.8551977,
+    "ast_hash": "5d74c2a9be039b89f99cd5f76a3cf56e",
+    "semantic_hash": "5d74c2a9be039b89f99cd5f76a3cf56e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/problemSubmission.js": {
+    "mtime": 1778749286.8553462,
+    "ast_hash": "2ca59c2d73214fc7b40786f712262763",
+    "semantic_hash": "2ca59c2d73214fc7b40786f712262763"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/quickFixGuide.js": {
+    "mtime": 1778749286.8554895,
+    "ast_hash": "c99626f215fc6c786d0b74800261a9f6",
+    "semantic_hash": "c99626f215fc6c786d0b74800261a9f6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/rating.js": {
+    "mtime": 1778749286.8556223,
+    "ast_hash": "e8c200fc48fd79fa5728b0c65404ab3c",
+    "semantic_hash": "e8c200fc48fd79fa5728b0c65404ab3c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/modules/technicianProfile.js": {
+    "mtime": 1778749286.8557627,
+    "ast_hash": "36ac566e21625d688c820696383fc064",
+    "semantic_hash": "36ac566e21625d688c820696383fc064"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/ai-service.js": {
+    "mtime": 1782723545.1548479,
+    "ast_hash": "4ac0c90b7a293ee736b26b3b335698b0",
+    "semantic_hash": "4ac0c90b7a293ee736b26b3b335698b0"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/auth-service.js": {
+    "mtime": 1781042494.3596141,
+    "ast_hash": "aafe2d06371d20e8809c19853698df8a",
+    "semantic_hash": "aafe2d06371d20e8809c19853698df8a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/chat-service.js": {
+    "mtime": 1778749286.856154,
+    "ast_hash": "1cd745886b75d514671c93a0b59ba774",
+    "semantic_hash": "1cd745886b75d514671c93a0b59ba774"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/firebase-config.js": {
+    "mtime": 1778749286.8562524,
+    "ast_hash": "b51f71f96948e3a67f79f49ecffa43bf",
+    "semantic_hash": "b51f71f96948e3a67f79f49ecffa43bf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/firestore-service.js": {
+    "mtime": 1778749286.856366,
+    "ast_hash": "1e4b0f4f52512d576cfb7d2391cedf6d",
+    "semantic_hash": "1e4b0f4f52512d576cfb7d2391cedf6d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/notification-service.js": {
+    "mtime": 1781042494.3651469,
+    "ast_hash": "f7a81bc546b74753fe950a3d073abb5a",
+    "semantic_hash": "f7a81bc546b74753fe950a3d073abb5a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/services/storage-service.js": {
+    "mtime": 1778749286.8565536,
+    "ast_hash": "30f358014242f6ceb0e68deb080b0619",
+    "semantic_hash": "30f358014242f6ceb0e68deb080b0619"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/js/utils/seed-data.js": {
+    "mtime": 1778749286.8567472,
+    "ast_hash": "fa324eeaa6086d8d702cdd297f500079",
+    "semantic_hash": "fa324eeaa6086d8d702cdd297f500079"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/manifest.json": {
+    "mtime": 1781080792.09518,
+    "ast_hash": "cdbd6b3662e3119128b9d1755cd57f21",
+    "semantic_hash": "cdbd6b3662e3119128b9d1755cd57f21"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/package.json": {
+    "mtime": 1781100042.4002352,
+    "ast_hash": "874da9b1c1b81e38c27695a7b9d2994c",
+    "semantic_hash": "874da9b1c1b81e38c27695a7b9d2994c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/run_ignore.py": {
+    "mtime": 1781080792.084126,
+    "ast_hash": "ae8e91695f2e3b4eb354d3f846340113",
+    "semantic_hash": "ae8e91695f2e3b4eb354d3f846340113"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/start_backend.sh": {
+    "mtime": 1781080792.0842042,
+    "ast_hash": "a326dfc30e61e72187c7bde7e21888ff",
+    "semantic_hash": "a326dfc30e61e72187c7bde7e21888ff"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/sw.js": {
+    "mtime": 1781080792.0953896,
+    "ast_hash": "a68b281cfa3250369424676b3d5f3012",
+    "semantic_hash": "a68b281cfa3250369424676b3d5f3012"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/test-browser.js": {
+    "mtime": 1778749286.8568413,
+    "ast_hash": "eaaa89e564f8e85f5a361f4620cf10c5",
+    "semantic_hash": "eaaa89e564f8e85f5a361f4620cf10c5"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/test-server.js": {
+    "mtime": 1781080792.08435,
+    "ast_hash": "055d936bc16e1678fc4fd3644746a626",
+    "semantic_hash": "055d936bc16e1678fc4fd3644746a626"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/vercel.json": {
+    "mtime": 1778749286.857024,
+    "ast_hash": "24c5b986f5f2fb71686f2a88f97aebc6",
+    "semantic_hash": "24c5b986f5f2fb71686f2a88f97aebc6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/app.js": {
+    "mtime": 1782723592.5041606,
+    "ast_hash": "6d2e882e2012b679c05586dbedd2123d",
+    "semantic_hash": "6d2e882e2012b679c05586dbedd2123d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/components/toast.js": {
+    "mtime": 1782723592.5044146,
+    "ast_hash": "250ec029752e80145bcd9f2b4856bd54",
+    "semantic_hash": "250ec029752e80145bcd9f2b4856bd54"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/config.js": {
+    "mtime": 1782723592.5048065,
+    "ast_hash": "e68798044a6716ac0ac1ceb96c890661",
+    "semantic_hash": "e68798044a6716ac0ac1ceb96c890661"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/mock-data.js": {
+    "mtime": 1782723592.5050259,
+    "ast_hash": "e0eae71434119bd30440a1d5ed67c725",
+    "semantic_hash": "e0eae71434119bd30440a1d5ed67c725"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/admin.js": {
+    "mtime": 1782723592.5054398,
+    "ast_hash": "bb3e348e90c14f37d13eb05972a2ea1e",
+    "semantic_hash": "bb3e348e90c14f37d13eb05972a2ea1e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/aiDiagnosis.js": {
+    "mtime": 1782723592.5056531,
+    "ast_hash": "e7eee206dc325f3ce6bc96157dae3aad",
+    "semantic_hash": "e7eee206dc325f3ce6bc96157dae3aad"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/auth.js": {
+    "mtime": 1782723592.505955,
+    "ast_hash": "a3957b803387c2d5f064deb03fc33282",
+    "semantic_hash": "a3957b803387c2d5f064deb03fc33282"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/booking.js": {
+    "mtime": 1782723592.5060923,
+    "ast_hash": "77e13619068c36b0ae0638c3fc90f85a",
+    "semantic_hash": "77e13619068c36b0ae0638c3fc90f85a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/chat.js": {
+    "mtime": 1782723592.5062177,
+    "ast_hash": "9e183958b04a70984163c56476fff5d1",
+    "semantic_hash": "9e183958b04a70984163c56476fff5d1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/dashboard.js": {
+    "mtime": 1782723592.50634,
+    "ast_hash": "b1da82d64a22a1566c75fdcbc550f6ba",
+    "semantic_hash": "b1da82d64a22a1566c75fdcbc550f6ba"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/landing.js": {
+    "mtime": 1782723592.506551,
+    "ast_hash": "6fc091f6927ebd3036f207a7e4978f20",
+    "semantic_hash": "6fc091f6927ebd3036f207a7e4978f20"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/marketplace.js": {
+    "mtime": 1782723592.5067928,
+    "ast_hash": "9dfc68f3091fc2d01119ee68ce6c3f47",
+    "semantic_hash": "9dfc68f3091fc2d01119ee68ce6c3f47"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/payment.js": {
+    "mtime": 1782723592.5069807,
+    "ast_hash": "5d74c2a9be039b89f99cd5f76a3cf56e",
+    "semantic_hash": "5d74c2a9be039b89f99cd5f76a3cf56e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/problemSubmission.js": {
+    "mtime": 1782723592.507133,
+    "ast_hash": "2ca59c2d73214fc7b40786f712262763",
+    "semantic_hash": "2ca59c2d73214fc7b40786f712262763"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/quickFixGuide.js": {
+    "mtime": 1782723592.507267,
+    "ast_hash": "c99626f215fc6c786d0b74800261a9f6",
+    "semantic_hash": "c99626f215fc6c786d0b74800261a9f6"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/rating.js": {
+    "mtime": 1782723592.5074005,
+    "ast_hash": "e8c200fc48fd79fa5728b0c65404ab3c",
+    "semantic_hash": "e8c200fc48fd79fa5728b0c65404ab3c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/modules/technicianProfile.js": {
+    "mtime": 1782723592.507525,
+    "ast_hash": "36ac566e21625d688c820696383fc064",
+    "semantic_hash": "36ac566e21625d688c820696383fc064"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/ai-service.js": {
+    "mtime": 1782723592.508144,
+    "ast_hash": "4ac0c90b7a293ee736b26b3b335698b0",
+    "semantic_hash": "4ac0c90b7a293ee736b26b3b335698b0"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/auth-service.js": {
+    "mtime": 1782723592.5083475,
+    "ast_hash": "aafe2d06371d20e8809c19853698df8a",
+    "semantic_hash": "aafe2d06371d20e8809c19853698df8a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/chat-service.js": {
+    "mtime": 1782723592.5085375,
+    "ast_hash": "1cd745886b75d514671c93a0b59ba774",
+    "semantic_hash": "1cd745886b75d514671c93a0b59ba774"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/firebase-config.js": {
+    "mtime": 1782723592.5091562,
+    "ast_hash": "b51f71f96948e3a67f79f49ecffa43bf",
+    "semantic_hash": "b51f71f96948e3a67f79f49ecffa43bf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/firestore-service.js": {
+    "mtime": 1782723592.5095904,
+    "ast_hash": "1e4b0f4f52512d576cfb7d2391cedf6d",
+    "semantic_hash": "1e4b0f4f52512d576cfb7d2391cedf6d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/notification-service.js": {
+    "mtime": 1782723592.5098462,
+    "ast_hash": "f7a81bc546b74753fe950a3d073abb5a",
+    "semantic_hash": "f7a81bc546b74753fe950a3d073abb5a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/services/storage-service.js": {
+    "mtime": 1782723592.509992,
+    "ast_hash": "30f358014242f6ceb0e68deb080b0619",
+    "semantic_hash": "30f358014242f6ceb0e68deb080b0619"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/js/utils/seed-data.js": {
+    "mtime": 1782723592.510298,
+    "ast_hash": "fa324eeaa6086d8d702cdd297f500079",
+    "semantic_hash": "fa324eeaa6086d8d702cdd297f500079"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/manifest.json": {
+    "mtime": 1782723592.499887,
+    "ast_hash": "cdbd6b3662e3119128b9d1755cd57f21",
+    "semantic_hash": "cdbd6b3662e3119128b9d1755cd57f21"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/sw.js": {
+    "mtime": 1782723592.5002303,
+    "ast_hash": "a68b281cfa3250369424676b3d5f3012",
+    "semantic_hash": "a68b281cfa3250369424676b3d5f3012"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/index.html": {
+    "mtime": 1781100067.6593788,
+    "ast_hash": "4ea3bb12f8f6bb14e330d15bd3844948",
+    "semantic_hash": "4ea3bb12f8f6bb14e330d15bd3844948"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/api/requirements.txt": {
+    "mtime": 1778749286.8247366,
+    "ast_hash": "0f10de4a2148006158d235a8aeea5d2f",
+    "semantic_hash": "0f10de4a2148006158d235a8aeea5d2f"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/docker-compose.yml": {
+    "mtime": 1781080792.083735,
+    "ast_hash": "6b8b7559b44cdc003dd6ae7e4d2bf7f1",
+    "semantic_hash": "6b8b7559b44cdc003dd6ae7e4d2bf7f1"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/index.html": {
+    "mtime": 1781100581.5345182,
+    "ast_hash": "fe4a6de7490f8f66907d0f88dd9181cf",
+    "semantic_hash": "fe4a6de7490f8f66907d0f88dd9181cf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/index.html": {
+    "mtime": 1781100067.6848466,
+    "ast_hash": "4ea3bb12f8f6bb14e330d15bd3844948",
+    "semantic_hash": "4ea3bb12f8f6bb14e330d15bd3844948"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/CapApp-SPM/README.md": {
+    "mtime": 1780415704.0,
+    "ast_hash": "d256f6b5922d4249607779141357d565",
+    "semantic_hash": "d256f6b5922d4249607779141357d565"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/index.html": {
+    "mtime": 1782723592.4992201,
+    "ast_hash": "fe4a6de7490f8f66907d0f88dd9181cf",
+    "semantic_hash": "fe4a6de7490f8f66907d0f88dd9181cf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-128x128.png": {
+    "mtime": 1781100067.6654208,
+    "ast_hash": "99a3175bc357ab90ea63512922fe5d9e",
+    "semantic_hash": "99a3175bc357ab90ea63512922fe5d9e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-144x144.png": {
+    "mtime": 1781100067.6655445,
+    "ast_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf",
+    "semantic_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-152x152.png": {
+    "mtime": 1781100067.6654646,
+    "ast_hash": "47e06c41615109500df092a54e0d4bfc",
+    "semantic_hash": "47e06c41615109500df092a54e0d4bfc"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-192x192.png": {
+    "mtime": 1781100067.6651812,
+    "ast_hash": "cbef102922f95d00cad3e35b8a139020",
+    "semantic_hash": "cbef102922f95d00cad3e35b8a139020"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-384x384.png": {
+    "mtime": 1781100067.6651826,
+    "ast_hash": "b9b21c7979ec86ed6eb026b39b8e377c",
+    "semantic_hash": "b9b21c7979ec86ed6eb026b39b8e377c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-512x512.png": {
+    "mtime": 1781100067.6653633,
+    "ast_hash": "a0f3be5cbb1535bac984212a24a33d06",
+    "semantic_hash": "a0f3be5cbb1535bac984212a24a33d06"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-72x72.png": {
+    "mtime": 1781100067.6650784,
+    "ast_hash": "13db4fdca8c91127cc577637edefd955",
+    "semantic_hash": "13db4fdca8c91127cc577637edefd955"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/icons/icon-96x96.png": {
+    "mtime": 1781100067.6653078,
+    "ast_hash": "d9426056a1f4fb03082f5034e419cd30",
+    "semantic_hash": "d9426056a1f4fb03082f5034e419cd30"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/preview_admin_dash.png": {
+    "mtime": 1781100067.662467,
+    "ast_hash": "19e4f9809b6a9c03521b57d4d8f20fbd",
+    "semantic_hash": "19e4f9809b6a9c03521b57d4d8f20fbd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/preview_landing.png": {
+    "mtime": 1781100067.6653283,
+    "ast_hash": "95c602947bda14a341c1eb17dbe8f19d",
+    "semantic_hash": "95c602947bda14a341c1eb17dbe8f19d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/preview_scroll.png": {
+    "mtime": 1781100067.6633167,
+    "ast_hash": "2cc05332cd401c222811af47d20c880d",
+    "semantic_hash": "2cc05332cd401c222811af47d20c880d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/preview_tech_dash.png": {
+    "mtime": 1781100067.662529,
+    "ast_hash": "eda7db519a59db084dc42c72b8af5857",
+    "semantic_hash": "eda7db519a59db084dc42c72b8af5857"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/assets/public/assets/preview_user_dash.png": {
+    "mtime": 1781100067.6631331,
+    "ast_hash": "401c15c3fe8fa83d4a7862cfe51170ea",
+    "semantic_hash": "401c15c3fe8fa83d4a7862cfe51170ea"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-land-hdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "f7a80786dd355bd39014e58027aa6e19",
+    "semantic_hash": "f7a80786dd355bd39014e58027aa6e19"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-land-mdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "acc976d4a36479233371a53021525c0c",
+    "semantic_hash": "acc976d4a36479233371a53021525c0c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-land-xhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "b8c72969bc1f78aab71a76035360d4af",
+    "semantic_hash": "b8c72969bc1f78aab71a76035360d4af"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-land-xxhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "f87e988387b07d843905f38b084929fb",
+    "semantic_hash": "f87e988387b07d843905f38b084929fb"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-land-xxxhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "055a69553b16b0bf5f72094a2e459fc7",
+    "semantic_hash": "055a69553b16b0bf5f72094a2e459fc7"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-port-hdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "5eb10d16c81338abe8bbc033d49638a8",
+    "semantic_hash": "5eb10d16c81338abe8bbc033d49638a8"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-port-mdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "d855a76a5070c8e6fcfd83a27549bdce",
+    "semantic_hash": "d855a76a5070c8e6fcfd83a27549bdce"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-port-xhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "df100b2a36bdb98b711cca58941728de",
+    "semantic_hash": "df100b2a36bdb98b711cca58941728de"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-port-xxhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "2c1b668364e815256f67b71dcdfa4d6e",
+    "semantic_hash": "2c1b668364e815256f67b71dcdfa4d6e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable-port-xxxhdpi/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "b5b1b22b59abe686c1df0d74a423d034",
+    "semantic_hash": "b5b1b22b59abe686c1df0d74a423d034"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/drawable/splash.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "acc976d4a36479233371a53021525c0c",
+    "semantic_hash": "acc976d4a36479233371a53021525c0c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "1956941339dd5fe36d5c66601c89a08d",
+    "semantic_hash": "1956941339dd5fe36d5c66601c89a08d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "73b1e06d769fa08a9c3b8328cc15fd75",
+    "semantic_hash": "73b1e06d769fa08a9c3b8328cc15fd75"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "f43e5674865a00186dd76183cf1f2f8e",
+    "semantic_hash": "f43e5674865a00186dd76183cf1f2f8e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "7ed1b3739b83215d0c4a0b4a7f2dcab4",
+    "semantic_hash": "7ed1b3739b83215d0c4a0b4a7f2dcab4"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "5b77e8aec8b17eed320a97567c7cb8bf",
+    "semantic_hash": "5b77e8aec8b17eed320a97567c7cb8bf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "a49547a32c7d9b529af607b033811d81",
+    "semantic_hash": "a49547a32c7d9b529af607b033811d81"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "5689511ee4e41a367d0342f37ac48bdf",
+    "semantic_hash": "5689511ee4e41a367d0342f37ac48bdf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "15cdded29b9877ac98c5931024c5da5d",
+    "semantic_hash": "15cdded29b9877ac98c5931024c5da5d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "c890fa4af62a63486d5dea62441ce7ab",
+    "semantic_hash": "c890fa4af62a63486d5dea62441ce7ab"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "a3285eeaedda8201f04e7737b9df8421",
+    "semantic_hash": "a3285eeaedda8201f04e7737b9df8421"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "4e9584ecc16d1fc75afb798688ce576f",
+    "semantic_hash": "4e9584ecc16d1fc75afb798688ce576f"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "14cde87848553e24d7106f56eb8ceb6f",
+    "semantic_hash": "14cde87848553e24d7106f56eb8ceb6f"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "9e029293ab1ae8e3a6a7b7d0b7177e46",
+    "semantic_hash": "9e029293ab1ae8e3a6a7b7d0b7177e46"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "ed3696b7c52d9747411a475dbe3fa34a",
+    "semantic_hash": "ed3696b7c52d9747411a475dbe3fa34a"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "85addb4159ecd3f76f02fbacd5ec86de",
+    "semantic_hash": "85addb4159ecd3f76f02fbacd5ec86de"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-128x128.png": {
+    "mtime": 1781080792.0924213,
+    "ast_hash": "99a3175bc357ab90ea63512922fe5d9e",
+    "semantic_hash": "99a3175bc357ab90ea63512922fe5d9e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-144x144.png": {
+    "mtime": 1781080792.0926836,
+    "ast_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf",
+    "semantic_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-152x152.png": {
+    "mtime": 1781080792.092917,
+    "ast_hash": "47e06c41615109500df092a54e0d4bfc",
+    "semantic_hash": "47e06c41615109500df092a54e0d4bfc"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-192x192.png": {
+    "mtime": 1781080792.093183,
+    "ast_hash": "cbef102922f95d00cad3e35b8a139020",
+    "semantic_hash": "cbef102922f95d00cad3e35b8a139020"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-384x384.png": {
+    "mtime": 1781080792.093538,
+    "ast_hash": "b9b21c7979ec86ed6eb026b39b8e377c",
+    "semantic_hash": "b9b21c7979ec86ed6eb026b39b8e377c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-512x512.png": {
+    "mtime": 1781080792.093953,
+    "ast_hash": "a0f3be5cbb1535bac984212a24a33d06",
+    "semantic_hash": "a0f3be5cbb1535bac984212a24a33d06"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-72x72.png": {
+    "mtime": 1781080792.0941913,
+    "ast_hash": "13db4fdca8c91127cc577637edefd955",
+    "semantic_hash": "13db4fdca8c91127cc577637edefd955"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/icons/icon-96x96.png": {
+    "mtime": 1781080792.0944073,
+    "ast_hash": "d9426056a1f4fb03082f5034e419cd30",
+    "semantic_hash": "d9426056a1f4fb03082f5034e419cd30"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/preview_admin_dash.png": {
+    "mtime": 1778749286.8275661,
+    "ast_hash": "19e4f9809b6a9c03521b57d4d8f20fbd",
+    "semantic_hash": "19e4f9809b6a9c03521b57d4d8f20fbd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/preview_landing.png": {
+    "mtime": 1778749286.8352363,
+    "ast_hash": "95c602947bda14a341c1eb17dbe8f19d",
+    "semantic_hash": "95c602947bda14a341c1eb17dbe8f19d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/preview_scroll.png": {
+    "mtime": 1778749286.8395784,
+    "ast_hash": "2cc05332cd401c222811af47d20c880d",
+    "semantic_hash": "2cc05332cd401c222811af47d20c880d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/preview_tech_dash.png": {
+    "mtime": 1778749286.842503,
+    "ast_hash": "eda7db519a59db084dc42c72b8af5857",
+    "semantic_hash": "eda7db519a59db084dc42c72b8af5857"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/assets/preview_user_dash.png": {
+    "mtime": 1778749286.8466172,
+    "ast_hash": "401c15c3fe8fa83d4a7862cfe51170ea",
+    "semantic_hash": "401c15c3fe8fa83d4a7862cfe51170ea"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "0ac741c9e1701ee14dd05ea131f7cfd8",
+    "semantic_hash": "0ac741c9e1701ee14dd05ea131f7cfd8"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732-1.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "958532b95c3e7d4997327dc977b80600",
+    "semantic_hash": "958532b95c3e7d4997327dc977b80600"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732-2.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "958532b95c3e7d4997327dc977b80600",
+    "semantic_hash": "958532b95c3e7d4997327dc977b80600"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/Assets.xcassets/Splash.imageset/splash-2732x2732.png": {
+    "mtime": 1780415704.0,
+    "ast_hash": "958532b95c3e7d4997327dc977b80600",
+    "semantic_hash": "958532b95c3e7d4997327dc977b80600"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-128x128.png": {
+    "mtime": 1781100067.6920896,
+    "ast_hash": "99a3175bc357ab90ea63512922fe5d9e",
+    "semantic_hash": "99a3175bc357ab90ea63512922fe5d9e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-144x144.png": {
+    "mtime": 1781100067.6916964,
+    "ast_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf",
+    "semantic_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-152x152.png": {
+    "mtime": 1781100067.6915252,
+    "ast_hash": "47e06c41615109500df092a54e0d4bfc",
+    "semantic_hash": "47e06c41615109500df092a54e0d4bfc"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-192x192.png": {
+    "mtime": 1781100067.691226,
+    "ast_hash": "cbef102922f95d00cad3e35b8a139020",
+    "semantic_hash": "cbef102922f95d00cad3e35b8a139020"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-384x384.png": {
+    "mtime": 1781100067.6913168,
+    "ast_hash": "b9b21c7979ec86ed6eb026b39b8e377c",
+    "semantic_hash": "b9b21c7979ec86ed6eb026b39b8e377c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-512x512.png": {
+    "mtime": 1781100067.6920636,
+    "ast_hash": "a0f3be5cbb1535bac984212a24a33d06",
+    "semantic_hash": "a0f3be5cbb1535bac984212a24a33d06"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-72x72.png": {
+    "mtime": 1781100067.691411,
+    "ast_hash": "13db4fdca8c91127cc577637edefd955",
+    "semantic_hash": "13db4fdca8c91127cc577637edefd955"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/icons/icon-96x96.png": {
+    "mtime": 1781100067.6915445,
+    "ast_hash": "d9426056a1f4fb03082f5034e419cd30",
+    "semantic_hash": "d9426056a1f4fb03082f5034e419cd30"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/preview_admin_dash.png": {
+    "mtime": 1781100067.6881332,
+    "ast_hash": "19e4f9809b6a9c03521b57d4d8f20fbd",
+    "semantic_hash": "19e4f9809b6a9c03521b57d4d8f20fbd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/preview_landing.png": {
+    "mtime": 1781100067.691246,
+    "ast_hash": "95c602947bda14a341c1eb17dbe8f19d",
+    "semantic_hash": "95c602947bda14a341c1eb17dbe8f19d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/preview_scroll.png": {
+    "mtime": 1781100067.6881435,
+    "ast_hash": "2cc05332cd401c222811af47d20c880d",
+    "semantic_hash": "2cc05332cd401c222811af47d20c880d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/preview_tech_dash.png": {
+    "mtime": 1781100067.6881375,
+    "ast_hash": "eda7db519a59db084dc42c72b8af5857",
+    "semantic_hash": "eda7db519a59db084dc42c72b8af5857"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/ios/App/App/public/assets/preview_user_dash.png": {
+    "mtime": 1781100067.6891453,
+    "ast_hash": "401c15c3fe8fa83d4a7862cfe51170ea",
+    "semantic_hash": "401c15c3fe8fa83d4a7862cfe51170ea"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-128x128.png": {
+    "mtime": 1782723592.5107887,
+    "ast_hash": "99a3175bc357ab90ea63512922fe5d9e",
+    "semantic_hash": "99a3175bc357ab90ea63512922fe5d9e"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-144x144.png": {
+    "mtime": 1782723592.5109956,
+    "ast_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf",
+    "semantic_hash": "bcd6d4cb68ee035974fbf3c3fe35dadf"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-152x152.png": {
+    "mtime": 1782723592.5115075,
+    "ast_hash": "47e06c41615109500df092a54e0d4bfc",
+    "semantic_hash": "47e06c41615109500df092a54e0d4bfc"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-192x192.png": {
+    "mtime": 1782723592.5116565,
+    "ast_hash": "cbef102922f95d00cad3e35b8a139020",
+    "semantic_hash": "cbef102922f95d00cad3e35b8a139020"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-384x384.png": {
+    "mtime": 1782723592.5118806,
+    "ast_hash": "b9b21c7979ec86ed6eb026b39b8e377c",
+    "semantic_hash": "b9b21c7979ec86ed6eb026b39b8e377c"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-512x512.png": {
+    "mtime": 1782723592.5123115,
+    "ast_hash": "a0f3be5cbb1535bac984212a24a33d06",
+    "semantic_hash": "a0f3be5cbb1535bac984212a24a33d06"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-72x72.png": {
+    "mtime": 1782723592.5125144,
+    "ast_hash": "13db4fdca8c91127cc577637edefd955",
+    "semantic_hash": "13db4fdca8c91127cc577637edefd955"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/icons/icon-96x96.png": {
+    "mtime": 1782723592.512736,
+    "ast_hash": "d9426056a1f4fb03082f5034e419cd30",
+    "semantic_hash": "d9426056a1f4fb03082f5034e419cd30"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/preview_admin_dash.png": {
+    "mtime": 1782723592.5143223,
+    "ast_hash": "19e4f9809b6a9c03521b57d4d8f20fbd",
+    "semantic_hash": "19e4f9809b6a9c03521b57d4d8f20fbd"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/preview_landing.png": {
+    "mtime": 1782723592.5178657,
+    "ast_hash": "95c602947bda14a341c1eb17dbe8f19d",
+    "semantic_hash": "95c602947bda14a341c1eb17dbe8f19d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/preview_scroll.png": {
+    "mtime": 1782723592.521079,
+    "ast_hash": "2cc05332cd401c222811af47d20c880d",
+    "semantic_hash": "2cc05332cd401c222811af47d20c880d"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/preview_tech_dash.png": {
+    "mtime": 1782723592.5229888,
+    "ast_hash": "eda7db519a59db084dc42c72b8af5857",
+    "semantic_hash": "eda7db519a59db084dc42c72b8af5857"
+  },
+  "/Users/retro/Desktop/DEV-TECH/MobileProject/capv1_Mobile/www/assets/preview_user_dash.png": {
+    "mtime": 1782723592.5259306,
+    "ast_hash": "401c15c3fe8fa83d4a7862cfe51170ea",
+    "semantic_hash": "401c15c3fe8fa83d4a7862cfe51170ea"
+  }
+}

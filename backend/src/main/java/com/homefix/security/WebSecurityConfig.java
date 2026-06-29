@@ -58,7 +58,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
-                                .requestMatchers("/", "/api/health").permitAll()
+                                .requestMatchers("/", "/api/health", "/api/jobs/diagnose").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
                                 .requestMatchers("/error").permitAll()
                                 .anyRequest().authenticated()
@@ -81,8 +81,14 @@ public class WebSecurityConfig {
         org.springframework.web.cors.CorsConfiguration configuration = new org.springframework.web.cors.CorsConfiguration();
         
         // Split comma-separated origins from properties
-        java.util.List<String> origins = java.util.Arrays.asList(allowedOrigins.split(","));
-        configuration.setAllowedOrigins(origins);
+        java.util.List<String> origins = new java.util.ArrayList<>(java.util.Arrays.asList(allowedOrigins.split(",")));
+        // Add local network patterns for mobile device testing
+        origins.add("http://192.168.*:*");
+        origins.add("http://10.*:*");
+        origins.add("http://172.*:*");
+        
+        configuration.setAllowedOriginPatterns(origins);
+        configuration.setAllowCredentials(true);
         
         configuration.setAllowedMethods(java.util.Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(java.util.Arrays.asList("authorization", "content-type", "x-auth-token"));
