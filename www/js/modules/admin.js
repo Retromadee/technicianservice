@@ -35,8 +35,8 @@ const AdminModule = (() => {
         const totalTechnicians = App.state.technicians.length;
         const totalUsers = mockUsers.length;
         
-        // Mock revenue calculation: base $5K + random active jobs
-        const revenue = `$${(15400 + (Math.random() * 5000)).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
+        // Mock revenue calculation: base ₺5K + random active jobs
+        const revenue = `₺${(15400 + (Math.random() * 5000)).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}`;
 
         container.innerHTML = `
             <div class="px-4">
@@ -81,7 +81,7 @@ const AdminModule = (() => {
                                             <tr>
                                                 <td><div class="d-flex align-items-center gap-2"><div class="tech-avatar ${t.color}" style="width:32px;height:32px;font-size:0.7rem">${t.logo}</div>${t.company}</div></td>
                                                 <td>${t.tags[0] || 'General'}</td>
-                                                <td>$${(t.pricing ? t.pricing.standard : '85')}/hr</td>
+                                                <td>₺${(t.pricing ? t.pricing.standard : '85')}/hr</td>
                                                 <td>
                                                     <button class="btn btn-sm btn-outline-danger" onclick="adminDeleteTech(${t.id})"><i class="fas fa-ban"></i> Remove Service</button>
                                                 </td>

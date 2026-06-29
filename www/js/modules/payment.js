@@ -27,7 +27,7 @@ const PaymentModule = (() => {
                             </div>
                             <div class="mb-3"><label class="form-label fw-semibold">Name on Card</label><input type="text" class="form-control custom-input" placeholder="John Doe"></div>
                         </div>
-                        <button class="btn btn-accent btn-lg w-100" id="btnPay"><i class="fas fa-lock me-2"></i>Pay $85.00</button>
+                        <button class="btn btn-accent btn-lg w-100" id="btnPay"><i class="fas fa-lock me-2"></i>Pay ₺85.00</button>
                         <p class="text-center text-muted mt-2" style="font-size:var(--font-size-xs)"><i class="fas fa-shield-alt me-1"></i>Secured with 256-bit encryption</p>
                     </div>
                 </div>
@@ -35,11 +35,11 @@ const PaymentModule = (() => {
                     <div class="glass-card tips-card">
                         <h5 class="fw-bold"><i class="fas fa-receipt me-2"></i>Order Summary</h5>
                         <div style="font-size:var(--font-size-sm);color:var(--color-text-secondary)">
-                            <div class="d-flex justify-content-between mb-2"><span>Service Fee</span><span>$75.00</span></div>
-                            <div class="d-flex justify-content-between mb-2"><span>Platform Fee</span><span>$5.00</span></div>
-                            <div class="d-flex justify-content-between mb-2"><span>Tax</span><span>$5.00</span></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Service Fee</span><span>₺75.00</span></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Platform Fee</span><span>₺5.00</span></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Tax</span><span>₺5.00</span></div>
                             <hr style="border-color:var(--color-border)">
-                            <div class="d-flex justify-content-between fw-bold" style="font-size:var(--font-size-lg)"><span>Total</span><span class="text-gradient">$85.00</span></div>
+                            <div class="d-flex justify-content-between fw-bold" style="font-size:var(--font-size-lg)"><span>Total</span><span class="text-gradient">₺85.00</span></div>
                         </div>
                         <div class="mt-3 p-3" style="background:rgba(16,185,129,0.08);border-radius:var(--radius-sm);font-size:var(--font-size-xs);color:var(--color-success)">
                             <i class="fas fa-shield-alt me-1"></i> Money-back guarantee if not satisfied
