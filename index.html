@@ -481,6 +481,26 @@
                 <button type="submit" class="btn w-100 py-3 fw-bold mb-3" style="border-radius:12px; font-size:15px; background:var(--jobie-purple); color:white; border:none;">Sign In</button>
 
                 <div class="text-center mb-3">
+                    <button type="button" onclick="(async () => {
+                        App.showLoading('Seeding Master Plumber Account...');
+                        try {
+                            const res = await SeedService.createMasterPlumberAccount();
+                            App.hideLoading();
+                            if (res) {
+                                document.getElementById('loginEmail').value = 'masterplumber@homefix.cy';
+                                document.getElementById('loginPassword').value = 'Plumber@1234';
+                                App.showToast('Master Plumber seeded and auto-filled! Press Sign In.', 'success');
+                            }
+                        } catch (e) {
+                            App.hideLoading();
+                            App.showToast('Failed to seed account', 'error');
+                        }
+                    })()" class="btn btn-outline-primary w-100 py-2 fw-bold mb-3" style="border-radius:12px; font-size:12px;">
+                        <i class="fas fa-hammer me-1"></i> Seed & Auto-fill Master Plumber
+                    </button>
+                </div>
+
+                <div class="text-center mb-3">
                     <span class="text-muted small fw-bold">OR CONTINUE WITH</span>
                 </div>
 
@@ -668,6 +688,7 @@
     <script src="js/modules/quickFixGuide.js"></script>
     <script src="js/modules/rating.js"></script>
     <script src="js/modules/admin.js"></script>
+    <script src="js/modules/technicianDashboard.js"></script>
 
     <!-- Mobile JS: sync tab state with App.navigate + register SW -->
     <script>

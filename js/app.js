@@ -114,33 +114,37 @@ const App = (() => {
         const grid = document.getElementById('serviceHistoryGrid');
         if (!grid) return;
         
-        if (state.myRequests.length === 0) {
+        const reqs = state.myRequests || [];
+        if (reqs.length === 0) {
             grid.innerHTML = '<div style="grid-column:1/-1; padding:40px; text-align:center; background:var(--surface-card); border-radius:20px; color:var(--text-muted); font-weight:700;">No active requests yet. Explore services below!</div>';
             return;
         }
 
-        grid.innerHTML = state.myRequests.map(req => `
+        grid.innerHTML = reqs.map(req => {
+            const statusColor = req.status === 'confirmed' ? '#2E7D32' : req.status === 'pending' ? '#F97316' : '#0369A1';
+            const statusBg = req.status === 'confirmed' ? '#E8F5E9' : req.status === 'pending' ? '#FFF3E0' : '#E0F2FE';
+            
+            return `
             <div class="job-card animate-in">
                 <div class="card-header">
                     <div class="company-info">
-                        <div class="company-name">${escapeHTML(req.tech.company)}</div>
-                        <h4>${escapeHTML(req.tech.title)}</h4>
+                        <div class="company-name">${escapeHTML(req.category.toUpperCase())}</div>
+                        <h4>${escapeHTML(req.description.substring(0, 45))}${req.description.length > 45 ? '...' : ''}</h4>
                     </div>
-                    <div class="company-logo ${escapeHTML(req.tech.color)}">${escapeHTML(req.tech.logo)}</div>
                 </div>
-                <div style="margin-bottom:15px; font-size:13px; color:#666;">
-                    <strong>Problem:</strong> ${escapeHTML(req.problem.substring(0, 50))}...
+                <div style="margin-bottom:15px; font-size:13px; color:var(--text-muted);">
+                    <strong>Details:</strong> ${escapeHTML(req.description)}
                 </div>
                 <div class="card-footer" style="justify-content:space-between; gap:10px;">
-                    <div class="badge-tag" style="background:#E0F2FE; color:#0369A1;">PENDING QUOTE</div>
+                    <div class="badge-tag" style="background:${statusBg}; color:${statusColor};">${req.status.toUpperCase()}</div>
                     <div style="display:flex; gap: 8px;">
-                        <button onclick="App.openChatForTech(${req.tech.id})" style="background:#E8E0FF; color:var(--jobie-purple); border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">MESSAGE</button>
-                        <button onclick="App.completeJobSim(${state.myRequests.indexOf(req)})" style="background:#E8F5E9; color:#2E7D32; border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">COMPLETE (TEST)</button>
+                        <button onclick="App.openChatForTech(1)" style="background:#E8E0FF; color:var(--jobie-purple); border:none; padding:5px 12px; border-radius:8px; font-weight:700; cursor:pointer; font-size:11px;">CHAT</button>
                     </div>
                 </div>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
     }
+
 
     // ---- Drawer & Selection ----
     function selectTech(id) {
@@ -377,26 +381,43 @@ const App = (() => {
     }
 
     function navigate(page) {
-        state.currentPage = page;
+        // Role check: redirect technician to dashboard page appropriately
+        let targetPage = page;
+        if (state.role === 'technician' && page === 'marketplace') {
+            targetPage = 'dashboard';
+        }
+
+        state.currentPage = targetPage;
         document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
         document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
         
-        const target = document.getElementById(`page-${page}`);
+        const target = document.getElementById(`page-${targetPage}`);
         if (target) {
             target.style.display = 'block';
             target.classList.add('active');
         }
         
-        const menuItem = document.querySelector(`.menu-item[data-page="${page}"]`);
+        const menuItem = document.querySelector(`.menu-item[data-page="${targetPage}"]`);
         if (menuItem) menuItem.classList.add('active');
         
-        if (page === 'dashboard') renderDashboard();
+        if (targetPage === 'dashboard') {
+            if (state.role === 'technician') {
+                if (typeof TechnicianDashboard !== 'undefined') TechnicianDashboard.render();
+            } else {
+                renderDashboard();
+            }
+        }
 
         const titleEl = document.getElementById('pageTitle');
         if (titleEl) {
-            const span = menuItem ? menuItem.querySelector('span') : null;
-            titleEl.textContent = span ? span.textContent : page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
+            if (state.role === 'technician' && targetPage === 'dashboard') {
+                titleEl.textContent = 'Technician Hub';
+            } else {
+                const span = menuItem ? menuItem.querySelector('span') : null;
+                titleEl.textContent = span ? span.textContent : targetPage.charAt(0).toUpperCase() + targetPage.slice(1).replace('-', ' ');
+            }
         }
+
 
         // Notify modules
         emit('navigate', { page });
@@ -780,11 +801,32 @@ const App = (() => {
         state.user = user;
         if (user) {
             state.role = user.role || 'user';
+            
+            // ── Live Firebase Data Subscriptions ─────────────────────────────
+            if (typeof NotificationService !== 'undefined') {
+                NotificationService.subscribe(user.id);
+                NotificationService.requestPermission();
+            }
+            if (typeof ChatService !== 'undefined') {
+                ChatService.subscribeForUser(user.id);
+            }
+            
+            // Load user requests from Firebase so they persist on refresh
+            if (typeof firebase !== 'undefined' && firebase.database && state.role !== 'technician') {
+                firebase.database().ref(`requests/${user.id}`).on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    state.myRequests = data ? Object.values(data).sort((a,b) => b.createdAt.localeCompare(a.createdAt)) : [];
+                    if (state.currentPage === 'dashboard') renderDashboard();
+                });
+            }
+            // ─────────────────────────────────────────────────────────────────
         } else {
             state.role = 'guest';
+            state.myRequests = [];
         }
         updateUI();
     }
+
 
     function updateUI() {
         const topName = document.getElementById('userName');
@@ -960,26 +1002,23 @@ const App = (() => {
                 showToast(err.message, 'error');
             });
 
-            firebase.auth().onAuthStateChanged(user => {
+            firebase.auth().onAuthStateChanged(async (user) => {
                 if (user) {
-                    // Check if local storage user exists, otherwise map Firebase user
-                    const localUser = localStorage.getItem('hv_user');
-                    if (localUser) {
-                        setUser(JSON.parse(localUser));
-                    } else {
-                        const userData = {
-                            id: user.uid,
-                            email: user.email,
-                            firstName: user.displayName ? user.displayName.split(' ')[0] : 'User',
-                            lastName: user.displayName ? (user.displayName.split(' ').slice(1).join(' ') || '') : '',
-                            photo: user.photoURL,
-                            role: 'user'
-                        };
-                        setUser(userData);
-                        localStorage.setItem('hv_user', JSON.stringify(userData));
-                    }
+                    const roleInfo = await AuthService.resolveUserRole(user.uid, 'user');
+                    const userData = {
+                        id: user.uid,
+                        email: user.email,
+                        firstName: user.displayName ? user.displayName.split(' ')[0] : 'User',
+                        lastName: user.displayName ? (user.displayName.split(' ').slice(1).join(' ') || '') : '',
+                        photo: user.photoURL,
+                        role: roleInfo.role || 'user',
+                        techId: roleInfo.techId || null
+                    };
+                    setUser(userData);
+                    localStorage.setItem('hv_user', JSON.stringify(userData));
                 }
             });
+
         }
 
         emit('appReady');

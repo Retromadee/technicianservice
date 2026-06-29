@@ -1,21 +1,26 @@
-/* Production Configuration */
+/* Production Configuration — Cyprus Edition */
 const Config = {
+    // Cyprus locale + Turkish Lira
+    currency: '₺',
+    locale: 'tr-CY',
+    region: 'Cyprus (TRNC)',
+
     // Check if running on local network/localhost to determine API base
     isLocalHost: () => {
         const hostname = window.location.hostname;
-        return hostname === 'localhost' || 
-               hostname === '127.0.0.1' || 
-               hostname.startsWith('192.168.') || 
-               hostname.startsWith('10.') || 
-               hostname.startsWith('172.') || 
+        return hostname === 'localhost' ||
+               hostname === '127.0.0.1' ||
+               hostname.startsWith('192.168.') ||
+               hostname.startsWith('10.') ||
+               hostname.startsWith('172.') ||
                hostname.endsWith('.local');
     },
 
     getApiBase: () => {
         const isLocal = Config.isLocalHost();
-        return isLocal ? `http://${window.location.hostname}:8081/api` : 'https://technicianservice.onrender.com/api'; 
+        return isLocal ? `http://${window.location.hostname}:8081/api` : 'https://technicianservice.onrender.com/api';
     },
-    
+
     // Auth Base
     getAuthBase: () => {
         const isLocal = Config.isLocalHost();
@@ -26,7 +31,11 @@ const Config = {
     getPythonApiBase: () => {
         const isLocal = Config.isLocalHost();
         return isLocal ? `http://${window.location.hostname}:8000/api` : '/api';
-    }
+    },
+
+    // Format a price with ₺ symbol
+    formatPrice: (amount) => `₺${Number(amount).toLocaleString('tr-TR')}`
 };
 
 window.AppConfig = Config;
+
