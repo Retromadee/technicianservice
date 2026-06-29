@@ -10,6 +10,8 @@ node_modules/
 
 # Secrets — never commit API keys
 js/secrets.js
+www/js/secrets.js
+**/secrets.js
 
 # Vercel
 .vercel/
@@ -33,5 +35,7 @@ serviceAccountKey.json
 # Progress Reports
 Progress_Report_*.html
 
-# Local secrets
+# Local secrets (all paths)
 js/secrets.js
+www/js/secrets.js
+**/secrets.js
