@@ -146,7 +146,7 @@ const MarketplaceModule = (() => {
                                             <div class="tech-rating"><i class="fas fa-star"></i> ${q.techRating} <span class="tech-specialization ms-2">${q.specialization}</span></div>
                                         </div>
                                     </div>
-                                    <div class="quote-price">$${q.price}</div>
+                                    <div class="quote-price">₺${q.price}</div>
                                 </div>
                                 <p style="color:var(--color-text-secondary);font-size:var(--font-size-sm);margin:var(--space-md) 0">"${q.message}"</p>
                                 <div class="quote-details">

@@ -219,12 +219,12 @@ const App = (() => {
                     <div style="background:var(--jobie-purple); color:white; padding:18px 12px; border-radius:14px; text-align:center; position:relative;">
                         <div style="position:absolute; top:-8px; left:50%; transform:translateX(-50%); background:#10B981; color:white; padding:2px 8px; border-radius:6px; font-size:9px; font-weight:800;">POPULAR</div>
                         <div style="font-size:10px; font-weight:800; opacity:0.8; text-transform:uppercase; margin-bottom:6px;">Standard</div>
-                        <div style="font-size:22px; font-weight:900;">$${p.standard}</div>
+                        <div style="font-size:22px; font-weight:900;">₺${p.standard}</div>
                         <div style="font-size:10px; opacity:0.7; margin-top:4px;">Full Service</div>
                     </div>
                     <div style="background:white; border:1px solid #EEE; padding:18px 12px; border-radius:14px; text-align:center;">
                         <div style="font-size:10px; font-weight:800; color:#EF4444; text-transform:uppercase; margin-bottom:6px;">Emergency</div>
-                        <div style="font-size:22px; font-weight:900; color:#333;">$${p.emergency}</div>
+                        <div style="font-size:22px; font-weight:900; color:#333;">₺${p.emergency}</div>
                         <div style="font-size:10px; color:#888; margin-top:4px;">24/7 Rush</div>
                     </div>
                 </div>
@@ -737,9 +737,9 @@ const App = (() => {
         
         // Mock global leads
         const mockLeads = [
-            { id: 101, title: 'Kitchen Pipe Leak', client: 'Sarah Johnson', location: 'London', budget: '$150-$200', desc: 'Water dripping from under-sink joint. Urgent fix needed.' },
-            { id: 102, title: 'EV Charger Install', client: 'Mike Ross', location: 'Manchester', budget: '$800', desc: 'Need a professional to install Level 2 charger in home garage.' },
-            { id: 103, title: 'AC Filter Clean', client: 'Dave B.', location: 'London', budget: '$50-$80', desc: 'Seasonal maintenance for 2 units. Central area.' }
+            { id: 101, title: 'Kitchen Pipe Leak', client: 'Sarah Johnson', location: 'London', budget: '₺150-₺200', desc: 'Water dripping from under-sink joint. Urgent fix needed.' },
+            { id: 102, title: 'EV Charger Install', client: 'Mike Ross', location: 'Manchester', budget: '₺800', desc: 'Need a professional to install Level 2 charger in home garage.' },
+            { id: 103, title: 'AC Filter Clean', client: 'Dave B.', location: 'London', budget: '₺50-₺80', desc: 'Seasonal maintenance for 2 units. Central area.' }
         ];
 
         grid.innerHTML = mockLeads.map(lead => `
