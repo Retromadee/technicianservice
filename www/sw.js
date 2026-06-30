@@ -1,7 +1,7 @@
 /* HomeFix Pro — Service Worker
    Provides offline caching for core assets (PWA shell) */
 
-const CACHE_NAME = 'homefix-pro-v1';
+const CACHE_NAME = 'homefix-pro-v2';
 const STATIC_ASSETS = [
     './',
     './index.html',
